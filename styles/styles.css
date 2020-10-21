@@ -23,3 +23,13 @@
     position: absolute;
     top: 40px;
 }
+
+.main-content-box {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.sales-box {
+    height: 450px;
+    background-color: gray;
+}
