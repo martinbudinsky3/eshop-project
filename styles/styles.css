@@ -3,3 +3,23 @@
 .main-header {
     display: flex;
 }
+
+.logo-link {
+    display: block;
+    width: 96px;
+    height: 96px;
+}
+
+.logo-link div {
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    position: relative;
+}
+
+.logo-link p {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    top: 40px;
+}
