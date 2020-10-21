@@ -23,3 +23,57 @@
     position: absolute;
     top: 40px;
 }
+
+.main-content {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.row-m-b {
+    margin-bottom: 50px;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.image-elements {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.carousel-caption * {
+    color: black;
+}
+
+/*
+.image-elements h2,h3,h4, p {
+    color: white;
+    text-shadow: #606060;
+}*/
+
+.banner-image-elements {
+    bottom: 50px;
+    /*margin-bottom: -110px;*/
+}
+
+.medium-image-elements {
+    bottom: 30px;
+    /*margin-bottom: -90px;*/
+}
+
+.price-on-image {
+    top: 50px;
+    left: 200px;
+}
+
+.link-button {
+
+}
