@@ -1,0 +1,183 @@
+body {
+    width: 100%;
+    margin: auto;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+.main-header {
+    display: flex;
+}
+
+.logo-link {
+    display: block;
+    width: 96px;
+    height: 96px;
+}
+
+.logo-link div {
+    width: 100%;
+    height: 100%;
+    background-color: gray;
+    position: relative;
+}
+
+.logo-link p {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    top: 40px;
+}
+
+.wrapper {
+    margin-top: 30px;
+}
+
+.row-m-b {
+    margin-bottom: 50px;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.image-content {
+    position: relative;
+}
+
+.image-elements {
+    position: absolute;
+}
+
+.carousel-caption * {
+    color: black;
+}
+
+.banner-image-elements {
+    bottom: 10%;
+}
+
+.medium-image-elements {
+    bottom: 6%;
+}
+
+.price-on-image {
+    top: 10%;
+    left: 80%;
+}
+
+.link-button {
+    display: block;
+    background-color: #606060;
+    border-radius: 6px;
+    padding: 0.3em 0.7em;
+    color: white;
+}
+
+.link-button:hover, .link-button:focus, .link-button:active, .link-button:visited {
+    text-decoration: none !important;
+    outline-style: none !important;
+    color: white;
+}
+
+.center-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 4%
+}
+
+.carousel-caption {
+    bottom: 0;
+    padding-bottom: 0;
+}
+
+@media (min-width: 200px) {
+    body {
+        width: 100%;
+    }
+
+    .main-content {
+        width: 100%;
+    }
+
+    .wrapper {
+        font-size: 13px;
+    }
+
+    .image-caption {
+        font-size: 1.6em;
+    }
+
+    .carousel-product-name {
+        font-size: 1.6em;
+    }
+}
+
+@media (min-width: 576px) {
+
+    .wrapper {
+        font-size: 14px;
+    }
+
+    .image-caption {
+        font-size: 1.7em;
+    }
+
+    .carousel-product-name {
+        font-size: 1.7em;
+    }
+}
+
+@media (min-width: 768px) {
+    
+    .main-content {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .wrapper {
+        font-size: 16px;
+    }
+    
+    .image-caption {
+        font-size: 1.3em;
+    }
+
+    .carousel-product-name {
+        font-size: 1.2em;
+    }
+}
+
+@media (min-width: 992px) { 
+    .wrapper {
+        font-size: 17px;
+    }
+
+    .image-caption {
+        font-size: 1.7em;
+    }
+
+    .carousel-product-name {
+        font-size: 1em;
+    }
+}
+
+
+@media (min-width: 1200px) { 
+    .wrapper {
+        font-size: 18px;
+    }
+
+    .carousel-product-name {
+        font-size: 1.2em;
+    }
+}
