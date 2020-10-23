@@ -1,0 +1,45 @@
+.color-box {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    position: absolute;
+    bottom: 5%;
+    left: 10%;
+}
+
+.color-box:before{
+    content: "";
+    display: block;
+    padding-top: 10%;
+}
+
+.color{
+    border: 1px solid black;
+    cursor: pointer;
+    width: 20%;
+    background: #ca0164;
+}
+
+.color:before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+
+.product-content {
+    display: flex;
+    margin-top: 4%;
+}
+
+.product-info {
+    width: 80%;
+}
+
+.product-info del{
+    display: inline-block;
+    margin-right: 10%;
+}
+
+.cart {
+    width: 20%;
+}

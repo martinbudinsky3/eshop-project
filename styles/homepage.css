@@ -31,24 +31,6 @@ h2 {
     top: 40px;
 }
 
-.wrapper {
-    margin-top: 30px;
-}
-
-.row-m-b {
-    margin-bottom: 50px;
-}
-
-.img-responsive {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-
-.image-content {
-    position: relative;
-}
-
 .image-elements {
     position: absolute;
 }
