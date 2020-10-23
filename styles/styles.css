@@ -62,11 +62,6 @@ p {
 }
 
 .image-elements {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     position: absolute;
 }
 
@@ -83,14 +78,10 @@ p {
 }
 
 .price-on-image {
-    justify-content: end;
-    align-items: flex-end;
     top: 10%;
+    left: 82%;
 }
 
-.price-on-image > div {
-    margin-right: 5%;
-}
 
 .link-button {
     display: block;
@@ -107,6 +98,10 @@ p {
 }
 
 .section {
+    
+}
+
+.center-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
