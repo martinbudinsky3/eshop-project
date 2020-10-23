@@ -15,10 +15,6 @@ h2 {
     font-size: 2em;
 }
 
-p {
-    font-size: 1em;
-}
-
 .main-header {
     display: flex;
 }
@@ -110,9 +106,6 @@ p {
 .carousel-caption {
     bottom: 0;
     padding-bottom: 0;
-    /*position: relative;
-    left: auto;
-    right: auto;*/
 }
 
 @media (min-width: 200px) {
@@ -133,15 +126,22 @@ p {
     }
 
     .carousel-product-name {
-        font-size: 1.4em;
+        font-size: 1.6em;
     }
 }
 
 @media (min-width: 576px) {
-    
 
     .wrapper {
         font-size: 14px;
+    }
+
+    .image-caption {
+        font-size: 1.7em;
+    }
+
+    .carousel-product-name {
+        font-size: 1.7em;
     }
 }
 
@@ -158,6 +158,10 @@ p {
     
     .image-caption {
         font-size: 1.3em;
+    }
+
+    .carousel-product-name {
+        font-size: 1.2em;
     }
 }
 
