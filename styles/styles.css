@@ -79,9 +79,8 @@ p {
 
 .price-on-image {
     top: 10%;
-    left: 82%;
+    left: 80%;
 }
-
 
 .link-button {
     display: block;
@@ -95,10 +94,6 @@ p {
     text-decoration: none !important;
     outline-style: none !important;
     color: white;
-}
-
-.section {
-    
 }
 
 .center-box {
@@ -115,6 +110,9 @@ p {
 .carousel-caption {
     bottom: 0;
     padding-bottom: 0;
+    /*position: relative;
+    left: auto;
+    right: auto;*/
 }
 
 @media (min-width: 200px) {
