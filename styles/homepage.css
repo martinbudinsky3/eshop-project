@@ -100,7 +100,7 @@ h2 {
     padding-bottom: 0;
 }
 
-@media (min-width: 200px) {
+@media (min-width: 300px) {
     body {
         width: 100%;
     }
@@ -118,7 +118,15 @@ h2 {
     }
 
     .carousel-product-name {
-        font-size: 1.6em;
+        display: none;
+    }
+}
+
+@media (min-width: 400px) {
+    
+    .carousel-product-name {
+        display: inline;
+        font-size: 1.5em;
     }
 }
 
