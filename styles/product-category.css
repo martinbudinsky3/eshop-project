@@ -1,3 +1,5 @@
+/** product colors**/
+
 .color-box {
     display: flex;
     flex-direction: row;
@@ -7,24 +9,26 @@
     left: 10%;
 }
 
-.color-box:before{
+.color-box:before {
     content: "";
     display: block;
     padding-top: 10%;
 }
 
-.color{
+.color {
     border: 1px solid black;
     cursor: pointer;
     width: 20%;
     background: #ca0164;
 }
 
-.color:before{
+.color:before {
     content: "";
     display: block;
     padding-top: 100%;
 }
+
+/** product information **/
 
 .product-content {
     display: flex;
@@ -35,7 +39,7 @@
     width: 80%;
 }
 
-.product-info del{
+.product-info del {
     display: inline-block;
     margin-right: 10%;
 }
@@ -44,9 +48,7 @@
     width: 20%;
 }
 
-label {
-    font-weight: bold;
-}
+/** sorting **/
 
 select {
     border-radius: 5px;
@@ -56,7 +58,13 @@ select:focus {
     outline: none;
 }
 
-#left-filter{
+/** left filter **/
+
+label {
+    font-weight: bold;
+}
+
+#left-filter {
     margin-left: 0.8%;
     border: solid 1px #c4c4c4;
     height: fit-content;
@@ -67,11 +75,11 @@ select:focus {
     padding-left: 10%;
 }
 
-#left-filter > ul {
+#left-filter>ul {
     margin-top: 10%;
 }
 
-#left-filter label  {
+#left-filter label {
     font-weight: normal;
     margin-left: 2%;
     cursor: pointer;
@@ -92,7 +100,7 @@ select:focus {
 
 .filter-category li {
     margin-bottom: 4%;
-    overflow: hidden; 
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -100,6 +108,71 @@ select:focus {
 .filter-category li:last-child {
     margin-bottom: 0;
 }
+
+/** top filter **/
+
+.dropdown-button {
+    width: 100%;
+    border: none;
+    background-color: #ffffff;
+    padding-left: 2%;
+}
+
+.dropdown-button:focus {
+    outline: none;
+}
+
+.dropdown-button-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#top-filter, .dropdown-button {
+    border-radius: 5px;
+}
+
+#top-filter {
+    border: 1px solid rgb(118, 118, 118);
+}
+
+.top-filter-menu {
+    display: none;
+    padding: 2% 4%;
+}
+
+.top-filter-menu label, select{
+    display: block
+}
+
+.top-filter-menu label {
+    margin-bottom: 0;
+}
+
+.top-filter-menu select{
+    width: 100%;
+    margin-bottom: 3%;
+}
+
+.show {
+    display: block;
+}
+
+/** stolen from bootstrap **/
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+/** breadcrumb **/
 
 .breadcrumb {
     background-color: #ffffff;
@@ -119,6 +192,8 @@ hr {
     background-color: #ffffff;
 }
 
+/** media queries **/
+
 @media (min-width: 300px) {
     label {
         margin-right: 2%;
@@ -130,33 +205,21 @@ hr {
     }
 }
 
-@media (min-width: 400px) {
-    
-    
-}
+@media (min-width: 400px) {}
 
-@media (min-width: 576px) {
-
-
-}
+@media (min-width: 576px) {}
 
 @media (min-width: 768px) {
+
     label {
         margin-right: 5%;
     }
-
     select {
         padding-left: 2%;
         padding-right: 20%;
     }
-    
 }
 
-@media (min-width: 992px) { 
-    
-}
+@media (min-width: 992px) {}
 
-
-@media (min-width: 1200px) { 
-    
-}
+@media (min-width: 1200px) {}

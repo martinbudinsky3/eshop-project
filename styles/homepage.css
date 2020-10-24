@@ -31,12 +31,10 @@ h2 {
     top: 40px;
 }
 
+/** elements that appears on images **/
+
 .image-elements {
     position: absolute;
-}
-
-.carousel-caption * {
-    color: black;
 }
 
 .banner-image-elements {
@@ -52,6 +50,8 @@ h2 {
     left: 80%;
 }
 
+/** link that looks like button **/
+
 .link-button {
     display: block;
     background-color: #606060;
@@ -66,6 +66,12 @@ h2 {
     color: white;
 }
 
+/** carousel **/
+
+.carousel-caption * {
+    color: black;
+}
+
 .carousel-control-prev, .carousel-control-next {
     width: 4%
 }
@@ -74,6 +80,8 @@ h2 {
     bottom: 0;
     padding-bottom: 0;
 }
+
+/** media queries **/
 
 @media (min-width: 300px) {
     body {

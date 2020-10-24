@@ -126,8 +126,51 @@
                 <div class="col ">
                     <div class="row row-m-b">
                         <!--Top filter-->
-                        <div class="col-12 hidden-md d-lg-none d-block">
+                        <div class="col-12 d-md-none d-block row-smaller-m-b">
+                            <div id="top-filter">
+                                <button class=" dropdown-button" onclick="showTopFilterMenu()">
+                                    <span class="dropdown-button-content">
+                                        Filter
+                                        <i class="caret "></i>
+                                    </span>
+                                </button>
+                                <div id="top-filter-menu" class="top-filter-menu">
+                                    <label for="color-top">Farba</label>
+                                    <select id="color-top" name="color-top">
+                                        <option value="selected-colors" disabled selected hidden>všetky farby</option>
+                                        <option value="all-colors" >všetky farby</option>
+                                        <option value="white">biela</option>
+                                        <option value="black">čierna</option>
+                                        <option value="purple">fialová</option>
+                                        <option value="blue">modrá</option>
+                                        <option value="green">zelená</option>
+                                    </select>
 
+                                    <label for="size-top">Veľkosť</label>
+                                    <select id="size-top" name="size-top">
+                                        <option value="selected-sizes" disabled selected hidden>všetky veľkosti</option>
+                                        <option value="all-sizes" >všetky veľkosti</option>
+                                        <option value="xxs">XXS</option>
+                                        <option value="xs">XS</option>
+                                        <option value="s">S</option>
+                                        <option value="m">M</option>
+                                        <option value="l">L</option>
+                                        <option value="xl">XL</option>
+                                        <option value="xxl">XXL</option>
+                                    </select>
+
+                                    <label for="size-top">Značka</label>
+                                    <select id="brand-top" name="brand-top">
+                                        <option class="selected-brands" value="" disabled selected hidden>všetky značky</option>
+                                        <option value="all-brands" >všetky značky</option>
+                                        <option value="rainbow">RAINBOW</option>
+                                        <option value="fashionweek">Fashionweek</option>
+                                        <option value="esmara">Esmara</option>
+                                        <option value="amando">Amando</option>
+                                    </select>
+
+                                </div>
+                            </div>
                         </div>
 
                         <!--Pagination-->
@@ -470,6 +513,7 @@
         </div>
     </div>
 
+    <script src="../js/product-category.js"></script>
 </body>
 
 </html>
