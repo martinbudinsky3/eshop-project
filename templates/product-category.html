@@ -13,14 +13,151 @@
 
 <body>
     <div class="wrapper">
-        <div class="fluid-container">
-            <div class="row row-m-b">
-                <div class="col-2">
-
+        <div class="center-box">
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Hlavná stránka</a></li>
+                    <li class="breadcrumb-item"><a href="#">Ženy</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Blúzky</li>
+                </ol>
+            </nav>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <div class="row row-smaller-m-b">
+                <!--Sorting selection-->
+                <div class="offset-xl-8 offset-lg-7 offset-md-6"></div>
+                <div class="col-xl-4 col-lg-5 col-md-6 col-12 pull-right">
+                    <label for="sort-order">Zoradiť podľa:</label>
+                    <select name="sort-order" id="sort-order">
+                        <option value="popularity">Obľúbené</option>
+                        <option value="price-desc">Cena zostupne</option>
+                        <option value="price-asc">Cena vzostupne</option>
+                    </select>
                 </div>
-                <div class="col-10">
+            </div>
+            <div class="row row-m-b">
+                <!--Left filter-->
+                <div class="col-lg-2 col-md-3 d-md-block d-none" id="left-filter">
+                    <ul>
+                        <li class="filter-category">
+                            <h4>Farba</h4>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" id="white" name="white">
+                                    <label for="white">biela</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="black" name="black">
+                                    <label for="black">čierna</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="purple" name="purple">
+                                    <label for="purple">fialová</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="blue" name="blue">
+                                    <label for="blue">modrá</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="green" name="green">
+                                    <label for="green"> zelená</label>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="filter-category">
+                            <h4>Veľkosť</h4>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" id="xxs" name="xxs">
+                                    <label for="xxs">XXS</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="xs" name="xs">
+                                    <label for="xxs">XS</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="s" name="s">
+                                    <label for="xxs">S</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="m" name="m">
+                                    <label for="xxs">M</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="l" name="l">
+                                    <label for="xxs">L</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="xl" name="xl">
+                                    <label for="xxs">XL</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="xxl" name="xxl">
+                                    <label for="xxs">XXL</label>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="filter-category">
+                            <h4>Značka</h4>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" id="rainbow" name="rainbow">
+                                    <label for="rainbow">RAINBOW</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="fashionweek" name="fashionweek">
+                                    <label for="fashionweek">Fashionweek</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="esmara" name="esmara">
+                                    <label for="esmara">Esmara</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="amando" name="amando">
+                                    <label for="amando">Amando</label>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col ">
                     <div class="row row-m-b">
-                        <div class="col-2">
+                        <!--Top filter-->
+                        <div class="col-12 hidden-md d-lg-none d-block">
+
+                        </div>
+
+                        <!--Pagination-->
+                        <div class="col-12 center-box">
+                            <nav>
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"> <span class="page-link pagination-three-dots">....</span>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">49</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">50</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <!--Products-->
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
                                 <a href="">
                                     <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
@@ -43,7 +180,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
                                 <a href="">
                                     <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
@@ -67,7 +204,7 @@
                             </div>
 
                         </div>
-                        <div class="col-2">
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
                                 <a href="">
                                     <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
@@ -91,7 +228,7 @@
                             </div>
 
                         </div>
-                        <div class="col-2">
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
                                 <a href="">
                                     <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
@@ -115,35 +252,9 @@
                             </div>
 
                         </div>
-                        <div class="col-2">
-                            <div class="image-content">
-                                <a href="">
-                                    <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: blue;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
 
 
-                    <div class="row row-m-b">
-                        <div class="col-2">
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
                                 <a href="">
                                     <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
@@ -166,7 +277,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
                                 <a href="">
                                     <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
@@ -189,7 +300,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
                                 <a href="">
                                     <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
@@ -212,7 +323,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
                                 <a href="">
                                     <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
@@ -235,7 +346,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-2">
+
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
                                 <a href="">
                                     <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
@@ -257,6 +369,100 @@
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
+                            <div class="image-content">
+                                <a href="">
+                                    <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
+                                </a>
+                                <div class="color-box">
+                                    <div style="background-color: black;" class="color"></div>
+                                    <div style="background-color: blue;" class="color"></div>
+                                    <div style="background-color: white;" class="color"></div>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-info">
+                                    <strong>Úpletový sveter</strong><br>
+                                    <del>17.99</del><strong>12.99</strong>
+                                </div>
+                                <div class="cart">
+                                    <a href="">
+                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
+                            <div class="image-content">
+                                <a href="">
+                                    <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
+                                </a>
+                                <div class="color-box">
+                                    <div style="background-color: black;" class="color"></div>
+                                    <div style="background-color: blue;" class="color"></div>
+                                    <div style="background-color: white;" class="color"></div>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-info">
+                                    <strong>Úpletový sveter</strong><br>
+                                    <del>17.99</del><strong>12.99</strong>
+                                </div>
+                                <div class="cart">
+                                    <a href="">
+                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4 col-6 row-m-b">
+                            <div class="image-content">
+                                <a href="">
+                                    <img src="../assets/images/placeholder-300x420.png" alt="" class="img-responsive">
+                                </a>
+                                <div class="color-box">
+                                    <div style="background-color: black;" class="color"></div>
+                                    <div style="background-color: blue;" class="color"></div>
+                                    <div style="background-color: white;" class="color"></div>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-info">
+                                    <strong>Úpletový sveter</strong><br>
+                                    <del>17.99</del><strong>12.99</strong>
+                                </div>
+                                <div class="cart">
+                                    <a href="">
+                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Pagination-->
+                        <div class="col-12 center-box">
+                            <nav>
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"> <span class="page-link pagination-three-dots">....</span>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="#">49</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">50</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>

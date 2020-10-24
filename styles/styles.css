@@ -11,12 +11,23 @@
     height: auto;
 }
 
+.center-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .row-m-b {
-    margin-bottom: 50px;
+    margin-bottom: 4%;
+}
+
+.row-smaller-m-b {
+    margin-bottom: 1%;
 }
 
 .wrapper {
-    margin-top: 30px;
+    margin-top: 2%;
 }
 
 .image-content {

@@ -66,13 +66,6 @@ h2 {
     color: white;
 }
 
-.center-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .carousel-control-prev, .carousel-control-next {
     width: 4%
 }

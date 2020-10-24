@@ -43,3 +43,120 @@
 .cart {
     width: 20%;
 }
+
+label {
+    font-weight: bold;
+}
+
+select {
+    border-radius: 5px;
+}
+
+select:focus {
+    outline: none;
+}
+
+#left-filter{
+    margin-left: 0.8%;
+    border: solid 1px #c4c4c4;
+    height: fit-content;
+}
+
+#left-filter ul {
+    list-style: none;
+    padding-left: 10%;
+}
+
+#left-filter > ul {
+    margin-top: 10%;
+}
+
+#left-filter label  {
+    font-weight: normal;
+    margin-left: 2%;
+    cursor: pointer;
+    display: inline;
+}
+
+.filter-category {
+    margin-bottom: 25%;
+}
+
+.filter-category:last-child {
+    margin-bottom: 15%;
+}
+
+.filter-category ul {
+    margin-top: 9%;
+}
+
+.filter-category li {
+    margin-bottom: 4%;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.filter-category li:last-child {
+    margin-bottom: 0;
+}
+
+.breadcrumb {
+    background-color: #ffffff;
+    margin-bottom: 0;
+}
+
+hr {
+    width: 94%;
+    margin: 0 auto 2% auto;
+}
+
+.page-link {
+    border: 0;
+}
+
+.pagination li .pagination-three-dots:hover {
+    background-color: #ffffff;
+}
+
+@media (min-width: 300px) {
+    label {
+        margin-right: 2%;
+    }
+
+    select {
+        padding-left: 2%;
+        padding-right: 5%;
+    }
+}
+
+@media (min-width: 400px) {
+    
+    
+}
+
+@media (min-width: 576px) {
+
+
+}
+
+@media (min-width: 768px) {
+    label {
+        margin-right: 5%;
+    }
+
+    select {
+        padding-left: 2%;
+        padding-right: 20%;
+    }
+    
+}
+
+@media (min-width: 992px) { 
+    
+}
+
+
+@media (min-width: 1200px) { 
+    
+}
