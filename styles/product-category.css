@@ -141,7 +141,7 @@ label {
     padding: 2% 4%;
 }
 
-.top-filter-menu label, select{
+.top-filter-menu label, .top-filter-menu select{
     display: block
 }
 
@@ -202,6 +202,10 @@ hr {
     select {
         padding-left: 2%;
         padding-right: 5%;
+    }
+
+    #sort-label {
+        margin-bottom: 0;
     }
 }
 
