@@ -4,18 +4,27 @@ width: 100%;
     margin:auto;
 }
 
-nav li{
-    float: contour;
-    display: inline;
-    padding: 0 20px 0 20px;
-
+.navigacia {
+    background-color: beige;
+    overflow: hidden;
+    min-height: 5px;
+    max-height: 100px;
+    padding: 2%;
 }
-
-body a:hover{
+.navigacia a {
+    color: dimgrey;
+    padding: 2%;
+}
+.navigacia a:hover{
     color: #cccccc;
     font-weight: bold;
 }
 
+.navigacia a.active {
+    color: saddlebrown;
+    font-weight: bold;
+    text-decoration: underline;
+}
 .items{
     padding: 20px;
     display:block;
@@ -40,7 +49,34 @@ body a:hover{
     margin-top: 50px;
     width: 100%;
 }
+.summary_price{
+    font-size: 1.5em;
+    margin-left: 5%;
+}
+.back_button{
+    text-decoration: underline;
+    float:left;
+    margin-left: 3%;
+    margin-bottom: 5%;
 
+}
+
+.submit_button{
+    position: fixed;
+    bottom: 2%;
+    right: 1%;
+    z-index: 9999;
+    background-color: sandybrown;
+    color: saddlebrown;
+    text-align: center;
+    padding: 0.5em;
+    font-size: 1.3em;
+    border: sandybrown;
+    border-radius: 8px;
+}
+.submit_button:hover{
+    font-size: 1.5em;
+}
 .wrapper {
     margin-top: 30px;
     overflow: hidden;
@@ -52,10 +88,15 @@ body a:hover{
 }
 
 .item_description {
-             font-size: 1.1em;
+    font-size: 1.1em;
     padding-left: 0;
-
 }
+.item_name{
+    color: saddlebrown;
+    font-weight: bold;
+}
+
+
 @media (min-width: 200px) {
     body {
         width: 100%;
@@ -68,6 +109,7 @@ body a:hover{
     .wrapper {
         font-size: 13px;
     }
+
 
 }
 
@@ -91,16 +133,20 @@ body a:hover{
     .item_picture {
         width: auto;
     }
+    .item_descript{
+        position: relative;
+        left: 15%;
+    }
 }
 @media (min-width: 992px) {
     .wrapper {
-        font-size: 18px;
+        font-size: 20px;
     }
 }
 
 
 @media (min-width: 1200px) {
     .wrapper {
-        font-size: 20px;
+        font-size: 22px;
     }
 }
