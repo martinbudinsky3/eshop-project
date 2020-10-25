@@ -88,7 +88,6 @@ width: 100%;
 }
 
 .item_description {
-    font-size: 1.1em;
     padding-left: 0;
 }
 .item_name{
@@ -107,7 +106,7 @@ width: 100%;
     }
 
     .wrapper {
-        font-size: 13px;
+        font-size: 1.3em;
     }
 
 
@@ -115,9 +114,6 @@ width: 100%;
 
 @media (min-width: 576px) {
 
-    .wrapper {
-        font-size: 16px;
-    }
 
 }
 
@@ -128,7 +124,7 @@ width: 100%;
     }
 
     .wrapper {
-        font-size: 17px;
+        font-size: 1.5em
     }
     .item_picture {
         width: auto;
@@ -139,14 +135,16 @@ width: 100%;
     }
 }
 @media (min-width: 992px) {
+
     .wrapper {
-        font-size: 20px;
+        font-size: 1.7em
     }
 }
 
 
 @media (min-width: 1200px) {
+
     .wrapper {
-        font-size: 22px;
+        font-size: 1.8em
     }
 }
