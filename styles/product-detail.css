@@ -1,0 +1,56 @@
+/** carousel **/
+
+.carousel-indicators li {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    margin-right: 7%;
+}
+
+.carousel-indicators li:last-of-type {
+    margin-right: 0;
+}
+
+/** product info **/
+
+#product-name {
+    margin-bottom: 3%;
+}
+
+.product-info section {
+    margin-bottom: 2%;
+}
+
+#size-section, #quantity-section {
+    display: flex;
+    flex-direction: column;
+}
+
+/** price section **/
+
+#price-section {
+    margin-bottom: 10%;
+}
+
+#price-section strong{
+    font-size: 2.4rem;
+    margin-right: 10%;
+    color: red;
+}
+
+#price-section del {
+    font-size: 1.2rem;
+}
+
+/** color picker **/
+
+.color-box {
+    width: 100%; 
+    justify-content: left;
+    align-items: flex-start;
+    margin-top: 0;
+}
+
+.color {
+    width: 5%;
+}
