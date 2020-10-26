@@ -31,30 +31,10 @@ h2 {
     top: 40px;
 }
 
-.wrapper {
-    margin-top: 30px;
-}
-
-.row-m-b {
-    margin-bottom: 50px;
-}
-
-.img-responsive {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-
-.image-content {
-    position: relative;
-}
+/** elements that appears on images **/
 
 .image-elements {
     position: absolute;
-}
-
-.carousel-caption * {
-    color: black;
 }
 
 .banner-image-elements {
@@ -70,6 +50,8 @@ h2 {
     left: 80%;
 }
 
+/** link that looks like button **/
+
 .link-button {
     display: block;
     background-color: #606060;
@@ -84,11 +66,10 @@ h2 {
     color: white;
 }
 
-.center-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+/** carousel **/
+
+.carousel-caption * {
+    color: black;
 }
 
 .carousel-control-prev, .carousel-control-next {
@@ -100,7 +81,9 @@ h2 {
     padding-bottom: 0;
 }
 
-@media (min-width: 200px) {
+/** media queries **/
+
+@media (min-width: 300px) {
     body {
         width: 100%;
     }
@@ -118,7 +101,15 @@ h2 {
     }
 
     .carousel-product-name {
-        font-size: 1.6em;
+        display: none;
+    }
+}
+
+@media (min-width: 400px) {
+    
+    .carousel-product-name {
+        display: inline;
+        font-size: 1.5em;
     }
 }
 
@@ -133,7 +124,7 @@ h2 {
     }
 
     .carousel-product-name {
-        font-size: 1.7em;
+        font-size: 1.2em;
     }
 }
 
@@ -150,10 +141,6 @@ h2 {
     
     .image-caption {
         font-size: 1.3em;
-    }
-
-    .carousel-product-name {
-        font-size: 1.2em;
     }
 }
 
