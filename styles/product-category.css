@@ -151,7 +151,7 @@ label {
 
 .top-filter-menu select{
     width: 100%;
-    margin-bottom: 3%;
+    margin-bottom: 5%;
 }
 
 .show {
@@ -188,8 +188,14 @@ hr {
     border: 0;
 }
 
+/** pagination **/
+
 .pagination li .pagination-three-dots:hover {
     background-color: #ffffff;
+}
+
+.pagination:first-of-type {
+    margin-top: 3%;
 }
 
 /** media queries **/
@@ -207,13 +213,36 @@ hr {
     #sort-label {
         margin-bottom: 0;
     }
+
+    .product-info {
+        font-size: 0.8rem;
+    }
+
+    .sort-selection, #top-filter, .breadcrumb, .pagination {
+        font-size: 0.9rem;
+    }
 }
 
-@media (min-width: 400px) {}
+@media (min-width: 400px) {
+    .product-info {
+        font-size: 0.9rem;
+    }
+}
 
-@media (min-width: 576px) {}
+@media (min-width: 576px) {
+    .product-info {
+        font-size: 0.8rem;
+    }
+}
 
 @media (min-width: 768px) {
+    .product-info, #left-filter label, .sort-selection, .breadcrumb, .pagination {
+        font-size: 0.85rem;
+    }
+
+    #left-filter h4 {
+        font-size: 1.3rem;
+    } 
 
     label {
         margin-right: 5%;
@@ -224,6 +253,22 @@ hr {
     }
 }
 
-@media (min-width: 992px) {}
+@media (min-width: 992px) {
+    .product-info, #left-filter label, .sort-selection, .breadcrumb, .pagination {
+        font-size: 0.9rem;
+    }
 
-@media (min-width: 1200px) {}
+    #left-filter h4 {
+        font-size: 1.4rem;
+    } 
+}
+
+@media (min-width: 1200px) {
+    .product-info, #left-filter label, .sort-selection, .breadcrumb, .pagination {
+        font-size: 1rem;
+    }
+
+    #left-filter h4 {
+        font-size: 1.5 rem;
+    }
+}
