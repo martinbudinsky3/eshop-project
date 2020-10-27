@@ -12,42 +12,24 @@ hr {
     size: 3px;
 }
 
-
-
 .item{
     margin: 10px 0;
-    padding: 10px 0;
+    padding: 15px 0;
     border-bottom: 1px solid black;
+    column-gap: 5%;
+}
+.select-title{
+    font-weight: bold;
+    font-size: larger;
 }
 
-.item_picture{
-    max-width: 300px;
-}
-.item_description{
-font-style: italic;
-}
-.edit_item{
-    min-width: 25px;
-    display: inline-block;
-    max-width: 70px;
-    width: 8.5vw;
+.bloky{
+    background-color: antiquewhite;
+    padding-top: 1.5em;
+    margin-top: 10px;
+    border-radius: 15px;
 }
 
-input[type=text] {
-    border: 2px solid black;
-    border-radius: 4px;
-    width: 50px;
-    text-align: center;
-    display: inline-block;
-
-}
-
-.button{
-    display: inline-block;
-    background-color: white;
-    border: none;
-    font-size: 1.5em;
-}
 
 .back_button{
     text-decoration: underline;
