@@ -21,10 +21,14 @@ hr {
 .item_picture{
     max-width: 300px;
 }
+.item_description{
+font-style: italic;
+}
 .edit_item{
-    width: 15%;
-    min-width: 20px;
+    min-width: 25px;
+    display: inline-block;
     max-width: 70px;
+    width: 8.5vw;
 }
 
 input[type=text] {
@@ -77,6 +81,7 @@ input[type=text] {
 
     .wrapper {
         font-size: 13px;
+        text-align: left;
     }
 
 }
@@ -85,7 +90,7 @@ input[type=text] {
 
 }
 
-@media (min-width: 576px) {
+@media (min-width: 572px) {
 
     .wrapper {
         font-size: 14px;

@@ -22,6 +22,34 @@
         <hr>
         <div class="container items">
             <p class="items_amount">pocet produktov 2 </p>
+
+            <div class="row item">
+                <div class="col-xs-12  col-sm-5 col-md-4 col-lg-3 item_picture">
+                    <div class="image-content">
+                        <a href="">
+                            <img src="assets/icons/logo-icon-placeholder.png" class="img-responsive">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-12  col-sm-5 col-md-5 col-lg-6  item_descript" >
+                    <h3 class="item_name">nazov produktu </h3>
+                    <p class="item_description">Velkost XS</p>
+                    <p class="item_description">Farba : Biela </p>
+                    <div class="amount">
+                        <label for="amount_input">Mnozstvo:</label><br>
+                        <button  class="button" >+</button>
+                        <input type="text" id="amount_input" placeholder=" ">
+                        <button  class="button" >-</button>
+                    </div>
+                    <p class="item_description">Cena 10E</p>
+                </div>
+                <div class="col-xs-12  col-sm-2 col-md-2 col-lg-3  item_edit" >
+                    <div class = "icons">
+                        <img class="edit_item"title="Upraviť" src="assets/icons/edit_icon.png" >
+                        <img class="edit_item" title="Vymazať"src="assets/icons/delete_icon.png">
+                    </div>
+                </div>
+            </div>
             <div class="row item">
                 <div class="col-xs-12  col-sm-5 col-md-4 col-lg-3 item_picture">
                     <div class="image-content">
@@ -37,7 +65,7 @@
                     <div class="amount">
                         <label for="amount_input1">Mnozstvo:</label><br>
                         <button  class="button" >+</button>
-                        <input type="text" name="amount_input" placeholder=" ">
+                        <input type="text" id="amount_input1" placeholder=" ">
                         <button  class="button" >-</button>
                     </div>
                     <p class="item_description">Cena 10E</p>
@@ -50,33 +78,9 @@
                 </div>
             </div>
         </div>
-        <div class="row item">
-            <div class="col-xs-12  col-sm-5 col-md-4 col-lg-3 item_picture">
-                <div class="image-content">
-                    <a href="">
-                        <img src="assets/icons/logo-icon-placeholder.png" class="img-responsive">
-                    </a>
-                </div>
-            </div>
-            <div class="col-xs-12  col-sm-5 col-md-5 col-lg-6  item_descript" >
-                <h3 class="item_name">nazov produktu </h3>
-                <p class="item_description">Velkost XS</p>
-                <p class="item_description">Farba : Biela </p>
-                <div class="amount">
-                    <label for="amount_input1">Mnozstvo:</label><br>
-                    <button  class="button" >+</button>
-                    <input type="text" id="amount_input1" name="amount_input" placeholder=" ">
-                    <button  class="button" >-</button>
-                </div>
-                <p class="item_description">Cena 10E</p>
-            </div>
-            <div class="col-xs-12  col-sm-2 col-md-2 col-lg-3  item_edit" >
-                <div class = "icons">
-                    <img class="edit_item"title="Upraviť" src="assets/icons/edit_icon.png" >
-                    <img class="edit_item" title="Vymazať"src="assets/icons/delete_icon.png">
-                </div>
-            </div>
-        </div>
+
+
+    </div>
     </div>
 </div>
 <div class="container summary">
