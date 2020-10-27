@@ -9,161 +9,93 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<!--<body>
-<section id="navigacia">
-    <nav>
-        <li><a href="index.html" > Kosik</a> </li>
-        <li><a href="index.html" > Doprava a platba</a> </li>
-        <li><a href="index.html" > Dodacie udaje </a> </li>
-
-    </nav>
-</section>
-
-
-<section id="produkty">
-    <h2>pocet produktov 2 </h2>
-
-    <div class="produkt">
-        <h2>nazov produktu </h2>
-        <img src="assets/icons/logo-icon-placeholder.png" class="produkt_obr">
-        <h1>Velksost XS</h1>
-        <h1>Farba</h1>
-
-        <h1>Mnozstvo </h1>
-        <button type="submit"> PLUS </button>
-        <button type="button"> Minus </button>
-        <h1>Cena xx/<h1>
-
-            <img src="assets/icons/edit_icon.png" id="edit_produkt0">
-            <h2>upravit</h2>
-            <img src="assets/icons/delete_icon.png" id ="del_produkt0">
-            <h2>delete</h2>
-
-    </div>
-
-    <div class="produkt">
-        <h2>nazov produktu </h2>
-        <img src="assets/icons/logo-icon-placeholder.png" class="produkt_obr">
-        <h1>Velksost XS</h1>
-        <h1>Farba</h1>
-
-        <h1>Mnozstvo </h1>
-        <button type="submit"> PLUS </button>
-        <button type="button"> Minus </button>
-        <h1>Cena xx/<h1>
-
-            <img src="assets/icons/edit_icon.png" id="edit_produkt">
-            <h2>upravit</h2>
-            <img src="assets/icons/delete_icon.png" id ="del_produkt">
-            <h2>delete</h2>
-
-    </div>
-</section>
-
-<section id="buttons">
-    <h2>CENA SPOLU</h2>
-
-    <button type="submit"> POKRACOVAT </button>
-    <h1>spat</h1>
-
-</section>
-</body>-->
-
 <body>
 <div class="wrapper">
     <div class="container main-content">
-
         <div class="navigation">
             <nav>
                 <a class="active" href="index.html" > Kosik</a>
                 <a href="index.html" > Doprava a platba</a>
                 <a href="index.html" > Dodacie udaje </a>
-
             </nav>
         </div>
-
-
-        <div class="items">
+        <hr>
+        <div class="container items">
             <p class="items_amount">pocet produktov 2 </p>
-
-            <div class="item">
-                <p class="item_name">nazov produktu </p>
-                <div class="item_picture">
-                    <img src="assets/icons/logo-icon-placeholder.png" class="item_picture">
+            <div class="row item">
+                <div class="col-xs-12  col-sm-5 col-md-4 col-lg-3 item_picture">
+                    <div class="image-content">
+                        <a href="">
+                            <img src="assets/icons/logo-icon-placeholder.png" class="img-responsive">
+                        </a>
+                    </div>
                 </div>
-
-                <div class="item_descript" >
+                <div class="col-xs-12  col-sm-5 col-md-5 col-lg-6  item_descript" >
+                    <h3 class="item_name">nazov produktu </h3>
                     <p class="item_description">Velkost XS</p>
                     <p class="item_description">Farba : Biela </p>
                     <div class="amount">
                         <label for="amount_input1">Mnozstvo:</label><br>
                         <button  class="button" >+</button>
-                        <input type="text" id="amount_input1" name="amount_input" placeholder=" ">
+                        <input type="text" name="amount_input" placeholder=" ">
                         <button  class="button" >-</button>
                     </div>
-
                     <p class="item_description">Cena 10E</p>
-                    <div>
+                </div>
+                <div class="col-xs-12  col-sm-2 col-md-2 col-lg-3  item_edit" >
+                    <div class = "icons">
                         <img class="edit_item"title="Upraviť" src="assets/icons/edit_icon.png" >
                         <img class="edit_item" title="Vymazať"src="assets/icons/delete_icon.png">
                     </div>
                 </div>
-
             </div>
-
-            <div class="item">
-                <p class="item_name">nazov produktu </p>
-                <div class="item_picture">
-                    <img src="assets/icons/logo-icon-placeholder.png" class="item_picture">
-                </div>
-
-                <div class="item_descript" >
-                    <p class="item_description">Velkost XS</p>
-                    <p class="item_description">Farba : Biela </p>
-                    <div class="amount">
-                        <label for="amount_input">Mnozstvo:</label><br>
-                        <button  class="button" >+</button>
-                        <input type="text" id="amount_input" name="amount_input" placeholder=" ">
-                        <button  class="button" >-</button>
-                    </div>
-
-                    <p class="item_description">Cena 10E</p>
-                    <div>
-                        <img class="edit_item"title="Upraviť" src="assets/icons/edit_icon.png" >
-                        <img class="edit_item" title="Vymazať"src="assets/icons/delete_icon.png">
-                    </div>
-                </div>
-
-            </div>
-
-
-
         </div>
-
-            <div class="summary">
-                <p class="summary_price">CENA SPOLU : 25e</p>
-                <button class="submit_button" type="submit"> POKRACOVAT </button>
-                <button  class="back_button" onClick="window.location='index.html';">Spat do obchodu</button>
+        <div class="row item">
+            <div class="col-xs-12  col-sm-5 col-md-4 col-lg-3 item_picture">
+                <div class="image-content">
+                    <a href="">
+                        <img src="assets/icons/logo-icon-placeholder.png" class="img-responsive">
+                    </a>
+                </div>
             </div>
-
-
+            <div class="col-xs-12  col-sm-5 col-md-5 col-lg-6  item_descript" >
+                <h3 class="item_name">nazov produktu </h3>
+                <p class="item_description">Velkost XS</p>
+                <p class="item_description">Farba : Biela </p>
+                <div class="amount">
+                    <label for="amount_input1">Mnozstvo:</label><br>
+                    <button  class="button" >+</button>
+                    <input type="text" id="amount_input1" name="amount_input" placeholder=" ">
+                    <button  class="button" >-</button>
+                </div>
+                <p class="item_description">Cena 10E</p>
+            </div>
+            <div class="col-xs-12  col-sm-2 col-md-2 col-lg-3  item_edit" >
+                <div class = "icons">
+                    <img class="edit_item"title="Upraviť" src="assets/icons/edit_icon.png" >
+                    <img class="edit_item" title="Vymazať"src="assets/icons/delete_icon.png">
+                </div>
+            </div>
+        </div>
     </div>
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-
 </div>
-
+<div class="container summary">
+    <p class="summary_price">CENA SPOLU : 25e</p>
+    <button  class="back_button" onClick="window.location='index.html';">Spat do obchodu</button>
+    <button class="submit_button" type="submit"> POKRACOVAT </button>
+</div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</div>
 </body>
-
 </html>
