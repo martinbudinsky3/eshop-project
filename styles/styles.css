@@ -48,7 +48,6 @@
 .color-box:before {
     content: "";
     display: block;
-    /*padding-top: 10%;*/
 }
 
 .color {
@@ -66,4 +65,9 @@
 
 .color-box > .color:last-of-type {
     margin-right: 0;
+}
+
+.horizontal-flex {
+    display: flex;
+    flex-direction: row;
 }

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/product-detail.css">
     <title>E-shop</title>
@@ -17,7 +18,8 @@
     <div class="wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-6 row-m-b">
+                <div class="col-6 row-m-b padded-box">
+                    <!--Carousel-->
                     <div id="carousel-product-images" class="carousel slide " data-ride="carousel">
                         <!-- Indicators -->
                         <ol class="carousel-indicators">
@@ -64,31 +66,86 @@
                     </div>
                 </div>
                 <div class="col-1"></div>
-                <div class="col-5 row-m-b">
+                <div class="col-5 row-m-b padded-box">
                     <div class="product-info">
-                        <h1 id="product-name">Tričko s dlhým rukávom a potlačou</h1>
-                        <section id="price-section">
-                            <strong>17.99</strong>
-                            <del>12.99</del>
-                        </section>
-                        <section id="color-section">
-                            <label>Farba:</label>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: blue;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </section>
-                        <section id="size-section">
-                            <label for="size-selector">Veľkosť:</label>
-                            <select name="size-selector" id="size-selector"></select>
-                        </section>
+                        <header>
+                            <h1>Tričko s dlhým rukávom a potlačou</h1>
+                            <a href="" class="rating-header">
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span>(150)</span>
+                            </a>
+                        </header>
 
-                        <section id="quantity-section">
-                            <label for="quantity-input">Množstvo:</label>
-                            <input type="number" name="quantity-input" id="quantity-input">
-                        </section>
+                        <span id="price-section">
+                            <strong class="price-off">12.99</strong>
+                            <del>17.99</del>
+                        </span>
+                        <form action="" id="product-input">
+                            <div id="color-input-box">
+                                <label for="color-selector">Farba:</label>
+                                <select name="color-selector" id="color-selector">
+                                    <option value="black">Čierna</option>
+                                    <option value="blue">Modrá</option>
+                                    <option value="white">Biela</option>
+                                </select>
+                            </div>
+
+                            <div id="size-input-box">
+                                <label for="size-selector">Veľkosť:</label>
+                                <select name="size-selector" id="size-selector">
+                                    <option value="xxs">XXS</option>
+                                    <option value="xs">XS</option>
+                                    <option value="s">S</option>
+                                    <option value="m">M</option>
+                                    <option value="l">L</option>
+                                    <option value="xl">XL</option>
+                                    <option value="xxl">XXL</option>
+                                </select>
+                                <a href="">Veľkostná tabuľka</a>
+                            </div>
+
+                            <div id="quantity-input-box">
+                                <label for="quantity-input">Množstvo:</label>
+                                <input type="number" name="quantity-input" id="quantity-input" value="1">
+                            </div>
+
+                            <input type="submit" value="Pridať do košíka" id="add-to-cart">
+                        </form>
                     </div>
+                </div>
+                <hr>
+                <div class="col-12 row-m-b padded-box" >
+                    <section id="product-description">
+                        <h2>Opis a vlastnosti produktu</h2>
+
+                        <p>Skvelá priľnavá blúzka s čipkovaným lemovaním, mäkká bavlna je veľmi príjemná pri nosení
+                            a dobre drží tvar.
+                            Pohodlná blúzka sa skvelo hodí k elegantným čiernym nohaviciam či sukni.
+                        </p>
+
+                        <table id="product-attributes">
+                            <tr>
+                                <th>Materiál:</th>
+                                <td>95 % bavlna, 5 % elastán</td>
+                            </tr>
+                            <tr>
+                                <th>Značka:</th>
+                                <td>RAINBOW</td>
+                            </tr>
+                            <tr>
+                                <th>Farba:</th>
+                                <td>biela</td>
+                            </tr>
+                            <tr>
+                                <th>Priehľadnosť:</th>
+                                <td>nepriesvitný</td>
+                            </tr>
+                        </table>
+                    </section>
                 </div>
             </div>
         </div>
