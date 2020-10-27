@@ -3,16 +3,16 @@ body {
     margin: auto;
 }
 
-h2 {
-    font-size: 2em;
+h3 {
+    font-size: larger;
 }
 hr {
     width: 94%;
     margin: 0 auto 2% auto;
     size: 3px;
     background-color: black;
-
 }
+
 .back-button{
     text-decoration: underline;
     float:left;
@@ -20,6 +20,11 @@ hr {
     margin-bottom: 5%;
     border: none;
     background-color: white;
+}
+
+
+.submit-button:hover{
+    font-size: 1.5em;
 }
 
 .submit-button{
@@ -32,35 +37,43 @@ hr {
     border: sandybrown;
     border-radius: 8px;
 }
-.submit-button:hover{
-    font-size: 1.5em;
-}
 
 
 
-
-
-.item{
-    margin: 10px 0;
-    padding: 15px 0;
-    border-bottom: 1px solid black;
-    column-gap: 5%;
-}
-.select-title{
-    font-weight: bold;
-    font-size: larger;
-}
-
-.bloky{
+.register-box{
     background-color: antiquewhite;
-    padding-top: 1.5em;
-    margin-top: 10px;
     border-radius: 15px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
+    padding: 10px;
+}
+.login-button{
+    position: center;
+    background-color: sandybrown;
+    color: saddlebrown;
+    font-size: larger;
+    padding: 15px;
+    border: sandybrown;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
+input[type=text]{
+    border-radius: 50px;
+    box-shadow: 0 0 0 4px antiquewhite;
 
+}
+
+.form-restriction{
+    font-size: medium;
+    font-style: italic;
+    color: gray;
+}
+
+.summary{
+    font-size: larger;
+}
 
 @media (min-width: 300px) {
     body {
@@ -116,3 +129,9 @@ hr {
     }
 
 }
+
+
+
+
+.
+

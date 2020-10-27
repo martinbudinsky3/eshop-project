@@ -18,10 +18,11 @@
             <nav>
                 <a href="cart.html" > Kosik</a>
                 <a class="active" href="cart2.html" > Doprava a platba</a>
-                <a href="index.html" > Dodacie udaje </a>
+                <a href="cart3.html" > Dodacie udaje </a>
             </nav>
         </div>
         <hr>
+        <h3>Výber dopravy a platby</h3>
 
         <div class="container items">
             <div class="row item">
@@ -65,26 +66,38 @@
                 <div class="col-xs-10  col-sm-5 col-md-5 col-lg-5 bloky">
                     <p class="select-title">Zvoľte platbu</p>
                     <div class="radio-buttons">
-                        <input type="radio" class="radio-input" id="pay1" name="pay">
-                        <label class="radio-label" for="pay1">VúB e-platbyr</label>
-                        <div class="col">
-                            <p class="pay-description">Zadarmo</p>
+                        <div>
+                            <input type="radio" class="radio-input" id="pay1" name="pay">
+                            <label class="radio-label" for="pay1">VúB e-platbyr</label>
+                            <div class="col">
+                                <p class="pay-description">Zadarmo</p>
+                            </div>
                         </div>
-                        <input type="radio" class="radio-input" id="pay4" name="pay">
-                        <label class="radio-label" for="pay4">Kartou online</label>
-                        <div class="col">
-                            <p class="pay-description">Zadarmo</p>
+
+                        <div>
+                           <input type="radio" class="radio-input" id="pay4" name="pay">
+                            <label class="radio-label" for="pay4">Kartou online</label>
+                            <div class="col">
+                                <p class="pay-description">Zadarmo</p>
+                            </div>
                         </div>
-                        <input type="radio" class="radio-input" id="pay2" name="pay" checked>
-                        <label class="radio-label" for="pay2">Platba kurierovi</label>
-                        <div class="col">
-                            <p class="pay-description">3.60€</p>
+
+                        <div>
+                            <input type="radio" class="radio-input" id="pay2" name="pay" checked>
+                            <label class="radio-label" for="pay2">Platba kurierovi</label>
+                            <div class="col">
+                                <p class="pay-description">3.60€</p>
+                            </div>
                         </div>
-                        <input type="radio" class="radio-input" id="pay3" name="pay">
-                        <label class="radio-label" for="pay3">Bankový prevod</label>
-                        <div class="col">
-                            <p class="pay-description">Zadarmo</p>
+
+                        <div>
+                            <input type="radio" class="radio-input" id="pay3" name="pay">
+                            <label class="radio-label" for="pay3">Bankový prevod</label>
+                            <div class="col">
+                                <p class="pay-description">Zadarmo</p>
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -97,8 +110,8 @@
             <p class="summary-pay">Platba: Kartou online</p>
             <p class="summary-price">CENA SPOLU : 25€</p>
 
-            <button  class="back_button" onClick="window.location='index.html';">Spat do obchodu</button>
-            <button class="submit_button" onClick="window.location='cart2.html';" type="submit"> POKRACOVAT </button>
+            <button  class="back-button" onClick="window.location='cart.html';">Spat</button>
+            <button class="submit-button" onClick="window.location='cart3.html';" type="submit"> POKRACOVAT </button>
         </div>
 
 
