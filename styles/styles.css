@@ -33,3 +33,18 @@
 .image-content {
     position: relative;
 }
+
+.horizontal-flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.center-col {
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.white-image-captions {
+    color: white;
+    text-shadow: 0 0 0.4em #000;
+}
