@@ -67,21 +67,18 @@ input {
     font-size: 0.9rem;
 }
 
-#product-input div {
+#product-input > div {
     margin-bottom: 5%;
+    display: flex;
+    flex-direction: column;
 }
 
 #product-input label {
     font-weight: bold;
 }
 
-#product-input div input, #product-input select {
+#product-input > div input, #product-input select {
     padding-left: 2%;
-}
-
-#product-input div{
-    display: flex;
-    flex-direction: column;
 }
 
 #product-input label {
@@ -100,12 +97,21 @@ input {
     background-color: #c4c4c4;
 }
 
+#quantity-input {
+    width: 50%;
+}
+
+.input-btn {
+    padding-bottom: 0.25%;
+    padding-top: 0.25%;
+    vertical-align: top;
+}
+
 /** price section **/
 
 #price-section strong{
     font-size: 2.4rem;
     margin-right: 10%;
-    
 }
 
 .price-off {
@@ -212,7 +218,6 @@ input {
 
 /** media queries **/
 
-
 @media (min-width: 400px) {
     .carousel-product-name {  
         display: inline;
@@ -250,9 +255,9 @@ input {
     }
 }
 
-
 @media (min-width: 1200px) { 
     .carousel-product-name {
         font-size: 1.2em;
     }
 }
+ 
