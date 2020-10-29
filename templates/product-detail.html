@@ -84,6 +84,8 @@
                             <strong class="price-off">12.99</strong>
                             <del>17.99</del>
                         </span>
+
+                        <!--Product form-->
                         <form action="" id="product-input">
                             <div id="color-input-box">
                                 <label for="color-selector">Farba:</label>
@@ -121,6 +123,7 @@
             <hr class="section-separator">
             <div class="row row-m-b">
                 <div class="col  padded-box">
+                    <!--Product description and attributes-->
                     <section id="product-description">
                         <h2 class="section-heading">Opis a vlastnosti produktu</h2>
 
@@ -152,34 +155,13 @@
             </div>
 
             <hr class="section-separator">
+
+            <!--Reviews-->
             <div class="row">
                 <div class="col-12 center-box section-heading">
                     <h2>Hodnotenia produktu</h2>
                 </div>
-                <div class="col-8 order-md-2 order-lg-1 center-box">
-                    <!--Pagination-->
-                    <nav>
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"> <span class="page-link pagination-three-dots">....</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">49</a></li>
-                            <li class="page-item"><a class="page-link" href="#">50</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="col-8 order-md-2 order-lg-1 center-box row-m-b">
                     <div class="review center-box">
                         <p>
                             <span>
@@ -258,7 +240,8 @@
                     </nav>
                     <button id="add-review" class="btn btn-primary">Pridať recenziu</button>
                 </div>
-                <div class="col-4 order-md-1 order-lg-2">
+                <div class="col-4 order-md-1 order-lg-2 row-m-b">
+                    <!--Reviews stats table-->
                     <div class="center-box">
                         <span>
                             <span class="fa fa-star checked"></span>
@@ -325,6 +308,136 @@
                                 <td>(30)</td>
                             </tr>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="section-separator">
+
+            <!--Similar products-->
+            <div class="row row-m-b">
+                <div class="col-12 center-box">
+                    <h2 class="section-heading">Podobné produkty</h2>
+                    <div id="carousel-similar" class="carousel slide d-none d-lg-block" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Úpletový sveter</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Károvaná košeľa</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Tričko s dlhým rukávom</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Tričko s dlhým rukávom</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Úpletový sveter1</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Károvaná košeľa1</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Tričko s dlhým rukávom1</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Tričko s dlhým rukávom1</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Úpletový sveter2</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Károvaná košeľa2</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Tričko s dlhým rukávom2</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 ">
+                                        <img class="d-block w-100 img-responsive"
+                                            src="../assets/images/placeholder-300x420.png" alt="First slide">
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name">Tričko s dlhým rukávom2</h4>
+                                            <p></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a class="carousel-control-prev" data-target="#carousel-similar" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" data-target="#carousel-similar" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     </div>
                 </div>
             </div>

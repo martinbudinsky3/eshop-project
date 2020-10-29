@@ -179,3 +179,18 @@ input {
 .pagination:first-of-type {
     margin-top: 3%;
 }
+
+/** carousel **/
+
+.carousel-caption * {
+    color: black;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 4%
+}
+
+.carousel-caption {
+    bottom: 0;
+    padding-bottom: 0;
+}
