@@ -15,13 +15,17 @@
 <body>
     <div class="wrapper">
         <div class="container">
-            <div class="row">
-                <div class="col-6">
+            <div class="row page-header">
+                <div id="logo-box" class="col-2 col-4-sm d-md-block">
                     <a href="">
-                        <img src="assets/images/logo.png" alt="">
+                        <picture>
+                            <source media="(min-width: 576px)" srcset="assets/images/logo.png">
+                                <img src="assets/images/logo-cropped.png"
+                                    alt="Logo">
+                        </picture>
                     </a>
                 </div>
-                <div class="col-6 vertical-reverse">
+                <div id="icons-box" class="col-10 col-8-sm d-md-flex vertical-reverse ">
                     <div class="header-icons">
                         <a href="" class="cart-link">
                             <i class="fa fa-shopping-cart icon" aria-hidden="true"></i>
@@ -30,14 +34,35 @@
                             <i class="fa fa-user icon" aria-hidden="true"></i>
                         </button>
 
-                        <form action="" id="search-form">
-                            <input type="text" name="search-full-text" id="search-full-text"
-                                placeholder="Zadajte hľadaný výraz">
-                            <button type="submit" class="icon-btn">
-                                <i class="fa fa-search icon"></i>
-                            </button>
-                        </form>
+                        <button class="icon-btn d-inline-block d-md-none" id="search-icon"
+                            onclick="changeSearchBarVisibility()">
+                            <i class="fa fa-search icon"></i>
+                        </button>
+
+                        <div class="d-none d-md-block">
+                            <form action="">
+                                <input type="text" name="search-full-text" class="search-full-text"
+                                    placeholder="Zadajte hľadaný výraz">
+                                <button type="submit" class="icon-btn">
+                                    <i class="fa fa-search icon"></i>
+                                </button>
+                            </form>
+                        </div>
+
                     </div>
+                </div>
+
+                <div id="search-bar" class="col-12 d-none d-md-none">
+                    <button class="icon-btn">
+                        <i class="fa fa-times-circle icon" aria-hidden="true" onclick="changeSearchBarVisibility()"></i>
+                    </button>
+                    <form action="" id="search-form-xs" >
+                        <input type="text" name="search-full-text" class="search-full-text"
+                            placeholder="Zadajte hľadaný výraz" id="search-input-xs" >
+                        <button type="submit" id="search-submit-xs" class="icon-btn" >
+                            <i class="fa fa-search icon"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -49,7 +74,7 @@
                     <div class="image-content center-box">
                         <a href="">
                             <picture>
-                                <source media="(max-width: 799px)" srcset="assets/images/placeholder-600x400.png">
+                                <source media="(max-width: 767px)" srcset="assets/images/placeholder-600x400.png">
                                 <img src="assets/images/placeholder-1200x500.png"
                                     alt="Ilustračný obrázok - jesenná príroda" class="img-responsive">
                             </picture>
@@ -831,7 +856,7 @@
                     <div class="image-content center-box">
                         <a href="">
                             <picture>
-                                <source media="(max-width: 799px)" srcset="assets/images/placeholder-600x400.png">
+                                <source media="(max-width: 767px)" srcset="assets/images/placeholder-600x400.png">
                                 <img src="assets/images/placeholder-1200x500.png"
                                     alt="Ilustračný obrázok - jesenná príroda" class="img-responsive">
                             </picture>
@@ -860,13 +885,9 @@
 
     <script>
         $('.carousel').carousel({ interval: false, });
-
-        /*
-        $('#carousel-news').on('slide.bs.carousel', function (event) {
-            // do something…
-            console.log(event.relatedTarget);
-        })*/
     </script>
+
+    <script src="js/index.js"></script>
 </body>
 
 </html>
