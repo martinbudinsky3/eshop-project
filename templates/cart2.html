@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/cart2.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/cart2.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -14,11 +14,14 @@
 
 
     <div class="container main-content">
-        <div class="navigation">
+        <!--Breadcrumb-->
+        <div class="center-box">
             <nav>
-                <a href="cart.html" > Kosik</a>
-                <a class="active" href="cart2.html" > Doprava a platba</a>
-                <a href="cart3.html" > Dodacie udaje </a>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart.html';"  >Košík</a></li>
+                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart2.html';" aria-current="page">Doprava a platba</a></li>
+                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart3.html';" >Dodacie údaje</a></li>
+                </ol>
             </nav>
         </div>
         <hr>
@@ -41,7 +44,7 @@
                         </div>
 
                         <input type="radio" class="radio-input" id="delivery2" name="delivery1" checked>
-                        <label class="radio-label" for="delivery2">Doručenie kurierom</label>
+                        <label class="radio-label" for="delivery2">Doručenie kuriérom</label>
                         <div class="row">
                             <div class="col">
                                 <p class="price-delivery">4.60€</p>
@@ -84,7 +87,7 @@
 
                         <div>
                             <input type="radio" class="radio-input" id="pay2" name="pay" checked>
-                            <label class="radio-label" for="pay2">Platba kurierovi</label>
+                            <label class="radio-label" for="pay2">Platba kuriérovi</label>
                             <div class="col">
                                 <p class="pay-description">3.60€</p>
                             </div>
@@ -106,12 +109,12 @@
         </div>
 
         <div class="container summary">
-            <p class="summary-delivery">Doprava: Doručenie kurierom</p>
+            <p class="summary-delivery">Doprava: Doručenie kuriérom</p>
             <p class="summary-pay">Platba: Kartou online</p>
-            <p class="summary-price">CENA SPOLU : 25€</p>
+            <p class="summary-price">CENA SPOLU : 40.20€</p>
 
-            <button  class="back-button" onClick="window.location='cart.html';">Spat</button>
-            <button class="submit-button" onClick="window.location='cart3.html';" type="submit"> POKRACOVAT </button>
+            <button  class="back-button" onClick="window.location='cart.html';">Späť</button>
+            <button class="submit-button" onClick="window.location='cart3.html';" type="submit"> POKRAČOVAŤ</button>
         </div>
 
 

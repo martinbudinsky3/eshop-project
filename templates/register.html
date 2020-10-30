@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrácia</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class="wrapper">
+
+    <div class="container main-content">
+        <!--Breadcrumb-->
+        <div class="center-box">
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#" onClick="window.location='homepage.html';" >Hlavná stránka</a></li>
+                    <li class="breadcrumb-item"><a href="#" onClick="window.location='login.html';" >Prihlásenie</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Registrácia</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="row register">
+            <div class="col-12 title-panel" id="register-panel">
+                <h3>Registrácia</h3>
+            </div>
+        </div>
+
+        <div class=" container ">
+            <div class=" " id="form-register">
+
+                <form id="register-form">
+
+                    <div class="form-group col-md-6 offset-md-3">
+                        <p class="form-restriction">Všetky údaje sú povinné.</p>
+
+                        <label for="email">Email </label>
+                            <input type="text" class="form-control" id="email" placeholder="Email">
+                        </div>
+
+                         <div class="form-group col-md-6 offset-md-3">
+                            <label for="password">Heslo </label>
+                            <input type="text" class="form-control" id="password" placeholder="********">
+                         </div>
+
+                         <div class="form-group col-md-6 offset-md-3">
+                            <label for="password_again">Zopakujte heslo</label>
+                            <input type="text" class="form-control" id="password_again" placeholder="********">
+                         </div>
+
+                         <div class="form-group col-md-6 offset-md-3">
+                            <label for="phone">Telefónne číslo </label>
+                            <input type="text" class="form-control" id="phone" placeholder="Heslo">
+                         </div>
+
+                        <div class="form-check col-md-6 offset-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="conditions-check">
+                                <label class="form-check-label" for="conditions-check">
+                                    Súhlasím s <a href = "">obchodnými podmienkami spoločnosti. </a></label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="newsletter-check">
+                                <label class="form-check-label" for="newsletter-check">
+                                    Súhlasím so zasielaním reklamných mailov.</label>
+                            </div>
+
+
+                        </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            <div id="register-button" class="row login_button">
+                <div class="col-12 center-box">
+                    <button class="login-button" onClick="window.location='homepage.html';" type="button">REGISTROVAŤ</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

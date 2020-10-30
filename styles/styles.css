@@ -33,3 +33,116 @@
 .image-content {
     position: relative;
 }
+
+input[type=text]{
+    position: center;
+    border-radius: 50px;
+    box-shadow: 0 0 0 4px antiquewhite;
+}
+h3 {
+    font-size: larger;
+}
+hr {
+    width: 94%;
+    margin: 0 auto 2% auto;
+    size: 3px;
+    background-color: black;
+
+}
+
+.title-panel{
+    background-color: antiquewhite;
+    text-align: center;
+    padding: 20px;
+}
+
+
+.back-button{
+    text-decoration: underline;
+    float:left;
+    margin-left: 3%;
+    margin-bottom: 5%;
+    border: none;
+    background-color: white;
+}
+
+
+.submit-button:hover{
+    font-size: 1.5em;
+}
+
+.submit-button{
+    float: right;
+    background-color: sandybrown;
+    color: saddlebrown;
+    text-align: center;
+    padding: 0.5em;
+    font-size: 1.3em;
+    border: sandybrown;
+    border-radius: 8px;
+}
+
+
+
+.form-restriction{
+    font-size: medium;
+    font-style: italic;
+    color: gray;
+}
+
+.login-button{
+    position: center;
+    background-color: sandybrown;
+    color: saddlebrown;
+    font-size: larger;
+    padding: 15px;
+    border: sandybrown;
+    margin-bottom: 10px;
+    margin-top: 2%;
+}
+
+.summary{
+    font-size: larger;
+    font-weight: bold;
+}
+
+
+
+@media (min-width: 400px) {
+
+}
+
+@media (min-width: 572px) {
+
+    .wrapper {
+        font-size: 14px;
+    }
+
+}
+
+@media (min-width: 768px) {
+
+    .main-content {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .wrapper {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 992px) {
+    .wrapper {
+        font-size: 17px;
+    }
+
+}
+
+
+@media (min-width: 1200px) {
+    .wrapper {
+        font-size: 18px;
+    }
+
+}
