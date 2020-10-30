@@ -20,8 +20,7 @@
                     <a href="">
                         <picture>
                             <source media="(min-width: 576px)" srcset="assets/images/logo.png">
-                                <img src="assets/images/logo-cropped.png"
-                                    alt="Logo">
+                            <img src="assets/images/logo-cropped.png" alt="Logo">
                         </picture>
                     </a>
                 </div>
@@ -30,15 +29,41 @@
                         <a href="" class="cart-link">
                             <i class="fa fa-shopping-cart icon" aria-hidden="true"></i>
                         </a>
-                        <button class="icon-btn">
-                            <i class="fa fa-user icon" aria-hidden="true"></i>
-                        </button>
+                        
+                        <!--Profile button-->
+                        <div id="profile-dropdown">
+                            <button class="icon-btn" onclick="handleProfileButtonClick()">
+                                <i class="fa fa-user icon" aria-hidden="true"></i>
+                            </button>
 
+                            <!--Profile menu-->
+                            <div id="profile-menu" class="pop-up d-none">
+                                <!--Close menu button-->
+                                <button class="left-menu-close icon-btn d-inline-block d-sm-none" onclick="closeMenu()">
+                                    <i class="fa fa-times-circle icon" aria-hidden="true" ></i>
+                                </button>
+
+                                <ul>
+                                    <li>
+                                        <a href="">Prihlásenie</a>
+                                    </li>
+                                    <li>
+                                        <a href="">Registrácia</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!--Opaque layer-->
+                            <div id="opaque-layer" class="pop-up d-none d-sm-none"></div>
+                        </div>
+
+                        <!--Search button - < 768px-->
                         <button class="icon-btn d-inline-block d-md-none" id="search-icon"
-                            onclick="changeSearchBarVisibility()">
+                            onclick="handleSearchButtonClick()">
                             <i class="fa fa-search icon"></i>
                         </button>
 
+                        <!--Search bar - >= 768px-->
                         <div class="d-none d-md-block">
                             <form action="">
                                 <input type="text" name="search-full-text" class="search-full-text"
@@ -48,18 +73,18 @@
                                 </button>
                             </form>
                         </div>
-
                     </div>
                 </div>
 
+                <!--Search bar - < 768px-->
                 <div id="search-bar" class="col-12 d-none d-md-none">
                     <button class="icon-btn">
-                        <i class="fa fa-times-circle icon" aria-hidden="true" onclick="changeSearchBarVisibility()"></i>
+                        <i class="fa fa-times-circle icon" aria-hidden="true" onclick="handleSearchButtonClick()"></i>
                     </button>
-                    <form action="" id="search-form-xs" >
+                    <form action="" id="search-form-xs">
                         <input type="text" name="search-full-text" class="search-full-text"
-                            placeholder="Zadajte hľadaný výraz" id="search-input-xs" >
-                        <button type="submit" id="search-submit-xs" class="icon-btn" >
+                            placeholder="Zadajte hľadaný výraz" id="search-input-xs">
+                        <button type="submit" id="search-submit-xs" class="icon-btn">
                             <i class="fa fa-search icon"></i>
                         </button>
                     </form>
