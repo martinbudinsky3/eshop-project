@@ -28,3 +28,36 @@ function closeMenu() {
 
     bodyElement.classList.toggle('scroll-disable-xs')
 }
+
+function showMenSubmenu() {
+    let menSubmenu = document.getElementById('men-submenu')
+    menSubmenu.classList.add('d-block')
+}
+
+function showWomenSubmenu() {
+    let womenSubmenu = document.getElementById('women-submenu')
+    womenSubmenu.classList.add('d-block')
+}
+
+function showKidsSubmenu() {
+    let kidsSubmenu = document.getElementById('kids-submenu')
+    kidsSubmenu.classList.add('d-block')
+}
+
+function hideMenSubmenu() {
+    let menSubmenu = document.getElementById('men-submenu')
+    menSubmenu.classList.remove('d-block')
+}
+
+function hideWomenSubmenu() {
+    let womenSubmenu = document.getElementById('women-submenu')
+    womenSubmenu.classList.remove('d-block')
+}
+
+function hideKidsSubmenu() {
+    let kidsSubmenu = document.getElementById('kids-submenu')
+    kidsSubmenu.classList.remove    ('d-block')
+}
+
+
+

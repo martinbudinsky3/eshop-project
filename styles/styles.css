@@ -183,6 +183,72 @@ select, select:focus, input, input:focus {
     outline: none;
 }
 
+/** main menu **/
+
+#main-menu {
+    background-color: #7b7b7b;
+    color: white;
+}
+
+.navigation-link {
+    display: block;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.navigation-link:hover {
+    color: #dcdcdc;
+    text-decoration: none;
+}
+
+#first-level > li{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#first-level {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.nav-item-dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    position: absolute;
+    z-index: 1;
+    min-width: 250px;
+    height: 350px;
+    padding-top: 30px;
+    background-color: #f6f6f6;
+    border: 1px solid #aaaaaa;
+    border-radius: 5px;
+}
+
+.dropdown-content ul {
+    list-style: none;
+}
+
+.dropdown-content ul li {
+    margin-bottom: 8px;
+}
+
+.dropdown-content a, .dropdown-content a:visited {
+    text-decoration: none !important;
+    color: black;
+}
+
+.dropdown-content a:active, .dropdown-content a:focus {
+    outline: none;
+}
+
+
 /** media queries **/
 
 @media (min-width: 576px) {

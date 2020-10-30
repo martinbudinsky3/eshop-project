@@ -13,9 +13,14 @@
 </head>
 
 <body>
+    <!--Opaque layer-->
+    <div id="opaque-layer" class="pop-up d-none d-sm-none"></div>
+
+    <!--Page header-->
     <div class="wrapper">
         <div class="container">
             <div class="row page-header">
+                <!--Logo-->
                 <div id="logo-box" class="col-2 col-4-sm d-md-block">
                     <a href="">
                         <picture>
@@ -24,12 +29,13 @@
                         </picture>
                     </a>
                 </div>
+                <!--Icon nav + Search-->
                 <div id="icons-box" class="col-10 col-8-sm d-md-flex vertical-reverse ">
                     <div class="header-icons">
                         <a href="" class="cart-link">
                             <i class="fa fa-shopping-cart icon" aria-hidden="true"></i>
                         </a>
-                        
+
                         <!--Profile button-->
                         <div id="profile-dropdown">
                             <button class="icon-btn" onclick="handleProfileButtonClick()">
@@ -40,7 +46,7 @@
                             <div id="profile-menu" class="pop-up d-none">
                                 <!--Close menu button-->
                                 <button class="left-menu-close icon-btn d-inline-block d-sm-none" onclick="closeMenu()">
-                                    <i class="fa fa-times-circle icon" aria-hidden="true" ></i>
+                                    <i class="fa fa-times-circle icon" aria-hidden="true"></i>
                                 </button>
 
                                 <ul>
@@ -52,9 +58,6 @@
                                     </li>
                                 </ul>
                             </div>
-                            
-                            <!--Opaque layer-->
-                            <div id="opaque-layer" class="pop-up d-none d-sm-none"></div>
                         </div>
 
                         <!--Search button - < 768px-->
@@ -92,6 +95,142 @@
             </div>
         </div>
     </div>
+
+    <!--Main menu-->
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav id="main-menu">
+                        <ul id="first-level">
+                            <li>
+                                <div class="nav-item-dropdown" onmouseover="showMenSubmenu()"
+                                    onmouseout="hideMenSubmenu()">
+                                    <a href="" class="navigation-link">
+                                        Muži
+                                    </a>
+                                    <div id="men-submenu" class="sub-menu dropdown-content d-none">
+                                        <ul>
+                                            <li>
+                                                <a href="">Tričká</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Košeľe</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Nohavice</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Obleky</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Novinky</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Akcie</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Najlepšie hodnotené</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="nav-item-dropdown" onmouseover="showWomenSubmenu()"
+                                    onmouseout="hideWomenSubmenu()">
+                                    <a href="" class="navigation-link">
+                                        Ženy
+                                    </a>
+                                    <div id="women-submenu" class="sub-menu dropdown-content d-none">
+                                        <ul>
+                                            <li>
+                                                <a href="">Tričká</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Blúzky</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Šaty</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Nohavice</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Svetre</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Novinky</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Akcie</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Najlepšie hodnotené</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="nav-item-dropdown" onmouseover="showKidsSubmenu()"
+                                    onmouseout="hideKidsSubmenu()">
+                                    <a href="" class="navigation-link">
+                                        Deti
+                                    </a>
+                                    <div id="kids-submenu" class="sub-menu dropdown-content d-none">
+                                        <ul>
+                                            <li>
+                                                <a href="">Tričká</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Kombinézy</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Svetre</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Mikiny</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Novinky</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Akcie</a>
+                                            </li>
+
+                                            <li>
+                                                <a href="">Najlepšie hodnotené</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="wrapper">
         <div class="container">
             <div class="row row-m-b">
