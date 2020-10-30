@@ -39,6 +39,11 @@
     flex-direction: row;
 }
 
+.horizontal-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 .center-col {
     margin-left: auto; 
     margin-right: auto;
@@ -47,4 +52,49 @@
 .white-image-captions {
     color: white;
     text-shadow: 0 0 0.4em #000;
+}
+
+select, select:focus, input, input:focus {
+    outline: none;
+}
+
+/** header **/
+
+.header-icons {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.header-icons > * {
+    margin-right: 7%;
+}
+
+.header-icons > *:first-child{
+    margin-right: 2%;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-link, .cart-link:active, .cart-link:visited {
+    color: black;
+}
+
+#search-full-text {
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid black;
+    width: 300px;
+}
+
+.vertical-reverse {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.icon {
+    font-size: 2.5rem;
 }
