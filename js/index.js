@@ -10,14 +10,22 @@ function handleSearchButtonClick() {
 
 function prepareLeftMenu() {
     let bodyElement = document.getElementsByTagName("BODY")[0];
-    let opaqueLayer = document.getElementById('opaque-layer')
+    let opaqueLayer = document.getElementById('opaque-layer-lg')
 
-    bodyElement.classList.toggle('scroll-disable-xs')
+    bodyElement.classList.toggle('scroll-enable-lg')
+    opaqueLayer.classList.toggle('d-block')
+}
+
+function prepareLeftProfileMenu() {
+    let bodyElement = document.getElementsByTagName("BODY")[0];
+    let opaqueLayer = document.getElementById('opaque-layer-sm')
+
+    bodyElement.classList.toggle('scroll-enable-sm')
     opaqueLayer.classList.toggle('d-block')
 }
 
 function handleProfileButtonClick() {
-    prepareLeftMenu()
+    prepareLeftProfileMenu()
 
     let profileMenu = document.getElementById('profile-menu')  
     profileMenu.classList.toggle('d-block')
@@ -32,7 +40,13 @@ function closeMenu() {
         popUp.classList.remove('d-block')
     }
 
-    bodyElement.classList.remove('scroll-disable-xs')
+    bodyElement.classList.remove('scroll-enable-xs')
+    bodyElement.classList.remove('scroll-enable-lg')
+}
+
+function closeLeftSubmenu(leftSubmenuId) {
+    let leftSubmenu = document.getElementById(leftSubmenuId)
+    leftSubmenu.classList.remove('d-block')  
 }
 
 function showMenSubmenu() {
