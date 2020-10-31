@@ -259,10 +259,6 @@ select, select:focus, input, input:focus {
     background-color: #f6f6f6;
 }
 
-#profile-menu ul {
-    list-style: none;
-}
-
 #profile-menu li {
     margin-bottom: 7%;
 }
@@ -403,7 +399,6 @@ select, select:focus, input, input:focus {
     }
 
     #profile-menu ul {
-        list-style: none;
         width: 70%;
         margin: 0 auto;
         padding-left: 0;

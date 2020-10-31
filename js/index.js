@@ -40,7 +40,7 @@ function closeMenu() {
         popUp.classList.remove('d-block')
     }
 
-    bodyElement.classList.remove('scroll-enable-xs')
+    bodyElement.classList.remove('scroll-enable-sm')
     bodyElement.classList.remove('scroll-enable-lg')
 }
 

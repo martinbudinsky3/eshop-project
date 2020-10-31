@@ -19,7 +19,7 @@
 
     <!--Page header-->
     <div class="wrapper">
-        <div class="container">
+        <header class="container">
             <div class="row page-header">
                 <!--Logo-->
                 <div id="logo-box" class="col-2 col-4-sm d-md-block">
@@ -44,11 +44,12 @@
                             </button>
 
                             <!--Profile menu-->
-                            <div id="profile-menu" class="pop-up d-none">
+                            <nav id="profile-menu" class="pop-up d-none">
                                 <!--Close menu button-->
                                 <button class="left-menu-close icon-btn d-inline-block d-sm-none" onclick="closeMenu()">
                                     <i class="fa fa-times-circle icon" aria-hidden="true"></i>
                                 </button>
+
 
                                 <ul>
                                     <li>
@@ -58,7 +59,7 @@
                                         <a href="">Registrácia</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </nav>
                         </div>
 
                         <!--Search button - < 768px-->
@@ -94,7 +95,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </header>
     </div>
 
     <!--Main menu-->
@@ -111,7 +112,7 @@
                                     <a href="/templates/product-category.html" class="navigation-link">
                                         Muži
                                     </a>
-                                    <div id="men-submenu" class="sub-menu dropdown-content d-none">
+                                    <nav id="men-submenu" class="sub-menu dropdown-content d-none">
                                         <ul>
                                             <li>
                                                 <a href="templates/product-category.html">Tričká</a>
@@ -141,7 +142,7 @@
                                                 <a href="templates/product-category.html">Najlepšie hodnotené</a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </nav>
                                 </div>
                             </li>
                             <li>
@@ -150,7 +151,7 @@
                                     <a href="templates/product-category.html" class="navigation-link">
                                         Ženy
                                     </a>
-                                    <div id="women-submenu" class="sub-menu dropdown-content d-none">
+                                    <nav id="women-submenu" class="sub-menu dropdown-content d-none">
                                         <ul>
                                             <li>
                                                 <a href="templates/product-category.html">Tričká</a>
@@ -184,7 +185,7 @@
                                                 <a href="templates/product-category.html">Najlepšie hodnotené</a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </nav>
                                 </div>
                             </li>
                             <li>
@@ -193,7 +194,7 @@
                                     <a href="templates/product-category.html" class="navigation-link">
                                         Deti
                                     </a>
-                                    <div id="kids-submenu" class="sub-menu dropdown-content d-none">
+                                    <nav id="kids-submenu" class="sub-menu dropdown-content d-none">
                                         <ul>
                                             <li>
                                                 <a href="templates/product-category.html">Tričká</a>
@@ -223,7 +224,7 @@
                                                 <a href="templates/product-category.html">Najlepšie hodnotené</a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </nav>
                                 </div>
                             </li>
                         </ul>
@@ -234,7 +235,7 @@
                         </button>
 
                         <!--Left menu - first level-->
-                        <div id="left-menu" class="left-menu pop-up d-none d-lg-none">
+                        <nav id="left-menu" class="left-menu pop-up d-none d-lg-none">
                             <!--Close menu button-->
                             <button class="left-menu-close icon-btn d-inline-block" onclick="closeMenu()">
                                 <i class="fa fa-times-circle icon" aria-hidden="true"></i>
@@ -275,10 +276,10 @@
                                     </td>
                                 </tr>
                             </table>
-                        </div>
+                        </nav>
 
                         <!--Left menu - second level-->
-                        <div id="left-men-submenu" class="left-menu left-submenu pop-up d-none d-lg-none">
+                        <nav id="left-men-submenu" class="left-menu left-submenu pop-up d-none d-lg-none">
                             <!--Close menu button-->
                             <button class="left-menu-close icon-btn d-inline-block d-lg-none" onclick="closeMenu()">
                                 <i class="fa fa-times-circle icon" aria-hidden="true"></i>
@@ -332,10 +333,10 @@
                                     <a href="templates/product-category.html">Najlepšie hodnotené</a>
                                 </li>
                             </ul>
-                        </div>
+                        </nav>
 
                         <!--Left menu - second level-->
-                        <div id="left-women-submenu" class="left-menu left-submenu pop-up d-none d-lg-none">
+                        <nav id="left-women-submenu" class="left-menu left-submenu pop-up d-none d-lg-none">
                             <!--Close menu button-->
                             <button class="left-menu-close icon-btn d-inline-block d-lg-none" onclick="closeMenu()">
                                 <i class="fa fa-times-circle icon" aria-hidden="true"></i>
@@ -392,10 +393,10 @@
                                     <a href="templates/product-category.html">Najlepšie hodnotené</a>
                                 </li>
                             </ul>
-                        </div>
+                        </nav>
 
                         <!--Left menu - second level-->
-                        <div id="left-kids-submenu" class="left-menu left-submenu pop-up d-none">
+                        <nav id="left-kids-submenu" class="left-menu left-submenu pop-up d-none">
                             <!--Close menu button-->
                             <button class="left-menu-close icon-btn d-inline-block d-lg-none" onclick="closeMenu()">
                                 <i class="fa fa-times-circle icon" aria-hidden="true"></i>
@@ -449,7 +450,7 @@
                                     <a href="">Najlepšie hodnotené</a>
                                 </li>
                             </ul>
-                        </div>
+                        </nav>
                     </nav>
                 </div>
             </div>
@@ -457,9 +458,9 @@
     </div>
 
     <div class="wrapper">
-        <div class="container">
+        <main class="container">
             <div class="row row-m-b">
-                <div class="col-sm-12">
+                <article class="col-sm-12">
                     <div class="image-content center-box">
                         <a href="">
                             <picture>
@@ -473,11 +474,11 @@
                             <a href="" class="link-button">Zistite viac >></a>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
 
             <div class="row ">
-                <div class="col-sm-12 col-md-6 row-m-b">
+                <article class="col-sm-12 col-md-6 row-m-b">
                     <div class="image-content center-box">
                         <a href="">
                             <img src="assets/images/placeholder-600x400.png" alt="Fotka blúzky" class="img-responsive">
@@ -487,8 +488,8 @@
                             <a href="" class="link-button">Zistite viac >></a>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-12 col-md-6 row-m-b">
+                </article>
+                <article class="col-sm-12 col-md-6 row-m-b">
                     <div class="image-content center-box">
                         <div class="image-elements price-on-image center-box">
                             <div>
@@ -503,11 +504,11 @@
                             <h3 class="image-caption">Čižmy</h3>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
 
             <div class="row row-m-b">
-                <div class="col-12 center-box">
+                <section class="col-12 center-box">
                     <h2 class="section-heading center-text">Novinky</h2>
                     <div id="carousel-news" class="carousel slide d-none d-lg-block" data-ride="carousel">
                         <div class="carousel-inner">
@@ -868,13 +869,13 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
-                </div>
+                </section>
             </div>
 
 
             <!--The bests carousels-->
             <div class="row row-m-b">
-                <div class="col-12 center-box">
+                <section class="col-12 center-box">
                     <h2 class="section-heading center-text">Najlepšie hodnotené</h2>
                     <div id="carousel-bests" class="carousel slide d-none d-lg-block" data-ride="carousel">
                         <div class="carousel-inner">
@@ -1237,11 +1238,11 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
-                </div>
+                </section>
             </div>
 
             <div class="row row-m-b">
-                <div class="col-sm-12">
+                <article class="col-sm-12">
                     <div class="image-content center-box">
                         <a href="">
                             <picture>
@@ -1255,9 +1256,9 @@
                             <a href="" class="link-button">Zistite viac >></a>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
-        </div>
+        </main>
     </div>
     
     <!--Footer-->
