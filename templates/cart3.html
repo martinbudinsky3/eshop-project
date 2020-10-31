@@ -487,77 +487,82 @@
             </div>
 
             <hr>
-            <div class="form1">
-                <h3>Fakturačné údaje</h3>
-                <p class="form-restriction">Všetky údaje sú povinné.</p>
+            <section>
+                <div class="form1">
+                    <h3>Fakturačné údaje</h3>
+                    <p class="form-restriction">Všetky údaje sú povinné.</p>
 
 
-                <form id="delivery-form">
+                    <form id="delivery-form">
 
-                    <div class="form-group">
-                        <label for="name">Meno a priezvisko</label>
-                        <input type="text" class="text-input form-control" id="name" placeholder="meno a priezvisko">
-                    </div>
-
-                    <div class="form-row">
-                        <div class="col-sm-8 col-md-8 form-group">
-                            <label for="street">Ulica</label>
-                            <input type="text" class="text-input form-control" id="street" placeholder="ulica">
+                        <div class="form-group">
+                            <label for="name">Meno a priezvisko</label>
+                            <input type="text" class="text-input form-control" id="name"
+                                placeholder="meno a priezvisko">
                         </div>
-                        <div class="col-sm-4 col-md-4 form-group">
-                            <label for="numb">Číslo domu</label>
-                            <input type="text" class="text-input form-control" id="numb" placeholder="číslo domu">
+
+                        <div class="form-row">
+                            <div class="col-sm-8 col-md-8 form-group">
+                                <label for="street">Ulica</label>
+                                <input type="text" class="text-input form-control" id="street" placeholder="ulica">
+                            </div>
+                            <div class="col-sm-4 col-md-4 form-group">
+                                <label for="numb">Číslo domu</label>
+                                <input type="text" class="text-input form-control" id="numb" placeholder="číslo domu">
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="form-row">
-                        <div class="col-sm-8 col-md-8 form-group ">
-                            <label for="town">Mesto</label>
-                            <input type="text" class="text-input form-control" id="town" placeholder="mesto">
+                        <div class="form-row">
+                            <div class="col-sm-8 col-md-8 form-group ">
+                                <label for="town">Mesto</label>
+                                <input type="text" class="text-input form-control" id="town" placeholder="mesto">
+                            </div>
+                            <div class="col-sm-4 col-md-4 form-group">
+                                <label for="zip">PSČ</label>
+                                <input type="text" class="text-input form-control" id="zip" placeholder="PSČ">
+                            </div>
                         </div>
-                        <div class="col-sm-4 col-md-4 form-group">
-                            <label for="zip">PSČ</label>
-                            <input type="text" class="text-input form-control" id="zip" placeholder="PSČ">
+
+                        <div class="form-group ">
+                            <label for="country">Krajina</label>
+                            <input type="text" class="text-input form-control" id="country" placeholder="krajina">
                         </div>
-                    </div>
-
-                    <div class="form-group ">
-                        <label for="country">Krajina</label>
-                        <input type="text" class="text-input form-control" id="country" placeholder="krajina">
-                    </div>
 
 
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="newsletter-check">
-                            <label class="form-check-label" for="newsletter-check">
-                                Odoslať na inú adresu</label>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="newsletter-check">
+                                <label class="form-check-label" for="newsletter-check">
+                                    Odoslať na inú adresu</label>
+                            </div>
+                            <div class="form-check">
+
+                                <input class="form-check-input" type="checkbox" id="conditions-check">
+                                <label class="form-check-label" for="conditions-check">
+                                    Súhlasím s <a href="">obchodnými podmienkami spoločnosti. </a></label>
+                            </div>
                         </div>
-                        <div class="form-check">
 
-                            <input class="form-check-input" type="checkbox" id="conditions-check">
-                            <label class="form-check-label" for="conditions-check">
-                                Súhlasím s <a href="">obchodnými podmienkami spoločnosti. </a></label>
-                        </div>
-                    </div>
+                    </form>
+                </div>
 
-                </form>
-            </div>
+                <hr>
+                <div class="container summary">
+                    <p class="summary-cart">Hodnota tovaru: 32€</p>
+                    <p class="summary-cart">Platba: 3.60€</p>
+                    <p class="summary-pay">Doprava: 4.60€</p>
+                    <p class="summary-price">CENA SPOLU : 40.20€</p>
 
-            <hr>
-            <div class="container summary">
-                <p class="summary-cart">Hodnota tovaru: 32€</p>
-                <p class="summary-cart">Platba: 3.60€</p>
-                <p class="summary-pay">Doprava: 4.60€</p>
-                <p class="summary-price">CENA SPOLU : 40.20€</p>
-
-                <button class="back-button" onClick="window.location='cart2.html';">Späť</button>
-                <button class="submit-button" onClick="window.location='../index.html';" type="submit"
-                    form="delivery-form">Odoslať</button>
-            </div>
+                    <button class="back-button" onClick="window.location='cart2.html';">Späť</button>
+                    <button class="submit-button" onClick="window.location='../index.html';" type="submit"
+                        form="delivery-form">Odoslať</button>
+                </div>
+            </section>
         </main>
     </div>
+
+    <div class="clearfix"></div>
 
     <!--Footer-->
     <div class="wrapper">
