@@ -13,6 +13,17 @@ ul {
     list-style: none;
 }
 
+h3 {
+    font-size: larger;
+}
+
+hr {
+    width: 94%;
+    margin: 0 auto 2% auto;
+    size: 3px;
+    background-color: black;
+}
+
 .img-responsive {
     display: block;
     max-width: 100%;
@@ -46,18 +57,6 @@ ul {
     position: center;
     border-radius: 50px;
     box-shadow: 0 0 0 4px antiquewhite;
-}
-
-h3 {
-    font-size: larger;
-}
-
-hr {
-    width: 94%;
-    margin: 0 auto 2% auto;
-    size: 3px;
-    background-color: black;
-
 }
 
 .title-panel{
