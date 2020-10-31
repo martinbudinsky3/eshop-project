@@ -2,6 +2,10 @@
     max-width: 1496px;
 }
 
+.sort-selection, #top-filter, .breadcrumb, .pagination {
+    font-size: 0.9rem;
+}
+
 /** product information **/
 
 .product-content {
@@ -11,6 +15,10 @@
 
 .product-info {
     width: 80%;
+}
+
+.product-info {
+    font-size: 0.8rem;
 }
 
 .product-info del {
@@ -51,68 +59,84 @@
     padding-top: 100%;
 }
 
-.color-box > .color:last-of-type {
+.color-box>.color:last-of-type {
     margin-right: 0;
 }
 
 /** sorting **/
 
+#sort-label {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
 select {
-    border-radius: 5px;
+    border-radius: 5px; 
+    padding-left: 2%;
+    padding-right: 5%;
 }
 
 select:focus {
     outline: none;
 }
 
-/** left filter **/
+/** filters **/
 
-label {
-    font-weight: bold;
-}
-
-#left-filter {
-    margin-left: 0.8%;
-    border: solid 1px #c4c4c4;
+.filter {
     height: fit-content;
 }
 
-#left-filter ul {
-    list-style: none;
-    padding-left: 10%;
-}
-
-#left-filter>ul {
-    margin-top: 10%;
-}
-
-#left-filter label {
-    font-weight: normal;
-    margin-left: 2%;
+.filter label{
     cursor: pointer;
     display: inline;
 }
 
-.filter-category {
-    margin-bottom: 25%;
+.filter form {
+    padding-left: 10%;
 }
 
-.filter-category:last-child {
+/** left filter **/
+
+#left-filter {
+    margin-left: 0.8%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: solid 1px #c4c4c4;
+}
+
+#left-filter ul {
+    padding-left: 10%;
+}
+
+#left-filter h4 {
+    font-size: 1.3rem;
+}
+
+#left-filter label {
+    font-size: 0.9rem;
+    margin-left: 2%;
+}
+
+#left-filter .filter-category {
     margin-bottom: 15%;
 }
 
-.filter-category ul {
-    margin-top: 9%;
+#left-filter .filter-category:last-of-type {
+    margin-bottom: 10%;
 }
 
-.filter-category li {
+#left-filter .filter-category ul {
+    margin-top: 2%;
+}
+
+#left-filter .filter-category li {
     margin-bottom: 4%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.filter-category li:last-child {
+#left-filter .filter-category li:last-child {
     margin-bottom: 0;
 }
 
@@ -143,29 +167,24 @@ label {
     border: 1px solid rgb(118, 118, 118);
 }
 
-.top-filter-menu {
-    display: none;
-    padding: 2% 4%;
+#top-filter-menu {
+    padding: 5% 5%;
 }
 
-.top-filter-menu label, .top-filter-menu select{
-    display: block
+#top-filter-menu li{
+    margin-bottom: 2%;
 }
 
-.top-filter-menu label {
-    margin-bottom: 0;
-}
-
-.top-filter-menu select{
-    width: 100%;
+#top-filter-menu .filter-category {
     margin-bottom: 5%;
 }
 
-.show {
-    display: block;
+#top-filter-menu .filter-category:last-of-type {
+    margin-bottom: 2%;
 }
 
 /** stolen from bootstrap **/
+
 .caret {
     display: inline-block;
     width: 0;
@@ -206,29 +225,6 @@ hr {
 
 /** media queries **/
 
-@media (min-width: 300px) {
-    label {
-        margin-right: 2%;
-    }
-
-    select {
-        padding-left: 2%;
-        padding-right: 5%;
-    }
-
-    #sort-label {
-        margin-bottom: 0;
-    }
-
-    .product-info {
-        font-size: 0.8rem;
-    }
-
-    .sort-selection, #top-filter, .breadcrumb, .pagination {
-        font-size: 0.9rem;
-    }
-}
-
 @media (min-width: 400px) {
     .product-info {
         font-size: 0.9rem;
@@ -242,13 +238,9 @@ hr {
 }
 
 @media (min-width: 768px) {
-    .product-info, #left-filter label, .sort-selection, .breadcrumb, .pagination {
+    .product-info, .sort-selection, .breadcrumb, .pagination {
         font-size: 0.85rem;
     }
-
-    #left-filter h4 {
-        font-size: 1.3rem;
-    } 
 
     label {
         margin-right: 5%;
@@ -260,20 +252,18 @@ hr {
 }
 
 @media (min-width: 992px) {
-    .product-info, #left-filter label, .sort-selection, .breadcrumb, .pagination {
+    .product-info, .sort-selection, .breadcrumb, .pagination {
         font-size: 0.9rem;
     }
-
     #left-filter h4 {
         font-size: 1.4rem;
-    } 
+    }
 }
 
 @media (min-width: 1200px) {
     .product-info, #left-filter label, .sort-selection, .breadcrumb, .pagination {
         font-size: 1rem;
     }
-
     #left-filter h4 {
         font-size: 1.5 rem;
     }

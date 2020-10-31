@@ -19,6 +19,18 @@ hr {
     margin: 0 auto 2% auto;
 }
 
+.section-separator {
+    margin: 0 auto 4% auto;
+}
+
+.section-heading {
+    margin-bottom: 5%;
+}
+
+.section-heading {
+    text-align: center;
+}
+
 .img-responsive {
     display: block;
     max-width: 100%;
@@ -146,6 +158,25 @@ select, select:focus, input, input:focus {
     z-index: 3;
     top: 30px;
     left: 250px;
+}
+
+/** carousel **/
+
+.carousel-caption * {
+    color: black;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 4%
+}
+
+.carousel-caption {
+    bottom: 0;
+    padding-bottom: 0;
+}
+
+.carousel-product-name {
+    display: none;
 }
 
 /** header **/
@@ -327,7 +358,18 @@ select, select:focus, input, input:focus {
 
 /** media queries **/
 
+@media (min-width: 400px) {
+    .carousel-product-name {
+        display: inline;
+        font-size: 1rem;
+    }
+}
+
 @media (min-width: 576px) {
+    .carousel-product-name {
+        font-size: 1.2rem;
+    }
+
     .scroll-enable-sm {
         overflow-y: scroll;
     }
@@ -374,6 +416,10 @@ select, select:focus, input, input:focus {
 }
 
 @media (min-width: 768px) {
+    .carousel-product-name {
+        font-size: 1.1rem;
+    }
+
     .search-full-text {
         width: 300px;
     }
@@ -447,4 +493,8 @@ select, select:focus, input, input:focus {
     }
 }
 
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+    .carousel-product-name {
+        font-size: 1.2rem;
+    }
+}
