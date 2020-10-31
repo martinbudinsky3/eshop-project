@@ -7,11 +7,96 @@
     <title>Prihlásenie</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../styles/styles.css">
 
 </head>
 
 <body>
+    <!--Opaque layers-->
+    <div id="opaque-layer-sm" class="opaque-layer pop-up d-none d-sm-none"></div>
+    <div id="opaque-layer-lg" class="opaque-layer pop-up d-none d-lg-none"></div>
+
+    <!--Page header-->
+    <div class="wrapper">
+        <header class="container">
+            <div class="row page-header">
+                <!--Logo-->
+                <div id="logo-box" class="col-2 col-4-sm d-md-block">
+                    <a href="../index.html">
+                        <picture>
+                            <source media="(min-width: 576px)" srcset="../assets/images/logo.png">
+                            <img src="../assets/images/logo-cropped.png" alt="Logo">
+                        </picture>
+                    </a>
+                </div>
+                <!--Icon nav + Search-->
+                <div id="icons-box" class="col-10 col-8-sm d-md-flex vertical-reverse ">
+                    <div class="header-icons">
+                        <a href="cart.html" class="cart-link">
+                            <i class="fa fa-shopping-cart icon" aria-hidden="true"></i>
+                        </a>
+
+                        <!--Profile button-->
+                        <div id="profile-dropdown">
+                            <button class="icon-btn" onclick="handleProfileButtonClick()">
+                                <i class="fa fa-user icon" aria-hidden="true"></i>
+                            </button>
+
+                            <!--Profile menu-->
+                            <nav id="profile-menu" class="pop-up d-none">
+                                <!--Close menu button-->
+                                <button class="left-menu-close icon-btn d-inline-block d-sm-none" onclick="closeMenu()">
+                                    <i class="fa fa-times-circle icon" aria-hidden="true"></i>
+                                </button>
+
+
+                                <ul>
+                                    <li>
+                                        <a href="login.html">Prihlásenie</a>
+                                    </li>
+                                    <li>
+                                        <a href="register.html">Registrácia</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <!--Search button - < 768px-->
+                        <button class="icon-btn d-inline-block d-md-none" id="search-icon"
+                            onclick="handleSearchButtonClick()">
+                            <i class="fa fa-search icon"></i>
+                        </button>
+
+                        <!--Search bar - >= 768px-->
+                        <div class="d-none d-md-block">
+                            <form action="">
+                                <input type="text" name="search-full-text" class="search-full-text"
+                                    placeholder="Zadajte hľadaný výraz">
+                                <button type="submit" class="icon-btn">
+                                    <i class="fa fa-search icon"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Search bar - < 768px-->
+                <div id="search-bar" class="col-12 d-none d-md-none">
+                    <button class="icon-btn">
+                        <i class="fa fa-times-circle icon" aria-hidden="true" onclick="handleSearchButtonClick()"></i>
+                    </button>
+                    <form action="" id="search-form-xs">
+                        <input type="text" name="search-full-text" class="search-full-text"
+                            placeholder="Zadajte hľadaný výraz" id="search-input-xs">
+                        <button type="submit" id="search-submit-xs" class="icon-btn">
+                            <i class="fa fa-search icon"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </header>
+    </div>
     <div class="wrapper">
         <div class="container">
             <!--Breadcrumb-->
@@ -61,8 +146,8 @@
             <div class="container">
                 <div id="login-button" class="row login_button">
                     <div class="col-12 center-box">
-                        <button class="login-button" onClick="window.location='../index.html';"
-                            type="submit" form="login-form">PRIHLÁSENIE</button>
+                        <button class="login-button" onClick="window.location='../index.html';" type="submit"
+                            form="login-form">PRIHLÁSENIE</button>
                     </div>
                 </div>
                 <div id="register-row" class="row register center-box">
@@ -86,6 +171,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script src="../js/index.js"></script>
 
 </body>
+
 </html>
