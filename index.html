@@ -100,9 +100,10 @@
     <div class="wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 menu-col">
                     <nav id="main-menu">
-                        <ul id="first-level">
+                        <!--Navigation - >= 992px-->
+                        <ul id="first-level" class="d-none d-lg-block">
                             <li>
                                 <div class="nav-item-dropdown" onmouseover="showMenSubmenu()"
                                     onmouseout="hideMenSubmenu()">
@@ -225,6 +226,142 @@
                                 </div>
                             </li>
                         </ul>
+
+                        <!--Navigation - < 992px-->
+                        <button id="menu-bars" class="icon-btn d-block d-lg-none" onclick="showLeftMenu()">
+                            <i class="fa fa-bars" ></i>
+                        </button>
+
+                        <div id="left-menu" class="left-menu pop-up d-none">
+                            <!--Close menu button-->
+                            <button class="left-menu-close icon-btn d-inline-block" onclick="closeMenu()">
+                                <i class="fa fa-times-circle icon" aria-hidden="true"></i>
+                            </button>
+                            <ul>
+                                <li>
+                                    <button onclick="showLeftMenSubmenu()">Muži</button>
+                                </li>
+                                <li>
+                                    <button onclick="showLeftWomenSubmenu()">Ženy</button>
+                                </li>
+                                <li>
+                                    <button onclick="showLeftKidsSubmenu()">Deti</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="left-men-submenu" class="left-menu pop-up d-none">
+                            <!--Close menu button-->
+                            <button class="left-menu-close icon-btn d-inline-block d-sm-none" onclick="closeMenu()">
+                                <i class="fa fa-times-circle icon" aria-hidden="true"></i>
+                            </button>
+
+                            <ul>
+                                <li>
+                                    <a href="">Tričká</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Košeľe</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Nohavice</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Obleky</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Novinky</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Akcie</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Najlepšie hodnotené</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="left-women-submenu" class="left-menu pop-up d-none">
+                            <!--Close menu button-->
+                            <button class="left-menu-close icon-btn d-inline-block d-sm-none" onclick="closeMenu()">
+                                <i class="fa fa-times-circle icon" aria-hidden="true"></i>
+                            </button>
+                            <ul>
+                                <li>
+                                    <a href="">Tričká</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Blúzky</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Šaty</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Nohavice</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Svetre</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Novinky</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Akcie</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Najlepšie hodnotené</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="left-kids-submenu" class="left-menu pop-up d-none">
+                            <!--Close menu button-->
+                            <button class="left-menu-close icon-btn d-inline-block d-sm-none" onclick="closeMenu()">
+                                <i class="fa fa-times-circle icon" aria-hidden="true"></i>
+                            </button>
+                            <ul>
+                                <li>
+                                    <a href="">Tričká</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Kombinézy</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Svetre</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Mikiny</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Novinky</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Akcie</a>
+                                </li>
+
+                                <li>
+                                    <a href="">Najlepšie hodnotené</a>
+                                </li>
+                            </ul>
+                        </div>
                     </nav>
                 </div>
             </div>

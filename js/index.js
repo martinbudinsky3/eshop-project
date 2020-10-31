@@ -8,14 +8,20 @@ function handleSearchButtonClick() {
     searchBar.classList.toggle('d-flex')
 }
 
-function handleProfileButtonClick() {
-    let profileMenu = document.getElementById('profile-menu')
+function prepareLeftMenu() {
     let bodyElement = document.getElementsByTagName("BODY")[0];
     let opaqueLayer = document.getElementById('opaque-layer')
 
-    profileMenu.classList.toggle('d-block')
     bodyElement.classList.toggle('scroll-disable-xs')
     opaqueLayer.classList.toggle('d-block')
+}
+
+function handleProfileButtonClick() {
+    prepareLeftMenu()
+
+    let profileMenu = document.getElementById('profile-menu')  
+    profileMenu.classList.toggle('d-block')
+    
 }
 
 function closeMenu() {
@@ -23,10 +29,10 @@ function closeMenu() {
     let bodyElement = document.getElementsByTagName("BODY")[0];
 
     for(let popUp of popUps) {
-        popUp.classList.toggle('d-block')
+        popUp.classList.remove('d-block')
     }
 
-    bodyElement.classList.toggle('scroll-disable-xs')
+    bodyElement.classList.remove('scroll-disable-xs')
 }
 
 function showMenSubmenu() {
@@ -56,8 +62,27 @@ function hideWomenSubmenu() {
 
 function hideKidsSubmenu() {
     let kidsSubmenu = document.getElementById('kids-submenu')
-    kidsSubmenu.classList.remove    ('d-block')
+    kidsSubmenu.classList.remove('d-block')
 }
 
+function showLeftMenu() {
+    prepareLeftMenu()
+    
+    let leftMenu = document.getElementById('left-menu')
+    leftMenu.classList.add('d-block')
+}
 
+function showLeftMenSubmenu() {
+    let leftMenSubmenu = document.getElementById('left-men-submenu')
+    leftMenSubmenu.classList.add('d-block')
+}
 
+function showLeftWomenSubmenu() {
+    let leftWomenSubmenu = document.getElementById('left-women-submenu')
+    leftWomenSubmenu.classList.add('d-block')
+}
+
+function showLeftKidsSubmenu() {
+    let leftWomenSubmenu = document.getElementById('left-kids-submenu')
+    leftWomenSubmenu.classList.add('d-block')
+}
