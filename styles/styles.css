@@ -13,15 +13,10 @@ ul {
     list-style: none;
 }
 
-h3 {
-    font-size: larger;
-}
-
 hr {
-    width: 94%;
+    width: 100%;
+    border-color: #c4c4c4;
     margin: 0 auto 2% auto;
-    size: 3px;
-    background-color: black;
 }
 
 .img-responsive {
@@ -321,6 +316,13 @@ select, select:focus, input, input:focus {
 
 .left-submenu li{
     margin-bottom: 13px;
+}
+
+/** footer **/
+
+.footer-link, .footer-link:visited {
+    text-align: center;
+    color: black;
 }
 
 /** media queries **/

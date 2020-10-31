@@ -17,9 +17,7 @@ input {
 }
 
 .section-separator {
-    width: 100%;
     margin: 0 auto 4% auto;
-    border-color: #c4c4c4;
 }
 
 .section-heading {
