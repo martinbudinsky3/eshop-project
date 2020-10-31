@@ -1,136 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/cart2.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
+
 <body>
-<div class="wrapper">
-
-
-    <div class="container main-content">
-        <!--Breadcrumb-->
-        <div class="center-box">
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart.html';"  >Košík</a></li>
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart2.html';" aria-current="page">Doprava a platba</a></li>
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart3.html';" >Dodacie údaje</a></li>
-                </ol>
-            </nav>
-        </div>
-        <hr>
-        <h3>Výber dopravy a platby</h3>
-
-        <div class="container items">
-            <div class="row item">
-                <div class="col-xs-10  col-sm-6 col-md-5 col-lg-5 bloky">
-                    <p class="select-title">Zvoľte dopravu</p>
-                    <div class="radio-buttons">
-                        <input type="radio" class="radio-input" id="delivery1" name="delivery1">
-                        <label class="radio-label" for="delivery1">Osobný odber</label>
-                        <div class="row">
-                            <div class="col">
-                                <p class="price-delivery">Zadarmo</p>
-                            </div>
-                            <div class="col">
-                                <p class="time-delivery"> dnes od 15:00</p>
-                            </div>
-                        </div>
-
-                        <input type="radio" class="radio-input" id="delivery2" name="delivery1" checked>
-                        <label class="radio-label" for="delivery2">Doručenie kuriérom</label>
-                        <div class="row">
-                            <div class="col">
-                                <p class="price-delivery">4.60€</p>
-                            </div>
-                            <div class="col">
-                                <p class="time-delivery">5.10</p>
-                            </div>
-                        </div>
-                        <input type="radio" class="radio-input" id="delivery3" name="delivery1">
-                        <label class="radio-label" for="delivery3">Pošta</label>
-                        <div class="row">
-                            <div class="col">
-                                <p class="price-delivery">1.76€</p>
-                            </div>
-                            <div class="col">
-                                <p class="time-delivery">zajtra</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-xs-10  col-sm-5 col-md-5 col-lg-5 bloky">
-                    <p class="select-title">Zvoľte platbu</p>
-                    <div class="radio-buttons">
-                        <div>
-                            <input type="radio" class="radio-input" id="pay1" name="pay">
-                            <label class="radio-label" for="pay1">VúB e-platbyr</label>
-                            <div class="col">
-                                <p class="pay-description">Zadarmo</p>
-                            </div>
-                        </div>
-
-                        <div>
-                           <input type="radio" class="radio-input" id="pay4" name="pay">
-                            <label class="radio-label" for="pay4">Kartou online</label>
-                            <div class="col">
-                                <p class="pay-description">Zadarmo</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <input type="radio" class="radio-input" id="pay2" name="pay" checked>
-                            <label class="radio-label" for="pay2">Platba kuriérovi</label>
-                            <div class="col">
-                                <p class="pay-description">3.60€</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <input type="radio" class="radio-input" id="pay3" name="pay">
-                            <label class="radio-label" for="pay3">Bankový prevod</label>
-                            <div class="col">
-                                <p class="pay-description">Zadarmo</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
+    <div class="wrapper">
+        <div class="container">
+            <!--Breadcrumb-->
+            <div class="center-box">
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" onClick="window.location='cart.html';">Košík</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Doprava a platba</li>
+                        <li class="breadcrumb-item"><a href="#" onClick="window.location='cart3.html';">Dodacie
+                                údaje</a></li>
+                    </ol>
+                </nav>
             </div>
+            <hr>
         </div>
-
-        <div class="container summary">
-            <p class="summary-delivery">Doprava: Doručenie kuriérom</p>
-            <p class="summary-pay">Platba: Kartou online</p>
-            <p class="summary-price">CENA SPOLU : 40.20€</p>
-
-            <button  class="back-button" onClick="window.location='cart.html';">Späť</button>
-            <button class="submit-button" onClick="window.location='cart3.html';" type="submit"> POKRAČOVAŤ</button>
-        </div>
-
-
     </div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    <div class="wrapper">
+        <main class="container items">
+            <h3>Výber dopravy a platby</h3>
+            <form action="" id="cart-form" class="row item">
+                <div class="col-xs-10  col-sm-6 col-md-5 col-lg-5 bloky">
+                    <fieldset>
+                        <legend class="select-title">
+                            <p>Zvoľte dopravu</p>
+                        </legend>
+                        <div class="radio-buttons">
+                            <input type="radio" class="radio-input" id="delivery1" name="delivery1">
+                            <label class="radio-label" for="delivery1">Osobný odber</label>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="price-delivery">Zadarmo</p>
+                                </div>
+                                <div class="col">
+                                    <p class="time-delivery"> dnes od 15:00</p>
+                                </div>
+                            </div>
+
+                            <input type="radio" class="radio-input" id="delivery2" name="delivery1" checked>
+                            <label class="radio-label" for="delivery2">Doručenie kuriérom</label>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="price-delivery">4.60€</p>
+                                </div>
+                                <div class="col">
+                                    <p class="time-delivery">5.10</p>
+                                </div>
+                            </div>
+                            <input type="radio" class="radio-input" id="delivery3" name="delivery1">
+                            <label class="radio-label" for="delivery3">Pošta</label>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="price-delivery">1.76€</p>
+                                </div>
+                                <div class="col">
+                                    <p class="time-delivery">zajtra</p>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-10  col-sm-5 col-md-5 col-lg-5 bloky">
+                    <fieldset>
+                        <legend class="select-title">
+                            <p>Zvoľte platbu</p>
+                        </legend>
+                        <div class="radio-buttons">
+                            <div>
+                                <input type="radio" class="radio-input" id="pay1" name="pay">
+                                <label class="radio-label" for="pay1">VúB e-platbyr</label>
+                                <div class="col">
+                                    <p class="pay-description">Zadarmo</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <input type="radio" class="radio-input" id="pay4" name="pay">
+                                <label class="radio-label" for="pay4">Kartou online</label>
+                                <div class="col">
+                                    <p class="pay-description">Zadarmo</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <input type="radio" class="radio-input" id="pay2" name="pay" checked>
+                                <label class="radio-label" for="pay2">Platba kuriérovi</label>
+                                <div class="col">
+                                    <p class="pay-description">3.60€</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <input type="radio" class="radio-input" id="pay3" name="pay">
+                                <label class="radio-label" for="pay3">Bankový prevod</label>
+                                <div class="col">
+                                    <p class="pay-description">Zadarmo</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+            </form>
+            <div class="row summary">
+                <div class="col-12">
+                    <p class="summary-delivery">Doprava: Doručenie kuriérom</p>
+                    <p class="summary-pay">Platba: Kartou online</p>
+                    <p class="summary-price">CENA SPOLU : 40.20€</p>
+
+                    <button class="back-button" onClick="window.location='cart.html';">Späť</button>
+                    <button class="submit-button" onClick="window.location='cart3.html';" type="submit"
+                        form="cart-form">
+                        POKRAČOVAŤ</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-</div>
 </body>
+
 </html>

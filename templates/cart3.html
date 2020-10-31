@@ -1,124 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dodacie údaje</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/cart3.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
+
 <body>
-<div class="wrapper">
-
-    <div class="container main-content">
-
-        <!--Breadcrumb-->
-        <div class="center-box">
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart.html';"  >Košík</a></li>
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart2.html';" >Doprava a platba</a></li>
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart3.html';"  aria-current="page" >Dodacie údaje</a></li>
-                </ol>
-            </nav>
+    <div class="wrapper">
+        <div class="container">
+            <!--Breadcrumb-->
+            <div class="center-box">
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" onClick="window.location='cart.html';">Košík</a></li>
+                        <li class="breadcrumb-item"><a href="#" onClick="window.location='cart2.html';">Doprava a
+                                platba</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Dodacie
+                            údaje</li>
+                    </ol>
+                </nav>
+            </div>
+            <hr>
         </div>
-        <hr>
-
-        <div class=" container sing-or-register">
+    </div>
+    <div class="wrapper">
+        <main class="container">
+            <div class=" container sing-or-register">
                 <div class="row item">
                     <div class="col-xs-10  col-sm-6 col-md-5 col-lg-5 register-box">
                         <p><strong>Máte už v nás konto? Ušetrite čas a prihláste sa.</strong></p>
-                        <button class="login-button" onClick="window.location='login.html';" type="button">PRIHLÁSENIE</button>
+                        <button class="login-button" onClick="window.location='login.html';"
+                            type="button">PRIHLÁSENIE</button>
                     </div>
                 </div>
-        </div>
-
-        <hr>
-        <div class="form1">
-            <h3>Fakturačné údaje</h3>
-        <p class="form-restriction">Všetky údaje sú povinné.</p>
-
-
-        <form id="delivery-form">
-
-            <div class="form-group">
-                <label for="name">Meno a priezvisko</label>
-                <input type="text" class="text-input form-control" id="name" placeholder="meno a priezvisko">
             </div>
 
-            <div class="form-row">
-                <div class="col-sm-8 col-md-8 form-group">
-                    <label for="street">Ulica</label>
-                    <input type="text" class="text-input form-control" id="street" placeholder="ulica">
-                </div>
-                <div class="col-sm-4 col-md-4 form-group">
-                    <label for="numb">Číslo domu</label>
-                    <input type="text" class="text-input form-control" id="numb" placeholder="číslo domu">
-                </div>
+            <hr>
+            <div class="form1">
+                <h3>Fakturačné údaje</h3>
+                <p class="form-restriction">Všetky údaje sú povinné.</p>
+
+
+                <form id="delivery-form">
+
+                    <div class="form-group">
+                        <label for="name">Meno a priezvisko</label>
+                        <input type="text" class="text-input form-control" id="name" placeholder="meno a priezvisko">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-sm-8 col-md-8 form-group">
+                            <label for="street">Ulica</label>
+                            <input type="text" class="text-input form-control" id="street" placeholder="ulica">
+                        </div>
+                        <div class="col-sm-4 col-md-4 form-group">
+                            <label for="numb">Číslo domu</label>
+                            <input type="text" class="text-input form-control" id="numb" placeholder="číslo domu">
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="col-sm-8 col-md-8 form-group ">
+                            <label for="town">Mesto</label>
+                            <input type="text" class="text-input form-control" id="town" placeholder="mesto">
+                        </div>
+                        <div class="col-sm-4 col-md-4 form-group">
+                            <label for="zip">PSČ</label>
+                            <input type="text" class="text-input form-control" id="zip" placeholder="PSČ">
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="country">Krajina</label>
+                        <input type="text" class="text-input form-control" id="country" placeholder="krajina">
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="newsletter-check">
+                            <label class="form-check-label" for="newsletter-check">
+                                Odoslať na inú adresu</label>
+                        </div>
+                        <div class="form-check">
+
+                            <input class="form-check-input" type="checkbox" id="conditions-check">
+                            <label class="form-check-label" for="conditions-check">
+                                Súhlasím s <a href="">obchodnými podmienkami spoločnosti. </a></label>
+                        </div>
+                    </div>
+
+                </form>
             </div>
 
+            <hr>
+            <div class="container summary">
+                <p class="summary-cart">Hodnota tovaru: 32€</p>
+                <p class="summary-cart">Platba: 3.60€</p>
+                <p class="summary-pay">Doprava: 4.60€</p>
+                <p class="summary-price">CENA SPOLU : 40.20€</p>
 
-            <div class="form-row">
-                <div class="col-sm-8 col-md-8 form-group ">
-                    <label for="town">Mesto</label>
-                    <input type="text" class="text-input form-control" id="town" placeholder="mesto">
-                </div>
-                <div class="col-sm-4 col-md-4 form-group">
-                    <label for="zip">PSČ</label>
-                    <input type="text" class="text-input form-control" id="zip" placeholder="PSČ">
-                </div>
+                <button class="back-button" onClick="window.location='cart2.html';">Späť</button>
+                <button class="submit-button" onClick="window.location='../index.html';" type="submit"
+                    form="delivery-form">Odoslať</button>
             </div>
-
-            <div class="form-group ">
-                <label for="country">Krajina</label>
-                <input type="text" class="text-input form-control" id="country" placeholder="krajina">
-            </div>
-
-
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="newsletter-check">
-                    <label class="form-check-label" for="newsletter-check">
-                       Odoslať na inú adresu</label>
-                </div>
-                <div class="form-check">
-
-                    <input class="form-check-input" type="checkbox" id="conditions-check">
-                    <label class="form-check-label" for="conditions-check">
-                    Súhlasím s <a href = "">obchodnými podmienkami spoločnosti. </a></label>
-                </div>
-            </div>
-
-        </form>
-        </div>
-
-        <hr>
-        <div class="container summary">
-            <p class="summary-cart">Hodnota tovaru: 32€</p>
-            <p class="summary-cart">Platba: 3.60€</p>
-            <p class="summary-pay">Doprava: 4.60€</p>
-            <p class="summary-price">CENA SPOLU : 40.20€</p>
-
-            <button class="back-button" onClick="window.location='cart2.html';">Späť</button>
-            <button class="submit-button" onClick="window.location='../index.html';" type="submit">Odoslať</button>
-        </div>
-
-
+        </main>
     </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-</div>
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -7,6 +7,7 @@
     text-align: center;
     padding: 10px;
 }
+
 .login-button{
     position: center;
     background-color: sandybrown;
@@ -18,6 +19,9 @@
     margin-bottom: 10px;
 }
 
+.sing-or-register {
+    margin-bottom: 1rem;
+}
 
 .summary{
     font-size: larger;

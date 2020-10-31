@@ -160,6 +160,18 @@ select, select:focus, input, input:focus {
     left: 250px;
 }
 
+/** breadcrumb **/
+
+.breadcrumb {
+    background-color: #ffffff;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+.page-link {
+    border: 0;
+}
+
 /** carousel **/
 
 .carousel-caption * {
@@ -418,12 +430,20 @@ select, select:focus, input, input:focus {
     .search-full-text {
         width: 300px;
     }
+
+    .breadcrumb {
+        font-size: 0.85rem;
+    }
 }
 
 @media (min-width: 992px) {
 
     .scroll-enable-lg {
         overflow: scroll;
+    }
+
+    .breadcrumb {
+        font-size: 0.9rem;
     }
 
     /** main menu **/
@@ -491,5 +511,9 @@ select, select:focus, input, input:focus {
 @media (min-width: 1200px) {
     .carousel-product-name {
         font-size: 1.2rem;
+    }
+
+    .breadcrumb {
+        font-size: 1rem;
     }
 }

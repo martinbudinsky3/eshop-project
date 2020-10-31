@@ -2,7 +2,7 @@
     max-width: 1496px;
 }
 
-.sort-selection, #top-filter, .breadcrumb, .pagination {
+.sort-selection, #top-filter, .pagination {
     font-size: 0.9rem;
 }
 
@@ -198,21 +198,6 @@ select:focus {
     border-left: .3em solid transparent;
 }
 
-/** breadcrumb **/
-
-.breadcrumb {
-    background-color: #ffffff;
-    margin-bottom: 0;
-}
-
-hr {
-    width: 94%;
-}
-
-.page-link {
-    border: 0;
-}
-
 /** pagination **/
 
 .pagination li .pagination-three-dots:hover {
@@ -238,7 +223,7 @@ hr {
 }
 
 @media (min-width: 768px) {
-    .product-info, .sort-selection, .breadcrumb, .pagination {
+    .product-info, .sort-selection, .pagination {
         font-size: 0.85rem;
     }
 
@@ -252,7 +237,7 @@ hr {
 }
 
 @media (min-width: 992px) {
-    .product-info, .sort-selection, .breadcrumb, .pagination {
+    .product-info, .sort-selection, .pagination {
         font-size: 0.9rem;
     }
     #left-filter h4 {
@@ -261,7 +246,7 @@ hr {
 }
 
 @media (min-width: 1200px) {
-    .product-info, #left-filter label, .sort-selection, .breadcrumb, .pagination {
+    .product-info, #left-filter label, .sort-selection, .pagination {
         font-size: 1rem;
     }
     #left-filter h4 {
