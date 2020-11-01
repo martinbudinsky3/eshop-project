@@ -53,33 +53,9 @@ h3 {
     color: white;
 }
 
-/** carousel **/
-
-.carousel-caption * {
-    color: black;
-}
-
-.carousel-control-prev, .carousel-control-next {
-    width: 4%
-}
-
-.carousel-caption {
-    bottom: 0;
-    padding-bottom: 0;
-}
-
-.carousel-product-name {
-    display: none;
-}
-
 /** media queries **/
 
 @media (min-width: 400px) {
-    
-    .carousel-product-name {
-        display: inline;
-        font-size: 1rem;
-    }
     
     h2 {
         font-size: 1.8em;
@@ -100,16 +76,9 @@ h3 {
         font-size: 1.75em;
     }
 
-    .carousel-product-name {
-        font-size: 1.2rem;
-    }
 }
 
 @media (min-width: 768px) {
-
-    .carousel-product-name {
-        font-size: 1.1rem;
-    }
 
     h3 {
         font-size: 1.5em;
@@ -125,7 +94,4 @@ h3 {
 
 @media (min-width: 1200px) { 
 
-    .carousel-product-name {
-        font-size: 1.2rem;
-    }
 }
