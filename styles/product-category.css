@@ -183,6 +183,10 @@ select:focus {
     margin-bottom: 2%;
 }
 
+#close-filter {
+    margin-left: 5%;
+}
+
 /** stolen from bootstrap **/
 
 .caret {

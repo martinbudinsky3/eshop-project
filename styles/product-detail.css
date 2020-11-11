@@ -59,8 +59,12 @@ input {
     font-weight: bold;
 }
 
-#product-input > div input, #product-input select {
+#product-input select {
     padding-left: 2%;
+}
+
+#product-input > div input {
+    padding-left: 3%;
 }
 
 #product-input label {
@@ -79,8 +83,17 @@ input {
     background-color: #c4c4c4;
 }
 
-#quantity-input {
-    width: 50%;
+#quantity-input-box {
+    width: 100%;
+}
+
+#quantity-input-box button{
+    padding: 0;
+    width: 10%;
+}
+
+#quantity-input-box input{
+    width: 76%;
 }
 
 .input-btn {
@@ -185,7 +198,6 @@ input {
     .stars-col {
         width: 8%;
     }
-
 }
 
 @media (min-width: 768px) {
@@ -195,6 +207,18 @@ input {
 
     .stars-col {
         width: 5%;
+    }
+
+    #quantity-input-box {
+        width: 50%;
+    }
+
+    #quantity-input-box input{
+        width: 100%;
+    }
+
+    #product-input > div input {
+        padding-left: 5%;
     }
 }
 

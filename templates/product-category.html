@@ -585,7 +585,7 @@
                                 </li>
                             </ul>
                         </fieldset>
-                        <input type="submit" value="Filtrovať" class="btn btn-primary filter-submit">
+                        <input type="submit" value="Filtrovať" class="btn btn-primary">
                     </form>
                 </div>
                 <div class="col ">
@@ -593,7 +593,7 @@
                         <!--Top filter-->
                         <div class="col-12 d-md-none d-block row-smaller-m-b">
                             <div id="top-filter">
-                                <button class=" dropdown-button" onclick="showTopFilterMenu()">
+                                <button class="dropdown-button" onclick="toggleTopFilterMenu()">
                                     <span class="dropdown-button-content">
                                         Filter
                                         <i class="caret "></i>
@@ -688,7 +688,8 @@
                                                 </li>
                                             </ul>
                                         </fieldset>
-                                        <input type="submit" value="Filtrovať" class="btn btn-primary filter-submit">
+                                        <input type="submit" value="Filtrovať" class="btn btn-primary">
+                                        <button type="button" id="close-filter" class="btn btn-secondary" onclick="toggleTopFilterMenu()">Zavrieť</button>
                                     </form>
                                 </div>
                             </div>
