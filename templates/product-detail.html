@@ -19,6 +19,28 @@
     <div id="opaque-layer-sm" class="opaque-layer pop-up d-none d-sm-none"></div>
     <div id="opaque-layer-lg" class="opaque-layer pop-up d-none d-lg-none"></div>
 
+    <!-- Modal window that pops up after user adds product to cart -->
+    <div class="modal fade" id="add-to-cart-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nákup</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Produkt bol pridaný do košíka</p>
+                </div>
+                <div class="modal-footer modal-footer-custom">
+                    <a href="cart.html" class="btn btn-primary">Prejsť do košíka</a>
+                    <a href="product-category.html" class="btn btn-secondary">Späť k nákupu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Page header-->
     <div class="wrapper">
         <header class="container">
@@ -61,7 +83,7 @@
                                         <a href="register.html">Registrácia</a>
                                     </li>
 
-                                     <!--Logged in user-->
+                                    <!--Logged in user-->
                                     <!--li>
                                         <a href="">Profil</a>
                                     </li>
@@ -509,10 +531,9 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="">
-                                    <img class="d-block w-100 img-responsive" 
+                                    <img class="d-block w-100 img-responsive"
                                         srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-1_520x728.jpg 520w,
-                                            ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-1_640x896.jpg 640w"
-                                        sizes="(max-width: 576px) 520px,
+                                            ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-1_640x896.jpg 640w" sizes="(max-width: 576px) 520px,
                                             640px"
                                         src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-1_640x896.jpg"
                                         alt="Tričko s dlhým rukávom">
@@ -520,21 +541,19 @@
                             </div>
                             <div class="carousel-item">
                                 <a href="">
-                                    <img class="d-block w-100 img-responsive" 
-                                    srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-2_520x728.jpg 520w,
+                                    <img class="d-block w-100 img-responsive" srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-2_520x728.jpg 520w,
                                         ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-2_640x896.jpg 640w"
-                                    sizes="(max-width: 576px) 520px,
+                                        sizes="(max-width: 576px) 520px,
                                         640px"
-                                    src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-2_640x896.jpg"
-                                    alt="Tričko s dlhým rukávom">
+                                        src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-2_640x896.jpg"
+                                        alt="Tričko s dlhým rukávom">
                                 </a>
                             </div>
                             <div class="carousel-item">
                                 <a href="">
-                                    <img class="d-block w-100 img-responsive" 
+                                    <img class="d-block w-100 img-responsive"
                                         srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-3_520x728.jpg 520w,
-                                            ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-3_640x896.jpg 640w"
-                                        sizes="(max-width: 576px) 520px,
+                                            ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-3_640x896.jpg 640w" sizes="(max-width: 576px) 520px,
                                             640px"
                                         src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-3_640x896.jpg"
                                         alt="Tričko s dlhým rukávom">
@@ -575,7 +594,7 @@
                         </span>
 
                         <!--Product form-->
-                        <form action="" id="product-input">
+                        <form action="" id="product-input" onsubmit="formSubmitPrevent(event)">
                             <div id="color-input-box">
                                 <label for="color-selector">Farba:</label>
                                 <select name="color-selector" id="color-selector">
@@ -611,7 +630,8 @@
 
                             </div>
 
-                            <input type="submit" value="Pridať do košíka" id="add-to-cart">
+                            <input type="submit" value="Pridať do košíka" id="add-to-cart" data-toggle="modal"
+                                data-target="#add-to-cart-modal">
                         </form>
                     </div>
                 </div>
@@ -826,12 +846,12 @@
                                 <div class="row">
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
+                                                alt="Úpletový sveter">
                                         </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
@@ -840,12 +860,12 @@
                                     </div>
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
                                                     ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
                                                     ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                            alt="Károvaná košeľa">
+                                                alt="Károvaná košeľa">
                                         </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
@@ -854,14 +874,14 @@
                                     </div>
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive"
-                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive"
+                                                srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
                                                     ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
                                                     ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px"
-                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                            alt="Tričko s dlhým rukávom">
+                                                src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
+                                                alt="Tričko s dlhým rukávom">
                                         </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
@@ -871,12 +891,12 @@
                                     </div>
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
                                                     ../assets/images/tielko_520x728.jpg 520w,
                                                     ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                                </a>
+                                        </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Tielko</h4>
                                             <p></p>
@@ -888,12 +908,12 @@
                                 <div class="row">
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
                                                     ../assets/images/strecova-bluzka_520x728.jpg 520w,
                                                     ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/strecova-bluzka_640x896.jpg"
-                                            alt="Strečová blúzka">
+                                                alt="Strečová blúzka">
                                         </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
@@ -902,12 +922,12 @@
                                     </div>
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
+                                                alt="Úpletový sveter">
                                         </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
@@ -916,12 +936,12 @@
                                     </div>
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
                                                     ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
                                                     ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                            alt="Károvaná košeľa">
+                                                alt="Károvaná košeľa">
                                         </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
@@ -930,14 +950,14 @@
                                     </div>
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive"
-                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive"
+                                                srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
                                                     ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
                                                     ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px"
-                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                            alt="Tričko s dlhým rukávom">
+                                                src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
+                                                alt="Tričko s dlhým rukávom">
                                         </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
@@ -951,12 +971,12 @@
                                 <div class="row">
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
                                                     ../assets/images/tielko_520x728.jpg 520w,
                                                     ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                                </a>
+                                        </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Tielko</h4>
                                             <p></p>
@@ -964,12 +984,12 @@
                                     </div>
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
                                                     ../assets/images/strecova-bluzka_520x728.jpg 520w,
                                                     ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/strecova-bluzka_640x896.jpg"
-                                            alt="Strečová blúzka">
+                                                alt="Strečová blúzka">
                                         </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
@@ -978,12 +998,12 @@
                                     </div>
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
+                                                alt="Úpletový sveter">
                                         </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
@@ -992,12 +1012,12 @@
                                     </div>
                                     <div class="col-lg-3 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
                                                     ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
                                                     ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                            alt="Károvaná košeľa">
+                                                alt="Károvaná košeľa">
                                         </a>
                                         <div class="carousel-caption ">
                                             <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
@@ -1027,16 +1047,17 @@
                                 <div class="row">
                                     <div class="col-md-4 ">
                                         <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                            <p></p>
-                                        </div>
+                                                alt="Úpletový sveter">
+                                            <div class="carousel-caption ">
+                                                <h4 class="carousel-product-name white-image-caption">Úpletový sveter
+                                                </h4>
+                                                <p></p>
+                                            </div>
                                         </a>
                                     </div>
                                     <div class="col-md-4 ">
@@ -1047,12 +1068,12 @@
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
                                                 alt="Károvaná košeľa">
-                                            </a>
-                                            <div class="carousel-caption ">
-                                                <h4 class="carousel-product-name white-image-caption">Károvaná košeľa
-                                                </h4>
-                                                <p></p>
-                                            </div>
+                                        </a>
+                                        <div class="carousel-caption ">
+                                            <h4 class="carousel-product-name white-image-caption">Károvaná košeľa
+                                            </h4>
+                                            <p></p>
+                                        </div>
                                     </div>
                                     <div class="col-md-4 ">
                                         <a href="product-detail.html">

@@ -102,6 +102,12 @@ input {
     vertical-align: top;
 }
 
+/** modal window - after add to cart **/
+
+.modal-footer-custom {
+    justify-content: center;
+}
+
 /** price section **/
 
 #price-section strong{
