@@ -206,6 +206,10 @@ select, select:focus, input, input:focus {
 
 /** header **/
 
+#page-header {
+
+}
+
 .header-icons {
     display: flex;
     flex-direction: row-reverse;
@@ -229,8 +233,9 @@ select, select:focus, input, input:focus {
     outline: none;
 }
 
-.cart-link, .cart-link:active, .cart-link:visited {
+.cart-link, .cart-link:active, .cart-link:visited, .cart-link:hover {
     color: black;
+    text-decoration: none;
 }
 
 .search-full-text {
@@ -309,6 +314,10 @@ select, select:focus, input, input:focus {
     color: white;
 }
 
+#main-menu :first-child {
+    margin-left: 1%;
+}
+
 #menu-bars {
     color: white;
     font-size: 1.8rem;
@@ -316,7 +325,7 @@ select, select:focus, input, input:focus {
 
 .left-menu {
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 2;
     top: 0;
     left: 0;

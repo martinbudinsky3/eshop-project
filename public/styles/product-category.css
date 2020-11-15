@@ -68,6 +68,7 @@
 #sort-label {
     font-weight: bold;
     margin-bottom: 0;
+    margin-right: 2%;
 }
 
 select {
@@ -231,9 +232,6 @@ select:focus {
         font-size: 0.85rem;
     }
 
-    label {
-        margin-right: 5%;
-    }
     select {
         padding-left: 2%;
         padding-right: 20%;
