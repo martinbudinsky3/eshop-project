@@ -40,6 +40,13 @@
                         <div class="form-group col-md-6 offset-md-3">
                             <p class="form-restriction">Všetky údaje sú povinné.</p>
 
+                            <label for="name">Meno a priezvisko </label>
+                            <input type="text" class="text-input form-control" id="name" name="name" required
+                                placeholder="meno a priezvisko">
+                        </div>
+
+                        <div class="form-group col-md-6 offset-md-3">
+
                             <label for="email">Email </label>
                             <input type="email" class="text-input form-control @error('email') is-invalid @enderror"
                                 id="email" name="email" value="{{ old('email') }}" required
@@ -129,7 +136,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
-                        @csrf
+@csrf
 
                         <div class="form-group row">
                             <label for="name"
@@ -140,11 +147,11 @@
                                     name="name" value="{{ old('name') }}" required autocomplete="name"
                                     autofocus>
 
-                                @error('name')
+@error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+@enderror
                             </div>
                         </div>
 
@@ -157,11 +164,11 @@
                                     name="email" value="{{ old('email') }}" required
                                     autocomplete="email">
 
-                                @error('email')
+@error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+@enderror
                             </div>
                         </div>
 
@@ -174,11 +181,11 @@
                                     class="form-control @error('password') is-invalid @enderror" name="password"
                                     required autocomplete="new-password">
 
-                                @error('password')
+@error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+@enderror
                             </div>
                         </div>
 
