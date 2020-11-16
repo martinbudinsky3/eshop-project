@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('custom-css')
-<link rel="stylesheet" href="../styles/cart2.css">
+<link rel="stylesheet" href="{{ asset('styles/cart2.css') }}">
 @endsection
 
 @section('title')
@@ -15,9 +15,9 @@
         <div class="center-box">
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart.html';">Košík</a></li>
+                    <li class="breadcrumb-item"><a href="/cart">Košík</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Doprava a platba</li>
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart3.html';">Dodacie
+                    <li class="breadcrumb-item"><a href="/cart3">Dodacie
                             údaje</a></li>
                 </ol>
             </nav>

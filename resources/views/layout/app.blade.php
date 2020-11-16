@@ -19,7 +19,7 @@
     @include('layout.partials.footer')
     
     @yield('external-scripts')
-    <script src="js/index.js"></script>
+    <script src="{{ asset('js/index.js') }}"></script>
     @yield('custom-scripts')
 
 </body>

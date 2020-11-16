@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<link rel="stylesheet" href="../styles/cart1.css">
+<link rel="stylesheet" href="{{ asset('styles/cart1.css') }}">
 @endsection
 
 @section('content')
@@ -16,9 +16,9 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">Košík</li>
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart2.html';">Doprava a
+                    <li class="breadcrumb-item"><a href="/cart2">Doprava a
                             platba</a></li>
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart3.html';">Dodacie
+                    <li class="breadcrumb-item"><a href="/cart3">Dodacie
                             údaje</a></li>
                 </ol>
             </nav>

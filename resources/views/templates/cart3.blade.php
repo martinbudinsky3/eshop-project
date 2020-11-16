@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('custom-css')
-<link rel="stylesheet" href="../styles/cart3.css">
+<link rel="stylesheet" href="{{ asset('styles/cart3.css') }}">
 @endsection
 
 @section('title')
@@ -15,8 +15,8 @@
         <div class="center-box">
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart.html';">Košík</a></li>
-                    <li class="breadcrumb-item"><a href="#" onClick="window.location='cart2.html';">Doprava a
+                    <li class="breadcrumb-item"><a href="/cart">Košík</a></li>
+                    <li class="breadcrumb-item"><a href="/cart2">Doprava a
                             platba</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Dodacie
                         údaje</li>
@@ -29,15 +29,15 @@
 <div class="wrapper">
     <main class="container">
         @guest
-        <div class=" container sing-or-register">
-            <div class="row item">
-                <div class="col-xs-10  col-sm-6 col-md-5 col-lg-5 register-box">
-                    <p><strong>Máte už v nás konto? Ušetrite čas a prihláste sa.</strong></p>
-                    <button class="login-button" onClick="window.location='login.html';"
-                        type="button">PRIHLÁSENIE</button>
+            <div class=" container sing-or-register">
+                <div class="row item">
+                    <div class="col-xs-10  col-sm-6 col-md-5 col-lg-5 register-box">
+                        <p><strong>Máte už v nás konto? Ušetrite čas a prihláste sa.</strong></p>
+                        <button class="login-button" onClick="window.location='login.html';"
+                            type="button">PRIHLÁSENIE</button>
+                    </div>
                 </div>
             </div>
-        </div>
         @endguest
 
         <hr>
@@ -107,9 +107,8 @@
                 <p class="summary-pay"><span>Doprava: </span>4.60€</p>
                 <p class="summary-price"><span>CENA SPOLU: </span>40.20€</p>
 
-                <a href="/cart2" class="back-link" >Späť</a>
-                <button class="submit-button" onClick="window.location='../index.html';" type="submit"
-                    form="delivery-form">Odoslať</button>
+                <a href="/cart2" class="back-link">Späť</a>
+                <button class="submit-button" type="submit" form="delivery-form">Odoslať</button>
             </div>
         </section>
     </main>

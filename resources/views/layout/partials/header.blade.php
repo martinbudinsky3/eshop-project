@@ -6,8 +6,8 @@
             <div id="logo-box" class="col-2 col-4-sm d-md-block">
                 <a href="/">
                     <picture>
-                        <source media="(min-width: 576px)" srcset="assets/images/logo.png">
-                        <img src="assets/images/logo-cropped.png" alt="Logo">
+                        <source media="(min-width: 576px)" srcset="{{ asset('assets/images/logo.png') }}">
+                        <img src="{{ asset('assets/images/logo-cropped.png') }}" alt="Logo">
                     </picture>
                 </a>
             </div>
