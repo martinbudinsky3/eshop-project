@@ -78,7 +78,7 @@
                 <div id="register-row" class="row register center-box">
                     <div id="register-b" class="register">
                         <p>Ešte nemáte účet?</p>
-                        <a class="register-page" href="#" onClick="window.location='register.html';">Zaregistrujte
+                        <a class="register-page" href="/register">Zaregistrujte
                             sa.</a>
                     </div>
                 </div>
