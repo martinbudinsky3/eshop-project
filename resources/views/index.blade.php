@@ -1174,3 +1174,12 @@
 @section('external-scripts')
 @include('layout.partials.external-scripts')
 @endsection
+
+@section('custom-scripts')
+<script>
+    $('.carousel').carousel({
+        interval: false,
+    });
+
+</script>
+@endsection

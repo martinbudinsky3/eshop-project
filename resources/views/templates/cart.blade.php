@@ -102,10 +102,12 @@
             <hr>
             <div class="row summary">
                 <div class="col-12">
-                    <p class="summary-price">CENA SPOLU: 32€</p>
-                    <button class="back-button" onClick="window.location='product-category.html';">Späť do
-                        obchodu</button>
-                    <button class="submit-button" onClick="window.location='cart2.html';" type="submit"> POKRAČOVAŤ
+                    <p class="summary-price"><span>CENA SPOLU: </span>32€</p>
+                    <a href="/cart" class="back-link">
+                        Späť do obchodu
+                    </a>
+                    <button class="submit-button" type="submit">
+                        POKRAČOVAŤ
                     </button>
                 </div>
             </div>

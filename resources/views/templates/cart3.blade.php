@@ -28,6 +28,7 @@
 </div>
 <div class="wrapper">
     <main class="container">
+        @guest
         <div class=" container sing-or-register">
             <div class="row item">
                 <div class="col-xs-10  col-sm-6 col-md-5 col-lg-5 register-box">
@@ -37,6 +38,7 @@
                 </div>
             </div>
         </div>
+        @endguest
 
         <hr>
         <section>
@@ -100,12 +102,12 @@
 
             <hr>
             <div class="container summary">
-                <p class="summary-cart">Hodnota tovaru: 32€</p>
-                <p class="summary-cart">Platba: 3.60€</p>
-                <p class="summary-pay">Doprava: 4.60€</p>
-                <p class="summary-price">CENA SPOLU : 40.20€</p>
+                <p class="summary-cart"><span>Hodnota tovaru: </span>32€</p>
+                <p class="summary-cart"><span>Platba: </span>3.60€</p>
+                <p class="summary-pay"><span>Doprava: </span>4.60€</p>
+                <p class="summary-price"><span>CENA SPOLU: </span>40.20€</p>
 
-                <button class="back-button" onClick="window.location='cart2.html';">Späť</button>
+                <a href="/cart2" class="back-link" >Späť</a>
                 <button class="submit-button" onClick="window.location='../index.html';" type="submit"
                     form="delivery-form">Odoslať</button>
             </div>

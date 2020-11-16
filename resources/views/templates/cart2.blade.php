@@ -30,7 +30,7 @@
     <main class="container items">
         <section>
             <h3>Výber dopravy a platby</h3>
-            <form action="" target="_blank" id="cart-form" class="row item">
+            <form action="POST" target="_blank" id="cart-form" class="row item">
                 <div class="col-xs-10  col-sm-6 col-md-5 col-lg-5 bloky">
                     <fieldset>
                         <legend class="select-title">
@@ -78,15 +78,7 @@
                         </legend>
                         <div class="radio-buttons">
                             <div>
-                                <input type="radio" class="radio-input" id="pay1" name="pay">
-                                <label class="radio-label" for="pay1">VúB e-platbyr</label>
-                                <div class="col">
-                                    <p class="pay-description">Zadarmo</p>
-                                </div>
-                            </div>
-
-                            <div>
-                                <input type="radio" class="radio-input" id="pay4" name="pay">
+                                <input type="radio" class="radio-input" id="pay4" name="pay" checked>
                                 <label class="radio-label" for="pay4">Kartou online</label>
                                 <div class="col">
                                     <p class="pay-description">Zadarmo</p>
@@ -94,7 +86,15 @@
                             </div>
 
                             <div>
-                                <input type="radio" class="radio-input" id="pay2" name="pay" checked>
+                                <input type="radio" class="radio-input" id="pay1" name="pay">
+                                <label class="radio-label" for="pay1">VúB e-platby</label>
+                                <div class="col">
+                                    <p class="pay-description">Zadarmo</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <input type="radio" class="radio-input" id="pay2" name="pay">
                                 <label class="radio-label" for="pay2">Platba kuriérovi</label>
                                 <div class="col">
                                     <p class="pay-description">3.60€</p>
@@ -109,18 +109,40 @@
                                 </div>
                             </div>
 
+                            <div>
+                                <input type="radio" class="radio-input" id="pay5" name="pay">
+                                <label class="radio-label" for="pay3">Kredit</label>
+                                <div class="col">
+                                    <p class="pay-description">Zadarmo</p>
+                                </div>
+                            </div>
                         </div>
                     </fieldset>
                 </div>
             </form>
             <div class="row summary">
                 <div class="col-12">
-                    <p class="summary-delivery">Doprava: Doručenie kuriérom</p>
-                    <p class="summary-pay">Platba: Kartou online</p>
-                    <p class="summary-price">CENA SPOLU : 40.20€</p>
+                    <!--table>
+                        <tr>
+                            <th>Doprava:</th>
+                            <td>Doručenie kuriérom</td>
+                        </tr>
+                        <tr>
+                            <th>Platba:</th>
+                            <td>Kartou online</td>
+                        </tr>
+                        <tr>
+                            <th>Cena spolu:</th>
+                            <td>40.20€</td>
+                        </tr>
 
-                    <button class="back-button" onClick="window.location='cart.html';">Späť</button>
-                    <button class="submit-button" onClick="window.location='cart3.html';" type="submit"
+                    </table-->
+                    <p class="summary-delivery"> <span>Doprava: </span>Doručenie kuriérom</p>
+                    <p class="summary-pay"> <span>Platba: </span> Kartou online</p>
+                    <p class="summary-price"> <span>CENA SPOLU: </span> 40.20€</p>
+
+                    <a href="/cart" class="back-link">Späť</a>
+                    <button class="submit-button" type="submit"
                         form="cart-form">
                         POKRAČOVAŤ</button>
                 </div>

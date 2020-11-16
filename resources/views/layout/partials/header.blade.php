@@ -31,22 +31,25 @@
                                 <i class="fa fa-times-circle icon" aria-hidden="true"></i>
                             </button>
 
-
                             <ul>
-                                <li>
-                                    <a href="/login">Prihlásenie</a>
-                                </li>
-                                <li>
-                                    <a href="/register">Registrácia</a>
-                                </li>
+                                @guest
+                                    <li>
+                                        <a href="/login">Prihlásenie</a>
+                                    </li>
+                                    <li>
+                                        <a href="/register">Registrácia</a>
+                                    </li>
 
-                                <!--Logged in user-->
-                                <!--li>
+                                @else
+                                    <!--Logged in user-->
+                                    <!--h4>{{ Auth::user()->name }}</h4-->
+                                    <li>
                                         <a href="">Profil</a>
                                     </li>
                                     <li>
                                         <a href="">Odhlásenie</a>
-                                    </li-->
+                                    </li>
+                                @endguest
                             </ul>
                         </nav>
                     </div>
