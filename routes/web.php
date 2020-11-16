@@ -37,14 +37,9 @@ Route::get('/cart3', function () {
     return view('templates.cart3');
 });
 
-Route::get('/login', function () {
-    return view('templates.login');
-});
-
 Route::get('/register', function () {
     return view('templates.register');
 });
-
 
 
 Auth::routes();
