@@ -72,19 +72,12 @@ hr {
     padding: 20px;
 }
 
-
-.back-button{
+.back-link{
     text-decoration: underline;
-    float:left;
-    margin-left: 3%;
-    margin-bottom: 5%;
-    border: none;
-    background-color: white;
 }
 
-
-.submit-button:hover{
-    font-size: 1.5em;
+.back-link, .back-link:active, .back-link:visited, .back-link:hover {
+    color: black;
 }
 
 .submit-button{
@@ -96,6 +89,7 @@ hr {
     font-size: 1.3em;
     border: sandybrown;
     border-radius: 8px;
+    margin-top: 4%;
 }
 
 .form-restriction{
@@ -116,7 +110,12 @@ hr {
 }
 
 .summary{
+    padding-top: 2%;
+    padding-bottom: 2%;
     font-size: larger;
+}
+
+.summary span {
     font-weight: bold;
 }
 
@@ -128,11 +127,6 @@ hr {
 .center-col {
     margin-left: auto;
     margin-right: auto;
-}
-
-.summary{
-    font-size: larger;
-    font-weight: bold;
 }
 
 select, select:focus, input, input:focus {
@@ -206,6 +200,10 @@ select, select:focus, input, input:focus {
 
 /** header **/
 
+#page-header {
+
+}
+
 .header-icons {
     display: flex;
     flex-direction: row-reverse;
@@ -229,8 +227,9 @@ select, select:focus, input, input:focus {
     outline: none;
 }
 
-.cart-link, .cart-link:active, .cart-link:visited {
+.cart-link, .cart-link:active, .cart-link:visited, .cart-link:hover {
     color: black;
+    text-decoration: none;
 }
 
 .search-full-text {
@@ -309,6 +308,10 @@ select, select:focus, input, input:focus {
     color: white;
 }
 
+#main-menu :first-child {
+    margin-left: 1%;
+}
+
 #menu-bars {
     color: white;
     font-size: 1.8rem;
@@ -316,7 +319,7 @@ select, select:focus, input, input:focus {
 
 .left-menu {
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 2;
     top: 0;
     left: 0;

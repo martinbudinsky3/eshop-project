@@ -25,8 +25,8 @@ Route::get('/product-detail', function () {
     return view('templates.product-detail');
 });
 
-Route::get('/cart1', function () {
-    return view('templates.cart1');
+Route::get('/cart', function () {
+    return view('templates.cart');
 });
 
 Route::get('/cart2', function () {
@@ -37,12 +37,11 @@ Route::get('/cart3', function () {
     return view('templates.cart3');
 });
 
-Route::get('/login', function () {
-    return view('templates.login');
-});
-
 Route::get('/register', function () {
     return view('templates.register');
 });
 
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

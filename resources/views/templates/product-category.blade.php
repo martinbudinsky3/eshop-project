@@ -1,1175 +1,684 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="stylesheet" href="../styles/product-category.css">
-    <title>Product category</title>
-</head>
+@section('custom-css')
+<link rel="stylesheet" href="{{ asset('styles/product-category.css') }}">
+@endsection
 
-<body>
-    <!--Opaque layers-->
-    <div id="opaque-layer-sm" class="opaque-layer pop-up d-none d-sm-none"></div>
-    <div id="opaque-layer-lg" class="opaque-layer pop-up d-none d-lg-none"></div>
+@section('title')
+<title>Product category</title>
+@endsection
 
-    <!--Page header-->
-    <div class="wrapper center-col">
-        <header class="container-fluid">
-            <div class="row page-header">
-                <!--Logo-->
-                <div id="logo-box" class="col-2 col-4-sm d-md-block">
-                    <a href="../index.html">
-                        <picture>
-                            <source media="(min-width: 576px)" srcset="../assets/images/logo.png">
-                            <img src="../assets/images/logo-cropped.png" alt="Logo">
-                        </picture>
-                    </a>
-                </div>
-                <!--Icon nav + Search-->
-                <div id="icons-box" class="col-10 col-8-sm d-md-flex vertical-reverse ">
-                    <div class="header-icons">
-                        <a href="cart.html" class="cart-link">
-                            <i class="fa fa-shopping-cart icon" aria-hidden="true"></i>
-                        </a>
-
-                        <!--Profile button-->
-                        <div id="profile-dropdown">
-                            <button class="icon-btn" onclick="handleProfileButtonClick()">
-                                <i class="fa fa-user icon" aria-hidden="true"></i>
-                            </button>
-
-                            <!--Profile menu-->
-                            <nav id="profile-menu" class="pop-up d-none">
-                                <!--Close menu button-->
-                                <button class="left-menu-close icon-btn d-inline-block d-sm-none" onclick="closeMenu()">
-                                    <i class="fa fa-times-circle icon" aria-hidden="true"></i>
-                                </button>
-
-
-                                <ul>
-                                    <li>
-                                        <a href="login.html">Prihlásenie</a>
-                                    </li>
-                                    <li>
-                                        <a href="register.html">Registrácia</a>
-                                    </li>
-
-                                     <!--Logged in user-->
-                                    <!--li>
-                                        <a href="">Profil</a>
-                                    </li>
-                                    <li>
-                                        <a href="">Odhlásenie</a>
-                                    </li-->
-                                </ul>
-                            </nav>
-                        </div>
-
-                        <!--Search button - < 768px-->
-                        <button class="icon-btn d-inline-block d-md-none" id="search-icon"
-                            onclick="handleSearchButtonClick()">
-                            <i class="fa fa-search icon"></i>
-                        </button>
-
-                        <!--Search bar - >= 768px-->
-                        <div class="d-none d-md-block">
-                            <form action="">
-                                <input type="text" name="search-full-text" class="search-full-text"
-                                    placeholder="Zadajte hľadaný výraz">
-                                <button type="submit" class="icon-btn">
-                                    <i class="fa fa-search icon"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <!--Search bar - < 768px-->
-                <div id="search-bar" class="col-12 d-none d-md-none">
-                    <button class="icon-btn">
-                        <i class="fa fa-times-circle icon" aria-hidden="true" onclick="handleSearchButtonClick()"></i>
-                    </button>
-                    <form action="" id="search-form-xs">
-                        <input type="text" name="search-full-text" class="search-full-text"
-                            placeholder="Zadajte hľadaný výraz" id="search-input-xs">
-                        <button type="submit" id="search-submit-xs" class="icon-btn">
-                            <i class="fa fa-search icon"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </header>
+@section('content')
+<div class="wrapper center-col">
+    <div class="container-fluid">
+        <!--Breadcrumb-->
+        <div class="center-box">
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Hlavná stránka</a></li>
+                    <li class="breadcrumb-item"><a href="#">Ženy</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Blúzky</li>
+                </ol>
+            </nav>
+        </div>
+        <hr>
     </div>
-
-    <!--Main menu-->
-    <div class="wrapper center-col">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 menu-col">
-                    <nav id="main-menu">
-                        <!--Navigation - >= 992px-->
-                        <ul id="first-level" class="d-none d-lg-block">
+</div>
+<div class="wrapper center-col">
+    <main class="container-fluid">
+        <div class="row row-smaller-m-b sort-selection">
+            <!--Sorting selection-->
+            <div class="col-xl-8 col-lg-7 col-md-6"></div>
+            <div class="col-xl-4 col-lg-5 col-md-6 col-12 ">
+                <label for="sort-order" id="sort-label">Zoradiť podľa:</label>
+                <select name="sort-order" id="sort-order">
+                    <option value="popularity">Obľúbené</option>
+                    <option value="price-desc">Cena zostupne</option>
+                    <option value="price-asc">Cena vzostupne</option>
+                </select>
+            </div>
+        </div>
+        <div class="row row-m-b">
+            <!--Left filter-->
+            <div class="col-lg-2 col-md-3 filter d-md-block d-none" id="left-filter">
+                <form action="">
+                    <fieldset class="filter-category">
+                        <legend>
+                            <h4>Farba</h4>
+                        </legend>
+                        <ul>
                             <li>
-                                <div class="nav-item-dropdown" onmouseover="showMenSubmenu()"
-                                    onmouseout="hideMenSubmenu()">
-                                    <a href="product-category.html" class="navigation-link">
-                                        Muži
-                                    </a>
-                                    <nav id="men-submenu" class="sub-menu dropdown-content d-none">
-                                        <ul>
-                                            <li>
-                                                <a href="product-category.html">Tričká</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Košeľe</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Nohavice</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Obleky</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Novinky</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Akcie</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Najlepšie hodnotené</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+                                <input type="checkbox" id="white" name="white">
+                                <label for="white">biela</label>
                             </li>
                             <li>
-                                <div class="nav-item-dropdown" onmouseover="showWomenSubmenu()"
-                                    onmouseout="hideWomenSubmenu()">
-                                    <a href="product-category.html" class="navigation-link">
-                                        Ženy
-                                    </a>
-                                    <nav id="women-submenu" class="sub-menu dropdown-content d-none">
-                                        <ul>
-                                            <li>
-                                                <a href="product-category.html">Tričká</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Blúzky</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Šaty</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Nohavice</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Svetre</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Novinky</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Akcie</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Najlepšie hodnotené</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+                                <input type="checkbox" id="black" name="black">
+                                <label for="black">čierna</label>
                             </li>
                             <li>
-                                <div class="nav-item-dropdown" onmouseover="showKidsSubmenu()"
-                                    onmouseout="hideKidsSubmenu()">
-                                    <a href="product-category.html" class="navigation-link">
-                                        Deti
-                                    </a>
-                                    <nav id="kids-submenu" class="sub-menu dropdown-content d-none">
-                                        <ul>
-                                            <li>
-                                                <a href="product-category.html">Tričká</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Kombinézy</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Svetre</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Mikiny</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Novinky</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Akcie</a>
-                                            </li>
-
-                                            <li>
-                                                <a href="product-category.html">Najlepšie hodnotené</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+                                <input type="checkbox" id="purple" name="purple">
+                                <label for="purple">fialová</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="blue" name="blue">
+                                <label for="blue">modrá</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="green" name="green">
+                                <label for="green"> zelená</label>
                             </li>
                         </ul>
+                    </fieldset>
 
-                        <!--Navigation - < 992px-->
-                        <button id="menu-bars" class="icon-btn d-block d-lg-none" onclick="showLeftMenu()">
-                            <i class="fa fa-bars"></i>
-                        </button>
+                    <fieldset class="filter-category">
+                        <legend>
+                            <h4>Veľkosť</h4>
+                        </legend>
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="xxs" name="xxs">
+                                <label for="xxs">XXS</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="xs" name="xs">
+                                <label for="xs">XS</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="s" name="s">
+                                <label for="s">S</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="m" name="m">
+                                <label for="m">M</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="l" name="l">
+                                <label for="l">L</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="xl" name="xl">
+                                <label for="xl">XL</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="xxl" name="xxl">
+                                <label for="xxl">XXL</label>
+                            </li>
+                        </ul>
+                    </fieldset>
 
-                        <!--Left menu - first level-->
-                        <nav id="left-menu" class="left-menu pop-up d-none d-lg-none">
-                            <!--Close menu button-->
-                            <button class="left-menu-close icon-btn d-inline-block" onclick="closeMenu()">
-                                <i class="fa fa-times-circle icon" aria-hidden="true"></i>
-                            </button>
-                            <table class="left-menu-table">
-                                <colgroup>
-                                    <col span="1" class="col-80">
-                                    <col span="1" class="col-20">
-                                </colgroup>
-
-                                <tr>
-                                    <td class="left-td">
-                                        <button class="btn btn-link left-menu-btn" onclick="showLeftMenSubmenu()">
-                                            Muži
-
-                                        </button>
-                                    </td>
-                                    <td class="arrow-td">
-                                        <i class="fa fa-long-arrow-right" onclick="showLeftMenSubmenu()"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="left-td">
-                                        <button class="btn btn-link left-menu-btn"
-                                            onclick="showLeftWomenSubmenu()">Ženy</button>
-                                    </td>
-                                    <td class="arrow-td">
-                                        <i class="fa fa-long-arrow-right" onclick="showLeftWomenSubmenu()"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="left-td">
-                                        <button class="btn btn-link left-menu-btn"
-                                            onclick="showLeftKidsSubmenu()">Deti</button>
-                                    </td>
-                                    <td class="arrow-td">
-                                        <i class="fa fa-long-arrow-right" onclick="showLeftWomenSubmenu()"></i>
-                                    </td>
-                                </tr>
-                            </table>
-                        </nav>
-
-                        <!--Left menu - second level-->
-                        <nav id="left-men-submenu" class="left-menu left-submenu pop-up d-none d-lg-none">
-                            <!--Close menu button-->
-                            <button class="left-menu-close icon-btn d-inline-block d-lg-none" onclick="closeMenu()">
-                                <i class="fa fa-times-circle icon" aria-hidden="true"></i>
-                            </button>
-
-                            <!--Back to first level-->
-                            <table class="left-menu-table left-submenu-table">
-                                <colgroup>
-                                    <col span="1" class="col-70">
-                                    <col span="1" class="col-30">
-                                </colgroup>
-                                <tr>
-                                    <td class="left-td arrow-td" onclick="closeLeftSubmenu('left-men-submenu')">
-                                        <i class="fa fa-long-arrow-left"></i>
-                                    </td>
-                                    <td onclick="closeLeftSubmenu('left-men-submenu')">
-                                        Muži
-                                    </td>
-                                </tr>
-                            </table>
-                            <ul>
-                                <li>
-                                    <a href="product-category.html">všetky produkty</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Tričká</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Košeľe</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Nohavice</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Obleky</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Novinky</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Akcie</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Najlepšie hodnotené</a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                        <!--Left menu - second level-->
-                        <nav id="left-women-submenu" class="left-menu left-submenu pop-up d-none d-lg-none">
-                            <!--Close menu button-->
-                            <button class="left-menu-close icon-btn d-inline-block d-lg-none" onclick="closeMenu()">
-                                <i class="fa fa-times-circle icon" aria-hidden="true"></i>
-                            </button>
-
-                            <!--Back to first level-->
-                            <table class="left-menu-table left-submenu-table">
-                                <colgroup>
-                                    <col span="1" class="col-70">
-                                    <col span="1" class="col-30">
-                                </colgroup>
-                                <tr>
-                                    <td class="left-td arrow-td" onclick="closeLeftSubmenu('left-women-submenu')">
-                                        <i class="fa fa-long-arrow-left"></i>
-                                    </td>
-                                    <td onclick="closeLeftSubmenu('left-women-submenu')">
-                                        Ženy
-                                    </td>
-                                </tr>
-                            </table>
-                            <ul>
-                                <li>
-                                    <a href="product-category.html">všetky produkty</a>
-                                </li>
-                                <li>
-                                    <a href="product-category.html">Tričká</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Blúzky</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Šaty</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Nohavice</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Svetre</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Novinky</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Akcie</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Najlepšie hodnotené</a>
-                                </li>
-                            </ul>
-                        </nav>
-
-                        <!--Left menu - second level-->
-                        <nav id="left-kids-submenu" class="left-menu left-submenu pop-up d-none">
-                            <!--Close menu button-->
-                            <button class="left-menu-close icon-btn d-inline-block d-lg-none" onclick="closeMenu()">
-                                <i class="fa fa-times-circle icon" aria-hidden="true"></i>
-                            </button>
-
-                            <!--Back to first level-->
-                            <table class="left-menu-table left-submenu-table">
-                                <colgroup>
-                                    <col span="1" class="col-70">
-                                    <col span="1" class="col-30">
-                                </colgroup>
-                                <tr>
-                                    <td class="left-td arrow-td" onclick="closeLeftSubmenu('left-kids-submenu')">
-                                        <i class="fa fa-long-arrow-left"></i>
-                                    </td>
-                                    <td onclick="closeLeftSubmenu('left-kids-submenu')">
-                                        Deti
-                                    </td>
-                                </tr>
-                            </table>
-
-                            <ul>
-                                <li>
-                                    <a href="product-category.html">všetky produkty</a>
-                                </li>
-                                <li>
-                                    <a href="product-category.html">Tričká</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Kombinézy</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Svetre</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Mikiny</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Novinky</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Akcie</a>
-                                </li>
-
-                                <li>
-                                    <a href="product-category.html">Najlepšie hodnotené</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </nav>
-                </div>
+                    <fieldset class="filter-category">
+                        <legend>
+                            <h4>Značka</h4>
+                        </legend>
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="rainbow" name="rainbow">
+                                <label for="rainbow">RAINBOW</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="fashionweek" name="fashionweek">
+                                <label for="fashionweek">Fashionweek</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="esmara" name="esmara">
+                                <label for="esmara">Esmara</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="amando" name="amando">
+                                <label for="amando">Amando</label>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    <input type="submit" value="Filtrovať" class="btn btn-primary">
+                </form>
             </div>
-        </div>
-    </div>
+            <div class="col ">
+                <div class="row ">
+                    <!--Top filter-->
+                    <div class="col-12 d-md-none d-block row-smaller-m-b">
+                        <div id="top-filter">
+                            <button class="dropdown-button" onclick="toggleTopFilterMenu()">
+                                <span class="dropdown-button-content">
+                                    Filter
+                                    <i class="caret "></i>
+                                </span>
+                            </button>
+                            <div id="top-filter-menu" class="filter d-none d-md-none">
+                                <form action="">
+                                    <fieldset class="filter-category">
+                                        <legend>
+                                            <h4>Farba</h4>
+                                        </legend>
+                                        <ul>
+                                            <li>
+                                                <input type="checkbox" id="white-top" name="white">
+                                                <label for="white-top">biela</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="black-top" name="black">
+                                                <label for="black-top">čierna</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="purple-top" name="purple">
+                                                <label for="purple-top">fialová</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="blue-top" name="blue">
+                                                <label for="blue-top">modrá</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="green-top" name="green">
+                                                <label for="green-top"> zelená</label>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
 
-    <div class="wrapper center-col">
-        <div class="container-fluid">
-            <!--Breadcrumb-->
-            <div class="center-box">
-                <nav>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Hlavná stránka</a></li>
-                        <li class="breadcrumb-item"><a href="#">Ženy</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Blúzky</li>
-                    </ol>
-                </nav>
-            </div>
-            <hr>
-        </div>
-    </div>
-    <div class="wrapper center-col">
-        <main class="container-fluid">
-            <div class="row row-smaller-m-b sort-selection">
-                <!--Sorting selection-->
-                <div class="col-xl-8 col-lg-7 col-md-6"></div>
-                <div class="col-xl-4 col-lg-5 col-md-6 col-12 pull-right">
-                    <label for="sort-order" id="sort-label">Zoradiť podľa:</label>
-                    <select name="sort-order" id="sort-order">
-                        <option value="popularity">Obľúbené</option>
-                        <option value="price-desc">Cena zostupne</option>
-                        <option value="price-asc">Cena vzostupne</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row row-m-b">
-                <!--Left filter-->
-                <div class="col-lg-2 col-md-3 filter d-md-block d-none" id="left-filter">
-                    <form action="">
-                        <fieldset class="filter-category">
-                            <legend>
-                                <h4>Farba</h4>
-                            </legend>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" id="white" name="white">
-                                    <label for="white">biela</label>
+                                    <fieldset class="filter-category">
+                                        <legend>
+                                            <h4>Veľkosť</h4>
+                                        </legend>
+                                        <ul>
+                                            <li>
+                                                <input type="checkbox" id="xxs-top" name="xxs">
+                                                <label for="xxs-top">XXS</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="xs-top" name="xs">
+                                                <label for="xs-top">XS</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="s-top" name="s">
+                                                <label for="s-top">S</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="m-top" name="m">
+                                                <label for="m-top">M</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="l-top" name="l">
+                                                <label for="l-top">L</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="xl-top" name="xl">
+                                                <label for="xl-top">XL</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="xxl-top" name="xxl">
+                                                <label for="xxl-top">XXL</label>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+
+                                    <fieldset class="filter-category">
+                                        <legend>
+                                            <h4>Značka</h4>
+                                        </legend>
+                                        <ul>
+                                            <li>
+                                                <input type="checkbox" id="rainbow-top" name="rainbow">
+                                                <label for="rainbow-top">RAINBOW</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="fashionweek-top" name="fashionweek">
+                                                <label for="fashionweek-top">Fashionweek</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="esmara-top" name="esmara">
+                                                <label for="esmara-top">Esmara</label>
+                                            </li>
+                                            <li>
+                                                <input type="checkbox" id="amando-top" name="amando">
+                                                <label for="amando-top">Amando</label>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                    <input type="submit" value="Filtrovať" class="btn btn-primary">
+                                    <button type="button" id="close-filter" class="btn btn-secondary"
+                                        onclick="toggleTopFilterMenu()">Zavrieť</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Pagination-->
+                    <div class="col-12 center-box">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
                                 </li>
-                                <li>
-                                    <input type="checkbox" id="black" name="black">
-                                    <label for="black">čierna</label>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item">
+                                    <span class="page-link pagination-three-dots">....</span>
                                 </li>
-                                <li>
-                                    <input type="checkbox" id="purple" name="purple">
-                                    <label for="purple">fialová</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="blue" name="blue">
-                                    <label for="blue">modrá</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="green" name="green">
-                                    <label for="green"> zelená</label>
+                                <li class="page-item"><a class="page-link" href="#">49</a></li>
+                                <li class="page-item"><a class="page-link" href="#">50</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </li>
                             </ul>
-                        </fieldset>
+                        </nav>
+                    </div>
 
-                        <fieldset class="filter-category">
-                            <legend>
-                                <h4>Veľkosť</h4>
-                            </legend>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" id="xxs" name="xxs">
-                                    <label for="xxs">XXS</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="xs" name="xs">
-                                    <label for="xs">XS</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="s" name="s">
-                                    <label for="s">S</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="m" name="m">
-                                    <label for="m">M</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="l" name="l">
-                                    <label for="l">L</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="xl" name="xl">
-                                    <label for="xl">XL</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="xxl" name="xxl">
-                                    <label for="xxl">XXL</label>
-                                </li>
-                            </ul>
-                        </fieldset>
-
-                        <fieldset class="filter-category">
-                            <legend>
-                                <h4>Značka</h4>
-                            </legend>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" id="rainbow" name="rainbow">
-                                    <label for="rainbow">RAINBOW</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="fashionweek" name="fashionweek">
-                                    <label for="fashionweek">Fashionweek</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="esmara" name="esmara">
-                                    <label for="esmara">Esmara</label>
-                                </li>
-                                <li>
-                                    <input type="checkbox" id="amando" name="amando">
-                                    <label for="amando">Amando</label>
-                                </li>
-                            </ul>
-                        </fieldset>
-                        <input type="submit" value="Filtrovať" class="btn btn-primary">
-                    </form>
-                </div>
-                <div class="col ">
-                    <div class="row ">
-                        <!--Top filter-->
-                        <div class="col-12 d-md-none d-block row-smaller-m-b">
-                            <div id="top-filter">
-                                <button class="dropdown-button" onclick="toggleTopFilterMenu()">
-                                    <span class="dropdown-button-content">
-                                        Filter
-                                        <i class="caret "></i>
-                                    </span>
-                                </button>
-                                <div id="top-filter-menu" class="filter d-none d-md-none">
-                                    <form action="">
-                                        <fieldset class="filter-category">
-                                            <legend>
-                                                <h4>Farba</h4>
-                                            </legend>
-                                            <ul>
-                                                <li>
-                                                    <input type="checkbox" id="white-top" name="white">
-                                                    <label for="white-top">biela</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="black-top" name="black">
-                                                    <label for="black-top">čierna</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="purple-top" name="purple">
-                                                    <label for="purple-top">fialová</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="blue-top" name="blue">
-                                                    <label for="blue-top">modrá</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="green-top" name="green">
-                                                    <label for="green-top"> zelená</label>
-                                                </li>
-                                            </ul>
-                                        </fieldset>
-
-                                        <fieldset class="filter-category">
-                                            <legend>
-                                                <h4>Veľkosť</h4>
-                                            </legend>
-                                            <ul>
-                                                <li>
-                                                    <input type="checkbox" id="xxs-top" name="xxs">
-                                                    <label for="xxs-top">XXS</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="xs-top" name="xs">
-                                                    <label for="xs-top">XS</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="s-top" name="s">
-                                                    <label for="s-top">S</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="m-top" name="m">
-                                                    <label for="m-top">M</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="l-top" name="l">
-                                                    <label for="l-top">L</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="xl-top" name="xl">
-                                                    <label for="xl-top">XL</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="xxl-top" name="xxl">
-                                                    <label for="xxl-top">XXL</label>
-                                                </li>
-                                            </ul>
-                                        </fieldset>
-
-                                        <fieldset class="filter-category">
-                                            <legend>
-                                                <h4>Značka</h4>
-                                            </legend>
-                                            <ul>
-                                                <li>
-                                                    <input type="checkbox" id="rainbow-top" name="rainbow">
-                                                    <label for="rainbow-top">RAINBOW</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="fashionweek-top" name="fashionweek">
-                                                    <label for="fashionweek-top">Fashionweek</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="esmara-top" name="esmara">
-                                                    <label for="esmara-top">Esmara</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="amando-top" name="amando">
-                                                    <label for="amando-top">Amando</label>
-                                                </li>
-                                            </ul>
-                                        </fieldset>
-                                        <input type="submit" value="Filtrovať" class="btn btn-primary">
-                                        <button type="button" id="close-filter" class="btn btn-secondary" onclick="toggleTopFilterMenu()">Zavrieť</button>
-                                    </form>
-                                </div>
+                    <!--Products-->
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
                             </div>
                         </div>
 
-                        <!--Pagination-->
-                        <div class="col-12 center-box">
-                            <nav>
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item">
-                                        <span class="page-link pagination-three-dots">....</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">49</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">50</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
+                    </article>
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
                         </div>
 
-                        <!--Products-->
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                    </article>
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
                                                     (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
                             </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-
-                        </article>
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-
-                        </article>
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-
-                        </article>
-
-
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                            <div class="image-content">
-                                <a href="">
-                                    <img class="img-responsive" 
-                                            srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" 
-                                            sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" 
-                                            src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                </a>
-                                <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-info">
-                                    <strong>Úpletový sveter</strong><br>
-                                    <del>17.99</del><strong>12.99</strong>
-                                </div>
-                                <div class="cart">
-                                    <a href="">
-                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                        <!--Pagination-->
-                        <div class="col-12 center-box">
-                            <nav>
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"> <span class="page-link pagination-three-dots">....</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">49</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">50</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+
+                    </article>
+
+
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                        <div class="image-content">
+                            <a href="">
+                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                    alt="Úpletový sveter">
+                            </a>
+                            <div class="color-box">
+                                <div style="background-color: black;" class="color"></div>
+                                <div style="background-color: yellow;" class="color"></div>
+                                <div style="background-color: white;" class="color"></div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <div class="product-info">
+                                <strong>Úpletový sveter</strong><br>
+                                <del>17.99</del><strong>12.99</strong>
+                            </div>
+                            <div class="cart">
+                                <a href="">
+                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    <!--Pagination-->
+                    <div class="col-12 center-box">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"> <span class="page-link pagination-three-dots">....</span>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">49</a></li>
+                                <li class="page-item"><a class="page-link" href="#">50</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <hr class="section-separator">
+        <hr class="section-separator">
 
-            <!--Recommended products-->
-            <section class="row row-m-b">
-                <div class="col-12 center-box">
-                    <h2 class="section-heading">Najpredávanejšie v tejto kategórií</h2>
-                    <div id="carousel-rec" class="carousel slide d-none d-lg-block" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+        <!--Recommended products-->
+        <section class="row row-m-b">
+            <div class="col-12 center-box">
+                <h2 class="section-heading">Najpredávanejšie v tejto kategórií</h2>
+                <div id="carousel-rec" class="carousel slide d-none d-lg-block" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
                                             alt="Úpletový sveter">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
                                                     ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
                                                     ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
                                             alt="Károvaná košeľa">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive"
                                             srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
                                                     ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
@@ -1178,74 +687,74 @@
                                                     640px"
                                             src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
                                             alt="Tričko s dlhým rukávom">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                            </h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
+                                        </h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
                                                     ../assets/images/tielko_520x728.jpg 520w,
                                                     ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                                </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
                                                     ../assets/images/strecova-bluzka_520x728.jpg 520w,
                                                     ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/strecova-bluzka_640x896.jpg"
                                             alt="Strečová blúzka">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
                                             alt="Úpletový sveter">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
                                                     ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
                                                     ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
                                             alt="Károvaná košeľa">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive"
                                             srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
                                                     ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
@@ -1254,91 +763,91 @@
                                                     640px"
                                             src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
                                             alt="Tričko s dlhým rukávom">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                            </h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
+                                        </h4>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
                                                     ../assets/images/tielko_520x728.jpg 520w,
                                                     ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                                </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
                                                     ../assets/images/strecova-bluzka_520x728.jpg 520w,
                                                     ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/strecova-bluzka_640x896.jpg"
                                             alt="Strečová blúzka">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
                                             alt="Úpletový sveter">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-lg-3 ">
-                                        <a href="product-detail.html">
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
                                                     ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
                                                     ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
                                             alt="Károvaná košeľa">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="carousel-control-prev" data-target="#carousel-rec" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" data-target="#carousel-rec" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
                     </div>
+                    <a class="carousel-control-prev" data-target="#carousel-rec" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" data-target="#carousel-rec" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
 
-                    <div id="carousel-rec-md" class="carousel slide d-none d-md-block d-lg-none" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div class="col-md-4 ">
-                                        <a href="product-detail.html">
+                <div id="carousel-rec-md" class="carousel slide d-none d-md-block d-lg-none" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-md-4 ">
+                                    <a href="product-detail.html">
                                         <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
@@ -1346,371 +855,346 @@
                                                     640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
                                             alt="Úpletový sveter">
                                         <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
+                                            <h4 class="carousel-product-name white-image-caption">Úpletový sveter
+                                            </h4>
                                             <p></p>
                                         </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-4 ">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
+                                    </a>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
                                                     ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
                                                     ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                                alt="Károvaná košeľa">
-                                            </a>
-                                            <div class="carousel-caption ">
-                                                <h4 class="carousel-product-name white-image-caption">Károvaná košeľa
-                                                </h4>
-                                                <p></p>
-                                            </div>
+                                            alt="Károvaná košeľa">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa
+                                        </h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-md-4 ">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive"
-                                                srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
+                                </div>
+                                <div class="col-md-4 ">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive"
+                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
                                                     ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
                                                     ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px"
-                                                src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                                alt="Tričko s dlhým rukávom">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                            </h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-md-4 ">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
-                                                    ../assets/images/tielko_520x728.jpg 520w,
-                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 ">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
-                                                    ../assets/images/strecova-bluzka_520x728.jpg 520w,
-                                                    ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/strecova-bluzka_640x896.jpg"
-                                                alt="Strečová blúzka">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 ">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                                alt="Úpletový sveter">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-md-4 ">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                                alt="Károvaná košeľa">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 ">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive"
-                                                srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px"
-                                                src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                                alt="Tričko s dlhým rukávom">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                            </h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 ">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
-                                                    ../assets/images/tielko_520x728.jpg 520w,
-                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                            <p></p>
-                                        </div>
+                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
+                                            alt="Tričko s dlhým rukávom">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
+                                        </h4>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="carousel-control-prev" data-target="#carousel-rec-md" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" data-target="#carousel-rec-md" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-
-                    <div id="carousel-rec-xs" class="carousel slide d-block d-md-none " data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                                alt="Úpletový sveter">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                                alt="Károvaná košeľa">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive"
-                                                srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px"
-                                                src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                                alt="Tričko s dlhým rukávom">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                            </h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-4 ">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
                                                     ../assets/images/tielko_520x728.jpg 520w,
                                                     ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                            <p></p>
-                                        </div>
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
+                                        <p></p>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
+                                <div class="col-md-4 ">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
                                                     ../assets/images/strecova-bluzka_520x728.jpg 520w,
                                                     ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/strecova-bluzka_640x896.jpg"
-                                                alt="Strečová blúzka">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
-                                            <p></p>
-                                        </div>
+                                            alt="Strečová blúzka">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
+                                        <p></p>
                                     </div>
-                                    <div class="col-6">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                </div>
+                                <div class="col-md-4 ">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                                alt="Úpletový sveter">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                                alt="Károvaná košeľa">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive"
-                                                srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px"
-                                                src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                                alt="Tričko s dlhým rukávom">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                            </h4>
-                                            <p></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
-                                                    ../assets/images/tielko_520x728.jpg 520w,
-                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                            <p></p>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="product-detail.html">
-                                            <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
-                                                    ../assets/images/strecova-bluzka_520x728.jpg 520w,
-                                                    ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/strecova-bluzka_640x896.jpg"
-                                                alt="Strečová blúzka">
-                                        </a>
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
-                                            <p></p>
-                                        </div>
+                                            alt="Úpletový sveter">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a class="carousel-control-prev" data-target="#carousel-rec-xs" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" data-target="#carousel-rec-xs" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-4 ">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
+                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
+                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
+                                            alt="Károvaná košeľa">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive"
+                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
+                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
+                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px"
+                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
+                                            alt="Tričko s dlhým rukávom">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
+                                        </h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
+                                                    ../assets/images/tielko_520x728.jpg 520w,
+                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <a class="carousel-control-prev" data-target="#carousel-rec-md" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" data-target="#carousel-rec-md" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-            </section>
-        </main>
-    </div>
 
-    <!--Footer-->
-    <div class="wrapper">
-        <footer class="container">
-            <hr>
-            <nav class="row row-m-b">
-                <div class="col-12 col-md-3 footer-link">
-                    <a href="" class="footer-link">Obchodné podmienky</a>
-                </div>
-                <div class="col-12 col-md-3 footer-link">
-                    <a href="" class="footer-link">Kontakt</a>
-                </div>
-                <div class="col-12 col-md-3 footer-link">
-                    <a href="" class="footer-link">Doprava</a>
-                </div>
-                <div class="col-12 col-md-3 footer-link">
-                    <a href="" class="footer-link">Reklamácia</a>
-                </div>
-            </nav>
-        </footer>
-    </div>
+                <div id="carousel-rec-xs" class="carousel slide d-block d-md-none " data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                            alt="Úpletový sveter">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
+                                        <p></p>
+                                    </div>
+                                </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <script src="../js/index.js"></script>
-    <script src="../js/product-category.js"></script>
+                                <div class="col-6">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
+                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
+                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
+                                            alt="Károvaná košeľa">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive"
+                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
+                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
+                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px"
+                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
+                                            alt="Tričko s dlhým rukávom">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
+                                        </h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
+                                                    ../assets/images/tielko_520x728.jpg 520w,
+                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-    <script>
-        $('.carousel').carousel({ interval: false, });
-    </script>
-</body>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
+                                                    ../assets/images/strecova-bluzka_520x728.jpg 520w,
+                                                    ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/strecova-bluzka_640x896.jpg"
+                                            alt="Strečová blúzka">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
+                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
+                                            alt="Úpletový sveter">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
+                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
+                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
+                                            alt="Károvaná košeľa">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive"
+                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
+                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
+                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px"
+                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
+                                            alt="Tričko s dlhým rukávom">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
+                                        </h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
+                                                    ../assets/images/tielko_520x728.jpg 520w,
+                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
+                                        <p></p>
+                                    </div>
 
-</html>
+                                </div>
+                                <div class="col-6">
+                                    <a href="product-detail.html">
+                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
+                                                    ../assets/images/strecova-bluzka_520x728.jpg 520w,
+                                                    ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
+                                                    (max-width: 1200px) 520px,
+                                                    640px" src="../assets/images/strecova-bluzka_640x896.jpg"
+                                            alt="Strečová blúzka">
+                                    </a>
+                                    <div class="carousel-caption ">
+                                        <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" data-target="#carousel-rec-xs" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" data-target="#carousel-rec-xs" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+@endsection
+
+@section('external-scripts')
+@include('layout.partials.external-scripts')
+@endsection
+
+@section('custom-scripts')
+<script src="../js/product-category.js"></script>
+
+<script>
+    $('.carousel').carousel({
+        interval: false,
+    });
+
+</script>
+@endsection
