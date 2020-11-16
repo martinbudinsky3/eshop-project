@@ -32,20 +32,18 @@
             </div>
 
             <div class="container wrapper">
-                <div id="form-register">
+                <div id="form-register" class="col-md-6 offset-md-3">
 
                     <form method="POST" action="{{ route('register') }}" id="register-form">
                         @csrf
-
-                        <div class="form-group col-md-6 offset-md-3">
-                            <p class="form-restriction">Všetky údaje sú povinné.</p>
-
+                        <p class="form-restriction">Všetky údaje sú povinné.</p>
+                        <div class="form-group ">
                             <label for="name">Meno a priezvisko </label>
                             <input type="text" class="text-input form-control" id="name" name="name" required
                                 placeholder="meno a priezvisko">
                         </div>
 
-                        <div class="form-group col-md-6 offset-md-3">
+                        <div class="form-group ">
 
                             <label for="email">Email </label>
                             <input type="email" class="text-input form-control @error('email') is-invalid @enderror"
@@ -58,7 +56,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group col-md-6 offset-md-3">
+                        <div class="form-group ">
                             <label for="password">Heslo </label>
                             <input type="password"
                                 class="text-input form-control @error('password') is-invalid @enderror" id="password"
@@ -71,7 +69,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group col-md-6 offset-md-3">
+                        <div class="form-group ">
                             <label for="password_again">Zopakujte heslo</label>
                             <input type="password" class="text-input form-control" id="password_again"
                                 name="password_again" required autocomplete="new-password">
@@ -82,13 +80,13 @@
                             @enderror
                         </div>
 
-                        <div class="form-group col-md-6 offset-md-3">
+                        <div class="form-group ">
                             <label for="phone">Telefónne číslo </label>
                             <input type="text" class="text-input form-control" id="phone" name="phone" required
                                 placeholder="+421xxxxxxxxx">
                         </div>
 
-                        <div class="form-check col-md-6 offset-md-3">
+                        <div class="form-check ">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="conditions-check"
                                     name="conditions-check">
