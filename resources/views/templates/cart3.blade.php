@@ -51,7 +51,17 @@
 
                     <div class="form-group">
                         <label for="name">Meno a priezvisko</label>
-                        <input type="text" class="text-input form-control" id="name" placeholder="meno a priezvisko">
+                        <input type="text" class="text-input form-control" id="name" name="name" placeholder="meno a priezvisko">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="text-input form-control" id="email" name="email" placeholder="napr. example@mail.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Telefónne číslo</label>
+                        <input type="tel" class="text-input form-control" id="phone" name="phone" placeholder="+421xxxxxxxxx">
                     </div>
 
                     <div class="form-row">
@@ -65,7 +75,6 @@
                         </div>
                     </div>
 
-
                     <div class="form-row">
                         <div class="col-sm-8 col-md-8 form-group ">
                             <label for="town">Mesto</label>
@@ -73,7 +82,7 @@
                         </div>
                         <div class="col-sm-4 col-md-4 form-group">
                             <label for="zip">PSČ</label>
-                            <input type="text" class="text-input form-control" id="zip" placeholder="PSČ">
+                            <input type="text" class="text-input form-control" id="zip" placeholder="napr. 96801">
                         </div>
                     </div>
 

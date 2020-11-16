@@ -91,3 +91,7 @@ Homestead.json
 /public/.htaccess
 /storage
 storage/*.key
+
+.editorconfig
+.styleci.yml
+artisan
