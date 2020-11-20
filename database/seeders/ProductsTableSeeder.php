@@ -24,14 +24,14 @@ class ProductsTableSeeder extends Seeder
                         'Košeľa s kravatovým vzorom', 'Košeľa s grafickou potlačou', 'Elegantná košeľa', 'Košeľa', 'Flanelová košeľa', 'Košeľa s dlhým rukávom'];
         $tshirtsKidsNames = ['Tričko s dlhým rukávom', 'Vrstvené tričko bio bavlna', 'Pásikované tričko s dlhým rukávom s potlačou', 'Vrstvené tričko', 'Športové tričko pre chlapcov',
                             'Športové tričko s kapucňou', 'Tričko s kapucňou', 'Emoji tričko s dlhým rukávom'];
-        $descriptionBlouses1 = "Skvelá priľnavá blúzka s čipkovaným lemovaním, mäkká bavlna je veľmi príjemná pri nosení a dobre drží tvar. 
-                                Pohodlná blúzka sa skvelo hodí k elegantným čiernym nohaviciam či sukni.";
-        $descriptionBlouses2 = "Pohodlné dlhé tričko, s okrúhlym výstrihom, vyrobené z bavlny. Tričko sa perfektne hodí, k čiernym nohaviciam
-                                alebo k džínsom.";
+
+        $descriptionBlouses1 = "Skvelá priľnavá blúzka s čipkovaným lemovaním, mäkká bavlna je veľmi príjemná pri nosení a dobre drží tvar. Pohodlná blúzka sa skvelo hodí k elegantným čiernym nohaviciam či sukni.";
+        $descriptionBlouses2 = "Pohodlné dlhé tričko, s okrúhlym výstrihom, vyrobené z bavlny. Tričko sa perfektne hodí, k čiernym nohaviciam alebo k džínsom.";
         $descriptionShirts1 = "Pohodlná košeľa vyrobená z bavlny. Výborne sa hodí s tmavými nohavicami alebo džínsami. Pod košeľou dobre vyznie biele tričko.";
         $descriptionShirts2 = "Elegantná košeľa vyrobená z bavlny. Košeľa je vhodná aj na formálne príležitosti, perfektne sa hodí s čiernym nohavicami a sakom.";
         $descriptionTshirtsKids1 = "Tričko, ktoré vaše dieťa nebude chcieť prestať nosiť. Materiál je príjemný na nosenie a hravý vzor poteší vaše dieťa.";
         $descriptionTshirtsKids2 = "Originálne tričko, ktoré sa bude vášmu dieťaťu páčiť. Príjemný materiál zabezpečí, že vaše dieťa sa bude v tričku cítíť pohodlne";
+        
         $materials = ['bavlna 100%', 'bavlna 95%, polyester 5%', 'bavlna 80%, polyester 15%, elastan 5%'];
 
         $id = 1;
