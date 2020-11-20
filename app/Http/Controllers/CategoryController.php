@@ -50,10 +50,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::with('products.images')->find($id);
-        //$category->setRelation('products', $category->products()->paginate(12));
+        $category = Category::find($id);
+        $category->setRelation('products', $category->products()->paginate(12));
         Log::debug($category->products);
-
 
         return view('templates.product-category')->with('category', $category);
     }

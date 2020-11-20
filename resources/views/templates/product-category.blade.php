@@ -272,12 +272,14 @@
                         <article class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
                                 <a href="">
-                                    <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                    @php
+                                        $image = $product->images->first()->path;
+                                    @endphp
+                                    <img class="img-responsive" srcset="{{ asset($image.'_300x420.jpg') }} 300w,
+                                                {{ asset($image.'_520x728.jpg') }} 520w,
+                                                {{ asset($image.'_640x896.jpg') }} 640w" sizes="(max-width: 992px) 300px,
                                                     (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                        alt="Úpletový sveter">
+                                                    640px" src="$image_640x896.jpg" alt="Úpletový sveter">
                                 </a>
                                 <div class="color-box">
                                     <div style="background-color: black;" class="color"></div>
