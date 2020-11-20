@@ -15,33 +15,51 @@ class Product_categoryTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_categories')->insert([
-            [
-                'category_id' => '5', //zeny kosele
-                'product_id' => '1', //kosela s volanom
-            ],
-            [
-                'category_id' => '5', //zeny kosele
-                'product_id' => '3', //satenova bluzka
-            ],
-            [
-                'category_id' => '4', //muzi tricka 
-                'product_id' => '2',  //tricko s potlacou
-            ],
-            [
-                'category_id' => '4', //muzi tricka 
-                'product_id' => '6', //hnede tricko
-            ],
-            [
-                'category_id' => '6', //deti rukavice
-                'product_id' => '4', //detske rukavice
-            ],
-            [
-                'category_id' => '6', //deti rukavice 
-                'product_id' => '5', //rukavice s minie 
-            ],
-    
-        ]);
+        $id = 1;
+
+        // Blouse category products
+        $blouseProductsSize = 64;
+        $blouseCategoryId = 5;
+
+        for($productId = 1; $productId <= $blouseProductsSize; $productId++) {
+            DB::table('product_categories')->insert([
+                [
+                    'id' => $id++,
+                    'category_id' => $blouseCategoryId,
+                    'product_id' => $productId,
+                ],
+            ]);
+        }
+
+        // Shirt category products
+        $shirtProductsStart = 65;
+        $shirtProductsEnd = 128;
+        $shirtCategoryId = 10;
+
+        for($productId = $shirtProductsStart; $productId <= $shirtProductsEnd; $productId++) {
+            DB::table('product_categories')->insert([
+                [
+                    'id' => $id++,
+                    'category_id' => $shirtCategoryId,
+                    'product_id' => $productId,
+                ],
+            ]);
+        }
+
+        // Kids t-shirts category products
+        $tshirtKidsProductsStart = 129;
+        $tshirtKidsProductsEnd = 144;
+        $tshirtKidsCategoryId = 13;
+
+        for($productId = $tshirtKidsProductsStart; $productId <= $tshirtKidsProductsEnd; $productId++) {
+            DB::table('product_categories')->insert([
+                [
+                    'id' => $id++,
+                    'category_id' => $tshirtKidsCategoryId,
+                    'product_id' => $productId,
+                ],
+            ]);
+        }
     }
 }
 
