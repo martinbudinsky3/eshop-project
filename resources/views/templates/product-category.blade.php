@@ -241,31 +241,9 @@
                     </div>
 
                     <!--Pagination-->
-                    <div class="col-12 center-box">
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item">
-                                    <span class="page-link pagination-three-dots">....</span>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">49</a></li>
-                                <li class="page-item"><a class="page-link" href="#">50</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                    @component('layout.partials.pagination', ['pagination' => $category->products])    
+                
+                    @endcomponent
 
                     <!--Products-->
                     @foreach($category->products as $product)
@@ -300,31 +278,11 @@
                             </div>
                         </article>
                     @endforeach
+                    
                     <!--Pagination-->
-                    <div class="col-12 center-box">
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"> <span class="page-link pagination-three-dots">....</span>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">49</a></li>
-                                <li class="page-item"><a class="page-link" href="#">50</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                    @component('layout.partials.pagination', ['pagination' => $category->products])    
+                
+                    @endcomponent
                 </div>
             </div>
         </div>
