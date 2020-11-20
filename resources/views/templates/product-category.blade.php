@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<title>Product category</title>
+<title>{{ $category->name }}</title>
 @endsection
 
 @section('content')
@@ -268,348 +268,36 @@
                     </div>
 
                     <!--Products-->
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
+                    @foreach($category->products as $product)
+                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                            <div class="image-content">
+                                <a href="">
+                                    <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
                                                     (max-width: 1200px) 520px,
                                                     640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                        alt="Úpletový sveter">
                                 </a>
+                                <div class="color-box">
+                                    <div style="background-color: black;" class="color"></div>
+                                    <div style="background-color: yellow;" class="color"></div>
+                                    <div style="background-color: white;" class="color"></div>
+                                </div>
                             </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
+                            <div class="product-content">
+                                <div class="product-info">
+                                    <strong>{{ $product->name }}</strong><br>
+                                    <!--del>17.99</del--><strong>{{ $product->price }}</strong>
+                                </div>
+                                <div class="cart">
+                                    <a href="">
+                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-
-                    </article>
-
-
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
+                        </article>
+                    @endforeach
                     <!--Pagination-->
                     <div class="col-12 center-box">
                         <nav>

@@ -21,6 +21,8 @@ Route::get('/product-category', function () {
     return view('templates.product-category');
 });
 
+Route::get('category/{category}', 'CategoryController@show');
+
 Route::get('/product-detail', function () {
     return view('templates.product-detail');
 });
