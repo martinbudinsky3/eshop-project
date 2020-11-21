@@ -51,8 +51,24 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::find($id);
-        $category->setRelation('products', $category->products()->paginate(12));
-        Log::debug($category->products);
+
+        $sortOrder = request()->get('sort');
+        switch ($sortOrder) {
+            case 1:
+                $category->setRelation('products', $category->products()->orderBy('price', 'asc')->paginate(12));
+                break;
+
+            case 2:
+                $category->setRelation('products', $category->products()->orderBy('price', 'desc')->paginate(12));
+                break;
+                
+            default:
+                $category->setRelation('products', $category->products()->orderBy('price', 'asc')->paginate(12));
+            
+          }
+
+        //$category->setRelation('products', $category->products()->paginate(12));
+        Log::debug(request()->get('sort'));
 
         return view('templates.product-category')->with('category', $category);
     }

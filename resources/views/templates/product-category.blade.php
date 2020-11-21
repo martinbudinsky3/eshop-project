@@ -30,12 +30,12 @@
             <!--Sorting selection-->
             <div class="col-xl-8 col-lg-7 col-md-6"></div>
             <div class="col-xl-4 col-lg-5 col-md-6 col-12 ">
-                <label for="sort-order" id="sort-label">Zoradiť podľa:</label>
-                <select name="sort-order" id="sort-order">
-                    <option value="popularity">Obľúbené</option>
-                    <option value="price-desc">Cena zostupne</option>
-                    <option value="price-asc">Cena vzostupne</option>
-                </select>
+                    <label for="sort-order" id="sort-label">Zoradiť podľa:</label>
+                    <select name="sort-order" id="sort-order" onChange=showSorted(this)>
+                        <!--option value="1">Obľúbenosť</option-->
+                        <option value="1" {{ (request()->get('sort') != 2) ? 'selected' : ''}}>Cena vzostupne</option>
+                        <option value="2" {{ (request()->get('sort') == 2) ? 'selected' : ''}}>Cena zostupne</option>
+                    </select>
             </div>
         </div>
         <div class="row row-m-b">
@@ -241,8 +241,8 @@
                     </div>
 
                     <!--Pagination-->
-                    @component('layout.partials.pagination', ['pagination' => $category->products])    
-                
+                    @component('layout.partials.pagination', ['pagination' => $category->products])
+
                     @endcomponent
 
                     <!--Products-->
@@ -278,10 +278,10 @@
                             </div>
                         </article>
                     @endforeach
-                    
+
                     <!--Pagination-->
-                    @component('layout.partials.pagination', ['pagination' => $category->products])    
-                
+                    @component('layout.partials.pagination', ['pagination' => $category->products])
+
                     @endcomponent
                 </div>
             </div>
