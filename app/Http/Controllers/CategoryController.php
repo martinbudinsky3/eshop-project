@@ -55,15 +55,15 @@ class CategoryController extends Controller
         $sortOrder = request()->get('sort');
         switch ($sortOrder) {
             case 1:
-                $category->setRelation('products', $category->products()->orderBy('price', 'asc')->paginate(12));
+                $category->setRelation('products', $category->products()->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
                 break;
 
             case 2:
-                $category->setRelation('products', $category->products()->orderBy('price', 'desc')->paginate(12));
+                $category->setRelation('products', $category->products()->orderBy('price', 'desc')->paginate(12)->appends(request()->query()));
                 break;
-                
+
             default:
-                $category->setRelation('products', $category->products()->orderBy('price', 'asc')->paginate(12));
+                $category->setRelation('products', $category->products()->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
             
           }
 
