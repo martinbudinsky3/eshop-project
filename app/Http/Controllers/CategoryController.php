@@ -59,27 +59,37 @@ class CategoryController extends Controller
         $colors = $this->getUniqueColors($id) ;
         $brands = $this->getUniqueBrands($id);
         $sizes = $this->getUniqueSizes($id);
+        
+        $products = $category->products();
+
+        // filtering
+        $filterColors = request()->get('color');
+        $filterSizes = request()->get('size');
+        $filterBrand = request()->get('brand');
+
+        // whereIn
 
         // sorting
         $sortOrder = request()->get('sort');
         switch ($sortOrder) {
             case 1:
-                $category->setRelation('products', $category->products()->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
+                $category->setRelation('products', $products->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
                 break;
 
             case 2:
-                $category->setRelation('products', $category->products()->orderBy('price', 'desc')->paginate(12)->appends(request()->query()));
+                $category->setRelation('products', $products->orderBy('price', 'desc')->paginate(12)->appends(request()->query()));
                 break;
 
             default:
-                $category->setRelation('products', $category->products()->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
+                $category->setRelation('products', $products->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
             
-          }
+        }
 
         return view('templates.product-category')
             ->with('category', $category)
             ->with('colors', $colors)
-            ->with('brands', $brands);
+            ->with('brands', $brands)
+            ->with('sizes', $sizes);
     }
 
     /**

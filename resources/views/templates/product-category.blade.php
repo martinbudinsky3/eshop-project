@@ -40,32 +40,19 @@
         <div class="row row-m-b">
             <!--Left filter-->
             <div class="col-lg-2 col-md-3 filter d-md-block d-none" id="left-filter">
-                <form action="" method="GET">
+                <form method="get" action="{{ url()->current().'?'.http_build_query(request()->except('page')) }}">
+                    @csrf
                     <fieldset class="filter-category">
                         <legend>
                             <h4>Farba</h4>
                         </legend>
                         <ul>
+                            @foreach($colors as $color)
                             <li>
-                                <input type="checkbox" id="white" name="white">
-                                <label for="white">biela</label>
+                                <input type="checkbox" id="{{ $color->id }}" name="color[]" value="{{ $color->id }}">
+                                <label for="{{ $color->id }}">{{ $color->name }}</label>
                             </li>
-                            <li>
-                                <input type="checkbox" id="black" name="black">
-                                <label for="black">čierna</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="purple" name="purple">
-                                <label for="purple">fialová</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="blue" name="blue">
-                                <label for="blue">modrá</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="green" name="green">
-                                <label for="green"> zelená</label>
-                            </li>
+                             @endforeach   
                         </ul>
                     </fieldset>
 
@@ -74,34 +61,13 @@
                             <h4>Veľkosť</h4>
                         </legend>
                         <ul>
+                            @foreach($sizes as $size)
                             <li>
-                                <input type="checkbox" id="xxs" name="xxs">
-                                <label for="xxs">XXS</label>
+                                <input type="checkbox" id="{{ $size }}" name="size[]" value="{{ $size }}">
+                                <label for="{{ $size }}">{{ $size }}</label>
                             </li>
-                            <li>
-                                <input type="checkbox" id="xs" name="xs">
-                                <label for="xs">XS</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="s" name="s">
-                                <label for="s">S</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="m" name="m">
-                                <label for="m">M</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="l" name="l">
-                                <label for="l">L</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="xl" name="xl">
-                                <label for="xl">XL</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="xxl" name="xxl">
-                                <label for="xxl">XXL</label>
-                            </li>
+                            @endforeach
+                                                        
                         </ul>
                     </fieldset>
 
@@ -110,22 +76,12 @@
                             <h4>Značka</h4>
                         </legend>
                         <ul>
+                            @foreach($brands as $brand)
                             <li>
-                                <input type="checkbox" id="rainbow" name="rainbow">
-                                <label for="rainbow">RAINBOW</label>
+                                <input type="checkbox" id="{{ $brand->id }}" name="brand[]" value="{{ $brand->id }}">
+                                <label for="{{ $brand->id }}">{{ $brand->name }}</label>
                             </li>
-                            <li>
-                                <input type="checkbox" id="fashionweek" name="fashionweek">
-                                <label for="fashionweek">Fashionweek</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="esmara" name="esmara">
-                                <label for="esmara">Esmara</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="amando" name="amando">
-                                <label for="amando">Amando</label>
-                            </li>
+                            @endforeach
                         </ul>
                     </fieldset>
                     <input type="submit" value="Filtrovať" class="btn btn-primary">
@@ -148,27 +104,13 @@
                                         <legend>
                                             <h4>Farba</h4>
                                         </legend>
-                                        <ul>                                            
+                                        <ul>
+                                            @foreach($colors as $color)
                                             <li>
-                                                <input type="checkbox" id="white-top" name="white">
-                                                <label for="white-top">biela</label>
+                                                <input type="checkbox" id="{{ $color->id }}.'top'" name="color[]" value="{{ $color->id }}">
+                                                <label for="{{ $color->id }}.'top'">{{ $color->name }}</label>
                                             </li>
-                                            <li>
-                                                <input type="checkbox" id="black-top" name="black">
-                                                <label for="black-top">čierna</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="purple-top" name="purple">
-                                                <label for="purple-top">fialová</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="blue-top" name="blue">
-                                                <label for="blue-top">modrá</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="green-top" name="green">
-                                                <label for="green-top"> zelená</label>
-                                            </li>
+                                            @endforeach                                            
                                         </ul>
                                     </fieldset>
 
@@ -177,34 +119,12 @@
                                             <h4>Veľkosť</h4>
                                         </legend>
                                         <ul>
+                                            @foreach($sizes as $size)
                                             <li>
-                                                <input type="checkbox" id="xxs-top" name="xxs">
-                                                <label for="xxs-top">XXS</label>
+                                                <input type="checkbox" id="{{ $size }}.'-top'" name="size[]" value="{{ $size }}">
+                                                <label for="{{ $size }}.'-top'">{{ $size }}</label>
                                             </li>
-                                            <li>
-                                                <input type="checkbox" id="xs-top" name="xs">
-                                                <label for="xs-top">XS</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="s-top" name="s">
-                                                <label for="s-top">S</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="m-top" name="m">
-                                                <label for="m-top">M</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="l-top" name="l">
-                                                <label for="l-top">L</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="xl-top" name="xl">
-                                                <label for="xl-top">XL</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="xxl-top" name="xxl">
-                                                <label for="xxl-top">XXL</label>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </fieldset>
 
@@ -213,22 +133,13 @@
                                             <h4>Značka</h4>
                                         </legend>
                                         <ul>
+                                            @foreach($brands as $brand)
                                             <li>
-                                                <input type="checkbox" id="rainbow-top" name="rainbow">
-                                                <label for="rainbow-top">RAINBOW</label>
+                                                <input type="checkbox" id="{{ $brand->id }}.'-top'" name="brand[]" value="{{ $brand->id }}">
+                                                <label for="{{ $brand->id }}.'-top'">{{ $brand->name }}</label>
                                             </li>
-                                            <li>
-                                                <input type="checkbox" id="fashionweek-top" name="fashionweek">
-                                                <label for="fashionweek-top">Fashionweek</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="esmara-top" name="esmara">
-                                                <label for="esmara-top">Esmara</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="amando-top" name="amando">
-                                                <label for="amando-top">Amando</label>
-                                            </li>
+                                            @endforeach
+                            
                                         </ul>
                                     </fieldset>
                                     <input type="submit" value="Filtrovať" class="btn btn-primary">
