@@ -53,7 +53,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find(5);
+        $product = Product::find($id);
         $similar_products = Product::find([1,2,4,5,6,7,8,9,10,11,12]);
 
         return view('templates.product-detail',compact('product',$product,'similar_products', $similar_products));
@@ -83,6 +83,7 @@ class ProductController extends Controller
     {
         //
     }
+
 
     /**
      * Remove the specified resource from storage.
