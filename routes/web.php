@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+use App\Http\Requests;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +22,9 @@ Route::get('/', function () {
 Route::get('/product-category', function () {
     return view('templates.product-category');
 });
+
+
+Route::get('product-detail/{product}', 'ProductController@show');
 
 Route::get('/product-detail', function () {
     return view('templates.product-detail');

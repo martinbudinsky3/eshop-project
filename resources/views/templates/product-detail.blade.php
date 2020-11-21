@@ -8,7 +8,45 @@
 <title>Product detail</title>
 @endsection
 
+<?php
+                 
+$liste_size = [];
+$liste_color = [];       
+$liste_images = [];                             
+function sortSize($data_arr)
+{
+                                    $sizes_arr = array('XXS' => 0, 'XS'  => 1, 'S'   => 2, 'M'   => 3, 'L'   => 4, 'XL'  => 5, 'XXL' => 6);
+                                    $data_sort_arr = array();
+                                    foreach ($data_arr as $value)
+                                        {
+                                        $size_item_arr = explode(':', $value);
+                                        $size_item_str = trim($size_item_arr[0]);
+
+                                        $size_pos_int = intval($sizes_arr[$size_item_str]);
+                                                       
+                                        $data_sort_arr[$size_pos_int] = $value;
+                                                    }
+                                    ksort($data_sort_arr);
+                                    return array_values($data_sort_arr);
+                                    }
+
+                                foreach($product->product_designs as $design) {
+                                        array_push($liste_size,$design->size);
+                                        array_push($liste_color,$design->color->name);
+
+                                    }
+                                    $liste_size = array_unique($liste_size); 
+                                    $liste_color = array_unique($liste_color);  
+                                    $liste_size = sortSize($liste_size);
+
+    foreach($product->images as $image) {
+        array_push($liste_images,$image->path);
+    } 
+    $similar_products = ($similar_products);
+?>
+
 @section('content')
+
 <!-- Modal window that pops up after user adds product to cart -->
 <div class="modal fade" id="add-to-cart-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
@@ -40,7 +78,7 @@
                     <li class="breadcrumb-item"><a href="#">Hlavná stránka</a></li>
                     <li class="breadcrumb-item"><a href="#">Ženy</a></li>
                     <li class="breadcrumb-item"><a href="#">Blúzky</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Tričko s dlhým rukávom s potlačou</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
                 </ol>
             </nav>
         </div>
@@ -51,56 +89,29 @@
     <main class="container">
         <div class="row">
             <div class="col-lg-6 col-md-7 col-12 row-m-b">
+                   
                 <!--Carousel-->
                 <div id="carousel-product-images" class="carousel slide " data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#carousel-product-images" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-product-images" data-slide-to="1"></li>
-                        <li data-target="#carousel-product-images" data-slide-to="2"></li>
-                        <li data-target="#carousel-product-images" data-slide-to="3"></li>
+                        @foreach ($liste_images as $key => $act_image)
+                            <li data-target="#carousel-product-images" data-slide-to="{{$key}}", class = "{{$key == 0 ? 'active' : '' }}"></li>
+                        @endforeach
                     </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <a href="">
-                                <img class="d-block w-100 img-responsive"
-                                    srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 576px) 520px,
-                                                    640px"
-                                    src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                    alt="Tričko s dlhým rukávom">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="">
-                                <img class="d-block w-100 img-responsive"
-                                    srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-1_520x728.jpg 520w,
-                                            ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-1_640x896.jpg 640w" sizes="(max-width: 576px) 520px,
-                                            640px"
-                                    src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-1_640x896.jpg"
-                                    alt="Tričko s dlhým rukávom">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="">
-                                <img class="d-block w-100 img-responsive" srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-2_520x728.jpg 520w,
-                                        ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-2_640x896.jpg 640w"
-                                    sizes="(max-width: 576px) 520px,
-                                        640px"
-                                    src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-2_640x896.jpg"
-                                    alt="Tričko s dlhým rukávom">
-                            </a>
-                        </div>
-                        <div class="carousel-item">
-                            <a href="">
-                                <img class="d-block w-100 img-responsive"
-                                    srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-3_520x728.jpg 520w,
-                                            ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-3_640x896.jpg 640w" sizes="(max-width: 576px) 520px,
-                                            640px"
-                                    src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy-3_640x896.jpg"
-                                    alt="Tričko s dlhým rukávom">
-                            </a>
-                        </div>
+                    
+                        @foreach ($liste_images as $key => $act_image)
+                            <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
+                                    <a href="">
+                                        <img class="d-block w-100 img-responsive"
+                                            srcset="{{ asset($act_image.'_520x728.jpg')}} 520w,
+                                                    {{ asset($act_image.'_640x896.jpg')}} 640w" 
+                                                    sizes="(max-width: 576px) 520px, 640px"
+                                            src="{{ asset($act_image.'_640x896.jpg')}}
+                                            alt="{{$act_image}}">
+                                    </a>
+                                </div> 
+                        @endforeach
                     </div>
 
                     <a class="carousel-control-prev" data-target="#carousel-product-images" role="button"
@@ -119,7 +130,7 @@
             <div class="col-md-5 col-sm-8 col-10 row-m-b center-col">
                 <div class="product-info">
                     <header class="section-heading">
-                        <h1>Tričko s dlhým rukávom a potlačou</h1>
+                    <h1> {{ $product->name }}</h1>
                         <a href="">
                             <span class="fa fa-star checked"></span>
                             <span class="fa fa-star checked"></span>
@@ -128,10 +139,11 @@
                             <span class="fa fa-star"></span>
                             <span>(150)</span>
                         </a>
+
                     </header>
 
                     <span id="price-section">
-                        <strong class="price-off">12.99</strong>
+                        <strong class = "price-off"> {{ $product->price }}</strong>
                         <del>17.99</del>
                     </span>
 
@@ -139,23 +151,22 @@
                     <form action="" id="product-input" onsubmit="formSubmitPrevent(event)">
                         <div id="color-input-box">
                             <label for="color-selector">Farba:</label>
-                            <select name="color-selector" id="color-selector">
-                                <option value="black">Čierna</option>
-                                <option value="blue">Modrá</option>
-                                <option value="white">Biela</option>
-                            </select>
+                                <select name="color-selector" id="color-selector">
+            
+                                    @foreach ($liste_color as $color){
+                                        <option value= "$color"> {{$color}}</option>
+                                    }
+                                    @endforeach
+                                </select>
                         </div>
 
                         <div id="size-input-box">
                             <label for="size-selector">Veľkosť:</label>
                             <select name="size-selector" id="size-selector">
-                                <option value="xxs">XXS</option>
-                                <option value="xs">XS</option>
-                                <option value="s">S</option>
-                                <option value="m">M</option>
-                                <option value="l">L</option>
-                                <option value="xl">XL</option>
-                                <option value="xxl">XXL</option>
+                                @foreach ($liste_size as $size){
+                                    <option value ="$size"> {{$size  }}</option>
+                                }
+                                @endforeach
                             </select>
                             <a href="">Veľkostná tabuľka</a>
                         </div>
@@ -164,14 +175,12 @@
                             <label for="quantity-input">Množstvo:</label>
                             <div>
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
-                                    onclick="decrementNumberValue(this)">-</button>
+                                    onclick=" (this)">-</button>
                                 <input type="number" name="quantity-input" id="quantity-input" value="1" min="1">
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
                                     onclick="incrementNumberValue(this)">+</button>
                             </div>
-
                         </div>
-
                         <input type="submit" value="Pridať do košíka" id="add-to-cart" data-toggle="modal"
                             data-target="#add-to-cart-modal">
                     </form>
@@ -185,27 +194,16 @@
                 <div id="product-description">
                     <h2 class="section-heading">Opis a vlastnosti produktu</h2>
 
-                    <p>Skvelá priľnavá blúzka s čipkovaným lemovaním, mäkká bavlna je veľmi príjemná pri nosení
-                        a dobre drží tvar.
-                        Pohodlná blúzka sa skvelo hodí k elegantným čiernym nohaviciam či sukni.
-                    </p>
+                    <p>{{ $product->description }}</</p>
 
                     <table id="product-attributes">
                         <tr>
                             <th>Materiál:</th>
-                            <td>95 % bavlna, 5 % elastán</td>
+                            <td>{{ $product->material }}</</td>
                         </tr>
                         <tr>
                             <th>Značka:</th>
-                            <td>RAINBOW</td>
-                        </tr>
-                        <tr>
-                            <th>Farba:</th>
-                            <td>biela</td>
-                        </tr>
-                        <tr>
-                            <th>Priehľadnosť:</th>
-                            <td>nepriesvitný</td>
+                            <td>{{ $product->brand->name }}</td>
                         </tr>
                     </table>
                 </div>
@@ -215,7 +213,7 @@
         <hr class="section-separator">
 
         <!--Reviews-->
-        <section class="row">
+        {{-- <section class="row">
             <div class="col-12 center-box section-heading">
                 <h2>Hodnotenia produktu</h2>
             </div>
@@ -374,202 +372,43 @@
                     </table>
                 </div>
             </div>
-        </section>
+         <hr class="section-separator">
 
-        <hr class="section-separator">
+        </section> --}}
+
 
         <!--Similar products-->
-        <section class="row row-m-b">
-            <div class="col-12 center-box">
+        <section class="row">
+            <div class="center-box">
                 <h2 class="section-heading">Podobné produkty</h2>
+
                 <div id="carousel-similars" class="carousel slide d-none d-lg-block" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row">
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                            alt="Károvaná košeľa">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive"
-                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px"
-                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                            alt="Tričko s dlhým rukávom">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                        </h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
-                                                    ../assets/images/tielko_520x728.jpg 520w,
-                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
-                                                    ../assets/images/strecova-bluzka_520x728.jpg 520w,
-                                                    ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/strecova-bluzka_640x896.jpg"
-                                            alt="Strečová blúzka">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                            alt="Károvaná košeľa">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive"
-                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px"
-                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                            alt="Tričko s dlhým rukávom">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                        </h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
-                                                    ../assets/images/tielko_520x728.jpg 520w,
-                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
-                                                    ../assets/images/strecova-bluzka_520x728.jpg 520w,
-                                                    ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/strecova-bluzka_640x896.jpg"
-                                            alt="Strečová blúzka">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                            alt="Károvaná košeľa">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @for($i = 0; $i <3; $i++)
+                            <div class="carousel-item {{$i == 0 ? 'active' : '' }}">
+                                <div class="row">
+                                    @for($j = 0; $j <4; $j++)
+                                        <div class="col-xs-6 col-md-4  col-lg-3">
+                                                <a href="">
+                                                    <img class="d-block w-100 img-responsive"
+                                                      srcset="{{asset($similar_products[$i*3+$j]->images->first()->path.'_300x420.jpg')}} 300w,
+                                                                {{asset($similar_products[$i*3+$j]->images->first()->path.'_520x728.jpg')}} 520w,
+                                                                {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}} 640w"
+                                                                sizes="(max-width: 992px) 300px,
+                                                                (max-width: 1200px) 520px, 640px"
+                                                        src=" {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}}"
+                                                        alt="{{($similar_products[$i*3+$j])->images->first()->path}}">
+                                                </a>
+                                                <div class="carousel-caption ">
+                                                    <h4 class="carousel-product-name white-image-caption">{{($similar_products[$i*3+$j])->name}}</h4>
+                                                    <p> </p>
+                                                </div>
+                                        </div>     
+                                    @endfor    
+                                </div>    
+                            </div>          
+                        @endfor
                     </div>
-
                     <a class="carousel-control-prev" data-target="#carousel-similars" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
@@ -579,348 +418,79 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-
                 <div id="carousel-similars-md" class="carousel slide d-none d-md-block d-lg-none" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row">
-                                <div class="col-md-4 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                        <div class="carousel-caption ">
-                                            <h4 class="carousel-product-name white-image-caption">Úpletový sveter
-                                            </h4>
-                                            <p></p>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-4 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                            alt="Károvaná košeľa">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa
-                                        </h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive"
-                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px"
-                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                            alt="Tričko s dlhým rukávom">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                        </h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-md-4 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
-                                                    ../assets/images/tielko_520x728.jpg 520w,
-                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
-                                                    ../assets/images/strecova-bluzka_520x728.jpg 520w,
-                                                    ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/strecova-bluzka_640x896.jpg"
-                                            alt="Strečová blúzka">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-md-4 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                            alt="Károvaná košeľa">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive"
-                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px"
-                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                            alt="Tričko s dlhým rukávom">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                        </h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 ">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
-                                                    ../assets/images/tielko_520x728.jpg 520w,
-                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="carousel-inner">
+                        @for($i = 0; $i <3; $i++)
+                            <div class="carousel-item {{$i == 0 ? 'active' : '' }}">
+                                <div class="row">
+                                    @for($j = 0; $j <3; $j++)
+                                        <div class="col-md-4">
+                                                <a href="">
+                                                    <img class="d-block w-100 img-responsive"
+
+                                                        srcset="{{asset($similar_products[$i*3+$j]->images->first()->path.'_300x420.jpg')}} 300w,
+                                                                {{asset($similar_products[$i*3+$j]->images->first()->path.'_520x728.jpg')}} 520w,
+                                                                {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}} 640w"
+                                                                sizes="(max-width: 992px) 300px,
+                                                                (max-width: 1200px) 520px, 640px"
+                                                        src=" {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}}"
+                                                        alt="{{($similar_products[$i*3+$j])->images->first()->path}}">
+                                                </a>
+                                                <div class="carousel-caption ">
+                                                    <h4 class="carousel-product-name white-image-caption">{{($similar_products[$i*3+$j])->name}}</h4>
+                                                    <p> </p>
+                                                </div>
+                                        </div>     
+                                    @endfor    
+                                </div>    
+                            </div>          
+                        @endfor
                     </div>
-                    <a class="carousel-control-prev" data-target="#carousel-similars-md" role="button"
-                        data-slide="prev">
+                   <a class="carousel-control-prev" data-target="#carousel-similars-md" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" data-target="#carousel-similars-md" role="button"
-                        data-slide="next">
+                    <a class="carousel-control-next" data-target="#carousel-similars-md" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-
                 <div id="carousel-similars-xs" class="carousel slide d-block d-md-none " data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                            alt="Károvaná košeľa">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive"
-                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px"
-                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                            alt="Tričko s dlhým rukávom">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                        </h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
-                                                    ../assets/images/tielko_520x728.jpg 520w,
-                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
-                                                    ../assets/images/strecova-bluzka_520x728.jpg 520w,
-                                                    ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/strecova-bluzka_640x896.jpg"
-                                            alt="Strečová blúzka">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                            alt="Úpletový sveter">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Úpletový sveter</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/kosela-s-dlhym-rukavom_300x420.jpg 300w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom_520x728.jpg 520w,
-                                                    ../assets/images/kosela-s-dlhym-rukavom.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/kosela-s-dlhym-rukavom.jpg"
-                                            alt="Károvaná košeľa">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Károvaná košeľa</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive"
-                                            srcset="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_300x420.jpg 300w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_520x728.jpg 520w,
-                                                    ../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px"
-                                            src="../assets/images/tricko-s-dlhym-rukavom-a-s-poltacou-sovy_640x896.jpg"
-                                            alt="Tričko s dlhým rukávom">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tričko s dlhým rukávom
-                                        </h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <div class="col-6">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/tielko_300x420.jpg 300w,
-                                                    ../assets/images/tielko_520x728.jpg 520w,
-                                                    ../assets/images/tielko_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/tielko_640x896.jpg" alt="Tielko">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Tielko</h4>
-                                        <p></p>
-                                    </div>
-
-                                </div>
-                                <div class="col-6">
-                                    <a href="product-detail.html">
-                                        <img class="d-block w-100 img-responsive" srcset="../assets/images/strecova-bluzka_300x420.jpg 300w,
-                                                    ../assets/images/strecova-bluzka_520x728.jpg 520w,
-                                                    ../assets/images/strecova-bluzka_640x896.jpg 640w" sizes="(max-width: 768px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/strecova-bluzka_640x896.jpg"
-                                            alt="Strečová blúzka">
-                                    </a>
-                                    <div class="carousel-caption ">
-                                        <h4 class="carousel-product-name white-image-caption">Strečová blúzka</h4>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @for($i = 0; $i <3; $i++)
+                            <div class="carousel-item {{$i == 0 ? 'active' : '' }}">
+                                <div class="row">
+                                    @for($j = 0; $j <2; $j++)
+                                        <div class="col-6">
+                                                <a href="">
+                                                    <img class="d-block w-100 img-responsive"
+                                                        srcset="{{asset($similar_products[$i*3+$j]->images->first()->path.'_300x420.jpg')}} 300w,
+                                                                {{asset($similar_products[$i*3+$j]->images->first()->path.'_520x728.jpg')}} 520w,
+                                                                {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}} 640w"
+                                                                sizes="(max-width: 992px) 300px,
+                                                                (max-width: 1200px) 520px, 640px"
+                                                        src=" {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}}"
+                                                        alt="{{($similar_products[$i*3+$j])->images->first()->path}}">
+                                                </a>
+                                                <div class="carousel-caption ">
+                                                    <h4 class="carousel-product-name white-image-caption">{{($similar_products[$i*3+$j])->name}}</h4>
+                                                    <p> </p>
+                                                </div>
+                                        </div>     
+                                    @endfor    
+                                </div>    
+                            </div>          
+                        @endfor
                     </div>
-                    <a class="carousel-control-prev" data-target="#carousel-similars-xs" role="button"
-                        data-slide="prev">
+                   <a class="carousel-control-prev" data-target="#carousel-similars-xs" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" data-target="#carousel-similars-xs" role="button"
-                        data-slide="next">
+                    <a class="carousel-control-next" data-target="#carousel-similars-xs" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-
             </div>
         </section>
     </main>

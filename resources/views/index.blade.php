@@ -72,7 +72,8 @@
                         <div class="carousel-item active">
                             <div class="row">
                                 <div class="col-lg-3 ">
-                                    <a href="templates/product-detail.html">
+                                {{-- upravene <a href="templates/product-detail.html">  --}}
+                                    <a href="product-detail"> 
                                         <img class="d-block w-100 img-responsive" srcset="assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
                                                     assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
                                                     assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
