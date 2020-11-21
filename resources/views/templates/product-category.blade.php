@@ -32,8 +32,7 @@
             <div class="col-xl-4 col-lg-5 col-md-6 col-12 ">
                     <label for="sort-order" id="sort-label">Zoradiť podľa:</label>
                     <select name="sort-order" id="sort-order" onChange=showSorted(this)>
-                        <!--option value="1">Obľúbenosť</option-->
-                        <option value="1" {{ (request()->get('sort') != 2) ? 'selected' : ''}}>Cena vzostupne</option>
+                        <option value="1" {{ (!request()->has('sort') || request()->get('sort') == 1) ? 'selected' : ''}}>Cena vzostupne</option>
                         <option value="2" {{ (request()->get('sort') == 2) ? 'selected' : ''}}>Cena zostupne</option>
                     </select>
             </div>
@@ -41,7 +40,7 @@
         <div class="row row-m-b">
             <!--Left filter-->
             <div class="col-lg-2 col-md-3 filter d-md-block d-none" id="left-filter">
-                <form action="">
+                <form action="" method="GET">
                     <fieldset class="filter-category">
                         <legend>
                             <h4>Farba</h4>
@@ -144,12 +143,12 @@
                                 </span>
                             </button>
                             <div id="top-filter-menu" class="filter d-none d-md-none">
-                                <form action="">
+                                <form method="GET" action="{{ url()->current().'?'.http_build_query(request()->except('page')) }}">
                                     <fieldset class="filter-category">
                                         <legend>
                                             <h4>Farba</h4>
                                         </legend>
-                                        <ul>
+                                        <ul>                                            
                                             <li>
                                                 <input type="checkbox" id="white-top" name="white">
                                                 <label for="white-top">biela</label>

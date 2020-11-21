@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductDesign;
+use App\Models\Color;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 
 class CategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -52,6 +56,11 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
+        $colors = $this->getUniqueColors($id) ;
+        $brands = $this->getUniqueBrands($id);
+        $sizes = $this->getUniqueSizes($id);
+
+        // sorting
         $sortOrder = request()->get('sort');
         switch ($sortOrder) {
             case 1:
@@ -67,10 +76,10 @@ class CategoryController extends Controller
             
           }
 
-        //$category->setRelation('products', $category->products()->paginate(12));
-        Log::debug(request()->get('sort'));
-
-        return view('templates.product-category')->with('category', $category);
+        return view('templates.product-category')
+            ->with('category', $category)
+            ->with('colors', $colors)
+            ->with('brands', $brands);
     }
 
     /**
@@ -105,5 +114,39 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getUniqueColors($id) {
+        // get all unique colors that occur in this category
+        $category2 = Category::find($id);
+        $category2->load(['products.colors' => function ($q) use (&$colors) {
+            $colors = $q->get()->unique();
+        }]);
+
+        return $colors;
+    }
+
+    private function getUniqueBrands($id) {
+        // get all unique brands that occur in this category
+        $category2 = Category::find($id);
+        $category2->load(['products.brand' => function ($q) use (&$brands) {
+            $brands = $q->get()->unique();
+        }]);
+
+        return $brands;
+    }
+
+    private function getUniqueSizes($id) {
+        $category2 = Category::find($id);
+        $category2->load(['products.productDesigns' => function ($q) use (&$sizesRecords) {
+            $sizesRecords = $q->get()->unique('size');
+        }]);
+
+        $sizes = array();
+        foreach($sizesRecords as $sizeRecord) {
+            array_push($sizes, $sizeRecord->size);
+        }
+
+        return $sizes;
     }
 }
