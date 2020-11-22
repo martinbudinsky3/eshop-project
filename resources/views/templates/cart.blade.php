@@ -31,11 +31,11 @@
 
         <header>
             <h3>Váš nákupný košík</h3>
-            <p class="items-amount">Počet produktov v košíku: {{sizeof(($cart->cart_items))}}</p>
+            <p class="items-amount">Počet produktov v košíku: {{sizeof(($cart->cartItems))}}</p>
         </header>
 
         <div class="container items">
-            @foreach($cart->cart_items as $key => $item)
+            @foreach($cart->cartItems as $key => $item)
 
             <article class="row item">
 
@@ -52,8 +52,8 @@
                 <div class="col-xs-12  col-sm-5 col-md-5 col-lg-6  center-col">
                     
                     <h3 class="item-name">{{$item->product->name}}</h3>
-                    <p class="item-description">Velkosť: {{$item->product_design->size}}</p>
-                    <p class="item-description">Farba: {{$item->product_design->color->name}}</p>
+                    <p class="item-description">Velkosť: {{$item->productDesign->size}}</p>
+                    <p class="item-description">Farba: {{$item->productDesign->color->name}}</p>
                    <div id="quantity-input-box">
                             <label for="quantity-input">Množstvo:</label>
                             <div>
@@ -80,7 +80,7 @@
 
             <?php 
             $final_price = 0;
-             foreach($cart->cart_items as $item)
+             foreach($cart->cartItems as $item)
 {                $final_price = $final_price+$item->product->price*$item->amount;
 }             ?>
             <div class="row summary">

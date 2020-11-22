@@ -30,7 +30,7 @@ function sortSize($data_arr)
                                     return array_values($data_sort_arr);
                                     }
 
-                                foreach($product->product_designs as $design) {
+                                foreach($product->productDesigns as $design) {
                                         array_push($liste_size,$design->size);
                                         array_push($liste_color,$design->color->name);
 

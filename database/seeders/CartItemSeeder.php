@@ -14,12 +14,12 @@ class CartItemSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('cart_items')->insert([
+        DB::table('cartItems')->insert([
             [
                 'id' => 1,
                 'cart_id' =>'2',
                 'product_id' => '5',
-                'product_design_id' =>'29',
+                'productDesign_id' =>'29',
                 'amount' => '2',
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s'),
@@ -28,7 +28,7 @@ class CartItemSeeder extends Seeder
                 'id' => 2,
                 'cart_id' =>'1',
                 'product_id' => '6',
-                'product_design_id' =>'33',
+                'productDesign_id' =>'33',
                 'amount' => '1',
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s'),
@@ -37,7 +37,7 @@ class CartItemSeeder extends Seeder
                 'id' => 3,
                 'cart_id' =>'1',
                 'product_id' => '8',
-                'product_design_id' =>'45',
+                'productDesign_id' =>'45',
                 'amount' => '2',
                 'created_at'=>date('Y-m-d H:i:s'),
                 'updated_at'=>date('Y-m-d H:i:s'),

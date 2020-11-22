@@ -14,13 +14,13 @@ class Product extends Model
         return $this->hasMany('App\Models\ProductCategory');
     }
 
-    public function product_designs(){
+    public function productDesigns(){
         return $this->hasMany('App\Models\ProductDesign');
     }
     public function images(){
         return $this->hasMany('App\Models\Image');
     }
-    public function cart_items(){
+    public function cartItems(){
         return $this->hasMany('App\Models\CartItem');
     }
 
