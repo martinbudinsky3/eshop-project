@@ -39,8 +39,7 @@
                         <p class="form-restriction">Všetky údaje sú povinné.</p>
                         <div class="form-group ">
                             <label for="name">Meno a priezvisko </label>
-                            <input type="text" class="text-input form-control" id="name" name="name" required
-                                placeholder="meno a priezvisko">
+                            <input type="text" class="text-input form-control" id="name" name="name" value="{{ old('name') }}" required>
                         </div>
 
                         <div class="form-group ">
@@ -70,9 +69,9 @@
                         </div>
 
                         <div class="form-group ">
-                            <label for="password_again">Zopakujte heslo</label>
-                            <input type="password" class="text-input form-control" id="password_again"
-                                name="password_again" required autocomplete="new-password">
+                            <label for="password_confirmation">Zopakujte heslo</label>
+                            <input type="password" class="text-input form-control @error('password') is-invalid @enderror" id="password_confirmation"
+                                name="password_confirmation" required autocomplete="new-password">
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -82,13 +81,25 @@
 
                         <div class="form-group ">
                             <label for="phone">Telefónne číslo </label>
-                            <input type="text" class="text-input form-control" id="phone" name="phone" required
+                            <input type="text" class="text-input form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required
                                 placeholder="+421xxxxxxxxx">
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-check ">
+                            @error('conditions-check')
+                            <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                                <!--strong>Musíte súhlasiť s obchodnými podmienkami spoločnosti.</strong-->
+                            </span>
+                            @enderror
+
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="conditions-check"
+                                <input class="form-check-input @error('phone') is-invalid @enderror" type="checkbox" id="conditions-check"
                                     name="conditions-check">
                                 <label class="form-check-label" for="conditions-check">
                                     <a href="">Súhlasím s obchodnými podmienkami spoločnosti. </a>
