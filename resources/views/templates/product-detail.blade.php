@@ -15,7 +15,7 @@ $liste_color = [];
 $liste_images = [];                             
 function sortSize($data_arr)
 {
-                                    $sizes_arr = array('XXS' => 0, 'XS'  => 1, 'S'   => 2, 'M'   => 3, 'L'   => 4, 'XL'  => 5, 'XXL' => 6);
+    $sizes_arr = array('XXS' => 0, 'XS'  => 1, 'S'   => 2, 'M'   => 3, 'L'   => 4, 'XL'  => 5, 'XXL' => 6);
                                     $data_sort_arr = array();
                                     foreach ($data_arr as $value)
                                         {
@@ -43,6 +43,16 @@ function sortSize($data_arr)
         array_push($liste_images,$image->path);
     } 
     $similar_products = ($similar_products);
+
+    $logged = session()->get('user');
+
+    if($logged){
+        $cart = $logged->cart;
+    }
+    else{
+        $cart = session()->get('cart');
+    }
+
 ?>
 
 @section('content')
@@ -62,8 +72,8 @@ function sortSize($data_arr)
                 <p>Produkt bol pridaný do košíka</p>
             </div>
             <div class="modal-footer modal-footer-custom">
-                <a href="cart.html" class="btn btn-primary">Prejsť do košíka</a>
-                <a href="product-category.html" class="btn btn-secondary">Späť k nákupu</a>
+                <a href="{{ route('cart',['cart'=>$cart->id])}}" class="btn btn-primary">Prejsť do košíka</a>
+                <a href="{{ route('product-category')}}" class="btn btn-secondary">Späť k nákupu</a>
             </div>
         </div>
     </div>
@@ -107,7 +117,7 @@ function sortSize($data_arr)
                                             srcset="{{ asset($act_image.'_520x728.jpg')}} 520w,
                                                     {{ asset($act_image.'_640x896.jpg')}} 640w" 
                                                     sizes="(max-width: 576px) 520px, 640px"
-                                            src="{{ asset($act_image.'_640x896.jpg')}}
+                                            src="{{ asset($act_image.'_640x896.jpg')}}"
                                             alt="{{$act_image}}">
                                     </a>
                                 </div> 
@@ -148,23 +158,24 @@ function sortSize($data_arr)
                     </span>
 
                     <!--Product form-->
-                    <form action="" id="product-input" onsubmit="formSubmitPrevent(event)">
+                    <form action="/cart-item/{{$product->id}}" method="POST" id="product-input">
+                        @csrf
+
                         <div id="color-input-box">
-                            <label for="color-selector">Farba:</label>
-                                <select name="color-selector" id="color-selector">
-            
+                            <label for="color_selector">Farba:</label>
+                                <select name="color_selector" id="color_selector">
                                     @foreach ($liste_color as $color){
-                                        <option value= "$color"> {{$color}}</option>
+                                        <option value="{{$color}}"> {{$color}}</option>
                                     }
                                     @endforeach
                                 </select>
                         </div>
 
                         <div id="size-input-box">
-                            <label for="size-selector">Veľkosť:</label>
-                            <select name="size-selector" id="size-selector">
+                            <label for="size_selector">Veľkosť:</label>
+                            <select name="size_selector" id="size_selector">
                                 @foreach ($liste_size as $size){
-                                    <option value ="$size"> {{$size  }}</option>
+                                    <option  value="{{$size}}"> {{$size  }}</option>
                                 }
                                 @endforeach
                             </select>
@@ -176,13 +187,14 @@ function sortSize($data_arr)
                             <div>
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
                                     onclick=" decrementNumberValue(this,$item)">-</button>
-                                <input type="number" name="quantity-input" id="quantity-input" value="1" min="1">
+                                <input type="number" name="amount" id="quantity-input" value="1" min="1">
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
                                     onclick="incrementNumberValue(this)">+</button>
                             </div>
                         </div>
-                        <input type="submit" value="Pridať do košíka" id="add-to-cart" data-toggle="modal"
-                            data-target="#add-to-cart-modal">
+                        <button type="submit" id="add-to-cart" 
+                            data-toggle="modal"
+                            data-target="#add-to-cart-modal">Pridať do košíka</button>
                     </form>
                 </div>
             </div>

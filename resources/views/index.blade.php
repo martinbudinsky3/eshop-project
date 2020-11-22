@@ -8,6 +8,12 @@
 <title>E-shop</title>
 @endsection
 
+<?php
+// Start the session
+session_start();
+session(['cart' => Cart::find(2)]);
+?>
+
 @section('content')
 <div class="wrapper">
     <main class="container">

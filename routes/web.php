@@ -21,16 +21,19 @@ Route::get('/', function () {
 
 Route::get('/product-category', function () {
     return view('templates.product-category');
-});
+})->name('product-category');
 
 
 Route::get('/product-detail/{product}', 'ProductController@show')->name('product-detail');
 
-Route::get('/product-detail', function () {
-    return view('templates.product-detail');
-});
+Route::get('/cart/{cart}', 'CartController@show')->name('cart');
 
-Route::get('/cart/{cart}', 'CartController@show');
+Route::post('/cart-item/{product}', 'CartItemController@store');
+
+Route::delete('/cart-delete/{item}', 'CartItemController@destroy');
+
+
+Route::get('/albums','ProductController@index');
 
 Route::get('/cart', function () {
     return view('templates.cart');
@@ -38,7 +41,7 @@ Route::get('/cart', function () {
 
 Route::get('/cart2', function () {
     return view('templates.cart2');
-});
+})->name('cart2');
 
 Route::get('/cart3', function () {
     return view('templates.cart3');

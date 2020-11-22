@@ -226,6 +226,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Cart' => App\Models\Cart::class,
+        'Color' => App\Models\Color::class,
+        'ProductDesign' => App\Models\ProductDesign::class,
+
 
     ],
 

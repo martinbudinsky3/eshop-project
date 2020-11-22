@@ -43,14 +43,13 @@
                     <div class="image-cart">
                         <a href="{{ route('product-detail',['product'=>$item->product->id])}}">
                                 <img class='img-akt'
-                                    src=" {{ asset($item->product->images->first()->path.'-1_300x420.jpg')}}"
+                                    src=" {{ asset($item->product->images->first()->path.'_300x420.jpg')}}"
                                     alt="{{$item->product->images->first()->path}}"
                                     >
                         </a>
                     </div>
                 </div>
                 <div class="col-xs-12  col-sm-5 col-md-5 col-lg-6  center-col">
-                    
                     <h3 class="item-name">{{$item->product->name}}</h3>
                     <p class="item-description">Velkosť: {{$item->productDesign->size}}</p>
                     <p class="item-description">Farba: {{$item->productDesign->color->name}}</p>
@@ -68,10 +67,16 @@
     
                 </div>
                 <div class="col-xs-12  col-sm-2 col-md-2 col-lg-3  item_edit">
-                    <div class="icons">
-                      {{-- .  <img class="edit-item" alt="upraviť" title="Upraviť" src="../assets/icons/edit_icon.png"> --}}
-                        <img class="edit-item" alt="Vymazať" title="Vymazať" src="../assets/icons/delete_icon.png">
-                    </div>
+                    <form action="/cart-delete/{{$item->id}}" method="POST">
+                            @csrf
+
+                        <div class="icons">
+                        <input type="hidden" name="_method" value="DELETE">
+                        {{-- .  <img class="edit-item" alt="upraviť" title="Upraviť" src="../assets/icons/edit_icon.png"> --}}
+                        <input type=image class="edit-item" alt="Vymazať" title="Vymazať" src="../assets/icons/delete_icon.png">
+
+                        </div>
+                    </form>
                 </div>
             </article>
                     <hr>
@@ -86,10 +91,10 @@
             <div class="row summary">
                 <div class="col-12">
                     <p class="summary-price" id="summary-price"><span>CENA SPOLU: </span> {{$final_price}}</p>
-                    <a href="" class="back-link">
+                    <a href="/product-category" class="back-link">
                         Späť do obchodu
                     </a>
-                    <button class="submit-button" type="submit">
+                    <button class="submit-button" type="submit" onclick= "location.href='{{ route('cart2')}}'">
                         POKRAČOVAŤ
                     </button>
                 </div>

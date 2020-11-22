@@ -13,15 +13,21 @@ class CartItem extends Model
     {
         return $this->belongsTo('App\Models\Product');
     }
-    public function product_design()
+    public function productDesign()
     {
         return $this->belongsTo('App\Models\ProductDesign');
     }
-
+    
     public function cart()
     {
         return $this->belongsTo('App\Models\Cart');
     }
+    protected $fillable = ['cart_id','product_id','amount','product_design_id'];
+
+    
+
+
+
 }
 
 

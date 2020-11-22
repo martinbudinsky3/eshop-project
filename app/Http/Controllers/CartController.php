@@ -34,16 +34,7 @@ class CartController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  
 
     /**
      * Display the specified resource.
@@ -54,11 +45,30 @@ class CartController extends Controller
     public function show($id)
     {
         $cart = Cart::find($id);
-
+        
         return view('templates.cart',compact('cart',$cart));
-
     }
-
+      /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+  
+    public function store(Request $request)
+    {
+        $logged = session()->get('user');
+        
+        $request->validate([
+                'title' => 'required|min:3',
+                'description' => 'required',
+            ]);
+      
+        
+        $cart = Cart::create(['user_id' => $logged->id]);
+        
+        return redirect('/');
+    }
     /**
      * Show the form for editing the specified resource.
      *
