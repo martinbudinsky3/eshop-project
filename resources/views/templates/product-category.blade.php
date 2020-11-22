@@ -151,14 +151,16 @@
                     </div>
 
                     <!--Pagination-->
-                    @component('layout.partials.pagination', ['pagination' => $category->products])
+                    @component('layout.partials.pagination', ['pagination' => $products])
 
                     @endcomponent
 
                     <!--Products-->
-                    @foreach($category->products as $product)
+                    {{--@foreach($category->products as $product)--}}
+                    @foreach($products as $product)
                         <article class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
+
                                 <a href="">
                                     @php
                                         $image = $product->images->first()->path;
@@ -190,8 +192,8 @@
                     @endforeach
 
                     <!--Pagination-->
-                    @component('layout.partials.pagination', ['pagination' => $category->products])
-
+                    @component('layout.partials.pagination', ['pagination' => $products])
+                    
                     @endcomponent
                 </div>
             </div>

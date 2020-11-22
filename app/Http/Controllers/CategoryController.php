@@ -55,12 +55,13 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::find($id);
-
+        $products = Product::whereHas('categories', function ($cat) use ($id) {
+            $cat->where('categories.id', $id);
+        });
+        
         $colors = $this->getUniqueColors($id) ;
         $brands = $this->getUniqueBrands($id);
         $sizes = $this->getUniqueSizes($id);
-        
-        $products = $category->products();
 
         // filtering
         $filterColors = request()->get('color');
@@ -68,25 +69,46 @@ class CategoryController extends Controller
         $filterBrand = request()->get('brand');
 
         // whereIn
+        
+        if($filterColors) {
+            $products = $products->whereHas('colors', function ($col) use ($filterColors) {
+                $col->whereIn('colors.id', $filterColors);
+            });
+        }
 
+        if($filterSizes) {
+            $products = $products->whereHas('productDesigns', function ($size) use ($filterSizes) {
+                $size->whereIn('product_designs.size', $filterSizes);
+            });
+        }
+
+        if($filterBrand) {
+            $products = $products->whereIn('brand_id', $filterBrand);
+        }
+        
         // sorting
         $sortOrder = request()->get('sort');
         switch ($sortOrder) {
             case 1:
-                $category->setRelation('products', $products->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
+                //$category->setRelation('products', $products->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
+                $products = $products->orderBy('price', 'asc');
                 break;
 
             case 2:
-                $category->setRelation('products', $products->orderBy('price', 'desc')->paginate(12)->appends(request()->query()));
+                //$category->setRelation('products', $products->orderBy('price', 'desc')->paginate(12)->appends(request()->query()));
+                $products = $products->orderBy('price', 'desc');
                 break;
 
             default:
-                $category->setRelation('products', $products->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
-            
+                //$category->setRelation('products', $products->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
+                $products = $products->orderBy('price', 'asc');
         }
+
+        $products = $products->paginate(12)->appends(request()->query());
 
         return view('templates.product-category')
             ->with('category', $category)
+            ->with('products', $products)
             ->with('colors', $colors)
             ->with('brands', $brands)
             ->with('sizes', $sizes);
