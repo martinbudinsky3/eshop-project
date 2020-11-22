@@ -84,7 +84,6 @@ class ProductController extends Controller
         //
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
@@ -95,5 +94,4 @@ class ProductController extends Controller
     {
         //
     }
-
 }

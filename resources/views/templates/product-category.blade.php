@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<title>Product category</title>
+<title>{{ $category->name }}</title>
 @endsection
 
 @section('content')
@@ -30,43 +30,30 @@
             <!--Sorting selection-->
             <div class="col-xl-8 col-lg-7 col-md-6"></div>
             <div class="col-xl-4 col-lg-5 col-md-6 col-12 ">
-                <label for="sort-order" id="sort-label">Zoradiť podľa:</label>
-                <select name="sort-order" id="sort-order">
-                    <option value="popularity">Obľúbené</option>
-                    <option value="price-desc">Cena zostupne</option>
-                    <option value="price-asc">Cena vzostupne</option>
-                </select>
+                    <label for="sort-order" id="sort-label">Zoradiť podľa:</label>
+                    <select name="sort-order" id="sort-order" onChange=showSorted(this)>
+                        <option value="1" {{ (!request()->has('sort') || request()->get('sort') == 1) ? 'selected' : ''}}>Cena vzostupne</option>
+                        <option value="2" {{ (request()->get('sort') == 2) ? 'selected' : ''}}>Cena zostupne</option>
+                    </select>
             </div>
         </div>
         <div class="row row-m-b">
             <!--Left filter-->
             <div class="col-lg-2 col-md-3 filter d-md-block d-none" id="left-filter">
-                <form action="">
+                <form method="get" action="{{ url()->current().'?'.http_build_query(request()->except('page')) }}">
+                    @csrf
                     <fieldset class="filter-category">
                         <legend>
                             <h4>Farba</h4>
                         </legend>
                         <ul>
+                            @foreach($colors as $color)
                             <li>
-                                <input type="checkbox" id="white" name="white">
-                                <label for="white">biela</label>
+                                <input type="checkbox" id="{{ $color->id }}" name="color[]" value="{{ $color->id }}" 
+                                    {{ (request()->has('color') && in_array($color->id, request()->get('color'))) ? 'checked' : '' }}>
+                                <label for="{{ $color->id }}">{{ $color->name }}</label>
                             </li>
-                            <li>
-                                <input type="checkbox" id="black" name="black">
-                                <label for="black">čierna</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="purple" name="purple">
-                                <label for="purple">fialová</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="blue" name="blue">
-                                <label for="blue">modrá</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="green" name="green">
-                                <label for="green"> zelená</label>
-                            </li>
+                             @endforeach   
                         </ul>
                     </fieldset>
 
@@ -75,34 +62,14 @@
                             <h4>Veľkosť</h4>
                         </legend>
                         <ul>
+                            @foreach($sizes as $size)
                             <li>
-                                <input type="checkbox" id="xxs" name="xxs">
-                                <label for="xxs">XXS</label>
+                                <input type="checkbox" id="{{ $size }}" name="size[]" value="{{ $size }}"
+                                    {{ (request()->has('size') && in_array($size, request()->get('size'))) ? 'checked' : '' }}>
+                                <label for="{{ $size }}">{{ $size }}</label>
                             </li>
-                            <li>
-                                <input type="checkbox" id="xs" name="xs">
-                                <label for="xs">XS</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="s" name="s">
-                                <label for="s">S</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="m" name="m">
-                                <label for="m">M</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="l" name="l">
-                                <label for="l">L</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="xl" name="xl">
-                                <label for="xl">XL</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="xxl" name="xxl">
-                                <label for="xxl">XXL</label>
-                            </li>
+                            @endforeach
+                                                        
                         </ul>
                     </fieldset>
 
@@ -111,22 +78,13 @@
                             <h4>Značka</h4>
                         </legend>
                         <ul>
+                            @foreach($brands as $brand)
                             <li>
-                                <input type="checkbox" id="rainbow" name="rainbow">
-                                <label for="rainbow">RAINBOW</label>
+                                <input type="checkbox" id="{{ $brand->id }}" name="brand[]" value="{{ $brand->id }}"
+                                    {{ (request()->has('brand') && in_array($brand->id, request()->get('brand'))) ? 'checked' : '' }}>
+                                <label for="{{ $brand->id }}">{{ $brand->name }}</label>
                             </li>
-                            <li>
-                                <input type="checkbox" id="fashionweek" name="fashionweek">
-                                <label for="fashionweek">Fashionweek</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="esmara" name="esmara">
-                                <label for="esmara">Esmara</label>
-                            </li>
-                            <li>
-                                <input type="checkbox" id="amando" name="amando">
-                                <label for="amando">Amando</label>
-                            </li>
+                            @endforeach
                         </ul>
                     </fieldset>
                     <input type="submit" value="Filtrovať" class="btn btn-primary">
@@ -144,32 +102,19 @@
                                 </span>
                             </button>
                             <div id="top-filter-menu" class="filter d-none d-md-none">
-                                <form action="">
+                                <form method="GET" action="{{ url()->current().'?'.http_build_query(request()->except('page')) }}">
                                     <fieldset class="filter-category">
                                         <legend>
                                             <h4>Farba</h4>
                                         </legend>
                                         <ul>
+                                            @foreach($colors as $color)
                                             <li>
-                                                <input type="checkbox" id="white-top" name="white">
-                                                <label for="white-top">biela</label>
+                                                <input type="checkbox" id="{{ $color->id }}.'top'" name="color[]" value="{{ $color->id }}"
+                                                    {{ (request()->has('color') && in_array($color->id, request()->get('color'))) ? 'checked' : '' }}>
+                                                <label for="{{ $color->id }}.'top'">{{ $color->name }}</label>
                                             </li>
-                                            <li>
-                                                <input type="checkbox" id="black-top" name="black">
-                                                <label for="black-top">čierna</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="purple-top" name="purple">
-                                                <label for="purple-top">fialová</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="blue-top" name="blue">
-                                                <label for="blue-top">modrá</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="green-top" name="green">
-                                                <label for="green-top"> zelená</label>
-                                            </li>
+                                            @endforeach                                            
                                         </ul>
                                     </fieldset>
 
@@ -178,34 +123,13 @@
                                             <h4>Veľkosť</h4>
                                         </legend>
                                         <ul>
+                                            @foreach($sizes as $size)
                                             <li>
-                                                <input type="checkbox" id="xxs-top" name="xxs">
-                                                <label for="xxs-top">XXS</label>
+                                                <input type="checkbox" id="{{ $size }}.'-top'" name="size[]" value="{{ $size }}"
+                                                    {{ (request()->has('size') && in_array($size, request()->get('size'))) ? 'checked' : '' }}>
+                                                <label for="{{ $size }}.'-top'">{{ $size }}</label>
                                             </li>
-                                            <li>
-                                                <input type="checkbox" id="xs-top" name="xs">
-                                                <label for="xs-top">XS</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="s-top" name="s">
-                                                <label for="s-top">S</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="m-top" name="m">
-                                                <label for="m-top">M</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="l-top" name="l">
-                                                <label for="l-top">L</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="xl-top" name="xl">
-                                                <label for="xl-top">XL</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="xxl-top" name="xxl">
-                                                <label for="xxl-top">XXL</label>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </fieldset>
 
@@ -214,22 +138,14 @@
                                             <h4>Značka</h4>
                                         </legend>
                                         <ul>
+                                            @foreach($brands as $brand)
                                             <li>
-                                                <input type="checkbox" id="rainbow-top" name="rainbow">
-                                                <label for="rainbow-top">RAINBOW</label>
+                                                <input type="checkbox" id="{{ $brand->id }}.'-top'" name="brand[]" value="{{ $brand->id }}"
+                                                    {{ (request()->has('brand') && in_array($brand->id, request()->get('brand'))) ? 'checked' : '' }}>
+                                                <label for="{{ $brand->id }}.'-top'">{{ $brand->name }}</label>
                                             </li>
-                                            <li>
-                                                <input type="checkbox" id="fashionweek-top" name="fashionweek">
-                                                <label for="fashionweek-top">Fashionweek</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="esmara-top" name="esmara">
-                                                <label for="esmara-top">Esmara</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" id="amando-top" name="amando">
-                                                <label for="amando-top">Amando</label>
-                                            </li>
+                                            @endforeach
+                            
                                         </ul>
                                     </fieldset>
                                     <input type="submit" value="Filtrovať" class="btn btn-primary">
@@ -241,400 +157,49 @@
                     </div>
 
                     <!--Pagination-->
-                    <div class="col-12 center-box">
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item">
-                                    <span class="page-link pagination-three-dots">....</span>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">49</a></li>
-                                <li class="page-item"><a class="page-link" href="#">50</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                    @component('layout.partials.pagination', ['pagination' => $products])
+
+                    @endcomponent
 
                     <!--Products-->
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
+                    @foreach($products as $product)
+                        <article class="col-lg-3 col-sm-4 col-6 row-m-b">
+                            <div class="image-content">
 
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
+                                <a href="/product-detail/{{ $product->id }}">
+                                    @php
+                                        $image = $product->images->first()->path;
+                                    @endphp
+                                    <img class="img-responsive" srcset="{{ asset($image.'_300x420.jpg') }} 300w,
+                                                {{ asset($image.'_520x728.jpg') }} 520w,
+                                                {{ asset($image.'_640x896.jpg') }} 640w" sizes="(max-width: 992px) 300px,
                                                     (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                                    640px" src="$image_640x896.jpg" alt="Úpletový sveter">
                                 </a>
+                                <div class="color-box">
+                                    @foreach($product->colors->unique() as $color)
+                                    <div style="background-color: #{{ $color->hex_code }};" class="color"></div>
+                                    @endforeach
+                                </div>
                             </div>
-                        </div>
+                            <div class="product-content">
+                                <div class="product-info">
+                                    <strong>{{ $product->name }}</strong><br>
+                                    <!--del>17.99</del--><strong>{{ $product->price }}</strong>
+                                </div>
+                                <!--div class="cart">
+                                    <a href="">
+                                        <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
+                                    </a>
+                                </div-->
+                            </div>
+                        </article>
+                    @endforeach
 
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-
-                    </article>
-
-
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="col-lg-3 col-sm-4 col-6 row-m-b">
-                        <div class="image-content">
-                            <a href="">
-                                <img class="img-responsive" srcset="../assets/images/pulover-dlhy-rukav_300x420.jpg 300w,
-                                                    ../assets/images/pulover-dlhy-rukav_520x728.jpg 520w,
-                                                    ../assets/images/pulover-dlhy-rukav_640x896.jpg 640w" sizes="(max-width: 992px) 300px,
-                                                    (max-width: 1200px) 520px,
-                                                    640px" src="../assets/images/pulover-dlhy-rukav_640x896.jpg"
-                                    alt="Úpletový sveter">
-                            </a>
-                            <div class="color-box">
-                                <div style="background-color: black;" class="color"></div>
-                                <div style="background-color: yellow;" class="color"></div>
-                                <div style="background-color: white;" class="color"></div>
-                            </div>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-info">
-                                <strong>Úpletový sveter</strong><br>
-                                <del>17.99</del><strong>12.99</strong>
-                            </div>
-                            <div class="cart">
-                                <a href="">
-                                    <img src="../assets/icons/cart-icon.png" alt="" class="img-responsive">
-                                </a>
-                            </div>
-                        </div>
-                    </article>
                     <!--Pagination-->
-                    <div class="col-12 center-box">
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"> <span class="page-link pagination-three-dots">....</span>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">49</a></li>
-                                <li class="page-item"><a class="page-link" href="#">50</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                    @component('layout.partials.pagination', ['pagination' => $products])
+                    
+                    @endcomponent
                 </div>
             </div>
         </div>

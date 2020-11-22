@@ -25,6 +25,7 @@ Route::get('/product-category', function () {
 
 
 Route::get('/product-detail/{product}', 'ProductController@show')->name('product-detail');
+Route::get('category/{category}', 'CategoryController@show');
 
 Route::get('/cart/{cart}', 'CartController@show')->name('cart');
 
