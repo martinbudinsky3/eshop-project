@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterProductsTable extends Migration
+class AddProductDesingToCartItem extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class AlterProductsTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('brand');
-            $table->foreignId('brand_id');
-            $table->text('description');
-            $table->string('material', 100);
+        Schema::table('cart_items', function (Blueprint $table) {
+            $table->bigInteger('product_design_id')->nullable();
+            $table->foreign('product_design_id')->references('id')->on('product_designs')->onDelete('CASCADE');
         });
     }
 
@@ -28,7 +26,7 @@ class AlterProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('cart_item', function (Blueprint $table) {
             //
         });
     }

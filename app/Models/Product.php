@@ -20,8 +20,13 @@ class Product extends Model
     public function images(){
         return $this->hasMany('App\Models\Image');
     }
+    public function cart_items(){
+        return $this->hasMany('App\Models\CartItem');
+    }
+
     public function brand(){
         return $this->belongsTo('App\Models\Brand');
 
     }
+
 }

@@ -24,11 +24,13 @@ Route::get('/product-category', function () {
 });
 
 
-Route::get('product-detail/{product}', 'ProductController@show');
+Route::get('/product-detail/{product}', 'ProductController@show')->name('product-detail');
 
 Route::get('/product-detail', function () {
     return view('templates.product-detail');
 });
+
+Route::get('/cart/{cart}', 'CartController@show');
 
 Route::get('/cart', function () {
     return view('templates.cart');

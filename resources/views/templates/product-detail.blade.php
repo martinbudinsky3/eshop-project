@@ -175,7 +175,7 @@ function sortSize($data_arr)
                             <label for="quantity-input">Množstvo:</label>
                             <div>
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
-                                    onclick=" (this)">-</button>
+                                    onclick=" decrementNumberValue(this,$item)">-</button>
                                 <input type="number" name="quantity-input" id="quantity-input" value="1" min="1">
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
                                     onclick="incrementNumberValue(this)">+</button>

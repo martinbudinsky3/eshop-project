@@ -18,5 +18,10 @@ class ProductDesign extends Model
     {
         return $this->belongsTo('App\Models\Color');
     }
+    public function cart_item()
+    {
+        return $this->hasOne('App\Models\CartItem');
+    }
+
 
 }

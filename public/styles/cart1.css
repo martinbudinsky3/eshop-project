@@ -11,10 +11,11 @@
     border-radius: 15px;
 }
 
-.item-picture{
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+img.img-akt{  
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    
 }
 .item-description,label{
     font-style: italic;
@@ -31,15 +32,12 @@
     max-width: 70px;
     width: 8.5vw;
 }
-
-.txt-input {
-    border: 2px solid black;
-    border-radius: 4px;
-    width: 50px;
-    text-align: center;
-    display: inline-block;
-
+button.input-btn {
+    padding-bottom: 0.25%;
+    padding-top: 0.25%;
+    vertical-align: top;
 }
+
 
 .button{
     display: inline-block;
@@ -48,3 +46,15 @@
     font-size: 1.5em;
 }
 
+#quantity-input-box {
+    width: 100%;
+}
+
+#quantity-input-box button{
+    padding: 0;
+    width: 10%;
+}
+
+#quantity-input-box input{
+    width: 50%;
+}
