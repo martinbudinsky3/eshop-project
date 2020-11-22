@@ -156,7 +156,6 @@
                     @endcomponent
 
                     <!--Products-->
-                    {{--@foreach($category->products as $product)--}}
                     @foreach($products as $product)
                         <article class="col-lg-3 col-sm-4 col-6 row-m-b">
                             <div class="image-content">
@@ -172,9 +171,9 @@
                                                     640px" src="$image_640x896.jpg" alt="Úpletový sveter">
                                 </a>
                                 <div class="color-box">
-                                    <div style="background-color: black;" class="color"></div>
-                                    <div style="background-color: yellow;" class="color"></div>
-                                    <div style="background-color: white;" class="color"></div>
+                                    @foreach($product->colors->unique() as $color)
+                                    <div style="background-color: #{{ $color->hex_code }};" class="color"></div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="product-content">

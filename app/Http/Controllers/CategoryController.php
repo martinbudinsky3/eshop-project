@@ -58,52 +58,19 @@ class CategoryController extends Controller
         $products = Product::whereHas('categories', function ($cat) use ($id) {
             $cat->where('categories.id', $id);
         });
-        
-        $colors = $this->getUniqueColors($id) ;
-        $brands = $this->getUniqueBrands($id);
-        $sizes = $this->getUniqueSizes($id);
+
+        // get unique products attributes
+        $colors = $this->getUniqueColors($products) ;
+        $brands = $this->getUniqueBrands($products);
+        $sizes = $this->getUniqueSizes($products);
 
         // filtering
-        $filterColors = request()->get('color');
-        $filterSizes = request()->get('size');
-        $filterBrand = request()->get('brand');
-
-        // whereIn
-        
-        if($filterColors) {
-            $products = $products->whereHas('colors', function ($col) use ($filterColors) {
-                $col->whereIn('colors.id', $filterColors);
-            });
-        }
-
-        if($filterSizes) {
-            $products = $products->whereHas('productDesigns', function ($size) use ($filterSizes) {
-                $size->whereIn('product_designs.size', $filterSizes);
-            });
-        }
-
-        if($filterBrand) {
-            $products = $products->whereIn('brand_id', $filterBrand);
-        }
+        $products = $this->filterProducts($products);
         
         // sorting
-        $sortOrder = request()->get('sort');
-        switch ($sortOrder) {
-            case 1:
-                //$category->setRelation('products', $products->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
-                $products = $products->orderBy('price', 'asc');
-                break;
+        $products = $this->sortProducts($products);
 
-            case 2:
-                //$category->setRelation('products', $products->orderBy('price', 'desc')->paginate(12)->appends(request()->query()));
-                $products = $products->orderBy('price', 'desc');
-                break;
-
-            default:
-                //$category->setRelation('products', $products->orderBy('price', 'asc')->paginate(12)->appends(request()->query()));
-                $products = $products->orderBy('price', 'asc');
-        }
-
+        // pagination
         $products = $products->paginate(12)->appends(request()->query());
 
         return view('templates.product-category')
@@ -148,29 +115,27 @@ class CategoryController extends Controller
         //
     }
 
-    public function getUniqueColors($id) {
+    private function getUniqueColors($products) {
         // get all unique colors that occur in this category
-        $category2 = Category::find($id);
-        $category2->load(['products.colors' => function ($q) use (&$colors) {
+        $products->get()->load(['colors' => function ($q) use (&$colors) {
             $colors = $q->get()->unique();
         }]);
 
         return $colors;
     }
 
-    private function getUniqueBrands($id) {
+    private function getUniqueBrands($products) {
         // get all unique brands that occur in this category
-        $category2 = Category::find($id);
-        $category2->load(['products.brand' => function ($q) use (&$brands) {
+        $products->get()->load(['brand' => function ($q) use (&$brands) {
             $brands = $q->get()->unique();
         }]);
 
         return $brands;
     }
 
-    private function getUniqueSizes($id) {
-        $category2 = Category::find($id);
-        $category2->load(['products.productDesigns' => function ($q) use (&$sizesRecords) {
+    private function getUniqueSizes($products) {
+        // get all unique sizes that occur in this category
+        $products->get()->load(['productDesigns' => function ($q) use (&$sizesRecords) {
             $sizesRecords = $q->get()->unique('size');
         }]);
 
@@ -180,5 +145,50 @@ class CategoryController extends Controller
         }
 
         return $sizes;
+    }
+
+    private function filterProducts($products) {
+        // filtering
+        $filterColors = request()->get('color');
+        $filterSizes = request()->get('size');
+        $filterBrand = request()->get('brand');
+        
+        if($filterColors) {
+            $products = $products->whereHas('colors', function ($col) use ($filterColors) {
+                $col->whereIn('colors.id', $filterColors);
+            });
+        }
+
+        if($filterSizes) {
+            $products = $products->whereHas('productDesigns', function ($size) use ($filterSizes) {
+                $size->whereIn('product_designs.size', $filterSizes);
+            });
+        }
+
+        if($filterBrand) {
+            $products = $products->whereIn('brand_id', $filterBrand);
+        }
+
+        return $products;
+    }
+
+    private function sortProducts($products) {
+        // sorting
+        $sortOrder = request()->get('sort');
+
+        switch ($sortOrder) {
+            case 1:
+                $products = $products->orderBy('price', 'asc');
+                break;
+
+            case 2:
+                $products = $products->orderBy('price', 'desc');
+                break;
+
+            default:
+                $products = $products->orderBy('price', 'asc');
+        }
+
+        return $products;
     }
 }
