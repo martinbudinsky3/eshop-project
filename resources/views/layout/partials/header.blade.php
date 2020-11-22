@@ -31,6 +31,11 @@
                                 <i class="fa fa-times-circle icon" aria-hidden="true"></i>
                             </button>
 
+                            
+                            <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                            </form>
+
                             <ul>
                                 @guest
                                     <li>
@@ -47,7 +52,7 @@
                                         <a href="">Profil</a>
                                     </li>
                                     <li>
-                                        <a href="">Odhlásenie</a>
+                                        <a href="{{ route('logout') }}" onclick="logout(event)">Odhlásenie</a>
                                     </li>
                                 @endguest
                             </ul>

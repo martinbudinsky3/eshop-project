@@ -100,3 +100,8 @@ function showLeftKidsSubmenu() {
     let leftWomenSubmenu = document.getElementById('left-kids-submenu')
     leftWomenSubmenu.classList.add('d-block')
 }
+
+function logout(event) {
+    event.preventDefault();
+    document.getElementById('logout-form').submit();
+}
