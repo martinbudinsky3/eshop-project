@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Color extends Model
 {
     use HasFactory;
-    public function products_design(){
+
+    function productDesigns() {
         return $this->hasMany('App\Models\ProductDesign');
+    }
+
+    function products() {
+        return $this->belongsToMany('App\Models\Product', 'product_designs', 'color_id', 'product_id');
     }
 }

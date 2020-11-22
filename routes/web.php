@@ -19,12 +19,8 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/product-category', function () {
-    return view('templates.product-category');
-});
-
-
 Route::get('/product-detail/{product}', 'ProductController@show')->name('product-detail');
+Route::get('category/{category}', 'CategoryController@show');
 
 Route::get('/product-detail', function () {
     return view('templates.product-detail');

@@ -9,19 +9,17 @@ class ProductDesign extends Model
 {
     use HasFactory;
 
-    public function product()
-    {
-        return $this->belongsTo('App\Models\Product');
-    }
-
-    public function color()
-    {
-        return $this->belongsTo('App\Models\Color');
-    }
     public function cart_item()
     {
         return $this->hasOne('App\Models\CartItem');
     }
 
 
+    function product() {
+        return $this->belongsTo('App\Models\Product');
+    }
+
+    function color() {
+        return $this->belongsTo('App\Models\Color');
+    }
 }

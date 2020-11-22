@@ -9,8 +9,7 @@ class Image extends Model
 {
     use HasFactory;
 
-    public function product()
-    {
+    function product() {
         return $this->belongsTo('App\Models\Product');
     }
 }
