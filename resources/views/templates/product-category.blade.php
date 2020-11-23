@@ -35,6 +35,7 @@
 </div>
 <div class="wrapper center-col">
     <main class="container-fluid">
+        @if(!$products->isEmpty())
         <div class="row row-smaller-m-b sort-selection">
             <!--Sorting selection-->
             <div class="col-xl-8 col-lg-7 col-md-6"></div>
@@ -335,6 +336,13 @@
                 </div>
             </div>
         </section>
+        @else
+        <div class="row row-m-b">
+            <div class="col-12 pt-5 pb-5">
+                <h1 class="text-center error-message">Zodpovedajúce položky neboli nájdené</h1>
+            </div>
+        </div>
+        @endif
     </main>
 </div>
 @endsection
