@@ -96,7 +96,7 @@
                         <ul>
                             @foreach($parentCategory->childCategories as $childCategory)
                             <li>
-                                <a href="category/{{ $childCategory->id }}">{{ $childCategory->name }}</a>
+                                <a href="/category/{{ $childCategory->id }}">{{ $childCategory->name }}</a>
                             </li>
                             @endforeach
 

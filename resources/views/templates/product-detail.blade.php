@@ -115,9 +115,8 @@
                         <div id="color-input-box">
                             <label for="color_selector">Farba:</label>
                                 <select name="color" id="color_selector" onChange="showProductInColor(this)">
-                                    @foreach ($liste_color as $color){
-                                        <option value="{{$color->id}}" {{ (request()->get('color') == $color->id) ? 'selected' : ''}}> {{ $color->name }}</option>
-                                    }
+                                    @foreach ($liste_color as $color)
+                                    <option value="{{$color->id}}" {{ (request()->get('color') == $color->id) ? 'selected' : ''}}> {{ $color->name }}</option>
                                     @endforeach
                                 </select>
                         </div>
@@ -125,9 +124,8 @@
                         <div id="size-input-box">
                             <label for="size_selector">Veľkosť:</label>
                             <select name="size" id="size_selector">
-                                @foreach ($liste_size as $size){
-                                    <option value="{{$size->size}}"> {{ $size->size }}</option>
-                                }
+                                @foreach ($liste_size as $size)
+                                <option value="{{$size->size}}"> {{ $size->size }}</option>
                                 @endforeach
                             </select>
                             <a href="">Veľkostná tabuľka</a>
@@ -137,7 +135,7 @@
                             <label for="quantity-input">Množstvo:</label>
                             <div>
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
-                                    onclick=" decrementNumberValue(this)">-</button>
+                                    onclick="decrementNumberValue(this)">-</button>
                                 <input type="number" name="amount" id="quantity-input" value="1" min="1">
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
                                     onclick="incrementNumberValue(this)">+</button>

@@ -58,9 +58,9 @@
                         <ul>
                             @foreach($colors as $color)
                             <li>
-                                <input type="checkbox" id="{{ $color->id }}" name="color[]" value="{{ $color->id }}" 
+                                <input type="checkbox" id="{{ $color->id }}-color-left" name="color[]" value="{{ $color->id }}" 
                                     {{ (request()->has('color') && in_array($color->id, request()->get('color'))) ? 'checked' : '' }}>
-                                <label for="{{ $color->id }}">{{ $color->name }}</label>
+                                <label for="{{ $color->id }}-color-left">{{ $color->name }}</label>
                             </li>
                              @endforeach   
                         </ul>
@@ -73,9 +73,9 @@
                         <ul>
                             @foreach($sizes as $size)
                             <li>
-                                <input type="checkbox" id="{{ $size }}" name="size[]" value="{{ $size }}"
+                                <input type="checkbox" id="{{ $size }}-size-left" name="size[]" value="{{ $size }}"
                                     {{ (request()->has('size') && in_array($size, request()->get('size'))) ? 'checked' : '' }}>
-                                <label for="{{ $size }}">{{ $size }}</label>
+                                <label for="{{ $size }}-size-left">{{ $size }}</label>
                             </li>
                             @endforeach
                                                         
@@ -89,9 +89,9 @@
                         <ul>
                             @foreach($brands as $brand)
                             <li>
-                                <input type="checkbox" id="{{ $brand->id }}" name="brand[]" value="{{ $brand->id }}"
+                                <input type="checkbox" id="{{ $brand->id }}-brand-left" name="brand[]" value="{{ $brand->id }}"
                                     {{ (request()->has('brand') && in_array($brand->id, request()->get('brand'))) ? 'checked' : '' }}>
-                                <label for="{{ $brand->id }}">{{ $brand->name }}</label>
+                                <label for="{{ $brand->id }}-brand-left">{{ $brand->name }}</label>
                             </li>
                             @endforeach
                         </ul>
@@ -119,9 +119,9 @@
                                         <ul>
                                             @foreach($colors as $color)
                                             <li>
-                                                <input type="checkbox" id="{{ $color->id }}.'top'" name="color[]" value="{{ $color->id }}"
+                                                <input type="checkbox" id="{{ $color->id }}-color-top" name="color[]" value="{{ $color->id }}"
                                                     {{ (request()->has('color') && in_array($color->id, request()->get('color'))) ? 'checked' : '' }}>
-                                                <label for="{{ $color->id }}.'top'">{{ $color->name }}</label>
+                                                <label for="{{ $color->id }}-color-top">{{ $color->name }}</label>
                                             </li>
                                             @endforeach                                            
                                         </ul>
@@ -134,9 +134,9 @@
                                         <ul>
                                             @foreach($sizes as $size)
                                             <li>
-                                                <input type="checkbox" id="{{ $size }}.'-top'" name="size[]" value="{{ $size }}"
+                                                <input type="checkbox" id="{{ $size }}-size-top" name="size[]" value="{{ $size }}"
                                                     {{ (request()->has('size') && in_array($size, request()->get('size'))) ? 'checked' : '' }}>
-                                                <label for="{{ $size }}.'-top'">{{ $size }}</label>
+                                                <label for="{{ $size }}.-size-top">{{ $size }}</label>
                                             </li>
                                             @endforeach
                                         </ul>
@@ -149,9 +149,9 @@
                                         <ul>
                                             @foreach($brands as $brand)
                                             <li>
-                                                <input type="checkbox" id="{{ $brand->id }}.'-top'" name="brand[]" value="{{ $brand->id }}"
+                                                <input type="checkbox" id="{{ $brand->id }}-brand-top" name="brand[]" value="{{ $brand->id }}"
                                                     {{ (request()->has('brand') && in_array($brand->id, request()->get('brand'))) ? 'checked' : '' }}>
-                                                <label for="{{ $brand->id }}.'-top'">{{ $brand->name }}</label>
+                                                <label for="{{ $brand->id }}-brand-top">{{ $brand->name }}</label>
                                             </li>
                                             @endforeach
                             
