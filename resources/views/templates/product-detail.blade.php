@@ -383,10 +383,10 @@
                 </div>
                 <div id="carousel-similars-md" class="carousel slide d-none d-md-block d-lg-none" data-ride="carousel">
                 <div class="carousel-inner">
-                        @for($i = 0; $i <3; $i++)
+                        @for($i = 0; $i < 3; $i++)
                             <div class="carousel-item {{$i == 0 ? 'active' : '' }}">
                                 <div class="row">
-                                    @for($j = 0; $j <3; $j++)
+                                    @for($j = 0; $j < 3; $j++)
                                         <div class="col-md-4">
                                                 <a href="">
                                                     <img class="d-block w-100 img-responsive"
@@ -420,10 +420,10 @@
                 </div>
                 <div id="carousel-similars-xs" class="carousel slide d-block d-md-none " data-ride="carousel">
                     <div class="carousel-inner">
-                        @for($i = 0; $i <3; $i++)
+                        @for($i = 0; $i < 3; $i++)
                             <div class="carousel-item {{$i == 0 ? 'active' : '' }}">
                                 <div class="row">
-                                    @for($j = 0; $j <2; $j++)
+                                    @for($j = 0; $j < 2; $j++)
                                         <div class="col-6">
                                                 <a href="">
                                                     <img class="d-block w-100 img-responsive"

@@ -6,126 +6,36 @@
                 <nav id="main-menu">
                     <!--Navigation - >= 992px-->
                     <ul id="first-level" class="d-none d-lg-block">
+                        @foreach($parentCategories as $parentCategory)
                         <li>
-                            <div class="nav-item-dropdown" onmouseover="showMenSubmenu()" onmouseout="hideMenSubmenu()">
-                                <a href="/templates/product-category.html" class="navigation-link">
-                                    Muži
+                            <div class="nav-item-dropdown" onmouseover="showSubmenu({{ $parentCategory->id }})" onmouseout="hideSubmenu({{ $parentCategory->id }})">
+                                <a href="" class="navigation-link">
+                                    {{ $parentCategory->name }}
                                 </a>
-                                <nav id="men-submenu" class="sub-menu dropdown-content d-none">
+                                <nav id="{{ $parentCategory->id }}" class="sub-menu dropdown-content d-none">
                                     <ul>
+                                        @foreach($parentCategory->childCategories as $childCategory)
                                         <li>
-                                            <a href="templates/product-category.html">Tričká</a>
+                                            <a href="/category/{{ $childCategory->id }}">{{ $childCategory->name }}</a>
+                                        </li>
+                                        @endforeach
+
+                                        <li>
+                                            <a href="">Novinky</a>
                                         </li>
 
                                         <li>
-                                            <a href="templates/product-category.html">Košeľe</a>
+                                            <a href="">Akcie</a>
                                         </li>
 
                                         <li>
-                                            <a href="templates/product-category.html">Nohavice</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Obleky</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Novinky</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Akcie</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Najlepšie hodnotené</a>
+                                            <a href="">Najlepšie hodnotené</a>
                                         </li>
                                     </ul>
                                 </nav>
                             </div>
                         </li>
-                        <li>
-                            <div class="nav-item-dropdown" onmouseover="showWomenSubmenu()"
-                                onmouseout="hideWomenSubmenu()">
-                                <a href="templates/product-category.html" class="navigation-link">
-                                    Ženy
-                                </a>
-                                <nav id="women-submenu" class="sub-menu dropdown-content d-none">
-                                    <ul>
-                                        <li>
-                                            <a href="templates/product-category.html">Tričká</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Blúzky</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Šaty</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Nohavice</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Svetre</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Novinky</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Akcie</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Najlepšie hodnotené</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="nav-item-dropdown" onmouseover="showKidsSubmenu()"
-                                onmouseout="hideKidsSubmenu()">
-                                <a href="templates/product-category.html" class="navigation-link">
-                                    Deti
-                                </a>
-                                <nav id="kids-submenu" class="sub-menu dropdown-content d-none">
-                                    <ul>
-                                        <li>
-                                            <a href="templates/product-category.html">Tričká</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Kombinézy</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Svetre</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Mikiny</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Novinky</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Akcie</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="templates/product-category.html">Najlepšie hodnotené</a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </li>
+                        @endforeach
                     </ul>
 
                     <!--Navigation - < 992px-->
