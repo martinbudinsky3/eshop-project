@@ -8,53 +8,6 @@
 <title>Product detail</title>
 @endsection
 
-<?php
-                 
-$liste_size = [];
-$liste_color = [];       
-$liste_images = [];                             
-function sortSize($data_arr)
-{
-    $sizes_arr = array('XXS' => 0, 'XS'  => 1, 'S'   => 2, 'M'   => 3, 'L'   => 4, 'XL'  => 5, 'XXL' => 6);
-                                    $data_sort_arr = array();
-                                    foreach ($data_arr as $value)
-                                        {
-                                        $size_item_arr = explode(':', $value);
-                                        $size_item_str = trim($size_item_arr[0]);
-
-                                        $size_pos_int = intval($sizes_arr[$size_item_str]);
-                                                       
-                                        $data_sort_arr[$size_pos_int] = $value;
-                                                    }
-                                    ksort($data_sort_arr);
-                                    return array_values($data_sort_arr);
-                                    }
-
-                                foreach($product->productDesigns as $design) {
-                                        array_push($liste_size,$design->size);
-                                        array_push($liste_color,$design->color->name);
-
-                                    }
-                                    $liste_size = array_unique($liste_size); 
-                                    $liste_color = array_unique($liste_color);  
-                                    $liste_size = sortSize($liste_size);
-
-    foreach($product->images as $image) {
-        array_push($liste_images,$image->path);
-    } 
-    $similar_products = ($similar_products);
-
-    $logged = session()->get('user');
-
-    if($logged){
-        $cart = $logged->cart;
-    }
-    else{
-        $cart = session()->get('cart');
-    }
-
-?>
-
 @section('content')
 
 <!-- Modal window that pops up after user adds product to cart -->
@@ -112,15 +65,13 @@ function sortSize($data_arr)
                     
                         @foreach ($liste_images as $key => $act_image)
                             <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
-                                    <a href="">
-                                        <img class="d-block w-100 img-responsive"
-                                            srcset="{{ asset($act_image.'_520x728.jpg')}} 520w,
-                                                    {{ asset($act_image.'_640x896.jpg')}} 640w" 
-                                                    sizes="(max-width: 576px) 520px, 640px"
-                                            src="{{ asset($act_image.'_640x896.jpg')}}"
-                                            alt="{{$act_image}}">
-                                    </a>
-                                </div> 
+                                <img class="d-block w-100 img-responsive"
+                                    srcset="{{ asset($act_image.'_520x728.jpg')}} 520w,
+                                            {{ asset($act_image.'_640x896.jpg')}} 640w" 
+                                    sizes="(max-width: 576px) 520px, 640px"
+                                    src="{{ asset($act_image.'_640x896.jpg')}}"
+                                    alt="{{$act_image}}">
+                            </div> 
                         @endforeach
                     </div>
 
@@ -154,11 +105,11 @@ function sortSize($data_arr)
 
                     <span id="price-section">
                         <strong class = "price-off"> {{ $product->price }}</strong>
-                        <del>17.99</del>
+                        <!--del>17.99</del-->
                     </span>
 
                     <!--Product form-->
-                    <form action="/cart-item/{{$product->id}}" method="POST" id="product-input">
+                    <form action="/cart-item/{{ $product->id }}" method="POST" id="product-input">
                         @csrf
 
                         <div id="color-input-box">
@@ -186,7 +137,7 @@ function sortSize($data_arr)
                             <label for="quantity-input">Množstvo:</label>
                             <div>
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
-                                    onclick=" decrementNumberValue(this,$item)">-</button>
+                                    onclick=" decrementNumberValue(this)">-</button>
                                 <input type="number" name="amount" id="quantity-input" value="1" min="1">
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
                                     onclick="incrementNumberValue(this)">+</button>

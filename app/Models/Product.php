@@ -30,7 +30,6 @@ class Product extends Model
         return $this->belongsTo('App\Models\Brand');
     }
 
- 
     function colors() {
         return $this->belongsToMany('App\Models\Color', 'product_designs', 'product_id', 'color_id');
     }

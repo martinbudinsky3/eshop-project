@@ -9,7 +9,6 @@ function decrementNumberValue(decButton) {
     let input = decButton.nextElementSibling
 
     if(input.value != 1) {
-        console.log(input.value)
         input.value--
     }
 }

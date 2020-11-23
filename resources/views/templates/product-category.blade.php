@@ -179,7 +179,7 @@
                                                 {{ asset($image.'_520x728.jpg') }} 520w,
                                                 {{ asset($image.'_640x896.jpg') }} 640w" sizes="(max-width: 992px) 300px,
                                                     (max-width: 1200px) 520px,
-                                                    640px" src="$image_640x896.jpg" alt="{{ $product->name }}">
+                                                    640px" src="{{ asset($image.'_640x896.jpg') }}" alt="{{ $product->name }}">
                                 </a>
                                 <div class="color-box">
                                     @foreach($product->colors->unique() as $color)
@@ -214,7 +214,11 @@
         <!--Recommended products-->
         <section class="row row-m-b">
             <div class="col-12 center-box">
+                @if($search)
+                <h2 class="section-heading">Najpredávanejšie</h2>
+                @else
                 <h2 class="section-heading">Najpredávanejšie v tejto kategórií</h2>
+                @endif
                 <div id="carousel-rec" class="carousel slide d-none d-lg-block" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
