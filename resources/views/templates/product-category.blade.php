@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<title>{{ $category->name }}</title>
+<title>{{ $title }}</title>
 @endsection
 
 @section('content')
@@ -15,9 +15,14 @@
         <div class="center-box">
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Hlavná stránka</a></li>
+                    @if($search)
+                    <li class="breadcrumb-item"><a href="/">Hlavná stránka</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Vyhľadávanie</li>
+                    @else
+                    <li class="breadcrumb-item"><a href="/">Hlavná stránka</a></li>
                     <li class="breadcrumb-item"><a href="#">Ženy</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Blúzky</li>
+                    @endif
                 </ol>
             </nav>
         </div>

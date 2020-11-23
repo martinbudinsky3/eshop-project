@@ -10,10 +10,12 @@ use App\Models\Color;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use App\Traits\ProductsTrait;
 
 
 class CategoryController extends Controller
 {
+    use ProductsTrait;
 
     /**
      * Display a listing of the resource.
@@ -60,9 +62,9 @@ class CategoryController extends Controller
         });
 
         // get unique products attributes
-        $colors = $this->getUniqueColors($products) ;
-        $brands = $this->getUniqueBrands($products);
-        $sizes = $this->getUniqueSizes($products);
+        $colors = $this->getUniqueColors($products->get());
+        $brands = $this->getUniqueBrands($products->get());
+        $sizes = $this->getUniqueSizes($products->get());
 
         // filtering
         $products = $this->filterProducts($products);
@@ -74,11 +76,12 @@ class CategoryController extends Controller
         $products = $products->paginate(12)->appends(request()->query());
 
         return view('templates.product-category')
-            ->with('category', $category)
+            ->with('title', $category->name)
             ->with('products', $products)
             ->with('colors', $colors)
             ->with('brands', $brands)
-            ->with('sizes', $sizes);
+            ->with('sizes', $sizes)
+            ->with('search', FALSE);
     }
 
     /**
@@ -113,38 +116,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    private function getUniqueColors($products) {
-        // get all unique colors that occur in this category
-        $products->get()->load(['colors' => function ($q) use (&$colors) {
-            $colors = $q->get()->unique();
-        }]);
-
-        return $colors;
-    }
-
-    private function getUniqueBrands($products) {
-        // get all unique brands that occur in this category
-        $products->get()->load(['brand' => function ($q) use (&$brands) {
-            $brands = $q->get()->unique();
-        }]);
-
-        return $brands;
-    }
-
-    private function getUniqueSizes($products) {
-        // get all unique sizes that occur in this category
-        $products->get()->load(['productDesigns' => function ($q) use (&$sizesRecords) {
-            $sizesRecords = $q->get()->unique('size');
-        }]);
-
-        $sizes = array();
-        foreach($sizesRecords as $sizeRecord) {
-            array_push($sizes, $sizeRecord->size);
-        }
-
-        return $sizes;
     }
 
     private function filterProducts($products) {

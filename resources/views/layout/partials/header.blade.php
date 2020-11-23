@@ -26,7 +26,7 @@
             <!--Icon nav + Search-->
             <div id="icons-box" class="col-10 col-8-sm d-md-flex vertical-reverse ">
                 <div class="header-icons">
-                    <a href="/cart/{{$cart->id}}" class="cart-link">
+                    <a href="" class="cart-link">
                         <i class="fa fa-shopping-cart icon" aria-hidden="true"></i>
                     </a>
 
@@ -79,8 +79,8 @@
 
                     <!--Search bar - >= 768px-->
                     <div class="d-none d-md-block">
-                        <form action="">
-                            <input type="text" name="search-full-text" class="search-full-text"
+                        <form method="GET" action="/product-detail">
+                            <input type="text" name="search" class="search-full-text"
                                 placeholder="Zadajte hľadaný výraz">
                             <button type="submit" class="icon-btn">
                                 <i class="fa fa-search icon"></i>
@@ -95,8 +95,8 @@
                 <button class="icon-btn">
                     <i class="fa fa-times-circle icon" aria-hidden="true" onclick="handleSearchButtonClick()"></i>
                 </button>
-                <form action="" id="search-form-xs">
-                    <input type="text" name="search-full-text" class="search-full-text"
+                <form method="GET" action="/product-detail" id="search-form-xs">
+                    <input type="text" name="search" class="search-full-text"
                         placeholder="Zadajte hľadaný výraz" id="search-input-xs">
                     <button type="submit" id="search-submit-xs" class="icon-btn">
                         <i class="fa fa-search icon"></i>

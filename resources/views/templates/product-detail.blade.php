@@ -72,8 +72,8 @@ function sortSize($data_arr)
                 <p>Produkt bol pridaný do košíka</p>
             </div>
             <div class="modal-footer modal-footer-custom">
-                <a href="{{ route('cart',['cart'=>$cart->id])}}" class="btn btn-primary">Prejsť do košíka</a>
-                <a href="{{ route('product-category')}}" class="btn btn-secondary">Späť k nákupu</a>
+                <a href="" class="btn btn-primary">Prejsť do košíka</a>
+                <a href="" class="btn btn-secondary">Späť k nákupu</a>
             </div>
         </div>
     </div>
