@@ -8,6 +8,7 @@
 <title>E-shop</title>
 @endsection
 
+
 @section('content')
 <div class="wrapper">
     <main class="container">
