@@ -179,7 +179,7 @@
                                                 {{ asset($image.'_520x728.jpg') }} 520w,
                                                 {{ asset($image.'_640x896.jpg') }} 640w" sizes="(max-width: 992px) 300px,
                                                     (max-width: 1200px) 520px,
-                                                    640px" src="$image_640x896.jpg" alt="Úpletový sveter">
+                                                    640px" src="$image_640x896.jpg" alt="{{ $product->name }}">
                                 </a>
                                 <div class="color-box">
                                     @foreach($product->colors->unique() as $color)
