@@ -15,21 +15,22 @@ use Illuminate\Support\Facades\DB;
 
 class CartItemController extends Controller
 {
-    //
+    
     public function store(Request $request)
     {
 
-    $request->validate([
-            'size' => 'required',
-            'color' => 'required',
-            'amount' => 'required'
-    ]);
+        $request->validate([
+                'size' => 'required',
+                'color' => 'required',
+                'amount' => 'required'
+        ]);
 
     $size = $request->post('size');
     $color_id = $request->post('color');
     $product_id = $request->post('product');
     
     $design_id = ProductDesign::where('size', '=', $size)->where('color_id', '=', $color_id)->where('product_id', '=', $product_id)->value('id');
+   
     if(Auth::check()){
 
         Cart::firstOrCreate([
@@ -39,21 +40,24 @@ class CartItemController extends Controller
         $cartItem = CartItem::create([
             'product_design_id' => $design_id,
             'amount' =>$request->amount,
-            'cart_id' => Auth::user()->cart()->first()->id
+            'cart_id' => Auth::user()->cart()->first()->id,
             ]);
-    } else {
+    }
+
+     else {
+
         $cartItems = session()->get('cartItems');
         if(!$cartItems) {
             session()->put('cartItems', []);
         }
+      
 
         $cartItem = new CartItem([
             'product_design_id' => $design_id,
             'amount' => $request->amount,
         ]);
         
-        session()->push('cartItems', collect($cartItem));
-
+        session()->push('cartItems', ($cartItem));
     }
 
     return back()->with('success', 'Product added to cart successfully!');
@@ -61,11 +65,22 @@ class CartItemController extends Controller
 }
 public function destroy(Request $request,$item)
 {
-    $cartItem = CartItem::find($item);
+     
+    if(Auth::check()){        
+        $cartItem = CartItem::find($item);
+        $cartItem->delete(); 
+    }
 
-    $cartItem->delete();    
+    else {
+        $cartItems = session()->get('cartItems');
+        array_splice($cartItems, $item, 1);
+        $request->session()->flush();
+        $request->session()->put('cartItems',$cartItems); // retrieving the value and remove it from the array       
+    }
+    
+    
 
-    return  redirect()->back()->with('success', 'Product deleted successfully!');
+  return  back()->with('success', 'Product deleted successfully!');
 }
 
     // public function store($id)

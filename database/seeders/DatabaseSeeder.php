@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoryTableSeeder::class);
         $this->call(Category_hierarchyTableSeeder::class);
         $this->call(Product_categoryTableSeeder::class);
-        $this->call(productDesignTableSeeder::class);
+        $this->call(Product_designTableSeeder::class);
         $this->call(ImageSeeder::class);
         $this->call(CartSeeder::class);
         $this->call(CartItemSeeder::class);

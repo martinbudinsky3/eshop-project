@@ -31,26 +31,25 @@
 
         <header>
             <h3>Váš nákupný košík</h3>
-            <p class="items-amount">Počet produktov v košíku: {{sizeof(($cart->cartItems))}}</p>
+            <p class="items-amount">Počet produktov v košíku: {{sizeof(($cartItems))}}</p>
         </header>
 
         <div class="container items">
-            @foreach($cart->cartItems as $item)
+            @foreach($cartItems as $item)
 
             <article class="row item">
-
                 <div class="col-xs-12  col-sm-5 col-md-4 col-lg-3 center-col">
                     <div class="image-cart">
-                        <a href="{{ route('product-detail',['product'=>$item->product->id])}}">
+                        <a href="">
                                 <img class='img-akt'
-                                    src=" {{ asset($item->product->images->first()->path.'_300x420.jpg')}}"
-                                    alt="{{$item->product->images->first()->path}}"
+                                    src=" {{ asset($item->productDesign->product->images->first()->path.'_300x420.jpg')}}"
+                                    alt="{{$item->productDesign->product->images->first()->path}}"
                                     >
                         </a>
                     </div>
                 </div>
                 <div class="col-xs-12  col-sm-5 col-md-5 col-lg-6  center-col">
-                    <h3 class="item-name">{{$item->product->name}}</h3>
+                    <h3 class="item-name">{{$item->productDesign->product->name}}</h3>
                     <p class="item-description">Velkosť: {{$item->productDesign->size}}</p>
                     <p class="item-description">Farba: {{$item->productDesign->color->name}}</p>
                    <div id="quantity-input-box">
@@ -63,13 +62,11 @@
                                     onclick="incrementNumberValue(this)">+</button>
                             </div>
                         </div>
-                    <p class="final-price">Cena: {{$item->product->price}}</p>
-    
+                    <p class="final-price">Cena: {{$item->productDesign->product->price}}</p>
                 </div>
                 <div class="col-xs-12  col-sm-2 col-md-2 col-lg-3  item_edit">
-                    <form action="/cart-delete/{{$item->id}}" method="POST">
-                            @csrf
-
+                    <form action="/cart-delete/  {{ (!$item->id) ? $loop->index : $item->id }}" method="POST">
+                         @csrf
                         <div class="icons">
                         <input type="hidden" name="_method" value="DELETE">
                         {{-- .  <img class="edit-item" alt="upraviť" title="Upraviť" src="../assets/icons/edit_icon.png"> --}}
@@ -83,18 +80,15 @@
 
              @endforeach
 
-            <?php 
-            $final_price = 0;
-             foreach($cart->cartItems as $item)
-{                $final_price = $final_price+$item->product->price*$item->amount;
-}             ?>
+             
+
             <div class="row summary">
                 <div class="col-12">
                     <p class="summary-price" id="summary-price"><span>CENA SPOLU: </span> {{$final_price}}</p>
                     <a href="/product-category" class="back-link">
                         Späť do obchodu
                     </a>
-                    <button class="submit-button" type="submit" onclick= "location.href='{{ route('cart2')}}'">
+                    <button class="submit-button" type="submit">
                         POKRAČOVAŤ
                     </button>
                 </div>
