@@ -114,9 +114,9 @@
 
                         <div id="color-input-box">
                             <label for="color_selector">Farba:</label>
-                                <select name="color" id="color_selector">
+                                <select name="color" id="color_selector" onChange="showProductInColor(this)">
                                     @foreach ($liste_color as $color){
-                                        <option value="{{$color->id}}"> {{ $color->name }}</option>
+                                        <option value="{{$color->id}}" {{ (request()->get('color') == $color->id) ? 'selected' : ''}}> {{ $color->name }}</option>
                                     }
                                     @endforeach
                                 </select>
@@ -126,7 +126,7 @@
                             <label for="size_selector">Veľkosť:</label>
                             <select name="size" id="size_selector">
                                 @foreach ($liste_size as $size){
-                                    <option value="{{$size}}"> {{ $size }}</option>
+                                    <option value="{{$size->size}}"> {{ $size->size }}</option>
                                 }
                                 @endforeach
                             </select>

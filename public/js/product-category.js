@@ -5,7 +5,6 @@ function toggleTopFilterMenu() {
 
 function showSorted(sortSelector) {
     let sortValue = sortSelector.value
-    console.log(sortValue)
     let url = new URL(window.location.href);
     url.searchParams.delete('page');
     url.searchParams.set('sort', sortValue);
