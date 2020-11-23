@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-<title>Product detail</title>
+<title>{{ $product->name }}</title>
 @endsection
 
 @section('content')
@@ -38,9 +38,9 @@
         <div class="center-box">
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Hlavná stránka</a></li>
-                    <li class="breadcrumb-item"><a href="#">Ženy</a></li>
-                    <li class="breadcrumb-item"><a href="#">Blúzky</a></li>
+                    <li class="breadcrumb-item"><a href="/">Hlavná stránka</a></li>
+                    <li class="breadcrumb-item"><a href="">{{ $product->categories[0]->parentCategories[0]->name }}</a></li>
+                    <li class="breadcrumb-item"><a href="/category/{{ $product->categories[0]->id }}">{{ $product->categories[0]->name }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
                 </ol>
             </nav>

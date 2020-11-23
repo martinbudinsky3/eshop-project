@@ -5,7 +5,11 @@
 @endsection
 
 @section('title')
-<title>{{ $title }}</title>
+    @if($search)
+    <title>{{ $title }}</title>
+    @else
+    <title>{{ $category->name }}</title>
+    @endif
 @endsection
 
 @section('content')
@@ -20,8 +24,8 @@
                     <li class="breadcrumb-item active" aria-current="page">Vyhľadávanie</li>
                     @else
                     <li class="breadcrumb-item"><a href="/">Hlavná stránka</a></li>
-                    <li class="breadcrumb-item"><a href="#">Ženy</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Blúzky</li>
+                    <li class="breadcrumb-item"><a href="">{{ $category->parentCategories[0]->name }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $category->name }}</li>
                     @endif
                 </ol>
             </nav>

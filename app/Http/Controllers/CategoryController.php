@@ -76,7 +76,7 @@ class CategoryController extends Controller
         $products = $products->paginate(12)->appends(request()->query());
 
         return view('templates.product-category')
-            ->with('title', $category->name)
+            ->with('category', $category)
             ->with('products', $products)
             ->with('colors', $colors)
             ->with('brands', $brands)
