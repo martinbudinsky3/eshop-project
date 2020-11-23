@@ -15,9 +15,7 @@ use App\Http\Requests;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'IndexController@index');
 
 Route::get('/product-detail', 'ProductController@index');
 
@@ -25,7 +23,7 @@ Route::get('/product-detail/{product}', 'ProductController@show');
 
 Route::get('category/{category}', 'CategoryController@show');
 
-Route::get('/cart/{cart}', 'CartController@show')->name('cart');
+Route::get('/cart', 'CartController@show')->name('cart');
 
 Route::post('/cart-item', 'CartItemController@store');
 

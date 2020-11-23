@@ -25,8 +25,8 @@
                 <p>Produkt bol pridaný do košíka</p>
             </div>
             <div class="modal-footer modal-footer-custom">
-                <a href="" class="btn btn-primary">Prejsť do košíka</a>
-                <a href="" class="btn btn-secondary">Späť k nákupu</a>
+                <a href="/cart" class="btn btn-primary">Prejsť do košíka</a>
+                <a href="/category/{{ $product->categories[0]->id }}" class="btn btn-secondary">Späť k nákupu</a>
             </div>
         </div>
     </div>
@@ -350,18 +350,18 @@
                                 <div class="row">
                                     @for($j = 0; $j < 4; $j++)
                                         <div class="col-xs-6 col-md-4  col-lg-3">
-                                                <a href="">
+                                                <a href="/product-detail/{{ $similar_products[$i*4+$j]->id }}">
                                                     <img class="d-block w-100 img-responsive"
-                                                      srcset="{{asset($similar_products[$i*3+$j]->images->first()->path.'_300x420.jpg')}} 300w,
-                                                                {{asset($similar_products[$i*3+$j]->images->first()->path.'_520x728.jpg')}} 520w,
-                                                                {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}} 640w"
+                                                      srcset="{{asset($similar_products[$i*4+$j]->images->first()->path.'_300x420.jpg')}} 300w,
+                                                                {{asset($similar_products[$i*4+$j]->images->first()->path.'_520x728.jpg')}} 520w,
+                                                                {{asset($similar_products[$i*4+$j]->images->first()->path.'_640x896.jpg')}} 640w"
                                                                 sizes="(max-width: 992px) 300px,
                                                                 (max-width: 1200px) 520px, 640px"
-                                                        src=" {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}}"
-                                                        alt="{{($similar_products[$i*3+$j])->images->first()->path}}">
+                                                        src=" {{asset($similar_products[$i*4+$j]->images->first()->path.'_640x896.jpg')}}"
+                                                        alt="{{($similar_products[$i*4+$j])->name}}">
                                                 </a>
                                                 <div class="carousel-caption ">
-                                                    <h4 class="carousel-product-name white-image-caption">{{($similar_products[$i*3+$j])->name}}</h4>
+                                                    <h4 class="carousel-product-name white-image-caption">{{($similar_products[$i*4+$j])->name}}</h4>
                                                     <p> </p>
                                                 </div>
                                         </div>     
@@ -381,12 +381,12 @@
                 </div>
                 <div id="carousel-similars-md" class="carousel slide d-none d-md-block d-lg-none" data-ride="carousel">
                 <div class="carousel-inner">
-                        @for($i = 0; $i < 3; $i++)
+                        @for($i = 0; $i < 4; $i++)
                             <div class="carousel-item {{$i == 0 ? 'active' : '' }}">
                                 <div class="row">
                                     @for($j = 0; $j < 3; $j++)
                                         <div class="col-md-4">
-                                                <a href="">
+                                                <a href="/product-detail/{{ $similar_products[$i*3+$j]->id }}">
                                                     <img class="d-block w-100 img-responsive"
 
                                                         srcset="{{asset($similar_products[$i*3+$j]->images->first()->path.'_300x420.jpg')}} 300w,
@@ -395,7 +395,7 @@
                                                                 sizes="(max-width: 992px) 300px,
                                                                 (max-width: 1200px) 520px, 640px"
                                                         src=" {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}}"
-                                                        alt="{{($similar_products[$i*3+$j])->images->first()->path}}">
+                                                        alt="{{($similar_products[$i*3+$j])->name}}">
                                                 </a>
                                                 <div class="carousel-caption ">
                                                     <h4 class="carousel-product-name white-image-caption">{{($similar_products[$i*3+$j])->name}}</h4>
@@ -418,23 +418,23 @@
                 </div>
                 <div id="carousel-similars-xs" class="carousel slide d-block d-md-none " data-ride="carousel">
                     <div class="carousel-inner">
-                        @for($i = 0; $i < 3; $i++)
+                        @for($i = 0; $i < 6; $i++)
                             <div class="carousel-item {{$i == 0 ? 'active' : '' }}">
                                 <div class="row">
                                     @for($j = 0; $j < 2; $j++)
                                         <div class="col-6">
-                                                <a href="">
+                                                <a href="/product-detail/{{ $similar_products[$i*2+$j]->id }}">
                                                     <img class="d-block w-100 img-responsive"
-                                                        srcset="{{asset($similar_products[$i*3+$j]->images->first()->path.'_300x420.jpg')}} 300w,
-                                                                {{asset($similar_products[$i*3+$j]->images->first()->path.'_520x728.jpg')}} 520w,
-                                                                {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}} 640w"
+                                                        srcset="{{asset($similar_products[$i*2+$j]->images->first()->path.'_300x420.jpg')}} 300w,
+                                                                {{asset($similar_products[$i*2+$j]->images->first()->path.'_520x728.jpg')}} 520w,
+                                                                {{asset($similar_products[$i*2+$j]->images->first()->path.'_640x896.jpg')}} 640w"
                                                                 sizes="(max-width: 992px) 300px,
                                                                 (max-width: 1200px) 520px, 640px"
-                                                        src=" {{asset($similar_products[$i*3+$j]->images->first()->path.'_640x896.jpg')}}"
-                                                        alt="{{($similar_products[$i*3+$j])->images->first()->path}}">
+                                                        src=" {{asset($similar_products[$i*2+$j]->images->first()->path.'_640x896.jpg')}}"
+                                                        alt="{{($similar_products[$i*2+$j])->name}}">
                                                 </a>
                                                 <div class="carousel-caption ">
-                                                    <h4 class="carousel-product-name white-image-caption">{{($similar_products[$i*3+$j])->name}}</h4>
+                                                    <h4 class="carousel-product-name white-image-caption">{{($similar_products[$i*2+$j])->name}}</h4>
                                                     <p> </p>
                                                 </div>
                                         </div>     
