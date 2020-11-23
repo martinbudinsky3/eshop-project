@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\CartItem;
 use App\Models\Color;
 use App\Models\ProductDesign;
+use App\Models\Cart;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 
 class CartItemController extends Controller
 {
     //
-    public function store(Request $request, $product)
+    public function store(Request $request)
     {
 
     $request->validate([
@@ -22,21 +27,19 @@ class CartItemController extends Controller
 
     $size = $request->post('size');
     $color_id = $request->post('color');
-
-    $design_id = ProductDesign::where('size', $size)->andWhere('color_id', $color)->andWhere('product_id', $product)->value('id');
-
+    $product_id = $request->post('product');
+    
+    $design_id = ProductDesign::where('size', '=', $size)->where('color_id', '=', $color_id)->where('product_id', '=', $product_id)->value('id');
     if(Auth::check()){
-        $cart = Auth::user()->cart;
-        if(!$cart) {
-            $cart = Cart::create([
-                'user_id' => Auth::user()->id,
-            ]);
-        }
+
+        Cart::firstOrCreate([
+            'user_id' => Auth::user()->id,
+        ]);
 
         $cartItem = CartItem::create([
             'product_design_id' => $design_id,
             'amount' =>$request->amount,
-            'cart_id' =>$cart->id
+            'cart_id' => Auth::user()->cart()->first()->id
             ]);
     } else {
         $cartItems = session()->get('cartItems');
@@ -48,12 +51,12 @@ class CartItemController extends Controller
             'product_design_id' => $design_id,
             'amount' => $request->amount,
         ]);
+        
+        session()->push('cartItems', collect($cartItem));
 
-        session()->push('cartItems', $cartItem);
     }
 
-
-    return redirect()->back()->with('success', 'Product added to cart successfully!');
+    return back()->with('success', 'Product added to cart successfully!');
 
 }
 public function destroy(Request $request,$item)

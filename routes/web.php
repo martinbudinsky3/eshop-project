@@ -27,7 +27,7 @@ Route::get('category/{category}', 'CategoryController@show');
 
 Route::get('/cart/{cart}', 'CartController@show')->name('cart');
 
-Route::post('/cart-item/{product}', 'CartItemController@store');
+Route::post('/cart-item', 'CartItemController@store');
 
 Route::delete('/cart-delete/{item}', 'CartItemController@destroy');
 

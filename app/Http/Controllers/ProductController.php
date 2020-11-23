@@ -109,9 +109,7 @@ class ProductController extends Controller
             ->with('similar_products', $similar_products)
             ->with('liste_images', $liste_images)
             ->with('liste_color', $liste_color)
-            ->with('liste_size', $liste_size)
-            ->with('cart', $cart);
-        
+            ->with('liste_size', $liste_size);
     }
 
     /**

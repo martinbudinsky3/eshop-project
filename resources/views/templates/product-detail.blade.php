@@ -143,9 +143,9 @@
                                     onclick="incrementNumberValue(this)">+</button>
                             </div>
                         </div>
-                        <button type="submit" id="add-to-cart" 
-                            data-toggle="modal"
+                        <button type="button" id="add-to-cart" data-toggle="modal"
                             data-target="#add-to-cart-modal">Pridať do košíka</button>
+                        <input type="hidden" id="product" name="product" value="{{ $product->id }}">
                     </form>
                 </div>
             </div>
@@ -347,10 +347,10 @@
 
                 <div id="carousel-similars" class="carousel slide d-none d-lg-block" data-ride="carousel">
                     <div class="carousel-inner">
-                        @for($i = 0; $i <3; $i++)
+                        @for($i = 0; $i < 3; $i++)
                             <div class="carousel-item {{$i == 0 ? 'active' : '' }}">
                                 <div class="row">
-                                    @for($j = 0; $j <4; $j++)
+                                    @for($j = 0; $j < 4; $j++)
                                         <div class="col-xs-6 col-md-4  col-lg-3">
                                                 <a href="">
                                                     <img class="d-block w-100 img-responsive"
@@ -472,4 +472,35 @@
     });
 
 </script>
+<script>
+    jQuery(document).ready(function($){
+
+        // CREATE
+        $("#add-to-cart").click(function (e) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            e.preventDefault();
+            var formData = {
+                size: jQuery('select[name=size]').val(),
+                color: jQuery('select[name=color]').val(),
+                product: jQuery('input[name=product]').val(),
+                amount: jQuery('input[name=amount]').val()
+            };
+
+            var type = "POST";
+            var ajaxurl = '/cart-item';
+            $.ajax({
+                type: type,
+                url: ajaxurl,
+                data: formData,
+                dataType: 'json',
+            });
+        });
+    });
+</script>
+
 @endsection
