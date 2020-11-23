@@ -21,8 +21,14 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        //
+    public function boot() {
+        view()->composer('*', function ($view) {
+            $cart = 'Test';
+            $view->with('cart',$cart);
+        });
+    }
+
+    private function getCart() {
+        
     }
 }

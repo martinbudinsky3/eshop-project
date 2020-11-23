@@ -35,7 +35,7 @@
         </header>
 
         <div class="container items">
-            @foreach($cart->cartItems as $key => $item)
+            @foreach($cart->cartItems as $item)
 
             <article class="row item">
 

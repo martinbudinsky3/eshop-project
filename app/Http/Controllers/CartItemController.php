@@ -15,36 +15,43 @@ class CartItemController extends Controller
     {
 
     $request->validate([
-            'size_selector' => 'required',
-            'color_selector' => 'required',
+            'size' => 'required',
+            'color' => 'required',
             'amount' => 'required'
     ]);
 
-    $logged = session()->get('user');
+    $size = $request->post('size');
+    $color_id = $request->post('color');
 
-    if($logged){
-        $cart = $logged->cart;
+    $design_id = ProductDesign::where('size', $size)->andWhere('color_id', $color)->andWhere('product_id', $product)->value('id');
+
+    if(Auth::check()){
+        $cart = Auth::user()->cart;
+        if(!$cart) {
+            $cart = Cart::create([
+                'user_id' => Auth::user()->id,
+            ]);
+        }
+
+        $cartItem = CartItem::create([
+            'product_design_id' => $design_id,
+            'amount' =>$request->amount,
+            'cart_id' =>$cart->id
+            ]);
+    } else {
+        $cartItems = session()->get('cartItems');
+        if(!$cartItems) {
+            session()->put('cartItems', []);
+        }
+
+        $cartItem = new CartItem([
+            'product_design_id' => $design_id,
+            'amount' => $request->amount,
+        ]);
+
+        session()->push('cartItems', $cartItem);
     }
-    else{
-        $cart = session()->get('cart');
-    }
-    
 
-    $size = $request->post("size_selector");
-
-    $color_name = $request->post("color_selector");
-
-    $color = Color::where('name',$color_name)->value('id');
-
-    $design_id = ProductDesign::where('size',$size)->value('id');
-
-
-    $CartItem = CartItem::create([
-                                  'product_id' => $product,
-                                  'product_design_id' => $design_id,// $request->product_design_id,
-                                  'amount' =>$request->amount,
-                                  'cart_id' =>$cart->id
-                                  ]);
 
     return redirect()->back()->with('success', 'Product added to cart successfully!');
 

@@ -93,30 +93,15 @@ class ProductController extends Controller
         $product = Product::find($id);
         $similar_products = Product::whereHas('categories', function ($cat) use ($product) {
             $cat->where('categories.id','=',  $product->categories->first()->id);
-        })->take(12)->get();
+        })->where('id', '!=', $id)->take(12)->get();
 
-        $liste_size = [];
-        $liste_color = [];
-        $liste_images = [];
-
-        foreach ($product->productDesigns as $design) {
-            array_push($liste_size, $design->size);
-            array_push($liste_color, $design->color->name);
-
-        }
-        
-        $liste_size = array_unique($liste_size);
-        $liste_color = array_unique($liste_color);
+        $liste_size = $this->getUniqueSizes($product);
         $liste_size = $this->sortSize($liste_size);
+        $liste_color = $this->getUniqueColors($product);
 
+        $liste_images = [];
         foreach ($product->images as $image) {
             array_push($liste_images, $image->path);
-        }
-
-        if (Auth::check()) {
-            $cart = Auth::user()->cart;
-        } else {
-            $cart = session()->get('cart');
         }
 
         return view('templates.product-detail')
