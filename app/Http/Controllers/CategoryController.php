@@ -61,6 +61,8 @@ class CategoryController extends Controller
             $cat->where('categories.id', $id);
         });
 
+        $recommendedProducts = Product::inRandomOrder()->take(12)->get();
+
         // get unique products attributes
         $colors = $this->getUniqueColors($products->get());
         $brands = $this->getUniqueBrands($products->get());
@@ -78,6 +80,7 @@ class CategoryController extends Controller
         return view('templates.product-category')
             ->with('category', $category)
             ->with('products', $products)
+            ->with('recommendedProducts', $recommendedProducts)
             ->with('colors', $colors)
             ->with('brands', $brands)
             ->with('sizes', $sizes)
