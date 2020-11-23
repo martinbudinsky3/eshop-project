@@ -67,19 +67,9 @@ function showLeftMenu() {
     leftMenu.classList.add('d-block')
 }
 
-function showLeftMenSubmenu() {
-    let leftMenSubmenu = document.getElementById('left-men-submenu')
-    leftMenSubmenu.classList.add('d-block')
-}
-
-function showLeftWomenSubmenu() {
-    let leftWomenSubmenu = document.getElementById('left-women-submenu')
-    leftWomenSubmenu.classList.add('d-block')
-}
-
-function showLeftKidsSubmenu() {
-    let leftWomenSubmenu = document.getElementById('left-kids-submenu')
-    leftWomenSubmenu.classList.add('d-block')
+function showLeftSubmenu(id) {
+    let leftSubmenu = document.getElementById(id)
+    leftSubmenu.classList.add('d-block')
 }
 
 function logout(event) {
