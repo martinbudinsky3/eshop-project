@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ProductDesign;
 use App\Models\Transport;
 use App\Models\Payment;
+use App\Models\CartItem;
 
 
 class CartController extends Controller
@@ -48,7 +49,7 @@ class CartController extends Controller
 
     public function show(Request $request)
     {
-    //  $request->session()->flush();
+   //  $request->session()->flush();
 
          if(Auth::check()){
 
@@ -59,10 +60,10 @@ class CartController extends Controller
                 $cartItems = $cart->cartItems;   
             } 
         else {
-            $cartItems = $request->session()->get('cartItems');
+            $cartItems = session()->get('cartItems');
             if(!$cartItems) {
                     session()->put('cartItems', []);
-                    $cartItems = $request->session()->get('cartItems');
+                    $cartItems = session()->get('cartItems');
                 }
             }
         $final_price = 0;
@@ -126,8 +127,38 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+
+    public function update(Request $request, $id) {
+        
+        $new_quantity = $request->post('quantity-input');
+
+        if(Auth::check()){
+
+            $user = Auth::user();
+            $cartItems = $user->cart->first()->cartItems;   
+            CartItem::where('id',$id)->update(['amount'=>$new_quantity]);
+
+        } 
+         else {
+             $cartItems = session()->get('cartItems');
+             session()->forget('cartItems');
+
+           // $cartItems[$id-1]['amount'] = $new_quantity;
+                        
+             foreach ($cartItems as $key => &$item) {
+
+                 if ($key == $id) {
+
+                    $cartItems[$key]['amount'] = $new_quantity;
+                 break;}
+                }
+            //         session()["products"][$key]['product_qty'] +=  $val["product_qty"]; // Add this
+            //     }
+
+            // }
+
+             session()->put('cartItems',$cartItems);      
+        }
+        return redirect()->action([CartController::class, 'show']);
     }
 }

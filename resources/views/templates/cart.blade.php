@@ -35,7 +35,7 @@
         </header>
 
         <div class="container items">
-            @foreach($cartItems as $item)
+            @foreach($cartItems as $key => &$item)
 
             <article class="row item">
                 <div class="col-xs-12  col-sm-5 col-md-4 col-lg-3 center-col">
@@ -53,16 +53,22 @@
                     <p class="item-description">Velkosť: {{$item->productDesign->size}}</p>
                     <p class="item-description">Farba: {{$item->productDesign->color->name}}</p>
                    <div id="quantity-input-box">
-                            <label for="quantity-input">Množstvo:</label>
-                            <div>
-                                <button type="button" class="btn input-btn d-inline-block d-md-none"
-                                    onclick=" decrementNumberValue(this)">-</button>
-                                <input type="number" name="quantity-input" id="quantity-input" value="{{$item->amount}}" min="1">
-                                <button type="button" class="btn input-btn d-inline-block d-md-none"
-                                    onclick="incrementNumberValue(this)">+</button>
-                            </div>
+                            <form action="/cart-update/ {{ (!$item->id) ? $loop->index : $item->id }}" name="quantity" method="POST">
+                            	<input type="hidden" name="_method" value="PUT">
+                                @csrf
+
+                                    <label for="quantity-input">Množstvo:</label>
+                                    <div>
+                                        <button type="button" class="btn input-btn d-inline-block d-md-none"
+                                            onclick=" decrementNumberValue(this)">-</button>
+                                        <input type="number" name="quantity-input" id="quantity-input" value="{{$item->amount}}" min="1" onchange="my_change($item-" >
+                                        <button type="button" class="btn input-btn d-inline-block d-md-none"
+                                            onclick="incrementNumberValue(this)">+</button>
+                                    </div>
+                                <input type="submit" type="hidden">
+                             </form>
                         </div>
-                    <p class="final-price">Cena: {{$item->productDesign->product->price}}</p>
+                    <p class="final-price" id="final-price">Cena: {{$item->productDesign->product->price}}</p>
                 </div>
                 <div class="col-xs-12  col-sm-2 col-md-2 col-lg-3  item_edit">
                     <form action="/cart-delete/  {{ (!$item->id) ? $loop->index : $item->id }}" method="POST">

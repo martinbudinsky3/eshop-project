@@ -52,18 +52,18 @@
                     <div class="form-group">
                         <label for="name">Meno a priezvisko</label>
                         <input type="text" class="text-input form-control" id="name" name="name" placeholder="meno a priezvisko"
-                         value = {{ (!is_array($data)) ? "": $data['name']}}>
+                         value = {{ (empty($data)) ? "": $data['name']}}>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="text-input form-control" id="email" name="email" placeholder="napr. example@mail.com"
-                        value = {{ (!is_array($data)) ? "": $data['email']}}>
+                        value = {{ (empty($data)) ? "": $data['email']}}>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Telefónne číslo</label>
                         <input type="tel" class="text-input form-control" id="phone" name="phone" placeholder="+421xxxxxxxxx"
-                        value = {{ (!is_array($data)) ? "": $data['phone']}}>
+                        value = {{ (empty($data)) ? "": $data['phone']}}>
 
                     </div>
 
