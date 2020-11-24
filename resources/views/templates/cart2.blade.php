@@ -150,7 +150,6 @@ let delivery_price = 0;
 let payment_price = 0;
 
 function my_function(group,val,act_price,final_price){
-    console.log(final_price);
     if(group==1)
         {
         delivery_price = act_price;
@@ -169,7 +168,6 @@ function my_function(group,val,act_price,final_price){
      price = final_price + delivery_price + payment_price;
      price =  Math.round(price * 100) / 100;
      p.innerHTML ='<span>CENA SPOLU: </span> ' +  price + '€';
-     console.log(delivery_price,payment_price);
 
     
 }
