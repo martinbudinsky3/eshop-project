@@ -25,6 +25,7 @@ class OrderController extends Controller
     public function create(Request $request){
       //$request->session()->flush();
         $data = [];
+        $logged =[]; 
          if(Auth::check()){
                 $logged = Auth::user();
                 $cart = $logged->cart->first();
@@ -75,6 +76,7 @@ class OrderController extends Controller
 
     public function store(Request $request){
  
+        $logged= []; 
         if(Auth::check()){
             $logged = Auth::user();
             $cart = $logged->cart->first();
