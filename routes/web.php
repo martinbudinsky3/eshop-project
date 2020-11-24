@@ -15,9 +15,7 @@ use App\Http\Requests;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'IndexController@index');
 
 Route::get('/product-detail', 'ProductController@index');
 

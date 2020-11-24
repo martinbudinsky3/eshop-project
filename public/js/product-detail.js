@@ -13,6 +13,10 @@ function decrementNumberValue(decButton) {
     }
 }
 
-function formSubmitPrevent(event) {
-    event.preventDefault();
+function showProductInColor(colorSelector) {
+    let colorValue = colorSelector.value
+    let url = new URL(window.location.href);
+    url.searchParams.set('color', colorValue);
+    window.location.href = url;
 }
+

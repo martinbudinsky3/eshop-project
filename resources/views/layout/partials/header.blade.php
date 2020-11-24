@@ -26,7 +26,7 @@
             <!--Icon nav + Search-->
             <div id="icons-box" class="col-10 col-8-sm d-md-flex vertical-reverse ">
                 <div class="header-icons">
-                    <a href="" class="cart-link">
+                    <a href="/cart" class="cart-link">
                         <i class="fa fa-shopping-cart icon" aria-hidden="true"></i>
                     </a>
 

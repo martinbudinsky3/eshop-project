@@ -61,6 +61,18 @@ class CategoryController extends Controller
             $cat->where('categories.id', $id);
         });
 
+        Log::debug($products->get()->isEmpty());
+        if($products->get()->isEmpty()) {
+            return view('templates.product-category')
+                ->with('category', $category)
+                ->with('products', $products->get())
+                ->with('search', FALSE);
+        }
+        
+        $recommendedProducts = Product::whereHas('categories', function ($cat) use ($id) {
+            $cat->where('categories.id', $id);
+        })->inRandomOrder()->take(12)->get();
+
         // get unique products attributes
         $colors = $this->getUniqueColors($products->get());
         $brands = $this->getUniqueBrands($products->get());
@@ -76,8 +88,9 @@ class CategoryController extends Controller
         $products = $products->paginate(12)->appends(request()->query());
 
         return view('templates.product-category')
-            ->with('title', $category->name)
+            ->with('category', $category)
             ->with('products', $products)
+            ->with('recommendedProducts', $recommendedProducts)
             ->with('colors', $colors)
             ->with('brands', $brands)
             ->with('sizes', $sizes)

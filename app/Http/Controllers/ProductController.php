@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductDesign;
 use App\Traits\ProductsTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -91,14 +92,28 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+
+        // random products from same category
         $similar_products = Product::whereHas('categories', function ($cat) use ($product) {
             $cat->where('categories.id','=',  $product->categories->first()->id);
         })->where('id', '!=', $id)->take(12)->get();
 
-        $liste_size = $this->getUniqueSizes($product);
-        $liste_size = $this->sortSize($liste_size);
+        // get all unique colors for given product
         $liste_color = $this->getUniqueColors($product);
 
+        // get selected color
+        $selectedColor = request()->get('color');
+        if(!$selectedColor) {
+            $selectedColor = $liste_color[0]->id;
+        }
+
+        // get only product designs of selected color
+        $productOfColor = ProductDesign::where('product_id', '=', $id)->where('color_id', '=', $selectedColor);
+
+        // get all unique sizes of selected color product design
+        $liste_size = $productOfColor->distinct()->get(['size']);
+
+        // get product images
         $liste_images = [];
         foreach ($product->images as $image) {
             array_push($liste_images, $image->path);
