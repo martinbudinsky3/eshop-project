@@ -89,7 +89,7 @@
             <div class="row summary">
                 <div class="col-12">
                     <p class="summary-price" id="summary-price"><span>CENA SPOLU: </span> {{$final_price}}</p>
-                    <a href="/product-category" class="back-link">
+                    <a href="/" class="back-link">
                         Späť do obchodu
                     </a>
                     <form action ="{{url('cart/delivery')}}" method= "POST">

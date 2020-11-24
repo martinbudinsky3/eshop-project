@@ -17,7 +17,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/cart">Košík</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Doprava a platba</li>
-                    <li class="breadcrumb-item"><a href="/cart3">Dodacie
+                    <li class="breadcrumb-item"><a href="/cart/data">Dodacie
                             údaje</a></li>
                 </ol>
             </nav>
@@ -37,7 +37,8 @@
                             Zvoľte dopravu
                         </legend>
                         <div class="radio-buttons">
-                            <input type="radio" class="radio-input" id="delivery1" value=1 name="delivery"  checked onchange = "my_function(1,'Osobný odber',0,{{$final_price}})">
+                            <input type="radio" class="radio-input" id="delivery1" value=1 name="delivery"
+                            {{ $transport->id == 1 ? 'checked' : '' }} onchange = "my_function(1,'Osobný odber',0,{{$final_price}})">
                             <label class="radio-label" for="delivery1">Osobný odber</label>
                             <div class="row">
                                 <div class="col">
@@ -48,7 +49,8 @@
                                 </div>
                             </div>
 
-                            <input type="radio" class="radio-input" id="delivery2"  value=2 name="delivery" onchange = "my_function(1,'Doručenie kuriérom',5.10,{{$final_price}})">
+                            <input type="radio" class="radio-input" id="delivery2"  value=2 name="delivery"
+                            {{ $transport->id == 2 ? 'checked' : '' }} onchange = "my_function(1,'Doručenie kuriérom',5.10,{{$final_price}})">
                             <label class="radio-label" for="delivery2">Doručenie kuriérom</label>
                             <div class="row">
                                 <div class="col">
@@ -58,7 +60,8 @@
                                     <p class="time-delivery">5.10</p>
                                 </div>
                             </div>
-                            <input type="radio" class="radio-input" id="delivery3" value =3  name="delivery" onchange = "my_function(1,'Pošta',1.76,{{$final_price}})">
+                            <input type="radio" class="radio-input" id="delivery3" value =3  name="delivery"
+                            {{ $transport->id == 3 ? 'checked' : '' }} onchange = "my_function(1,'Pošta',1.76,{{$final_price}})">
                             <label class="radio-label" for="delivery3">Pošta</label>
                             <div class="row">
                                 <div class="col">

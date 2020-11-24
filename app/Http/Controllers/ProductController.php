@@ -23,6 +23,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        // random products
+        $recommendedProducts = Product::inRandomOrder()->take(12)->get();
+
         $searchTerm = request()->get('search');
 
         // filtering based on search term
@@ -55,6 +58,7 @@ class ProductController extends Controller
         return view('templates.product-category')
             ->with('title', 'Vyhľadávanie')
             ->with('products', $products)
+            ->with('recommendedProducts', $recommendedProducts)
             ->with('colors', $colors)
             ->with('brands', $brands)
             ->with('sizes', $sizes)

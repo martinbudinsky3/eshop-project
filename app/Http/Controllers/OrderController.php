@@ -87,7 +87,8 @@ class OrderController extends Controller
         }
 
         $delivery = Delivery::create([
-                    'user_id' => (!$logged) ? '1' : $logged->id,
+
+                    'user_id' => (!Auth::check()) ? null : Auth::user()->id,
                     'name' => $request->post('name'),
                     'email' =>$request->post('email'),
                     'street' =>$request->post('street'),
@@ -98,7 +99,7 @@ class OrderController extends Controller
         ]);
 
         $order = Order::create([
-                 'user_id' => (!$logged) ? '1' : $logged->id,
+                'user_id' =>(!Auth::check()) ? null : Auth::user()->id,
                  'delivery_id' => $delivery->id,
                  'transport' => $request->session()->get('transport'),
                  'payment' => $request->session()->get('payment'),
@@ -113,8 +114,11 @@ class OrderController extends Controller
             ]);
         }
 
-        session()->flush();
+        if(!Auth::check()) {
+            session()->flush();
+        }
+        
 
-        return view('/');
+        return redirect('/');
     }
 }

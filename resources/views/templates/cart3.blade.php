@@ -16,7 +16,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/cart">Košík</a></li>
-                    <li class="breadcrumb-item"><a href="/cart2">Doprava a
+                    <li class="breadcrumb-item"><a href="/cart/delivery">Doprava a
                             platba</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Dodacie
                         údaje</li>
@@ -33,7 +33,7 @@
                 <div class="row item">
                     <div class="col-xs-10  col-sm-6 col-md-5 col-lg-5 register-box">
                         <p><strong>Máte už v nás konto? Ušetrite čas a prihláste sa.</strong></p>
-                        <button class="login-button" onClick="window.location='login.html';"
+                        <button class="login-button" onClick="window.location='/login';"
                             type="button">PRIHLÁSENIE</button>
                     </div>
                 </div>
@@ -52,18 +52,18 @@
                     <div class="form-group">
                         <label for="name">Meno a priezvisko</label>
                         <input type="text" class="text-input form-control" id="name" name="name" placeholder="meno a priezvisko"
-                         value = {{ (empty($data)) ? "": $data['name']}}>
+                         value = {{ (empty($data)) ? "" : $data['name']}}>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="text-input form-control" id="email" name="email" placeholder="napr. example@mail.com"
-                         value = {{ (empty($data)) ? "": $data['email']}}>
+                         value = {{ (empty($data)) ? "" : $data['email']}}>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Telefónne číslo</label>
                         <input type="tel" class="text-input form-control" id="phone" name="phone" placeholder="+421xxxxxxxxx"
-                        value = {{ (empty($data)) ? "": $data['phone']}}>
+                        value = {{ (empty($data)) ? "" : $data['phone']}}>
 
                     </div>
 
