@@ -37,7 +37,7 @@
                             Zvoľte dopravu
                         </legend>
                         <div class="radio-buttons">
-                            <input type="radio" class="radio-input" id="delivery1" value=1 name="delivery"
+                            <input type="radio" class="radio-input" id="delivery1" value = 1 name="delivery"
                             {{ $transport->id == 1 ? 'checked' : '' }} onchange = "my_function(1,'Osobný odber',0,{{$final_price}})">
                             <label class="radio-label" for="delivery1">Osobný odber</label>
                             <div class="row">
@@ -50,7 +50,7 @@
                             </div>
 
                             <input type="radio" class="radio-input" id="delivery2"  value=2 name="delivery"
-                            {{ $transport->id == 2 ? 'checked' : '' }} onchange = "my_function(1,'Doručenie kuriérom',5.10,{{$final_price}})">
+                            {{ $transport->id == 2 ? 'checked' : '' }} onchange = "my_function(1,'Doručenie kuriérom',4.60,{{$final_price}})">
                             <label class="radio-label" for="delivery2">Doručenie kuriérom</label>
                             <div class="row">
                                 <div class="col">
@@ -61,11 +61,11 @@
                                 </div>
                             </div>
                             <input type="radio" class="radio-input" id="delivery3" value =3  name="delivery"
-                            {{ $transport->id == 3 ? 'checked' : '' }} onchange = "my_function(1,'Pošta',1.76,{{$final_price}})">
+                            {{ $transport->id == 3 ? 'checked' : '' }} onchange = "my_function(1,'Pošta',1.70,{{$final_price}})">
                             <label class="radio-label" for="delivery3">Pošta</label>
                             <div class="row">
                                 <div class="col">
-                                    <p class="price-delivery">1.76€</p>
+                                    <p class="price-delivery">1.70€</p>
                                 </div>
                                 <div class="col">
                                     <p class="time-delivery">zajtra</p>
@@ -150,24 +150,27 @@ let delivery_price = 0;
 let payment_price = 0;
 
 function my_function(group,val,act_price,final_price){
-
+    console.log(final_price);
     if(group==1)
         {
+        delivery_price = act_price;
+
         let p = document.getElementById('summary-delivery');
         p.innerHTML ='<span>Doprava: </span> ' +  val;
-        delivery_price = act_price;
     }
      if(group==2)
          {
+        payment_price = act_price;
         let p = document.getElementById('summary-pay');
         p.innerHTML ='<span>Platba: </span> ' +  val;
-        payment_price = act_price;
     
     }
      let p = document.getElementById('summary-price');
      price = final_price + delivery_price + payment_price;
      price =  Math.round(price * 100) / 100;
      p.innerHTML ='<span>CENA SPOLU: </span> ' +  price + '€';
+     console.log(delivery_price,payment_price);
+
     
 }
 </script>

@@ -49,7 +49,7 @@ class CartController extends Controller
 
     public function show(Request $request)
     {
-   //  $request->session()->flush();
+    // $request->session()->flush();
 
          if(Auth::check()){
 

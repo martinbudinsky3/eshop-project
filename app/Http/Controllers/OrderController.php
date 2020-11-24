@@ -49,8 +49,8 @@ class OrderController extends Controller
         $transport = Transport::find($transport_id);
         $payment = Payment::find($pay_id);
 
-        $payment_price = 0;
-        $transport_price = 4.60;
+        $payment_price = $payment->price;
+        $transport_price = $transport->price;
 
         $items_price = 0;
 
@@ -61,7 +61,6 @@ class OrderController extends Controller
         $final_price = $items_price + $payment_price + $transport_price;
 
         session(['final_price' => $final_price]);
-
 
         return view('templates.cart3')
         ->with('transport', $transport)
@@ -120,7 +119,6 @@ class OrderController extends Controller
             session()->flush();
         }
         
-
         return redirect('/');
     }
 }
