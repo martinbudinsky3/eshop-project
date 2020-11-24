@@ -12,7 +12,3 @@ function decrementNumberValue(decButton) {
         input.value--
     }
 }
-
-function formSubmitPrevent(event) {
-    event.preventDefault();
-}

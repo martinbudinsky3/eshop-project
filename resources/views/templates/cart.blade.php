@@ -16,9 +16,9 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">Košík</li>
-                    <li class="breadcrumb-item"><a href="/cart2">Doprava a
+                    <li class="breadcrumb-item"><a href="/cart/delivery">Doprava a
                             platba</a></li>
-                    <li class="breadcrumb-item"><a href="/cart3">Dodacie
+                    <li class="breadcrumb-item"><a href="/cart/data">Dodacie
                             údaje</a></li>
                 </ol>
             </nav>
@@ -80,17 +80,17 @@
 
              @endforeach
 
-             
-
             <div class="row summary">
                 <div class="col-12">
                     <p class="summary-price" id="summary-price"><span>CENA SPOLU: </span> {{$final_price}}</p>
                     <a href="/product-category" class="back-link">
                         Späť do obchodu
                     </a>
-                    <button class="submit-button" type="submit">
-                        POKRAČOVAŤ
-                    </button>
+                    <form action ="{{url('cart/delivery')}}" method= "POST">
+                        @csrf
+
+                        <input class="submit-button" type="submit" value = POKRAČOVAŤ>
+                    </form>
                 </div>
             </div>
         </div>

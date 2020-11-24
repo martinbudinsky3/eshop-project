@@ -74,65 +74,10 @@ public function destroy(Request $request,$item)
     else {
         $cartItems = session()->get('cartItems');
         array_splice($cartItems, $item, 1);
-        $request->session()->flush();
-        $request->session()->put('cartItems',$cartItems); // retrieving the value and remove it from the array       
+        session()->flush();
+        session()->put('cartItems',$cartItems); // retrieving the value and remove it from the array       
     }
-    
-    
 
   return  back()->with('success', 'Product deleted successfully!');
 }
-
-    // public function store($id)
-    // {
-    //     $product = Product::find($id);
-
-    //     $logged = session()->get('user');
-
-    //     // if cart is empty then this the first product
-    //     if($logged){
-    //         console.log("prihlaseny")
-    //         $cart = $logged->cart
-    //     }
-    //     else{
-    //         console.log("neprihlaseny")
-    //         $cart = session()->get('cart');
-    //     }
-    //     if(!$cart) {
-
-    //         $cart = [
-    //                 $id => [
-    //                     "name" => $product->name,
-    //                     "quantity" => 1,
-    //                     "price" => $product->price,
-    //                     "photo" => $product->photo
-    //                 ]
-    //         ];
-    //         session()->put('cart', $cart);
-
-    //         return redirect()->back()->with('success', 'Product added to cart successfully!');
-    //     }
-
-    //     // if cart not empty then check if this product exist then increment quantity
-    //     if(isset($cart[$id])) {
-
-    //         $cart[$id]['quantity']++;
-
-    //         session()->put('cart', $cart);
-
-    //         return redirect()->back()->with('success', 'Product added to cart successfully!');
-    //     }
-
-    //     // if item not exist in cart then add to cart with quantity = 1
-    //     $cart[$id] = [
-    //         "name" => $product->name,
-    //         "quantity" => 1,
-    //         "price" => $product->price,
-    //         "photo" => $product->photo
-    //     ];
-
-    //     session()->put('cart', $cart);
-
-    //     return redirect()->back()->with('success', 'Product added to cart successfully!');
-    // }
 }

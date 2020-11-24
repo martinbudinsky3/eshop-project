@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ProductDesign;
+use App\Models\Transport;
+use App\Models\Payment;
+
 
 class CartController extends Controller
 {
@@ -45,7 +48,7 @@ class CartController extends Controller
 
     public function show(Request $request)
     {
-     //  $request->session()->flush();
+    //  $request->session()->flush();
 
          if(Auth::check()){
 
@@ -58,7 +61,7 @@ class CartController extends Controller
         else {
             $cartItems = $request->session()->get('cartItems');
             if(!$cartItems) {
-                    $request->session()->put('cartItems', []);
+                    session()->put('cartItems', []);
                     $cartItems = $request->session()->get('cartItems');
                 }
             }
@@ -72,36 +75,49 @@ class CartController extends Controller
             ->with('cartItems', $cartItems)
             ->with('final_price', $final_price);
     }
-            /**
-             * Store a newly created resource in storage.
-             *
-             * @param  \Illuminate\Http\Request  $request
-             * @return \Illuminate\Http\Response
-             */
-        
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function delivery(Request $request)
     {
-        //
+        $pay_id = $request->session()->get('pay');
+        $transport_id = $request->session()->get('transport');
+
+        if(!$transport_id) {
+            session(['transport' => '1']);
+            $transport_id = $request->session()->get('transport');
+        }
+
+        if(!$pay_id) {
+            session(['pay' => '1']);
+            $pay_id = $request->session()->get('pay');
+        }
+
+        $transport = Transport::find($transport_id);
+        $payment = Payment::find($pay_id);
+
+        $final_price = 0;
+
+            if(Auth::check()){
+                $user = Auth::user();
+                $cart = $user->cart->first();
+                $cartItems = $cart->cartItems;   
+            } 
+            else {
+                $cartItems = $request->session()->get('cartItems');
+            }
+
+            $final_price = 0;
+
+            foreach($cartItems as $item){
+            $final_price = $final_price + $item->amount*$item->productDesign->product->price;
+            }
+
+
+        return view('templates.cart2')
+        ->with('transport', $transport)
+        ->with('payment', $payment)
+        ->with('final_price', $final_price);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
 
     /**

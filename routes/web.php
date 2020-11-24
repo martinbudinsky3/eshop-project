@@ -25,7 +25,16 @@ Route::get('/product-detail/{product}', 'ProductController@show');
 
 Route::get('category/{category}', 'CategoryController@show');
 
-Route::get('/cart', 'CartController@show')->name('cart');
+Route::get('/cart', 'CartController@show');
+
+Route::get('/cart/data/', 'OrderController@create');
+
+Route::get('/cart/sent', 'OrderController@store');
+
+Route::post('/cart/delivery', 'CartController@delivery');
+
+Route::get('/cart/delivery', 'CartController@delivery');
+
 
 Route::post('/cart-item', 'CartItemController@store');
 

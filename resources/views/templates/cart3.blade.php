@@ -47,48 +47,51 @@
                 <p class="form-restriction">Všetky údaje sú povinné.</p>
 
 
-                <form action="" target="_blank" id="delivery-form">
+                <form action="/cart/sent" id="delivery-form" method="get">
 
                     <div class="form-group">
                         <label for="name">Meno a priezvisko</label>
-                        <input type="text" class="text-input form-control" id="name" name="name" placeholder="meno a priezvisko">
+                        <input type="text" class="text-input form-control" id="name" name="name" placeholder="meno a priezvisko"
+                         value = {{ (!is_array($data)) ? "": $data['name']}}>
                     </div>
-
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="text-input form-control" id="email" name="email" placeholder="napr. example@mail.com">
+                        <input type="email" class="text-input form-control" id="email" name="email" placeholder="napr. example@mail.com"
+                        value = {{ (!is_array($data)) ? "": $data['email']}}>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Telefónne číslo</label>
-                        <input type="tel" class="text-input form-control" id="phone" name="phone" placeholder="+421xxxxxxxxx">
+                        <input type="tel" class="text-input form-control" id="phone" name="phone" placeholder="+421xxxxxxxxx"
+                        value = {{ (!is_array($data)) ? "": $data['phone']}}>
+
                     </div>
 
                     <div class="form-row">
                         <div class="col-sm-8 col-md-8 form-group">
                             <label for="street">Ulica</label>
-                            <input type="text" class="text-input form-control" id="street" placeholder="ulica">
+                            <input type="text" class="text-input form-control" id="street" name="street" placeholder="ulica">
                         </div>
                         <div class="col-sm-4 col-md-4 form-group">
                             <label for="numb">Číslo domu</label>
-                            <input type="text" class="text-input form-control" id="numb" placeholder="číslo domu">
+                            <input type="text" class="text-input form-control" id="numb" name="numb" placeholder="číslo domu">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="col-sm-8 col-md-8 form-group ">
                             <label for="town">Mesto</label>
-                            <input type="text" class="text-input form-control" id="town" placeholder="mesto">
+                            <input type="text" class="text-input form-control" id="town" name="town" placeholder="mesto">
                         </div>
                         <div class="col-sm-4 col-md-4 form-group">
                             <label for="zip">PSČ</label>
-                            <input type="text" class="text-input form-control" id="zip" placeholder="napr. 96801">
+                            <input type="text" class="text-input form-control" id="zip" name="zip" placeholder="napr. 96801">
                         </div>
                     </div>
 
                     <div class="form-group ">
                         <label for="country">Krajina</label>
-                        <input type="text" class="text-input form-control" id="country" placeholder="krajina">
+                        <input type="text" class="text-input form-control" id="country" name="country" placeholder="krajina">
                     </div>
 
 
@@ -111,12 +114,13 @@
 
             <hr>
             <div class="container summary">
-                <p class="summary-cart"><span>Hodnota tovaru: </span>32€</p>
-                <p class="summary-cart"><span>Platba: </span>3.60€</p>
-                <p class="summary-pay"><span>Doprava: </span>4.60€</p>
-                <p class="summary-price"><span>CENA SPOLU: </span>40.20€</p>
+                <p class="summary-cart"><span>Hodnota tovaru: </span>{{$items_price}} €</p>
+                <p class="summary-cart"><span>Platba: </span>{{$payment_price}} €</p>
+                <p class="summary-pay"><span>Doprava: </span>{{$transport_price}} €</p>
+                <p class="summary-price"><span>CENA SPOLU: </span>{{$final_price}} €</p>
 
-                <a href="/cart2" class="back-link">Späť</a>
+                <a href="/cart/delivery" class="back-link">Späť</a>
+               
                 <button class="submit-button" type="submit" form="delivery-form">Odoslať</button>
             </div>
         </section>

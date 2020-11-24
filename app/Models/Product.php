@@ -33,4 +33,7 @@ class Product extends Model
     function colors() {
         return $this->belongsToMany('App\Models\Color', 'product_designs', 'product_id', 'color_id');
     }
+    function orders() {
+        return $this->hasMany('App\Models\Order');
+    }
 }
