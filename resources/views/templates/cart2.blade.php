@@ -125,7 +125,7 @@
                 <div class="col-12">
                     <p class="summary-delivery" id ='summary-delivery'> <span>Doprava: </span>{{$transport->name}}</p>
                     <p class="summary-pay" id = 'summary-pay'> <span>Platba: </span> {{$payment->name}}</p>
-                    <p class="summary-price" id='summary-price'> <span>CENA SPOLU: </span>{{$final_price}}</p>
+                    <p class="summary-price" id='summary-price'> <span>CENA SPOLU: </span>{{$final_price}}€</p>
 
                     <a href="/cart" class="back-link">Späť</a>
 
@@ -148,8 +148,6 @@ let payment_price = 0;
 
 function my_function(group,val,act_price,final_price){
 
-    console.log("changed");
-    console.log("value ",val);
     if(group==1)
         {
         let p = document.getElementById('summary-delivery');
@@ -166,7 +164,7 @@ function my_function(group,val,act_price,final_price){
      let p = document.getElementById('summary-price');
      price = final_price + delivery_price + payment_price;
      price =  Math.round(price * 100) / 100;
-     p.innerHTML ='<span>CENA SPOLU: </span> ' +  price;
+     p.innerHTML ='<span>CENA SPOLU: </span> ' +  price + '€';
     
 }
 </script>

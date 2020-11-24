@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="text-input form-control" id="email" name="email" placeholder="napr. example@mail.com"
-                        value = {{ (empty($data)) ? "": $data['email']}}>
+                         value = {{ (empty($data)) ? "": $data['email']}}>
                     </div>
 
                     <div class="form-group">

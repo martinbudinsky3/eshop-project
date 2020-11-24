@@ -51,7 +51,6 @@ class CartItemController extends Controller
                 session()->put('cartItems', []);
             }
         
-
             $cartItem = new CartItem([
                 'product_design_id' => $design_id,
                 'amount' => $request->amount,

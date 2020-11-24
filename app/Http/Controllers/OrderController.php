@@ -48,8 +48,8 @@ class OrderController extends Controller
         $transport = Transport::find($transport_id);
         $payment = Payment::find($pay_id);
 
-        $payment_price = 3.20;
-        $transport_price = 2;
+        $payment_price = 0;
+        $transport_price = 4.60;
 
         $items_price = 0;
 

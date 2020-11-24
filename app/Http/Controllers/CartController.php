@@ -95,7 +95,6 @@ class CartController extends Controller
         $transport = Transport::find($transport_id);
         $payment = Payment::find($pay_id);
 
-        $final_price = 0;
 
             if(Auth::check()){
                 $user = Auth::user();
@@ -142,8 +141,6 @@ class CartController extends Controller
          else {
              $cartItems = session()->get('cartItems');
              session()->forget('cartItems');
-
-           // $cartItems[$id-1]['amount'] = $new_quantity;
                         
              foreach ($cartItems as $key => &$item) {
 
@@ -152,10 +149,6 @@ class CartController extends Controller
                     $cartItems[$key]['amount'] = $new_quantity;
                  break;}
                 }
-            //         session()["products"][$key]['product_qty'] +=  $val["product_qty"]; // Add this
-            //     }
-
-            // }
 
              session()->put('cartItems',$cartItems);      
         }
