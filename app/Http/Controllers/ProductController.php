@@ -6,10 +6,9 @@ use App\Models\Product;
 use App\Models\ProductDesign;
 use App\Traits\ProductsTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
-
 
 class ProductController extends Controller
 {
@@ -65,6 +64,42 @@ class ProductController extends Controller
             ->with('search', true);
     }
 
+    function list($page) {
+        // get rowsPerPage from query parameters (after ?), if not set => 5
+        $rowsPerPage = request('rowsPerPage', 5);
+
+        // get sortBy from query parameters (after ?), if not set => name
+        $sortBy = request('sortBy', 'name');
+
+        // get descending from query parameters (after ?), if not set => false
+        $descendingBool = request('descending', 'false');
+        // convert descending true|false -> desc|asc
+        $descending = $descendingBool === 'true' ? 'desc' : 'asc';
+
+        // pagination
+        // IFF rowsPerPage == 0, load ALL rows
+        if ($rowsPerPage == 0) {
+            // load all products from DB
+            $products = DB::table('products')
+                ->orderBy($sortBy, $descending)
+                ->get();
+        } else {
+            $offset = ($page - 1) * $rowsPerPage;
+
+            // load products from DB
+            $products = DB::table('products')
+                ->orderBy($sortBy, $descending)
+                ->offset($offset)
+                ->limit($rowsPerPage)
+                ->get();
+        }
+
+        // total number of rows -> for quasar data table pagination
+        $rowsNumber = DB::table('products')->count();
+
+        return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -83,7 +118,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validations and error handling is up to you!!! ;)
+        /*
+        $request->validate([
+        'name' => 'required|min:3',
+        'description' => 'required',
+        ]);
+         */
+
+        $product = Product::create(['name' => $request->name, 'description' => $request->description]);
+
+        return response()->json(['id' => $product->id]);
     }
 
     /**
@@ -99,7 +144,7 @@ class ProductController extends Controller
 
         // random products from same category
         $similar_products = Product::whereHas('categories', function ($cat) use ($product) {
-            $cat->where('categories.id','=',  $product->categories->first()->id);
+            $cat->where('categories.id', '=', $product->categories->first()->id);
         })->where('id', '!=', $id)->take(12)->get();
 
         // get all unique colors for given product
@@ -107,7 +152,7 @@ class ProductController extends Controller
 
         // get selected color
         $selectedColor = request()->get('color');
-        if(!$selectedColor) {
+        if (!$selectedColor) {
             $selectedColor = $liste_color[0]->id;
         }
 
@@ -139,7 +184,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        
+        return response()->json($product);
     }
 
     /**
@@ -151,7 +198,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validations and error handling is up to you!!! ;)
+        /*
+        $request->validate([
+        'name' => 'required|min:3',
+        'description' => 'required',
+        ]);
+         */
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->save();
     }
 
     /**
@@ -162,7 +219,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+
+        $product->delete();
+
+        // error handling is up to you!!! ;)
+        return response()->json(['status' => 'success', 'msg' => 'Product deleted successfully']);
     }
 
     private function transformString($str)

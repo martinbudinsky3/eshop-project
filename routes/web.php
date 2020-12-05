@@ -39,4 +39,14 @@ Route::post('/cart-item', 'CartItemController@store');
 
 Route::delete('/cart-delete/{item}', 'CartItemController@destroy');
 
+Route::get('products/list/{page}', 'ProductController@list');
+
+Route::delete('products/{product}', 'ProductController@destroy');
+
+Route::post('products/', 'ProductController@store');
+
+Route::get('products/{product}/edit', 'ProductController@edit');
+
+Route::put('products/{product}', 'ProductController@update');
+
 Auth::routes();
