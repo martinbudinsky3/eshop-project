@@ -95,7 +95,7 @@ class RegisterController extends Controller
                 CartItem::create([
                     'product_design_id' => $cartItem->product_design_id,
                     'amount' => $cartItem->amount,
-                    'cart_id' => $cartItem->cart_id,
+                    'cart_id' => $cart->id,
                 ]); 
             }
 

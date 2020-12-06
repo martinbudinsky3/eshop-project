@@ -61,7 +61,6 @@ class CategoryController extends Controller
             $cat->where('categories.id', $id);
         });
 
-        Log::debug($products->get()->isEmpty());
         if($products->get()->isEmpty()) {
             return view('templates.product-category')
                 ->with('category', $category)

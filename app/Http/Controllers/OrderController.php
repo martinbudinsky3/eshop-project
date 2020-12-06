@@ -31,6 +31,7 @@ class OrderController extends Controller
                 'email' => $logged->email,
                 'phone' => $logged->phone,
             );
+
             $cartItems = $cart->cartItems;   
         } 
 
@@ -39,13 +40,31 @@ class OrderController extends Controller
             $cartItems = $request->session()->get('cartItems');
         }
         
-        // get payment and transport from request if they are selected else default values
-        $pay_id = $request->post('pay', 1);
-        $transport_id = $request->post('delivery', 1);
+        // get payment from request if parameter exists
+        if($request->has('pay')) {
+            $pay_id = $request->get('pay');
+            session(['payment' => $pay_id]); 
+        } 
         
-        // save payment and transport to session
-        session(['payment' => $pay_id]);
-        session(['transport' => $transport_id]);
+        // if payment hasn't been selected yet set it to default value 
+        else if(!$request->session()->has('payment')) {
+            session(['payment' => 1]);
+        }
+        
+        // get transport from request if parameter exists
+        if($request->has('delivery')) {
+            $transport_id = $request->get('delivery');
+            session(['transport' => $transport_id]);
+        }  
+        
+        // if transport hasn't been selected yet set it to default value 
+        else if(!$request->session()->has('transport')) {
+            session(['transport' => 1]);
+        }    
+
+        // get final transport and payment
+        $pay_id = session()->get('payment');
+        $transport_id = session()->get('transport');
 
         // get info about selected payment and transport
         $payment = Payment::find($pay_id);
@@ -108,8 +127,8 @@ class OrderController extends Controller
         $order = Order::create([
             'user_id' =>(!Auth::check()) ? null : Auth::user()->id,
             'delivery_id' => $delivery->id,
-            'transport_id' => $request->session()->get('transport'),
-            'payment_id' => $request->session()->get('payment'),
+            'transport_id' => $request->session()->get('transport', 1),
+            'payment_id' => $request->session()->get('payment', 1),
             'price' => $request->session()->get('final_price'),
         ]);
 

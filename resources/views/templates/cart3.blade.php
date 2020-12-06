@@ -38,9 +38,8 @@
                     </div>
                 </div>
             </div>
+            <hr>
         @endguest
-
-        <hr>
         <section>
             <div class="form1">
                 <h3>Fakturačné údaje</h3>

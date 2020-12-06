@@ -6,7 +6,7 @@ var lastFinalPrice = null;
 function transportSelectHandler(newValue, newPrice, originalPrice, finalPrice) {
 
     let summaryDelivery = document.getElementById('summary-delivery');
-    summaryDelivery.innerHTML = 'Doprava: <span>' + newValue + '</span> €';
+    summaryDelivery.innerHTML = 'Doprava: <span>' + newValue + '</span>';
 
     if(lastFinalPrice == null) lastFinalPrice = finalPrice
     if(lastTransport == null)  lastTransport = originalPrice
@@ -24,7 +24,7 @@ function transportSelectHandler(newValue, newPrice, originalPrice, finalPrice) {
 function paymentSelectHandler(newValue, newPrice, originalPrice, finalPrice) {
 
     let summaryPay = document.getElementById('summary-pay');
-    summaryPay.innerHTML = 'Platba: <span>' + newValue + '</span> €';
+    summaryPay.innerHTML = 'Platba: <span>' + newValue + '</span>';
 
     if(lastFinalPrice == null) lastFinalPrice = finalPrice
     if(lastPayment == null)  lastPayment = originalPrice
