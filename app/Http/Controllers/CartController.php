@@ -39,37 +39,40 @@ class CartController extends Controller
     {
         //
     }
+
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-
     public function show(Request $request)
     {
-    // $request->session()->flush();
+        
+        // get cart items of logged in user from DB
+        if(Auth::check()){
 
-         if(Auth::check()){
+            $cart = Cart::firstOrCreate([
+                'user_id' => Auth::user()->id,
+            ]);
 
-                $cart = Cart::firstOrCreate([
-                    'user_id' => Auth::user()->id,
-                ]);
+            $cartItems = $cart->cartItems;   
+        } 
 
-                $cartItems = $cart->cartItems;   
-            } 
+        // get cart items of guest from session
         else {
             $cartItems = session()->get('cartItems');
             if(!$cartItems) {
-                    session()->put('cartItems', []);
-                    $cartItems = session()->get('cartItems');
-                }
+                session()->put('cartItems', []);
+                $cartItems = [];
             }
+        }
+
+        // count price of cart items 
         $final_price = 0;
 
         foreach($cartItems as $item){
-         $final_price = $final_price + $item->amount*$item->productDesign->product->price;
+            $final_price = $final_price + $item->amount*$item->productDesign->product->price;
         }
             
         return view('templates.cart')
@@ -77,81 +80,94 @@ class CartController extends Controller
             ->with('final_price', $final_price);
     }
 
+
     public function delivery(Request $request)
     {
-        $pay_id = $request->session()->get('pay');
+        // get selected payment and transport option
+        $pay_id = $request->session()->get('payment');
         $transport_id = $request->session()->get('transport');
 
+        // if user hasn't selected yet, select default
         if(!$transport_id) {
             session(['transport' => '1']);
             $transport_id = $request->session()->get('transport');
         }
 
         if(!$pay_id) {
-            session(['pay' => '1']);
-            $pay_id = $request->session()->get('pay');
+            session(['payment' => '1']);
+            $pay_id = $request->session()->get('payment');
         }
 
+        // get records of selected transport and payment from DB
         $transport = Transport::find($transport_id);
         $payment = Payment::find($pay_id);
 
+        // get cart items of logged in user from DB
+        if(Auth::check()){
+            $cart = Auth::user()->cart->first();
+            $cartItems = $cart->cartItems;   
+        } 
 
-            if(Auth::check()){
-                $user = Auth::user();
-                $cart = $user->cart->first();
-                $cartItems = $cart->cartItems;   
-            } 
-            else {
-                $cartItems = $request->session()->get('cartItems');
-            }
+        // get cart items of guest from session
+        else {
+            $cartItems = $request->session()->get('cartItems');
+        }
 
-            $final_price = 0;
+        // count price of order
+        $final_price = 0;
 
-            foreach($cartItems as $item){
+        foreach($cartItems as $item){
             $final_price = $final_price + $item->amount*$item->productDesign->product->price;
-            }
+        }
 
+        $final_price += $transport->price + $payment->price;
+
+        $transports = Transport::all();
+        $payments = Payment::all();
 
         return view('templates.cart2')
-        ->with('transport', $transport)
-        ->with('payment', $payment)
-        ->with('final_price', $final_price);
+            ->with('transport', $transport)
+            ->with('payment', $payment)
+            ->with('final_price', $final_price)
+            ->with('transports', $transports)
+            ->with('payments', $payments);
     }
 
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
     public function update(Request $request, $id) {
         
+        // get new quantity of cart item
         $new_quantity = $request->post('quantity-input');
 
+        // find requested cart item of logged user in DB and update it
         if(Auth::check()){
-
-            $user = Auth::user();
-            $cartItems = $user->cart->first()->cartItems;   
+            $cartItems = Auth::user()->cart->first()->cartItems;   
             CartItem::where('id',$id)->update(['amount'=>$new_quantity]);
-
         } 
-         else {
-             $cartItems = session()->get('cartItems');
-             session()->forget('cartItems');
+
+        // find requested cart item of guest in session and update it
+        else {
+            $cartItems = session()->get('cartItems');
+            session()->forget('cartItems');
                         
-             foreach ($cartItems as $key => &$item) {
+            foreach ($cartItems as $key => &$item) {
 
-                 if ($key == $id) {
-
+                if ($key == $id) {
                     $cartItems[$key]['amount'] = $new_quantity;
-                 break;}
+                    break;
                 }
+            }
 
-             session()->put('cartItems',$cartItems);      
+            session()->put('cartItems',$cartItems);      
         }
+
+
         return redirect()->action([CartController::class, 'show']);
+    }
+
+    public function login() {
+        session(['cart' => TRUE]);
+
+        return redirect()->to('/login');
     }
 }

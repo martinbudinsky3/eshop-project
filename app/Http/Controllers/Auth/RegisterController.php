@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use \Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -9,6 +10,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use App\Models\Cart;
+use App\Models\CartItem;
 
 
 class RegisterController extends Controller
@@ -31,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    //protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -74,5 +77,33 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
         ]);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        if ($request->session()->has('cart')) {
+            session()->forget('cart');
+
+            // create new cart in DB
+            $cart = Cart::create([
+                'user_id' => $user->id,
+            ]);
+
+            // copy cart items from session to DB
+            $cartItems = session()->get('cartItems');
+            foreach($cartItems as $cartItem) {
+                CartItem::create([
+                    'product_design_id' => $cartItem->product_design_id,
+                    'amount' => $cartItem->amount,
+                    'cart_id' => $cartItem->cart_id,
+                ]); 
+            }
+
+            session()->forget('cartItems');
+
+            return redirect('/cart/data');
+        }
+
+        return redirect('/');
     }
 }

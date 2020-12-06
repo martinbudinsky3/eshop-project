@@ -1,7 +1,5 @@
-.summary-price{
-    margin-left: 50%;
+.summary-price {
     font-size: x-large;
-    font-weight: bold;
 }
 
 .item{
@@ -12,32 +10,28 @@
 }
 
 img.img-akt{  
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    
+    max-width: 200px;    
 }
+
 .item-description,label{
     font-style: italic;
     font-size: larger;
 }
 
 .final-price{
-    float: right;
     font-size: x-large;
 }
+
 .edit-item{
-    min-width: 25px;
-    display: inline-block;
-    max-width: 70px;
-    width: 8.5vw;
+    max-width: 40px;
 }
+
 button.input-btn {
     padding-bottom: 0.25%;
     padding-top: 0.25%;
     vertical-align: top;
+    min-width: 35px;
 }
-
 
 .button{
     display: inline-block;
@@ -50,11 +44,28 @@ button.input-btn {
     width: 100%;
 }
 
-#quantity-input-box button{
-    padding: 0;
-    width: 10%;
-}
-
 #quantity-input-box input{
     width: 50%;
+}
+
+#quantity-submit {
+    margin-left: 40px;
+}
+
+@media (min-width: 576px) {
+
+    .edit-item{
+        max-width: 50px;
+    }
+
+    #quantity-submit {
+        margin-left: 130px;
+    }
+}
+
+@media (min-width: 767px) {
+
+    #quantity-submit {
+        margin-left: 90px;
+    }
 }

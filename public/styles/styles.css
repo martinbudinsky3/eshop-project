@@ -200,10 +200,6 @@ select, select:focus, input, input:focus {
 
 /** header **/
 
-#page-header {
-
-}
-
 .header-icons {
     display: flex;
     flex-direction: row-reverse;

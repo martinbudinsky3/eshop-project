@@ -33,7 +33,7 @@
                 <div class="row item">
                     <div class="col-xs-10  col-sm-6 col-md-5 col-lg-5 register-box">
                         <p><strong>Máte už v nás konto? Ušetrite čas a prihláste sa.</strong></p>
-                        <button class="login-button" onClick="window.location='/login';"
+                        <button class="login-button" onClick="window.location='/cart/login';"
                             type="button">PRIHLÁSENIE</button>
                     </div>
                 </div>
@@ -52,18 +52,18 @@
                     <div class="form-group">
                         <label for="name">Meno a priezvisko</label>
                         <input type="text" class="text-input form-control" id="name" name="name" placeholder="meno a priezvisko"
-                         value = {{ (empty($data)) ? "" : $data['name']}}>
+                         value = {{ (empty($data)) ? "" : $data['name'] }}>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="text-input form-control" id="email" name="email" placeholder="napr. example@mail.com"
-                         value = {{ (empty($data)) ? "" : $data['email']}}>
+                         value = {{ (empty($data)) ? "" : $data['email'] }}>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Telefónne číslo</label>
                         <input type="tel" class="text-input form-control" id="phone" name="phone" placeholder="+421xxxxxxxxx"
-                        value = {{ (empty($data)) ? "" : $data['phone']}}>
+                        value = {{ (empty($data)) ? "" : $data['phone'] }}>
 
                     </div>
 
@@ -114,14 +114,14 @@
 
             <hr>
             <div class="container summary">
-                <p class="summary-cart"><span>Hodnota tovaru: </span>{{$items_price}} €</p>
-                <p class="summary-cart"><span>Platba: </span>{{$payment_price}} €</p>
-                <p class="summary-pay"><span>Doprava: </span>{{$transport_price}} €</p>
-                <p class="summary-price"><span>CENA SPOLU: </span>{{$final_price}} €</p>
-
-                <a href="/cart/delivery" class="back-link">Späť</a>
+                <p class="summary-cart">Hodnota tovaru: <span>{{ $items_price }} €</span></p>
+                <p class="summary-cart">Platba: <span>{{ $payment_price }} €</span></p>
+                <p class="summary-pay">Doprava: <span>{{ $transport_price }} €</span></p>
+                <p class="summary-price">CENA SPOLU: <span>{{ $final_price }} €</span></p>
                
-                <button class="submit-button" type="submit" form="delivery-form">Odoslať</button>
+                <button class="submit-button mb-3" type="submit" form="delivery-form">Odoslať</button>
+                <a href="/cart/delivery" class="back-link float-left">Späť</a>
+
             </div>
         </section>
     </main>

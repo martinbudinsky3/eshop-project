@@ -31,13 +31,13 @@ Route::get('/cart/data/', 'OrderController@create');
 
 Route::get('/cart/sent', 'OrderController@store');
 
-Route::post('/cart/delivery', 'CartController@delivery');
-
 Route::get('/cart/delivery', 'CartController@delivery');
 
 Route::post('/cart-item', 'CartItemController@store');
 
 Route::delete('/cart-delete/{item}', 'CartItemController@destroy');
+
+Route::get('/cart/login', 'CartController@login');
 
 Route::get('products/list/{page}', 'ProductController@list');
 
