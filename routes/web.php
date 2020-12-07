@@ -49,4 +49,10 @@ Route::get('products/{product}/edit', 'ProductController@edit');
 
 Route::put('products/{product}', 'ProductController@update');
 
+Route::get('/brand', 'BrandController@index');
+
+Route::get('/color', 'ColorController@index');
+
+Route::get('/size', 'SizeController@index');
+
 Auth::routes();
