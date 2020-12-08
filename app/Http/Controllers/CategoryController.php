@@ -24,7 +24,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $parentCategories = Category::with('childCategories')->doesnthave('parentCategories')->get();
+
+        return response()->json($parentCategories);
     }
 
     /**

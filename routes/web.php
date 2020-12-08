@@ -23,6 +23,8 @@ Route::get('/product-detail/{product}', 'ProductController@show');
 
 Route::get('category/{category}', 'CategoryController@show');
 
+Route::get('category', 'CategoryController@index');
+
 Route::get('/cart', 'CartController@show');
 
 Route::put('/cart-update/{id}', 'CartController@update');
