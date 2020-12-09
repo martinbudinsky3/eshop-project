@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductDesign;
+use App\Models\ProductCategory;
 use App\Traits\ProductsTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -126,9 +127,35 @@ class ProductController extends Controller
         ]);
          */
 
-        $product = Product::create(['name' => $request->name, 'description' => $request->description]);
+        $productDesigns = $request->product_designs;
+
+        DB::transaction(function() use ($productDesigns, $request, &$product) {
+            $product = Product::create([
+                        'name' => $request->name,
+                        'description' => $request->description,
+                        'price' => $request->price,
+                        'brand_id' =>  $request->brand_id,
+                        'material' => $request->material
+                    ]);
+
+            foreach($productDesigns as $productDesign) {
+                ProductDesign::create([
+                    'color_id' => $productDesign['color']['id'],
+                    'size' => $productDesign['size'],
+                    'quantity' => $productDesign['quantity'],
+                    'product_id' => $product->id
+                ]);
+            }
+
+            ProductCategory::create([
+                'product_id' => $product->id,
+                'category_id' => $request->category_id
+            ]);
+
+        });
 
         return response()->json(['id' => $product->id]);
+
     }
 
     /**
@@ -184,7 +211,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('categories.parentCategories', 'productDesigns.color', 'brand')->find($id);
         
         return response()->json($product);
     }
@@ -205,10 +232,56 @@ class ProductController extends Controller
         'description' => 'required',
         ]);
          */
+        
+        Log::debug($request);
+        // update product
+        
+        $product = Product::find($id);
 
         $product->name = $request->name;
         $product->description = $request->description;
+        $product->price = $request->price;
+        $product->brand_id = $request->brand_id;
+        $product->material = $request->material;
+        
         $product->save();
+
+        // destroy deleted product designs
+        $deletedProductDesigns = $request->deleted_designs;
+        foreach($deletedProductDesigns as $deletedProductDesign) {
+            Log::debug($deletedProductDesign['id']);
+
+            $designToDelete = ProductDesign::find($deletedProductDesign['id']);
+            $designToDelete->delete();
+        }
+
+        // update or create product designs
+        $productDesigns = $request->product_designs;
+        foreach($productDesigns as $productDesign) {
+            if(!isset($productDesign['id'])) { // create product design
+
+                ProductDesign::create([
+                    'color_id' => $productDesign['color']['id'],
+                    'size' => $productDesign['size'],
+                    'quantity' => $productDesign['quantity'],
+                    'product_id' => $product->id
+                ]);
+            } else { // update existing product design
+                $oldProductDesign = ProductDesign::find($productDesign['id']);
+                $oldProductDesign->color_id = $productDesign['color']['id'];
+                $oldProductDesign->size = $productDesign['size'];
+                $oldProductDesign->quantity = $productDesign['quantity'];
+
+                $oldProductDesign->save();
+            }
+        }
+        
+        // update product category
+        $oldProductCategory = ProductCategory::where('product_id', $id)->first();
+        $oldProductCategory->category_id = $request->category_id;
+
+        $oldProductCategory->save();
+
     }
 
     /**

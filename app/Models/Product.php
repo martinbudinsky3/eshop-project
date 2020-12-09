@@ -9,6 +9,8 @@ class Product extends Model
 {
     
     use HasFactory;
+
+    protected $fillable = ['name', 'price', 'material', 'brand_id','description'];
     
     public function cartItems(){
         return $this->hasMany('App\Models\CartItem');

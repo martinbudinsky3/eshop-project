@@ -9,6 +9,8 @@ class ProductDesign extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['color_id', 'size', 'quantity', 'product_id'];
+
     public function cart_item()
     {
         return $this->hasOne('App\Models\CartItem');

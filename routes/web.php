@@ -57,4 +57,6 @@ Route::get('/color', 'ColorController@index');
 
 Route::get('/size', 'SizeController@index');
 
+Route::post('/image', 'ImageController@store');
+
 Auth::routes();
