@@ -47,50 +47,65 @@
 
 
                 <form action="/cart/sent" id="delivery-form" method="get">
-
+                           
                     <div class="form-group">
                         <label for="name">Meno a priezvisko</label>
-                        <input type="text" class="text-input form-control" id="name" name="name" placeholder="meno a priezvisko"
+                        <input type="text" class="text-input form-control" id="name" name="name" required placeholder="meno a priezvisko"
                          value = {{ (empty($data)) ? "" : $data['name'] }}>
+
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="text-input form-control" id="email" name="email" placeholder="napr. example@mail.com"
+                        <input type="email" class="text-input form-control  @error('email') is-invalid @enderror"  required
+                                autocomplete="email" id="email" name="email" placeholder="napr. example@mail.com"
                          value = {{ (empty($data)) ? "" : $data['email'] }}>
+
+                         @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Telefónne číslo</label>
-                        <input type="tel" class="text-input form-control" id="phone" name="phone" placeholder="+421xxxxxxxxx"
+                        <input type="tel" class="text-input form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder="+421xxxxxxxxx"
                         value = {{ (empty($data)) ? "" : $data['phone'] }}>
+                            
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
 
                     </div>
 
                     <div class="form-row">
                         <div class="col-sm-8 col-md-8 form-group">
                             <label for="street">Ulica</label>
-                            <input type="text" class="text-input form-control" id="street" name="street" placeholder="ulica">
+                            <input type="text" class="text-input form-control" id="street" name="street" required placeholder="ulica">
                         </div>
                         <div class="col-sm-4 col-md-4 form-group">
                             <label for="numb">Číslo domu</label>
-                            <input type="text" class="text-input form-control" id="numb" name="numb" placeholder="číslo domu">
+                            <input type="text" class="text-input form-control" id="numb" name="numb" required placeholder="číslo domu">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="col-sm-8 col-md-8 form-group ">
                             <label for="town">Mesto</label>
-                            <input type="text" class="text-input form-control" id="town" name="town" placeholder="mesto">
+                            <input type="text" class="text-input form-control" id="town" name="town" required placeholder="mesto">
                         </div>
                         <div class="col-sm-4 col-md-4 form-group">
                             <label for="zip">PSČ</label>
-                            <input type="text" class="text-input form-control" id="zip" name="zip" placeholder="napr. 96801">
+                            <input type="text" class="text-input form-control" id="zip" name="zip" required placeholder="napr. 96801">
                         </div>
                     </div>
 
                     <div class="form-group ">
                         <label for="country">Krajina</label>
-                        <input type="text" class="text-input form-control" id="country" name="country" placeholder="krajina">
+                        <input type="text" class="text-input form-control" id="country" name="country" required placeholder="krajina">
                     </div>
 
 
@@ -102,7 +117,7 @@
                         </div>
                         <div class="form-check">
 
-                            <input class="form-check-input" type="checkbox" id="conditions-check">
+                            <input class="form-check-input" type="checkbox" required id="conditions-check">
                             <label class="form-check-label" for="conditions-check">
                                 Súhlasím s <a href="">obchodnými podmienkami spoločnosti. </a></label>
                         </div>
