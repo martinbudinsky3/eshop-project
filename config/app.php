@@ -174,6 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -229,7 +230,7 @@ return [
         'Cart' => App\Models\Cart::class,
         'Color' => App\Models\Color::class,
         'ProductDesign' => App\Models\ProductDesign::class,
-
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

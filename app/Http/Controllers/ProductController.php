@@ -45,8 +45,6 @@ class ProductController extends Controller
             return $product->id;
         });
 
-        Log::debug(sizeof($filteredProducts));
-
         // query filtered products
         $products = Product::whereIn('id', $filteredProductsIds);
 
@@ -66,6 +64,8 @@ class ProductController extends Controller
     }
 
     function list($page) {
+        Log::debug("List");
+
         // get rowsPerPage from query parameters (after ?), if not set => 5
         $rowsPerPage = request('rowsPerPage', 5);
 
@@ -77,26 +77,27 @@ class ProductController extends Controller
         // convert descending true|false -> desc|asc
         $descending = $descendingBool === 'true' ? 'desc' : 'asc';
 
-        // pagination
-        // IFF rowsPerPage == 0, load ALL rows
-        if ($rowsPerPage == 0) {
-            // load all products from DB
-            $products = DB::table('products')
-                ->orderBy($sortBy, $descending)
-                ->get();
-        } else {
+        $filter = request('filter', '');
+        
+        // filtering based on search term
+        $filteredProducts = Product::orderBy($sortBy, $descending)->get()->filter(function ($product) use ($filter) {
+            if (Str::is('*' . $this->transformString($filter) . '*', $this->transformString($product->name))) {
+                return $product;
+            };
+        });
+
+        if ($rowsPerPage > 0) {
+
             $offset = ($page - 1) * $rowsPerPage;
 
-            // load products from DB
-            $products = DB::table('products')
-                ->orderBy($sortBy, $descending)
-                ->offset($offset)
-                ->limit($rowsPerPage)
-                ->get();
-        }
+            $products = $filteredProducts->slice($offset, $rowsPerPage)->values();
 
-        // total number of rows -> for quasar data table pagination
-        $rowsNumber = DB::table('products')->count();
+            $rowsNumber = count($products);
+        } else {
+            $products = $filteredProducts;
+        }
+        
+        $rowsNumber = count($filteredProducts);
 
         return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
     }
@@ -156,6 +157,7 @@ class ProductController extends Controller
 
         return response()->json(['id' => $product->id]);
 
+        // return response()->json(['id' => 1]);
     }
 
     /**
@@ -211,6 +213,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+
         $product = Product::with('categories.parentCategories', 'productDesigns.color', 'brand')->find($id);
         
         return response()->json($product);
@@ -226,14 +229,15 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         // validations and error handling is up to you!!! ;)
-        /*
-        $request->validate([
-        'name' => 'required|min:3',
-        'description' => 'required',
-        ]);
-         */
+
+        /*$request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required'|'min:0',
+            'brand_id' => 'required',
+            'material' => 'required'
+        ]);*/
         
-        Log::debug($request);
         // update product
         
         $product = Product::find($id);
@@ -249,7 +253,6 @@ class ProductController extends Controller
         // destroy deleted product designs
         $deletedProductDesigns = $request->deleted_designs;
         foreach($deletedProductDesigns as $deletedProductDesign) {
-            Log::debug($deletedProductDesign['id']);
 
             $designToDelete = ProductDesign::find($deletedProductDesign['id']);
             $designToDelete->delete();
