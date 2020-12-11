@@ -12,11 +12,7 @@ class AdminController extends Controller
     //
         public function index()
         {
-
-        return redirect('https://stackoverflow.com/');
-
-
-
+            return view('admin');
         }
 
         public function __construct()
