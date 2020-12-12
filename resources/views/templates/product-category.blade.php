@@ -113,6 +113,7 @@
                             </button>
                             <div id="top-filter-menu" class="filter d-none d-md-none">
                                 <form method="GET" action="{{ url()->current().'?'.http_build_query(request()->except('page')) }}">
+                                    @csrf
                                     <fieldset class="filter-category">
                                         <legend>
                                             <h4>Farba</h4>

@@ -31,6 +31,7 @@
         <section>
             <h3>Výber dopravy a platby</h3>
             <form action="/cart/data/"  id="cart-form" class="row item" method="get">
+                @csrf
                 <div class="col-xs-10  col-sm-6 col-md-5 col-lg-5 bloky">
                     <fieldset>
                         <legend class="select-title">

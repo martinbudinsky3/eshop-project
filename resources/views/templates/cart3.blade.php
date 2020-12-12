@@ -47,7 +47,7 @@
 
 
                 <form action="/cart/sent" id="delivery-form" method="get">
-                           
+                    @csrf
                     <div class="form-group">
                         <label for="name">Meno a priezvisko</label>
                         <input type="text" class="text-input form-control" id="name" name="name" required placeholder="meno a priezvisko"
