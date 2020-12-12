@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Image;
+
 
 class ProductController extends Controller
 {
@@ -45,8 +48,6 @@ class ProductController extends Controller
             return $product->id;
         });
 
-        Log::debug(sizeof($filteredProducts));
-
         // query filtered products
         $products = Product::whereIn('id', $filteredProductsIds);
 
@@ -66,6 +67,7 @@ class ProductController extends Controller
     }
 
     function list($page) {
+
         // get rowsPerPage from query parameters (after ?), if not set => 5
         $rowsPerPage = request('rowsPerPage', 5);
 
@@ -77,26 +79,27 @@ class ProductController extends Controller
         // convert descending true|false -> desc|asc
         $descending = $descendingBool === 'true' ? 'desc' : 'asc';
 
-        // pagination
-        // IFF rowsPerPage == 0, load ALL rows
-        if ($rowsPerPage == 0) {
-            // load all products from DB
-            $products = DB::table('products')
-                ->orderBy($sortBy, $descending)
-                ->get();
-        } else {
+        $filter = request('filter', '');
+        
+        // filtering based on search term
+        $filteredProducts = Product::orderBy($sortBy, $descending)->get()->filter(function ($product) use ($filter) {
+            if (Str::is('*' . $this->transformString($filter) . '*', $this->transformString($product->name))) {
+                return $product;
+            };
+        });
+
+        if ($rowsPerPage > 0) {
+
             $offset = ($page - 1) * $rowsPerPage;
 
-            // load products from DB
-            $products = DB::table('products')
-                ->orderBy($sortBy, $descending)
-                ->offset($offset)
-                ->limit($rowsPerPage)
-                ->get();
-        }
+            $products = $filteredProducts->slice($offset, $rowsPerPage)->values();
 
-        // total number of rows -> for quasar data table pagination
-        $rowsNumber = DB::table('products')->count();
+            $rowsNumber = count($products);
+        } else {
+            $products = $filteredProducts;
+        }
+        
+        $rowsNumber = count($filteredProducts);
 
         return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
     }
@@ -119,13 +122,18 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // validations and error handling is up to you!!! ;)
-        /*
+        // validation      
         $request->validate([
-        'name' => 'required|min:3',
-        'description' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'brand_id' => 'required',
+            'material' => 'required',
+            'product_designs' => 'required|array',
+            'product_designs.*.color' => 'required|array',
+            'product_designs.*.size' => 'required',
+            'product_designs.*.quantity' => 'required'
         ]);
-         */
 
         $productDesigns = $request->product_designs;
 
@@ -174,6 +182,10 @@ class ProductController extends Controller
             $cat->where('categories.id', '=', $product->categories->first()->id);
         })->where('id', '!=', $id)->take(12)->get();
 
+        if(sizeof($similar_products) < 12) {
+            $similar_products = Product::where('id', '!=', $id)->inRandomOrder()->take(12)->get();
+        }
+
         // get all unique colors for given product
         $liste_color = $this->getUniqueColors($product);
 
@@ -211,6 +223,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+
         $product = Product::with('categories.parentCategories', 'productDesigns.color', 'brand')->find($id);
         
         return response()->json($product);
@@ -225,15 +238,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // validations and error handling is up to you!!! ;)
-        /*
+        // validation
         $request->validate([
-        'name' => 'required|min:3',
-        'description' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'brand_id' => 'required',
+            'material' => 'required',
+            'product_designs' => 'required|array',
+            'product_designs.*.color' => 'required|array',
+            'product_designs.*.size' => 'required',
+            'product_designs.*.quantity' => 'required'
         ]);
-         */
         
-        Log::debug($request);
         // update product
         
         $product = Product::find($id);
@@ -249,7 +266,6 @@ class ProductController extends Controller
         // destroy deleted product designs
         $deletedProductDesigns = $request->deleted_designs;
         foreach($deletedProductDesigns as $deletedProductDesign) {
-            Log::debug($deletedProductDesign['id']);
 
             $designToDelete = ProductDesign::find($deletedProductDesign['id']);
             $designToDelete->delete();
@@ -282,6 +298,9 @@ class ProductController extends Controller
 
         $oldProductCategory->save();
 
+        // delete images
+        $deletedImages = $request->deleted_images;
+        $this->deleteImages($deletedImages);
     }
 
     /**
@@ -292,6 +311,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        // delete images
+        $deletedImages = Image::where('product_id', $id)->get();
+        $this->deleteImages($deletedImages);
+
         $product = Product::find($id);
 
         $product->delete();
@@ -324,4 +347,18 @@ class ProductController extends Controller
         ksort($data_sort_arr);
         return array_values($data_sort_arr);
     }
+
+    public function deleteImages($deletedImages) {
+        foreach($deletedImages as $deletedImage) {
+
+            // delete physically
+            $directory = dirname($deletedImage['path']);
+
+            Storage::deleteDirectory($directory);
+
+            // delete from db
+            Image::where('id', $deletedImage['id'])->delete();
+        }
+    }
+
 }

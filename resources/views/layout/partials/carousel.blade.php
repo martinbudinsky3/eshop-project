@@ -8,7 +8,7 @@
                     <div class="row">
                         @for($j = 0; $j < 4; $j++)
                         <div class="col-lg-3 ">
-                            <a href="product-detail/{{ $data[$i*4+$j]->id }}">
+                            <a href="/product-detail/{{ $data[$i*4+$j]->id }}">
                                 <img class="d-block w-100 img-responsive" srcset="{{asset($data[$i*4+$j]->images->first()->path.'_300x420.jpg')}} 300w,
                                     {{asset($data[$i*4+$j]->images->first()->path.'_520x728.jpg')}} 520w,
                                     {{asset($data[$i*4+$j]->images->first()->path.'_640x896.jpg')}} 640w" sizes="(max-width: 992px) 300px,
@@ -44,7 +44,7 @@
                     <div class="row">
                         @for($j = 0; $j < 3; $j++)
                         <div class="col-md-4 ">
-                            <a href="product-detail/{{ $data[$i*3+$j]->id }}">
+                            <a href="/product-detail/{{ $data[$i*3+$j]->id }}">
                                 <img class="d-block w-100 img-responsive" srcset="{{asset($data[$i*3+$j]->images->first()->path.'_300x420.jpg')}} 300w,
                                     {{asset($data[$i*3+$j]->images->first()->path.'_520x728.jpg')}} 520w,
                                     {{asset($data[$i*3+$j]->images->first()->path.'_640x896.jpg')}} 640w" sizes="(max-width: 992px) 300px,
@@ -82,7 +82,7 @@
                     <div class="row">
                         @for($j = 0; $j < 2; $j++)
                         <div class="col-6">
-                            <a href="product-detail/{{ $data[$i*2+$j]->id }}">
+                            <a href="/product-detail/{{ $data[$i*2+$j]->id }}">
                                 <img class="d-block w-100 img-responsive" srcset="{{asset($data[$i*2+$j]->images->first()->path.'_300x420.jpg')}} 300w,
                                     {{asset($data[$i*2+$j]->images->first()->path.'_520x728.jpg')}} 520w,
                                     {{asset($data[$i*2+$j]->images->first()->path.'_640x896.jpg')}} 640w" sizes="(max-width: 992px) 300px,

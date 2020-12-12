@@ -70,9 +70,14 @@ class CategoryController extends Controller
                 ->with('search', FALSE);
         }
         
-        $recommendedProducts = Product::whereHas('categories', function ($cat) use ($id) {
-            $cat->where('categories.id', $id);
-        })->inRandomOrder()->take(12)->get();
+        if(sizeof($products->get()) >= 12) {
+            $recommendedProducts = Product::whereHas('categories', function ($cat) use ($id) {
+                $cat->where('categories.id', $id);
+            })->inRandomOrder()->take(12)->get();
+        } else {
+            $recommendedProducts = Product::inRandomOrder()->take(12)->get();
+        }
+        
 
         // get unique products attributes
         $colors = $this->getUniqueColors($products->get());

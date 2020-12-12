@@ -119,6 +119,14 @@ hr {
     font-weight: bold;
 }
 
+.input-btn {
+    padding-bottom: 0.25%;
+    padding-top: 0.25%;
+    vertical-align: top;
+    min-width: 35px;
+    border: 0.5px solid #767676
+}
+
 .horizontal-reverse {
     display: flex;
     flex-direction: row-reverse;

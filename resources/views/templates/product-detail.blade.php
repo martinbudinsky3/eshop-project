@@ -114,21 +114,31 @@
 
                         <div id="color-input-box">
                             <label for="color_selector">Farba:</label>
-                                <select name="color" id="color_selector" onChange="showProductInColor(this)">
+                                <select name="color" id="color_selector" class="@error('color') is-invalid @enderror" onChange="showProductInColor(this)">
                                     @foreach ($liste_color as $color)
                                     <option value="{{$color->id}}" {{ (request()->get('color') == $color->id) ? 'selected' : ''}}> {{ $color->name }}</option>
                                     @endforeach
                                 </select>
+                            @error('color')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div id="size-input-box">
                             <label for="size_selector">Veľkosť:</label>
-                            <select name="size" id="size_selector">
+                            <select name="size" id="size_selector" class="@error('size') is-invalid @enderror">
                                 @foreach ($liste_size as $size)
                                 <option value="{{$size->size}}"> {{ $size->size }}</option>
                                 @endforeach
                             </select>
                             <a href="">Veľkostná tabuľka</a>
+                            @error('size')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div id="quantity-input-box">
@@ -136,10 +146,15 @@
                             <div>
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
                                     onclick="decrementNumberValue(this)">-</button>
-                                <input type="number" name="amount" id="quantity-input" value="1" min="1">
+                                <input type="number" name="amount" id="quantity-input" class="@error('amount') is-invalid @enderror" value="1" min="1">
                                 <button type="button" class="btn input-btn d-inline-block d-md-none"
                                     onclick="incrementNumberValue(this)">+</button>
                             </div>
+                            @error('amount')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <button type="button" id="add-to-cart" data-toggle="modal"
                             data-target="#add-to-cart-modal">Pridať do košíka</button>

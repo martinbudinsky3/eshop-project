@@ -95,3 +95,4 @@ storage/*.key
 .editorconfig
 .styleci.yml
 artisan
+node_modules
