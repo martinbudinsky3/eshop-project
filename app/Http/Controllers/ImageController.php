@@ -34,7 +34,6 @@ class ImageController extends Controller
     public function store(Request $request)
     {
 
-        Log::debug($request);
         $request->validate([
             'productId' => 'required',
             'image' => 'required|array'

@@ -67,7 +67,6 @@ class ProductController extends Controller
     }
 
     function list($page) {
-        Log::debug("List");
 
         // get rowsPerPage from query parameters (after ?), if not set => 5
         $rowsPerPage = request('rowsPerPage', 5);
@@ -136,7 +135,6 @@ class ProductController extends Controller
             'product_designs.*.quantity' => 'required'
         ]);
 
-        Log::debug($request);
         $productDesigns = $request->product_designs;
 
         DB::transaction(function() use ($productDesigns, $request, &$product) {
@@ -166,7 +164,6 @@ class ProductController extends Controller
 
         return response()->json(['id' => $product->id]);
 
-        // return response()->json(['id' => 1]);
     }
 
     /**
@@ -353,7 +350,6 @@ class ProductController extends Controller
 
     public function deleteImages($deletedImages) {
         foreach($deletedImages as $deletedImage) {
-            Log::debug($deletedImage);
 
             // delete physically
             $directory = dirname($deletedImage['path']);

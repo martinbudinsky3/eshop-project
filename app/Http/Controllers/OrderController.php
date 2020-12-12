@@ -83,7 +83,6 @@ class OrderController extends Controller
         $final_price = $items_price + $payment_price + $transport_price;
 
         session(['final_price' => $final_price]);
-        Log::debug($request->session()->get('transport'));
 
         return view('templates.cart3')
             ->with('payment_price', $payment_price)
@@ -95,8 +94,6 @@ class OrderController extends Controller
 
     public function store(Request $request){
  
-        Log::debug($request->session()->get('transport'));
-
         // get cart items from logged user
         $cartItems = [];
         if(Auth::check()){
