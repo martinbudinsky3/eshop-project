@@ -72,8 +72,10 @@ class CartController extends Controller
         $final_price = 0;
 
         foreach($cartItems as $item){
-            $final_price = $final_price + $item->amount*$item->productDesign->product->price;
+            $final_price = $final_price + $item->amount * $item->productDesign->product->price;
         }
+
+        Log::debug($final_price);
             
         return view('templates.cart')
             ->with('cartItems', $cartItems)

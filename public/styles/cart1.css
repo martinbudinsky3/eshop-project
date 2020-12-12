@@ -26,13 +26,6 @@ img.img-akt{
     max-width: 40px;
 }
 
-button.input-btn {
-    padding-bottom: 0.25%;
-    padding-top: 0.25%;
-    vertical-align: top;
-    min-width: 35px;
-}
-
 .button{
     display: inline-block;
     background-color: antiquewhite;

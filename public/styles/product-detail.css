@@ -87,19 +87,8 @@ input {
     width: 100%;
 }
 
-#quantity-input-box button{
-    padding: 0;
-    width: 10%;
-}
-
 #quantity-input-box input{
-    width: 76%;
-}
-
-.input-btn {
-    padding-bottom: 0.25%;
-    padding-top: 0.25%;
-    vertical-align: top;
+    width: 65%;
 }
 
 /** modal window - after add to cart **/
