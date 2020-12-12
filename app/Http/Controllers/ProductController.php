@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Image;
+
 
 class ProductController extends Controller
 {
@@ -240,7 +243,7 @@ class ProductController extends Controller
         
         // update product
         
-        $product = Product::find($id);
+        /* $product = Product::find($id);
 
         $product->name = $request->name;
         $product->description = $request->description;
@@ -283,8 +286,22 @@ class ProductController extends Controller
         $oldProductCategory = ProductCategory::where('product_id', $id)->first();
         $oldProductCategory->category_id = $request->category_id;
 
-        $oldProductCategory->save();
+        $oldProductCategory->save(); */
 
+        // delete images
+        $deletedImages = $request->deleted_images;
+
+        foreach($deletedImages as $deletedImage) {
+            Log::debug($deletedImage);
+
+            // delete physically
+            $directory = dirname($deletedImage['path']);
+
+            Storage::deleteDirectory($directory);
+
+            // delete from db
+            Image::where('id', $deletedImage['id'])->delete();
+        }
     }
 
     /**

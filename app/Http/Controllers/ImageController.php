@@ -11,11 +11,24 @@ use App\Models\Image;
 
 class ImageController extends Controller
 {
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Show images of given product
+     */
+    public function show($id) {
+        $images = Image::where('product_id', $id)->get();
+
+        foreach($images as $image) {
+            $image->path = $image->path.'_520x728.jpg';
+        }
+
+        Log::debug($images);
+
+        return response()->json($images);
+    }
+    
+    /**
+     * Upload images
      */
     public function store(Request $request)
     {
@@ -48,11 +61,11 @@ class ImageController extends Controller
 
             // save image to DB
             $productId = $request->productId;
+            $pathDB = dirname($path_lg) . '/' . $filename;
             Image::create([
                 'product_id' => $productId,
-                'path' => $path_lg,
+                'path' => $pathDB,
             ]);
         }
-
     }
 }

@@ -59,4 +59,6 @@ Route::get('/size', 'SizeController@index');
 
 Route::post('/image', 'ImageController@store');
 
+Route::get('/image/{product}', 'ImageController@show');
+
 Auth::routes();
