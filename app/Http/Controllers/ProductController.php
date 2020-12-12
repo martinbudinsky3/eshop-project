@@ -243,7 +243,7 @@ class ProductController extends Controller
         
         // update product
         
-        /* $product = Product::find($id);
+        $product = Product::find($id);
 
         $product->name = $request->name;
         $product->description = $request->description;
@@ -286,7 +286,7 @@ class ProductController extends Controller
         $oldProductCategory = ProductCategory::where('product_id', $id)->first();
         $oldProductCategory->category_id = $request->category_id;
 
-        $oldProductCategory->save(); */
+        $oldProductCategory->save();
 
         // delete images
         $deletedImages = $request->deleted_images;
