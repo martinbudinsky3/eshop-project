@@ -16,6 +16,7 @@ class ImageController extends Controller
      * Show images of given product
      */
     public function show($id) {
+
         $images = Image::where('product_id', $id)->get();
 
         foreach($images as $image) {
@@ -32,6 +33,12 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+
+        Log::debug($request);
+        $request->validate([
+            'productId' => 'required',
+            'image' => 'required|array'
+        ]);
 
         foreach($request->file('image') as $uploadedImage){
             // get image name and extension

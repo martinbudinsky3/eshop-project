@@ -123,14 +123,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // validations and error handling is up to you!!! ;)
-        /*
+        // validation      
         $request->validate([
-        'name' => 'required|min:3',
-        'description' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'brand_id' => 'required',
+            'material' => 'required',
+            'product_designs' => 'required|array',
+            'product_designs.*.color' => 'required|array',
+            'product_designs.*.size' => 'required',
+            'product_designs.*.quantity' => 'required'
         ]);
-         */
 
+        Log::debug($request);
         $productDesigns = $request->product_designs;
 
         DB::transaction(function() use ($productDesigns, $request, &$product) {
@@ -235,15 +241,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // validations and error handling is up to you!!! ;)
-
-        /*$request->validate([
+        // validation
+        $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required'|'min:0',
+            'price' => 'required',
             'brand_id' => 'required',
-            'material' => 'required'
-        ]);*/
+            'material' => 'required',
+            'product_designs' => 'required|array',
+            'product_designs.*.color' => 'required|array',
+            'product_designs.*.size' => 'required',
+            'product_designs.*.quantity' => 'required'
+        ]);
         
         // update product
         
