@@ -303,18 +303,7 @@ class ProductController extends Controller
 
         // delete images
         $deletedImages = $request->deleted_images;
-
-        foreach($deletedImages as $deletedImage) {
-            Log::debug($deletedImage);
-
-            // delete physically
-            $directory = dirname($deletedImage['path']);
-
-            Storage::deleteDirectory($directory);
-
-            // delete from db
-            Image::where('id', $deletedImage['id'])->delete();
-        }
+        $this->deleteImages($deletedImages);
     }
 
     /**
@@ -325,6 +314,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        // delete images
+        $deletedImages = Image::where('product_id', $id)->get();
+        $this->deleteImages($deletedImages);
+
         $product = Product::find($id);
 
         $product->delete();
@@ -357,4 +350,19 @@ class ProductController extends Controller
         ksort($data_sort_arr);
         return array_values($data_sort_arr);
     }
+
+    public function deleteImages($deletedImages) {
+        foreach($deletedImages as $deletedImage) {
+            Log::debug($deletedImage);
+
+            // delete physically
+            $directory = dirname($deletedImage['path']);
+
+            Storage::deleteDirectory($directory);
+
+            // delete from db
+            Image::where('id', $deletedImage['id'])->delete();
+        }
+    }
+
 }
