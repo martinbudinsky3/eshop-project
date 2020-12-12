@@ -179,6 +179,10 @@ class ProductController extends Controller
             $cat->where('categories.id', '=', $product->categories->first()->id);
         })->where('id', '!=', $id)->take(12)->get();
 
+        if(sizeof($similar_products) < 12) {
+            $similar_products = Product::where('id', '!=', $id)->inRandomOrder()->take(12)->get();
+        }
+
         // get all unique colors for given product
         $liste_color = $this->getUniqueColors($product);
 
