@@ -23,8 +23,6 @@ class ImageController extends Controller
             $image->path = $image->path.'_520x728.jpg';
         }
 
-        Log::debug($images);
-
         return response()->json($images);
     }
     

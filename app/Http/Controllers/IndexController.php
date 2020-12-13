@@ -21,9 +21,6 @@ class IndexController extends Controller
         $news = Product::orderBy('created_at', 'desc')->take(12)->get();
         $bests = Product::inRandomOrder()->take(12)->get();
 
-        Log::debug($news);
-        Log::debug($bests);
-
         return view('index')
             ->with('news', $news)
             ->with('bests', $bests);
