@@ -94,7 +94,6 @@
                             @error('conditions-check')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
-                                <!--strong>Musíte súhlasiť s obchodnými podmienkami spoločnosti.</strong-->
                             </span>
                             @enderror
 

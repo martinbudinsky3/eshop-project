@@ -93,7 +93,24 @@ class OrderController extends Controller
     }
 
     public function store(Request $request){
- 
+
+        Log::debug($request);
+        // validation
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'street' => 'required|string|max:255',
+            'town' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'numb' => 'required|string|max:15',
+            'phone' => 'required|string|max:255',
+            'zip' => 'required|string|max:15',
+        ]);
+
+        /*$request->validate([
+            'zip' => 'required|string|max:15',
+        ]);*/
+
         // get cart items from logged user
         $cartItems = [];
         if(Auth::check()){
@@ -118,7 +135,8 @@ class OrderController extends Controller
                 'town' => $request->post('town'),
                 'country' => $request->post('country'),
                 'house_number' => $request->post('numb'),
-                'phone_number' => $request->post('phone')
+                'phone_number' => $request->post('phone'),
+                'zip' => $request->post('zip')
             ]);
             
             // create order

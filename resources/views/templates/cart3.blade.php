@@ -51,19 +51,20 @@
                     <div class="form-group">
                         <label for="name">Meno a priezvisko</label>
                         <input type="text" class="text-input form-control" id="name" name="name" required placeholder="meno a priezvisko"
-                         value = {{ (empty($data)) ? "" : $data['name'] }}>
+                         value = "{{ (empty($data)) ? old('name') : $data['name'] }}">
+                         @error('name')
+                            <strong class="text-danger">{{ $message }}</strong>
+                        @enderror
 
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="text-input form-control  @error('email') is-invalid @enderror"  required
                                 autocomplete="email" id="email" name="email" placeholder="napr. example@mail.com"
-                         value = {{ (empty($data)) ? "" : $data['email'] }}>
+                         value = "{{ (empty($data)) ? old('email') : $data['email'] }}">
 
-                         @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            @error('email')
+                                <strong class="text-danger">{{ $message }}</strong>
                             @enderror
 
                     </div>
@@ -71,12 +72,10 @@
                     <div class="form-group">
                         <label for="phone">Telefónne číslo</label>
                         <input type="tel" class="text-input form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder="+421xxxxxxxxx"
-                        value = {{ (empty($data)) ? "" : $data['phone'] }}>
+                        value = "{{ (empty($data)) ? old('phone') : $data['phone'] }}">
                             
                             @error('phone')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <strong class="text-danger">{{ $message }}</strong>
                             @enderror
 
                     </div>
@@ -84,28 +83,49 @@
                     <div class="form-row">
                         <div class="col-sm-8 col-md-8 form-group">
                             <label for="street">Ulica</label>
-                            <input type="text" class="text-input form-control" id="street" name="street" required placeholder="ulica">
+                            <input type="text" class="text-input form-control" id="street" name="street" required placeholder="ulica"
+                            value="{{ old('street') }}">
+
+                            @error('street')
+                                <strong class="text-danger">{{ $message }}</strong>
+                            @enderror
                         </div>
                         <div class="col-sm-4 col-md-4 form-group">
                             <label for="numb">Číslo domu</label>
-                            <input type="text" class="text-input form-control" id="numb" name="numb" required placeholder="číslo domu">
+                            <input type="text" class="text-input form-control" id="numb" name="numb" required placeholder="číslo domu"
+                            value="{{ old('numb') }}">
+                            @error('numb')
+                                <strong class="text-danger">{{ $message }}</strong>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="col-sm-8 col-md-8 form-group ">
                             <label for="town">Mesto</label>
-                            <input type="text" class="text-input form-control" id="town" name="town" required placeholder="mesto">
+                            <input type="text" class="text-input form-control" id="town" name="town" required placeholder="mesto"
+                            value="{{ old('town') }}">
+                            @error('town')
+                                <strong class="text-danger">{{ $message }}</strong>
+                            @enderror
                         </div>
                         <div class="col-sm-4 col-md-4 form-group">
                             <label for="zip">PSČ</label>
-                            <input type="text" class="text-input form-control" id="zip" name="zip" required placeholder="napr. 96801">
+                            <input type="text" class="text-input form-control" id="zip" name="zip" required placeholder="napr. 96801"
+                            value="{{ old('zip') }}">
+                            @error('zip')
+                                <strong class="text-danger">{{ $message }}</strong>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-group ">
                         <label for="country">Krajina</label>
-                        <input type="text" class="text-input form-control" id="country" name="country" required placeholder="krajina">
+                        <input type="text" class="text-input form-control" id="country" name="country" required placeholder="krajina"
+                        value="{{ old('country') }}">
+                        @error('country')
+                            <strong class="text-danger">{{ $message }}</strong>
+                        @enderror
                     </div>
 
 
