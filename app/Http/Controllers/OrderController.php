@@ -108,35 +108,37 @@ class OrderController extends Controller
             $cartItems = $request->session()->get('cartItems');
         }
 
-        // create delivery record
-        $delivery = Delivery::create([
-            'user_id' => (!Auth::check()) ? null : Auth::user()->id,
-            'name' => $request->post('name'),
-            'email' =>$request->post('email'),
-            'street' =>$request->post('street'),
-            'town' => $request->post('town'),
-            'country' => $request->post('country'),
-            'house_number' => $request->post('numb'),
-            'phone_number' => $request->post('phone')
-        ]);
-        
-        // create order
-        $order = Order::create([
-            'user_id' =>(!Auth::check()) ? null : Auth::user()->id,
-            'delivery_id' => $delivery->id,
-            'transport_id' => $request->session()->get('transport', 1),
-            'payment_id' => $request->session()->get('payment', 1),
-            'price' => $request->session()->get('final_price'),
-        ]);
-
-        // create all cart items
-        foreach($cartItems as $item){
-           $orderitem =  OrderItem::create([
-                'product_id' => $item->productDesign->product->id,
-                'amount' => $item->amount,
-                'order_id' => $order->id,
+        DB::transaction(function() use ($request, $cartItems) {
+            // create delivery record
+            $delivery = Delivery::create([
+                'user_id' => (!Auth::check()) ? null : Auth::user()->id,
+                'name' => $request->post('name'),
+                'email' =>$request->post('email'),
+                'street' =>$request->post('street'),
+                'town' => $request->post('town'),
+                'country' => $request->post('country'),
+                'house_number' => $request->post('numb'),
+                'phone_number' => $request->post('phone')
             ]);
-        }
+            
+            // create order
+            $order = Order::create([
+                'user_id' =>(!Auth::check()) ? null : Auth::user()->id,
+                'delivery_id' => $delivery->id,
+                'transport_id' => $request->session()->get('transport', 1),
+                'payment_id' => $request->session()->get('payment', 1),
+                'price' => $request->session()->get('final_price'),
+            ]);
+
+            // create all cart items
+            foreach($cartItems as $item) {
+                $orderitem =  OrderItem::create([
+                    'product_id' => $item->productDesign->product->id,
+                    'amount' => $item->amount,
+                    'order_id' => $order->id,
+                ]);
+            }
+        });
 
         // delete cart items, payment and delivery info from session
         session()->forget('cartItems');

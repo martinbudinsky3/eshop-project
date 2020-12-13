@@ -74,8 +74,6 @@ class CartController extends Controller
         foreach($cartItems as $item){
             $final_price = $final_price + $item->amount * $item->productDesign->product->price;
         }
-
-        Log::debug($final_price);
             
         return view('templates.cart')
             ->with('cartItems', $cartItems)
@@ -143,7 +141,6 @@ class CartController extends Controller
 
         // find requested cart item of logged user in DB and update it
         if(Auth::check()){
-            $cartItems = Auth::user()->cart->first()->cartItems;   
             CartItem::where('id',$id)->update(['amount'=>$new_quantity]);
         } 
 
@@ -167,6 +164,7 @@ class CartController extends Controller
         return redirect()->action([CartController::class, 'show']);
     }
 
+    // login from cart
     public function login() {
         session(['cart' => TRUE]);
 

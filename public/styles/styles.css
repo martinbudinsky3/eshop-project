@@ -37,6 +37,10 @@ hr {
     height: auto;
 }
 
+.error-message {
+    font-size: 1.8rem;
+}
+
 .center-box {
     display: flex;
     flex-direction: column;

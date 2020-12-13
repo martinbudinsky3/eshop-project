@@ -44,10 +44,6 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if($request->user()->hasRole('ADMIN')){
-            return view('admin');
-        }
-
 
         if ( $request->session()->has('cart') ) {
             session()->forget('cart');

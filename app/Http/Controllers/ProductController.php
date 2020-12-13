@@ -251,56 +251,60 @@ class ProductController extends Controller
             'product_designs.*.quantity' => 'required'
         ]);
         
-        // update product
-        
-        $product = Product::find($id);
+        DB::transaction(function() use($request, $id) {
 
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->brand_id = $request->brand_id;
-        $product->material = $request->material;
-        
-        $product->save();
+            // update product
+            $product = Product::find($id);
 
-        // destroy deleted product designs
-        $deletedProductDesigns = $request->deleted_designs;
-        foreach($deletedProductDesigns as $deletedProductDesign) {
+            $product->name = $request->name;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->brand_id = $request->brand_id;
+            $product->material = $request->material;
+            
+            $product->save();
 
-            $designToDelete = ProductDesign::find($deletedProductDesign['id']);
-            $designToDelete->delete();
-        }
+            // destroy deleted product designs
+            $deletedProductDesigns = $request->deleted_designs;
+            foreach($deletedProductDesigns as $deletedProductDesign) {
 
-        // update or create product designs
-        $productDesigns = $request->product_designs;
-        foreach($productDesigns as $productDesign) {
-            if(!isset($productDesign['id'])) { // create product design
-
-                ProductDesign::create([
-                    'color_id' => $productDesign['color']['id'],
-                    'size' => $productDesign['size'],
-                    'quantity' => $productDesign['quantity'],
-                    'product_id' => $product->id
-                ]);
-            } else { // update existing product design
-                $oldProductDesign = ProductDesign::find($productDesign['id']);
-                $oldProductDesign->color_id = $productDesign['color']['id'];
-                $oldProductDesign->size = $productDesign['size'];
-                $oldProductDesign->quantity = $productDesign['quantity'];
-
-                $oldProductDesign->save();
+                $designToDelete = ProductDesign::find($deletedProductDesign['id']);
+                $designToDelete->delete();
             }
-        }
-        
-        // update product category
-        $oldProductCategory = ProductCategory::where('product_id', $id)->first();
-        $oldProductCategory->category_id = $request->category_id;
 
-        $oldProductCategory->save();
+            // update or create product designs
+            $productDesigns = $request->product_designs;
+            foreach($productDesigns as $productDesign) {
+                if(!isset($productDesign['id'])) { // create product design
 
-        // delete images
-        $deletedImages = $request->deleted_images;
-        $this->deleteImages($deletedImages);
+                    ProductDesign::create([
+                        'color_id' => $productDesign['color']['id'],
+                        'size' => $productDesign['size'],
+                        'quantity' => $productDesign['quantity'],
+                        'product_id' => $product->id
+                    ]);
+                } else { // update existing product design
+                    $oldProductDesign = ProductDesign::find($productDesign['id']);
+                    $oldProductDesign->color_id = $productDesign['color']['id'];
+                    $oldProductDesign->size = $productDesign['size'];
+                    $oldProductDesign->quantity = $productDesign['quantity'];
+
+                    $oldProductDesign->save();
+                }
+            }
+            
+            // update product category
+            $oldProductCategory = ProductCategory::where('product_id', $id)->first();
+            $oldProductCategory->category_id = $request->category_id;
+
+            $oldProductCategory->save();
+
+            // delete images
+            $deletedImages = $request->deleted_images;
+            $this->deleteImages($deletedImages);
+        });
+
+        return response()->json(['status' => 'success', 'msg' => 'Product updated successfully']); 
     }
 
     /**
@@ -311,15 +315,18 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        // delete images
+        // get images to delete
         $deletedImages = Image::where('product_id', $id)->get();
-        $this->deleteImages($deletedImages);
 
         $product = Product::find($id);
 
-        $product->delete();
+        DB::transaction(function() use($product, $deletedImages) {
+            $product->delete();
 
-        // error handling is up to you!!! ;)
+            // delete images
+            $this->deleteImages($deletedImages);
+        });
+
         return response()->json(['status' => 'success', 'msg' => 'Product deleted successfully']);
     }
 
@@ -330,22 +337,6 @@ class ProductController extends Controller
         $str = strtolower($str);
 
         return $str;
-    }
-
-    public function sortSize($data_arr)
-    {
-        $sizes_arr = array('XXS' => 0, 'XS' => 1, 'S' => 2, 'M' => 3, 'L' => 4, 'XL' => 5, 'XXL' => 6);
-        $data_sort_arr = array();
-        foreach ($data_arr as $value) {
-            $size_item_arr = explode(':', $value);
-            $size_item_str = trim($size_item_arr[0]);
-
-            $size_pos_int = intval($sizes_arr[$size_item_str]);
-
-            $data_sort_arr[$size_pos_int] = $value;
-        }
-        ksort($data_sort_arr);
-        return array_values($data_sort_arr);
     }
 
     public function deleteImages($deletedImages) {
