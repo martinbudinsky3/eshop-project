@@ -118,11 +118,11 @@ input {
 
 /** product description **/
 
-#product-attributes th { 
+.product-attributes th { 
     padding-right: 20px;
 }
 
-#product-attributes th, #product-attributes td {
+.product-attributes th, .product-attributes td {
     padding-bottom: 10px;
 }
 

@@ -171,7 +171,7 @@
 
                         <p>{{ $product->description }}</</p>
 
-                        <table id="product-attributes">
+                        <table class="product-attributes">
                             <tr>
                                 <th>Materiál:</th>
                                 <td>{{ $product->material }}</</td>

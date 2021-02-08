@@ -1,5 +1,5 @@
 .summary-price {
-    font-size: x-large;
+    font-size: 1.5rem;
 }
 
 .item{
@@ -9,17 +9,12 @@
     border-radius: 15px;
 }
 
-img.img-akt{  
-    max-width: 200px;    
-}
-
-.item-description,label{
-    font-style: italic;
-    font-size: larger;
+.img-cart {
+    max-width: 240px;
 }
 
 .final-price{
-    font-size: x-large;
+    font-size: 1.3rem;
 }
 
 .edit-item{
@@ -52,13 +47,13 @@ img.img-akt{
     }
 
     #quantity-submit {
-        margin-left: 130px;
+        margin-left: 118px;
     }
 }
 
 @media (min-width: 767px) {
 
     #quantity-submit {
-        margin-left: 90px;
+        margin-left: 78px;
     }
 }
