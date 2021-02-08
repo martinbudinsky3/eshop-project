@@ -64,6 +64,11 @@ hr {
     position: relative;
 }
 
+.center-form {
+    margin: 0 auto;
+    width: 100%;
+}
+
 .text-input{
     position: center;
 }
@@ -455,6 +460,10 @@ select, select:focus, input, input:focus {
     .breadcrumb {
         font-size: 0.85rem;
     }
+
+    .center-form {
+        width: 75%;
+    }
 }
 
 @media (min-width: 992px) {
@@ -536,5 +545,9 @@ select, select:focus, input, input:focus {
 
     .breadcrumb {
         font-size: 1rem;
+    }
+
+    .center-form {
+        width: 50%;
     }
 }
