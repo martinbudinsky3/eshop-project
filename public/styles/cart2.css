@@ -1,21 +1,24 @@
-.item{
-    margin: 10px 0;
-    padding: 15px 0;
-    border-bottom: 1px solid black;
-    column-gap: 5%;
-}
 .select-title{
     font-weight: bold;
     font-size: larger;
 }
 
-.bloky{
-    background-color: antiquewhite;
-    padding-top: 1.5em;
-    margin-top: 10px;
+.card{
+    padding-top: 2%;
+    margin-top: 2%;
+    border: 1px solid black;
     border-radius: 15px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.summary {
+    margin-top: 1%;
+    font-size: 1.2rem;
+}
+
+.price {
+    margin-left: 18px;
 }
 
 

@@ -32,7 +32,10 @@
     <main class="container mt-2">
         <header>
             <h3>Váš nákupný košík</h3>
-            <p>Počet produktov v košíku: {{sizeof(($cartItems))}}</p>
+
+            @if(sizeof($cartItems) > 0)
+                <p>Počet produktov v košíku: {{sizeof(($cartItems))}}</p>
+            @endif
         </header>
 
         @foreach($cartItems as $item)
@@ -84,31 +87,29 @@
             <p>V košíku sa nenachádzajú žiadne produkty.</p>
         @endif
 
-        <div class="row summary">
-            <div class="col-12">
+        @if(sizeof($cartItems) > 0)
+            <div class="summary">
                 <p class="summary-price text-sm-right">CENA SPOLU: <span>{{$final_price}} €</span></p>
-                
-                <div class="d-flex mt-5">
-                    <a href="/" class="back-link mr-auto">
-                        Späť do obchodu
-                    </a>
-
-                    @if(sizeof($cartItems) > 0)
-                        <button class="btn btn-primary mb-3" onclick="window.location.href = '{{ url('cart/delivery') }}'">Pokračovať</button>
-                    @endif
-                </div>
             </div>
+        @endif
+
+        <div class="d-flex mt-2">
+            <a href="/" class="back-link mr-auto">
+                Späť do obchodu
+            </a>
+
+            @if(sizeof($cartItems) > 0)
+                <button class="btn btn-primary mb-3" onclick="window.location.href = '{{ url('cart/delivery') }}'">Pokračovať</button>
+            @endif
         </div>
     </main>
-
-    <div class="clearfix"></div>
 @endsection
 
 @section('external-scripts')
-@include('layout.partials.external-scripts')
+    @include('layout.partials.external-scripts')
 @endsection
 
 
 @section('custom-scripts')
-<script src="../js/cart.js"></script>
+    <script src="../js/cart.js"></script>
 @endsection
