@@ -1,17 +1,5 @@
-<?php
-    $logged = session()->get('user');
-
-    if($logged){
-        $cart = $logged->cart;
-    }
-    else{
-        $cart = session()->get('cart');
-    }
-?>
-
-
 <!--Page header-->
-<div class="wrapper">
+<div class="wrapper center-col">
     <header class="container">
         <div class="row page-header">
             <!--Logo-->
@@ -81,7 +69,7 @@
                     <div class="d-none d-md-block">
                         <form method="GET" action="/product-detail">
                             @csrf
-                            <input type="text" name="search" class="search-full-text"
+                            <input type="search" name="search" class="search-full-text"
                                 placeholder="Zadajte hľadaný výraz">
                             <button type="submit" class="icon-btn">
                                 <i class="fa fa-search icon"></i>

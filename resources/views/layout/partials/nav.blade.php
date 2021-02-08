@@ -1,5 +1,5 @@
 <!--Main menu-->
-<div class="wrapper">
+<div class="wrapper center-col">
     <div class="container">
         <div class="row">
             <div class="col-12 menu-col">
