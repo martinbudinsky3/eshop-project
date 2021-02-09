@@ -149,8 +149,8 @@
             </div>
 
             <div class="summary">
-                <p id ='summary-delivery'>Doprava: <span>{{$transport->name}}</span></p>
-                <p id = 'summary-pay'>Platba: <span>{{$payment->name}}</span></p>
+                <p id='summary-delivery'>Doprava: <span>{{$transport->name}}</span></p>
+                <p id='summary-pay'>Platba: <span>{{$payment->name}}</span></p>
                 <p id='summary-price'>CENA SPOLU: <span>{{$final_price}} €</span></p>
             </div>
 

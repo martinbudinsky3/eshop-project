@@ -1,18 +1,3 @@
-// functions for increment and decrement buttons that change value in numeric input
-
-function incrementNumberValue(incButton) {
-    let input = incButton.previousElementSibling
-    input.value++
-}
-
-function decrementNumberValue(decButton) {
-    let input = decButton.nextElementSibling
-
-    if(input.value != 1) {
-        input.value--
-    }
-}
-
 function showProductInColor(colorSelector) {
     let colorValue = colorSelector.value
     let url = new URL(window.location.href);
@@ -32,15 +17,15 @@ $(function(){
         });
 
         e.preventDefault();
-        var formData = {
+        let formData = {
             size: jQuery('select[name=size]').val(),
             color: jQuery('select[name=color]').val(),
             product: jQuery('input[name=product]').val(),
             amount: jQuery('input[name=amount]').val()
         };
 
-        var type = "POST";
-        var ajaxurl = '/cart-item';
+        let type = "POST";
+        let ajaxurl = '/cart-item';
         $.ajax({
             type: type,
             url: ajaxurl,

@@ -142,11 +142,9 @@
                             <div id="quantity-input-box">
                                 <label for="quantity-input">Množstvo:</label>
                                 <div>
-                                    <button type="button" class="btn input-btn d-inline-block d-md-none"
-                                        onclick="decrementNumberValue(this)">-</button>
+                                    <button type="button" class="btn input-btn d-inline-block d-md-none" onclick="decrementNumberValue(this)">-</button>
                                     <input type="number" name="amount" id="quantity-input" class="@error('amount') is-invalid @enderror" value="1" min="1">
-                                    <button type="button" class="btn input-btn d-inline-block d-md-none"
-                                        onclick="incrementNumberValue(this)">+</button>
+                                    <button type="button" class="btn input-btn d-inline-block d-md-none" onclick="incrementNumberValue(this)">+</button>
                                 </div>
                                 @error('amount')
                                     <span class="invalid-feedback" role="alert">
@@ -365,5 +363,6 @@
 
 @section('custom-scripts')
     <script src="../js/product-detail.js"></script>
+    <script src="../js/number-buttons.js"></script>
     <script src="../js/carousel.js"></script>
 @endsection

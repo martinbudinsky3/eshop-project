@@ -60,12 +60,10 @@
                                 <input type="hidden" name="_method" value="PUT">
 
                                 <label for="quantity-input" class="d-block d-sm-inline-block">Množstvo:</label>
-                                <button type="button" class="btn input-btn d-inline-block d-md-none"
-                                    onclick=" decrementNumberValue(this)">-</button>
+                                <button type="button" class="btn input-btn d-inline-block d-md-none" onclick="decrementNumberValue(this)">-</button>
                                 <input type="number" name="quantity-input" id="quantity-input" value="{{$item->amount}}" min="1" >
-                                <button type="button" class="btn input-btn d-inline-block d-md-none"
-                                    onclick="incrementNumberValue(this)">+</button>
-                                <input id="quantity-submit" class="d-block mt-2" type="submit">
+                                <button type="button" id="increment-btn" class="btn input-btn d-inline-block d-md-none" onclick="incrementNumberValue(this)">+</button>
+                                <input id="quantity-submit" class="d-block mt-2" type="submit" value="Zmeniť">
                             </form>
                         </div>
                         
@@ -107,5 +105,5 @@
 @endsection
 
 @section('custom-scripts')
-    <script src="../js/cart.js"></script>
+    <script src="../js/number-buttons.js"></script>
 @endsection
