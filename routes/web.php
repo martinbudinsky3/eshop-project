@@ -17,48 +17,48 @@ use App\Http\Requests;
 
 Route::get('/', 'IndexController@index');
 
-Route::get('/product-detail', 'ProductController@index');
+Route::get('products/', 'ProductController@index');
 
-Route::get('/product-detail/{product}', 'ProductController@show');
+Route::get('products/{product}/', 'ProductController@show');
 
-Route::get('category/{category}', 'CategoryController@show');
+Route::get('categories/{category}', 'CategoryController@show');
 
-Route::get('category', 'CategoryController@index');
+//Route::get('category/', 'CategoryController@index');
 
-Route::get('/cart', 'CartController@show');
+Route::get('cart/', 'CartController@show');
 
-Route::put('/cart-update/{id}', 'CartController@update');
+Route::put('cart/{id}/', 'CartController@update');
 
-Route::get('/cart/data/', 'OrderController@create');
+Route::get('order/create/', 'OrderController@create');
 
-Route::get('/cart/sent', 'OrderController@store');
+Route::post('order/', 'OrderController@store');
 
-Route::get('/cart/delivery', 'CartController@delivery');
+Route::get('cart/delivery/', 'CartController@delivery');
 
-Route::post('/cart-item', 'CartItemController@store');
+Route::post('cart-item/', 'CartItemController@store');
 
-Route::delete('/cart-delete/{item}', 'CartItemController@destroy');
+Route::delete('cart/{item}/', 'CartItemController@destroy');
 
-Route::get('/cart/login', 'CartController@login');
+Route::get('cart/login/', 'CartController@login');
 
-Route::get('products/list/{page}', 'ProductController@list');
+Route::get('products/list/{page}/', 'ProductController@list');
 
-Route::delete('products/{product}', 'ProductController@destroy');
+Route::delete('products/{product}/', 'ProductController@destroy');
 
 Route::post('products/', 'ProductController@store');
 
-Route::get('products/{product}/edit', 'ProductController@edit');
+Route::get('products/{product}/edit/', 'ProductController@edit');
 
-Route::put('products/{product}', 'ProductController@update');
+Route::put('products/{product}/', 'ProductController@update');
 
-Route::get('/brand', 'BrandController@index');
+Route::get('brand/', 'BrandController@index');
 
-Route::get('/color', 'ColorController@index');
+Route::get('color/', 'ColorController@index');
 
-Route::get('/size', 'SizeController@index');
+Route::get('size/', 'SizeController@index');
 
-Route::post('/image', 'ImageController@store');
+Route::post('image/', 'ImageController@store');
 
-Route::get('/image/{product}', 'ImageController@show');
+Route::get('image/{product}/', 'ImageController@show');
 
 Auth::routes();

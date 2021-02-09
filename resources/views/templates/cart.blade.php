@@ -43,7 +43,7 @@
             <article class="cart-card py-4">
                 <div class="row">
                     <div class="col-12 col-md-5 col-lg-4 mb-4 d-flex justify-content-center">
-                        <a href="">
+                        <a href="/products/{{ $item->productDesign->product->id }}">
                             <img class='img-cart img-responsive'
                                 src=" {{ asset($item->productDesign->product->images->first()->path.'_300x420.jpg')}}"
                                 alt="{{$item->productDesign->product->images->first()->path}}">
@@ -55,7 +55,7 @@
                         <p>Farba: {{$item->productDesign->color->name}}</p>
 
                         <div id="quantity-input-box" class="mb-4">
-                            <form action="/cart-update/{{ (!$item->id) ? $loop->index : $item->id }}" name="quantity" method="POST">
+                            <form action="/cart/{{ (!$item->id) ? $loop->index : $item->id }}" name="quantity" method="POST">
                                 @csrf 
                                 <input type="hidden" name="_method" value="PUT">
 
@@ -69,7 +69,7 @@
                         
                         <p class="final-price" id="final-price">Cena: {{$item->productDesign->product->price}} €</p>
                         <!--Delete icon-->
-                        <form action="/cart-delete/{{ (!$item->id) ? $loop->index : $item->id }}" method="POST">
+                        <form action="/cart/{{ (!$item->id) ? $loop->index : $item->id }}" method="POST">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
 
@@ -98,7 +98,7 @@
             </a>
 
             @if(sizeof($cartItems) > 0)
-                <button class="btn btn-primary mb-3" onclick="window.location.href = '{{ url('cart/delivery') }}'">Pokračovať</button>
+                <a class="btn btn-primary mb-3" href ="cart/delivery/">Pokračovať</a>
             @endif
         </div>
     </main>

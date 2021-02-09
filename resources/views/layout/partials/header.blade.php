@@ -66,7 +66,7 @@
 
                 <!--Search bar - >= 768px-->
                 <div class="d-none d-md-block">
-                    <form method="GET" action="/product-detail">
+                    <form method="GET" action="/products">
                         @csrf
                         <input type="search" name="search" class="search-full-text"
                             placeholder="Zadajte hľadaný výraz">
@@ -83,7 +83,7 @@
             <button class="icon-btn">
                 <i class="fa fa-times-circle icon" aria-hidden="true" onclick="handleSearchButtonClick()"></i>
             </button>
-            <form method="GET" action="/product-detail" id="search-form-xs">
+            <form method="GET" action="/products" id="search-form-xs">
                 @csrf
                 <input type="text" name="search" class="search-full-text"
                     placeholder="Zadajte hľadaný výraz" id="search-input-xs">

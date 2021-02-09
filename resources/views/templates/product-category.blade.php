@@ -177,7 +177,7 @@
                             <article class="col-lg-3 col-sm-4 col-6 row-m-b">
                                 <div class="image-content">
 
-                                    <a href="/product-detail/{{ $product->id }}">
+                                    <a href="/products/{{ $product->id }}">
                                         @php
                                             $image = $product->images->first()->path;
                                         @endphp

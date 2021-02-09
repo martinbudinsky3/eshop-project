@@ -107,9 +107,6 @@ class OrderController extends Controller
             'zip' => 'required|string|max:15',
         ]);
 
-        /*$request->validate([
-            'zip' => 'required|string|max:15',
-        ]);*/
 
         // get cart items from logged user
         $cartItems = [];

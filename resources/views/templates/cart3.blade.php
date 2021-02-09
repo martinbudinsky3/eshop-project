@@ -42,7 +42,7 @@
                 <h3>Fakturačné údaje</h3>
                 <p class="form-restriction">* - všetky údaje sú povinné.</p>
 
-                <form action="/cart/sent" id="delivery-form" method="get">
+                <form action="/order" id="delivery-form" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="name">Meno a priezvisko *</label>

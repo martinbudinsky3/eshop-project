@@ -36,7 +36,7 @@
             <h3>Výber dopravy a platby</h3>
             
             <div class="mt-4">
-                <form action="/cart/data/" id="cart-form" method="get">
+                <form action="/order/create/" id="cart-form" method="get">
                     @csrf
                     <div class="row">
                         <div class="col-10 col-sm-5 py-3 cart-card">
@@ -159,7 +159,7 @@
                     Späť
                 </a>
 
-                <button class="btn btn-primary mb-3" onclick="window.location.href = '{{ url('cart/data') }}'">Pokračovať</button>
+                <button class="btn btn-primary mb-3" type="submit" form="cart-form">Pokračovať</button>
             </div>
         </section>
     </main>
