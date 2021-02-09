@@ -101,10 +101,5 @@
 @endsection
 
 @section('custom-scripts')
-    <script>
-        $('.carousel').carousel({
-            interval: false,
-        });
-
-    </script>
+    <script src="../js/carousel.js"></script>
 @endsection

@@ -106,11 +106,6 @@
     </main>
 @endsection
 
-@section('external-scripts')
-    @include('layout.partials.external-scripts')
-@endsection
-
-
 @section('custom-scripts')
     <script src="../js/cart.js"></script>
 @endsection

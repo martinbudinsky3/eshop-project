@@ -108,9 +108,8 @@
                         </span>
 
                         <!--Product form-->
-                        <form action="/cart-item/{{ $product->id }}" method="POST" id="product-input">
+                        <form action="/cart-item" method="POST" id="product-input">
                             @csrf
-
                             <div id="color-input-box">
                                 <label for="color_selector">Farba:</label>
                                     <select name="color" id="color_selector" class="@error('color') is-invalid @enderror" onChange="showProductInColor(this)">
@@ -366,41 +365,5 @@
 
 @section('custom-scripts')
     <script src="../js/product-detail.js"></script>
-    <script>
-        $('.carousel').carousel({
-            interval: false,
-        });
-
-    </script>
-
-    <script>
-        jQuery(document).ready(function($){
-
-            // CREATE
-            $("#add-to-cart").click(function (e) {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                e.preventDefault();
-                var formData = {
-                    size: jQuery('select[name=size]').val(),
-                    color: jQuery('select[name=color]').val(),
-                    product: jQuery('input[name=product]').val(),
-                    amount: jQuery('input[name=amount]').val()
-                };
-
-                var type = "POST";
-                var ajaxurl = '/cart-item';
-                $.ajax({
-                    type: type,
-                    url: ajaxurl,
-                    data: formData,
-                    dataType: 'json',
-                });
-            });
-        });
-    </script>
+    <script src="../js/carousel.js"></script>
 @endsection

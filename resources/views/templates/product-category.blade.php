@@ -237,11 +237,5 @@
 
 @section('custom-scripts')
     <script src="../js/product-category.js"></script>
-
-    <script>
-        $('.carousel').carousel({
-            interval: false,
-        });
-
-    </script>
+    <script src="../js/carousel.js"></script>
 @endsection
