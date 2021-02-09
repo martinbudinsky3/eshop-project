@@ -38,8 +38,9 @@
             @endif
         </header>
 
+
         @foreach($cartItems as $item)
-            <article class="py-4">
+            <article class="cart-card py-4">
                 <div class="row">
                     <div class="col-12 col-md-5 col-lg-4 mb-4 d-flex justify-content-center">
                         <a href="">
@@ -81,15 +82,15 @@
             </article>
         @endforeach
         
-        <hr>
-
         @if(sizeof($cartItems) == 0)
+        <div class="my-5">
             <p>V košíku sa nenachádzajú žiadne produkty.</p>
+        </div>
         @endif
 
         @if(sizeof($cartItems) > 0)
             <div class="summary">
-                <p class="summary-price text-sm-right">CENA SPOLU: <span>{{$final_price}} €</span></p>
+                <p class="text-sm-right">CENA SPOLU: <span>{{$final_price}} €</span></p>
             </div>
         @endif
 

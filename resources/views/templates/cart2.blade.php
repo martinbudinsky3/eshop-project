@@ -39,7 +39,7 @@
                 <form action="/cart/data/" id="cart-form" method="get">
                     @csrf
                     <div class="row">
-                        <div class="col-10 col-sm-5 card">
+                        <div class="col-10 col-sm-5 py-3 cart-card">
                             <fieldset>
                                 <legend class="select-title">
                                     Zvoľte dopravu
@@ -86,7 +86,7 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="col-10 col-sm-5 card">
+                        <div class="col-10 col-sm-5 py-3 cart-card">
                             <fieldset>
                                 <legend class="select-title">
                                     Zvoľte platbu
@@ -155,11 +155,11 @@
             </div>
 
             <div class="d-flex mt-2">
-                <a href="/" class="back-link mr-auto">
-                    Späť do obchodu
+                <a href="/cart" class="back-link mr-auto">
+                    Späť
                 </a>
 
-                <button class="btn btn-primary mb-3" onclick="window.location.href = '{{ url('cart/delivery') }}'">Pokračovať</button>
+                <button class="btn btn-primary mb-3" onclick="window.location.href = '{{ url('cart/data') }}'">Pokračovať</button>
             </div>
         </section>
     </main>

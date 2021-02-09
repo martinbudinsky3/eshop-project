@@ -1,25 +1,14 @@
+.summary {
+    font-size: 1.2rem;
+}
 
 .register-box{
-    background-color: antiquewhite;
-    border-radius: 15px;
-    margin-left: auto;
-    margin-right: auto;
     text-align: center;
     padding: 10px;
 }
 
 .login-button{
-    position: center;
-    background-color: sandybrown;
-    color: saddlebrown;
     font-size: larger;
-    padding: 15px;
-    border: sandybrown;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.sing-or-register {
-    margin-bottom: 1rem;
+    padding: 5px 15px 5px 15px;
 }
 

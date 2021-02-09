@@ -104,24 +104,22 @@ hr {
     color: gray;
 }
 
-.login-button{
-    position: center;
-    background-color: sandybrown;
-    color: saddlebrown;
-    font-size: larger;
-    padding: 15px;
-    border: sandybrown;
-    margin-bottom: 10px;
-    margin-top: 2%;
-}
-
-.summary{
+.summary {
     padding-top: 2%;
     padding-bottom: 2%;
+    margin-top: 1%;
 }
 
 .summary span {
     font-weight: bold;
+}
+
+.cart-card{
+    border: 1px solid #8F8F8F;
+    border-radius: 15px;
+    margin-bottom: 1.2rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .input-btn {
