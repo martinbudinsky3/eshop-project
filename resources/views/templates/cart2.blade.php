@@ -27,7 +27,7 @@
                     </ol>
                 </nav>
             </div>
-            <hr>
+            <hr class="hr"> 
         </div>
     </div>
 

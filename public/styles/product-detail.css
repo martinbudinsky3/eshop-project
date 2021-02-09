@@ -221,7 +221,4 @@ input {
     .stars-col {
         width: 15%;
     }
-}
-
-@media (min-width: 1200px) {}
- 
+} 

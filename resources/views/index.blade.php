@@ -23,7 +23,7 @@
                             </picture>
                         </a>
                         <div class="image-elements banner-image-elements center-box">
-                            <h2 class="center-text ">Jesenný výpredaj</h2>
+                            <h2 class="center-text h2">Jesenný výpredaj</h2>
                             <a href="" class="link-button">Zistite viac >></a>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                                 alt="Fotka blúzky">
                         </a>
                         <div class="image-elements medium-image-elements center-box">
-                            <h3 class="image-caption white-image-caption">25% zľava na blúzky</h3>
+                            <h3 class="image-caption white-image-caption h3">25% zľava na blúzky</h3>
                             <a href="" class="link-button">Zistite viac >></a>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                                         612px" src="assets/images/boots.jpg" class="img-responsive" alt="Fotka čižiem">
                         </a>
                         <div class="image-elements medium-image-elements">
-                            <h3 class="image-caption white-image-caption">Čižmy</h3>
+                            <h3 class="image-caption white-image-caption h3">Čižmy</h3>
                         </div>
                     </div>
                 </article>
@@ -86,7 +86,7 @@
                             </picture>
                         </a>
                         <div class="image-elements banner-image-elements center-box">
-                            <h2 class="center-text">Čo nosiť v tejto sezóne</h2>
+                            <h2 class="center-text h2">Čo nosiť v tejto sezóne</h2>
                             <a href="" class="link-button">Zistite viac >></a>
                         </div>
                     </div>

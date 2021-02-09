@@ -1,13 +1,9 @@
-h2 {
+.h2 {
     font-size: 1.6em;
 }
 
-h3 {
+.h3 {
     font-size: 1.4rem
-}
-
-.main-header {
-    display: flex;
 }
 
 .section-heading {
@@ -57,22 +53,22 @@ h3 {
 
 @media (min-width: 400px) {
     
-    h2 {
+    .h2 {
         font-size: 1.8em;
     }
 
-    h3 {
+    .h3 {
         font-size: 1.6em;
     }
 }
 
 @media (min-width: 576px) {
 
-    h2 {
+    .h2 {
         font-size: 2em;
     }
 
-    h3 {
+    .h3 {
         font-size: 1.75em;
     }
 
@@ -80,18 +76,13 @@ h3 {
 
 @media (min-width: 768px) {
 
-    h3 {
+    .h3 {
         font-size: 1.5em;
     }
 }
 
 @media (min-width: 992px) { 
-    h3 {
+    .h3 {
         font-size: 1.75em;
     }
-}
-
-
-@media (min-width: 1200px) { 
-
 }

@@ -45,7 +45,7 @@
                     </ol>
                 </nav>
             </div>
-            <hr>
+            <hr class="hr">
         </div>
     </div>
     <div class="wrapper">
@@ -162,7 +162,7 @@
                     </div>
                 </div>
             </div>
-            <hr class="section-separator">
+            <hr class="section-separator hr">
             <section class="row row-m-b">
                 <div class="col  padded-box">
                     <!--Product description and attributes-->
@@ -185,7 +185,7 @@
                 </div>
             </section>
 
-            <hr class="section-separator">
+            <hr class="section-separator hr">
 
             <!--Reviews-->
             {{-- <section class="row">
@@ -208,7 +208,7 @@
                         <p>
                             Super, presne ako na obrázku.
                         </p>
-                        <hr class="review-separator">
+                        <hr class="review-separator hr">
                     </article>
 
                     <article class="review center-box">
@@ -226,7 +226,7 @@
                         <p>
                             Super, presne ako na obrázku.
                         </p>
-                        <hr class="review-separator">
+                        <hr class="review-separator hr">
                     </article>
 
                     <article class="review center-box">
@@ -244,7 +244,7 @@
                         <p>
                             Super, presne ako na obrázku.
                         </p>
-                        <hr class="review-separator">
+                        <hr class="review-separator hr">
                     </article>
                     <!--Pagination-->
                     <nav>
@@ -347,7 +347,7 @@
                         </table>
                     </div>
                 </div>
-            <hr class="section-separator">
+            <hr class="section-separator hr">
 
             </section> --}}
 

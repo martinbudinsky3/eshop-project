@@ -30,7 +30,7 @@
                 </ol>
             </nav>
         </div>
-        <hr>
+        <hr class="hr">
     </div>
 </div>
 <div class="wrapper center-col">
@@ -210,12 +210,15 @@
                 </div>
             </div>
 
-            <hr class="section-separator">
+            <hr class="section-separator hr">
 
-            <!--Recommended products-->
-            @component('layout.partials.carousel', 
-                ['heading' => $search ? 'Najpredávanejšie' : 'Najpredávanejšie v tejto kategórií', 'carouselId' => 'carousel-rec', 'data' => $recommendedProducts])
-            @endcomponent
+            <div class="container center-col">
+                <!--Recommended products-->
+                @component('layout.partials.carousel', 
+                    ['heading' => $search ? 'Najpredávanejšie' : 'Najpredávanejšie v tejto kategórií', 'carouselId' => 'carousel-rec', 'data' => $recommendedProducts])
+                @endcomponent 
+            </div>
+           
 
         @else
             <div class="row row-m-b">

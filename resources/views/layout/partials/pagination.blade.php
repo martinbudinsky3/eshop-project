@@ -3,6 +3,7 @@
     $currentPage = $pagination->currentPage();
     $lastPage = $pagination->lastPage();
 @endphp
+
 <div class="col-12 center-box">
     <nav>
         <ul class="pagination">

@@ -2,13 +2,6 @@
     font-size: 1.5rem;
 }
 
-.item{
-    margin: 10px ;
-    padding: 10px 0;
-    background-color: antiquewhite;
-    border-radius: 15px;
-}
-
 .img-cart {
     max-width: 240px;
 }
@@ -19,13 +12,6 @@
 
 .edit-item{
     max-width: 40px;
-}
-
-.button{
-    display: inline-block;
-    background-color: antiquewhite;
-    border: none;
-    font-size: 1.5em;
 }
 
 #quantity-input-box {

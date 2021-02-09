@@ -13,7 +13,7 @@ ul {
     list-style: none;
 }
 
-hr {
+.hr {
     width: 100%;
     border-color: #c4c4c4;
     margin: 0 auto 2% auto;
@@ -86,18 +86,6 @@ hr {
     color: black;
 }
 
-.submit-button{
-    float: right;
-    background-color: sandybrown;
-    color: saddlebrown;
-    text-align: center;
-    padding: 0.5em;
-    font-size: 1.3em;
-    border: sandybrown;
-    border-radius: 8px;
-    margin-top: 4%;
-}
-
 .form-restriction{
     font-size: medium;
     font-style: italic;
@@ -143,6 +131,8 @@ hr {
 select, select:focus, input, input:focus {
     outline: none;
 }
+
+/* left menu */
 
 .opaque-layer {
     position: absolute;
