@@ -44,7 +44,7 @@
                     <label for="email">Email *</label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror"
                         id="email" name="email" value="{{ old('email') }}" required
-                        autocomplete="email" placeholder="priklad@mail.sk">
+                        autocomplete="email" placeholder="napr. priklad@mail.sk">
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
                     <label for="password">Heslo *</label>
                     <input type="password"
                         class="form-control @error('password') is-invalid @enderror" id="password"
-                        name="password" required autocomplete="new-password" placeholder="Aspoň 8 znakov">
+                        name="password" required autocomplete="new-password" placeholder="aspoň 8 znakov">
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <label for="phone">Telefónne číslo *</label>
                     <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required
-                        placeholder="+421012345678">
+                        placeholder="napr. +421012345678">
                     @error('phone')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

@@ -148,7 +148,7 @@ class OrderController extends Controller
             // create all cart items
             foreach($cartItems as $item) {
                 $orderitem =  OrderItem::create([
-                    'product_id' => $item->productDesign->product->id,
+                    'product_design_id' => $item->productDesign->id,
                     'amount' => $item->amount,
                     'order_id' => $order->id,
                 ]);
