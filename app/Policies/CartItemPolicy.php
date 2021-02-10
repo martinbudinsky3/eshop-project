@@ -22,6 +22,10 @@ class CartItemPolicy
         //
     }
 
+    public function update(User $user, CartItem $cartItem) {
+        return $user->cart->id === $cartItem->cart->id;
+    }
+
     public function delete(User $user, CartItem $cartItem) {
         return $user->cart->id === $cartItem->cart->id;
     }

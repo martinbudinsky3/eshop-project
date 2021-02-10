@@ -23,21 +23,21 @@ Route::get('products/{product}/', 'ProductController@show');
 
 Route::get('categories/{category}', 'CategoryController@show');
 
-//Route::get('category/', 'CategoryController@index');
+Route::get('category/', 'CategoryController@index'); //*
 
 Route::get('cart/', 'CartController@show');
 
-Route::put('cart/{id}/', 'CartController@update');
+Route::get('cart/delivery/', 'CartController@delivery')->middleware('cart');
 
 Route::get('order/create/', 'OrderController@create')->middleware('cart');
 
 Route::post('order/', 'OrderController@store')->middleware('cart');
 
-Route::get('cart/delivery/', 'CartController@delivery')->middleware('cart');
-
 Route::post('cart-item/', 'CartItemController@store');
 
-Route::delete('cart-item/{item}/', 'CartItemController@destroy');
+Route::put('cart-item/{id}/', 'CartItemController@update');
+
+Route::delete('cart-item/{id}/', 'CartItemController@destroy');
 
 Route::get('cart/login/', 'CartController@login');
 
@@ -51,14 +51,14 @@ Route::get('products/{product}/edit/', 'ProductController@edit');
 
 Route::put('products/{product}/', 'ProductController@update');
 
-Route::get('brand/', 'BrandController@index');
+Route::get('brand/', 'BrandController@index'); //*
 
-Route::get('color/', 'ColorController@index');
+Route::get('color/', 'ColorController@index'); //*
 
-Route::get('size/', 'SizeController@index');
+Route::get('size/', 'SizeController@index'); //*
 
-Route::post('image/', 'ImageController@store');
+Route::post('image/', 'ImageController@store'); //*
 
-Route::get('image/{product}/', 'ImageController@show');
+Route::get('image/{product}/', 'ImageController@show'); //*
 
 Auth::routes();

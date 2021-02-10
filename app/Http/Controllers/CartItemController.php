@@ -74,16 +74,49 @@ class CartItemController extends Controller
         }
 
         return back()->with('success', 'Product added to cart successfully!');
-
     }
 
 
-    public function destroy(Request $request, $item)
+    public function update(Request $request, $id) {
+        
+        // get new quantity of cart item
+        $new_quantity = $request->post('quantity-input');
+
+        // find requested cart item of logged user in DB and update it
+        if(Auth::check()){
+            $cartItem = CartItem::find($id);
+
+            $this->authorize('update', $cartItem);
+
+            $cartItem->update(['amount'=>$new_quantity]);
+        } 
+
+        // find requested cart item of guest in session and update it
+        else {
+            $cartItems = session()->get('cartItems');
+            session()->forget('cartItems');
+                        
+            foreach ($cartItems as $key => &$item) {
+
+                if ($key == $id) {
+                    $cartItems[$key]['amount'] = $new_quantity;
+                    break;
+                }
+            }
+
+            session()->put('cartItems',$cartItems);      
+        }
+
+        return redirect('/cart');
+    }
+
+
+    public function destroy(Request $request, $id)
     {
         // delete cart item of logged in user from DB
         if(Auth::check()){   
   
-            $cartItem = CartItem::find($item);
+            $cartItem = CartItem::find($id);
 
             $this->authorize('delete', $cartItem);
 

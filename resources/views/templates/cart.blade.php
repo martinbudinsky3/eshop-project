@@ -55,7 +55,7 @@
                         <p>Farba: {{$item->productDesign->color->name}}</p>
 
                         <div id="quantity-input-box" class="mb-4">
-                            <form action="/cart/{{ (!$item->id) ? $loop->index : $item->id }}" name="quantity" method="POST">
+                            <form action="/cart-item/{{ (!$item->id) ? $loop->index : $item->id }}" name="quantity" method="POST">
                                 @csrf 
                                 <input type="hidden" name="_method" value="PUT">
 

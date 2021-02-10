@@ -138,35 +138,8 @@ class CartController extends Controller
             ->with('payments', $payments);
     }
 
-
     public function update(Request $request, $id) {
         
-        // get new quantity of cart item
-        $new_quantity = $request->post('quantity-input');
-
-        // find requested cart item of logged user in DB and update it
-        if(Auth::check()){
-            CartItem::where('id',$id)->update(['amount'=>$new_quantity]);
-        } 
-
-        // find requested cart item of guest in session and update it
-        else {
-            $cartItems = session()->get('cartItems');
-            session()->forget('cartItems');
-                        
-            foreach ($cartItems as $key => &$item) {
-
-                if ($key == $id) {
-                    $cartItems[$key]['amount'] = $new_quantity;
-                    break;
-                }
-            }
-
-            session()->put('cartItems',$cartItems);      
-        }
-
-
-        return redirect()->action([CartController::class, 'show']);
     }
 
     // login from cart
