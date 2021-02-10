@@ -81,8 +81,12 @@ class CartItemController extends Controller
     public function destroy(Request $request, $item)
     {
         // delete cart item of logged in user from DB
-        if(Auth::check()){        
+        if(Auth::check()){   
+  
             $cartItem = CartItem::find($item);
+
+            $this->authorize('delete', $cartItem);
+
             $cartItem->delete();
 
             $cart = Cart::where('user_id', Auth::user()->id)->first();

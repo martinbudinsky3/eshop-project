@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Models\CartItem;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Log;
 
@@ -21,10 +22,7 @@ class CartItemPolicy
         //
     }
 
-    public function delete(?User $user, CartItem $cartItem) {
-        Log::debug($cartItem);
-
-        //return optional($user)->cart->id === $cartItem->cart->id;
-        return true;
+    public function delete(User $user, CartItem $cartItem) {
+        return $user->cart->id === $cartItem->cart->id;
     }
 }

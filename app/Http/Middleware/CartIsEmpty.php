@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 class CartIsEmpty
 {
     /**
-     * Handle an incoming request.
+     * Check if user has empty cart.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
