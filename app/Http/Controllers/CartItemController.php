@@ -31,8 +31,15 @@ class CartItemController extends Controller
         $product_id = $request->post('product');
         
         // find product design by size, color and product_id
-        $design_id = ProductDesign::where('size', '=', $size)->where('color_id', '=', $color_id)->where('product_id', '=', $product_id)->value('id');
-    
+        $productDesign = ProductDesign::where('size', '=', $size)->where('color_id', '=', $color_id)
+            ->where('product_id', '=', $product_id)->first();
+            
+        if(!$productDesign) {
+            return response()->json([
+                'error' => 'Product design does not exist',
+            ], 422);
+        }
+
         // get selected amount
         $amount = $request->post('amount');
 
@@ -46,7 +53,7 @@ class CartItemController extends Controller
 
             // create cart item and save it
             $cartItem = CartItem::create([
-                'product_design_id' => $design_id,
+                'product_design_id' => $productDesign->id,
                 'amount' => $amount,
                 'cart_id' => $cart->id,
             ]);
@@ -65,7 +72,7 @@ class CartItemController extends Controller
         
             // create cart item
             $cartItem = new CartItem([
-                'product_design_id' => $design_id,
+                'product_design_id' => $productDesign->id,
                 'amount' => $amount,
             ]);
             
@@ -73,7 +80,11 @@ class CartItemController extends Controller
             session()->push('cartItems', ($cartItem));
         }
 
-        return back()->with('success', 'Product added to cart successfully!');
+        return response()->json([
+            'message' => 'Product added to cart successfully!',
+        ], 200);
+
+        //return back()->with('success', 'Product added to cart successfully!');
     }
 
 
@@ -138,7 +149,7 @@ class CartItemController extends Controller
         // delete cart item of guest from session
         else {
             $cartItems = session()->get('cartItems');
-            array_splice($cartItems, $item, 1);
+            array_splice($cartItems, $id, 1);
             session()->forget('cartItems');
 
             // save cartItems to session only when not empty

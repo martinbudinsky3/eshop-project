@@ -8,29 +8,25 @@ function showProductInColor(colorSelector) {
 // add product to cart via ajax
 $(function(){
 
-    // CREATE
-    $("#add-to-cart").on('click', function (e) {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': jQuery('input[name="_token"]').val()
-            }
+    var form = $('#product-input');
+
+    form.on('submit', function(event) {
+        var req = $.ajax({
+            url: form.attr('action'),
+            type: form.attr('method'),
+            data: form.serialize()
         });
 
-        e.preventDefault();
-        let formData = {
-            size: jQuery('select[name=size]').val(),
-            color: jQuery('select[name=color]').val(),
-            product: jQuery('input[name=product]').val(),
-            amount: jQuery('input[name=amount]').val()
-        };
-
-        let type = "POST";
-        let ajaxurl = '/cart-item';
-        $.ajax({
-            type: type,
-            url: ajaxurl,
-            data: formData,
-            dataType: 'json',
+        req.done(function(data) {
+            console.log( data );
+            $('#add-to-cart-modal').modal('show');
         });
+
+        req.fail(function(error) {
+            console.log(error);
+            $('#add-to-cart-modal-fail').modal('show');
+        })
+
+        event.preventDefault();
     });
 });
