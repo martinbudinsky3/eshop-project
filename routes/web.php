@@ -29,15 +29,15 @@ Route::get('cart/', 'CartController@show');
 
 Route::put('cart/{id}/', 'CartController@update');
 
-Route::get('order/create/', 'OrderController@create');
+Route::get('order/create/', 'OrderController@create')->middleware('cart');
 
-Route::post('order/', 'OrderController@store');
+Route::post('order/', 'OrderController@store')->middleware('cart');
 
-Route::get('cart/delivery/', 'CartController@delivery');
+Route::get('cart/delivery/', 'CartController@delivery')->middleware('cart');
 
 Route::post('cart-item/', 'CartItemController@store');
 
-Route::delete('cart/{item}/', 'CartItemController@destroy');
+Route::delete('cart-item/{item}/', 'CartItemController@destroy');
 
 Route::get('cart/login/', 'CartController@login');
 

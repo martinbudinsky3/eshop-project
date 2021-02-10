@@ -69,11 +69,11 @@
                         
                         <p class="final-price" id="final-price">Cena: {{$item->productDesign->product->price}} €</p>
                         <!--Delete icon-->
-                        <form action="/cart/{{ (!$item->id) ? $loop->index : $item->id }}" method="POST">
+                        <form action="/cart-item/{{ (!$item->id) ? $loop->index : $item->id }}" method="POST">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
 
-                            <input type=image class="edit-item" alt="Vymazať" title="Vymazať" src="../assets/icons/delete_icon.png">
+                            <input type=image class="icon" alt="Vymazať" title="Vymazať" src="../assets/icons/delete_icon.png">
                         </form>
                     </div>
                 </div>

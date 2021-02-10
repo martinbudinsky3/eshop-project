@@ -12,6 +12,7 @@ use App\Models\ProductDesign;
 use App\Models\Transport;
 use App\Models\Payment;
 use App\Models\CartItem;
+use App\Models\User;
 
 
 class CartController extends Controller
@@ -52,18 +53,22 @@ class CartController extends Controller
         // get cart items of logged in user from DB
         if(Auth::check()){
 
-            $cart = Cart::firstOrCreate([
+            $cart = User::with('cart')->find(Auth::user()->id)->cart;
+            /*$cart = Cart::firstOrCreate([
                 'user_id' => Auth::user()->id,
-            ]);
+            ]);*/
 
-            $cartItems = $cart->cartItems;   
+            if(!$cart) {
+                $cartItems = [];
+            } else {
+                $cartItems = $cart->cartItems;
+            }
         } 
 
         // get cart items of guest from session
         else {
             $cartItems = session()->get('cartItems');
             if(!$cartItems) {
-                session()->put('cartItems', []);
                 $cartItems = [];
             }
         }

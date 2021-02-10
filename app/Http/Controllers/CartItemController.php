@@ -88,8 +88,9 @@ class CartItemController extends Controller
             $cart = Cart::where('user_id', Auth::user()->id)->first();
             $cartItems = $cart->cartItems;
 
+            Log::debug($cartItems);
             // if there are no cart items left delete cart
-            if(!$cartItems) {
+            if($cartItems->isEmpty()) {
                 $cart->delete();
                 //session()->forget('cartItems');
                 session()->forget('payment');
