@@ -92,13 +92,13 @@
             </div>
         @endif
 
-        <div class="d-flex mt-2">
+        <div class="d-flex mt-2 mb-3">
             <a href="/" class="back-link mr-auto">
                 Späť do obchodu
             </a>
 
             @if(sizeof($cartItems) > 0)
-                <a class="btn btn-primary mb-3" href ="cart/delivery/">Pokračovať</a>
+                <a class="btn btn-primary" href ="cart/delivery/">Pokračovať</a>
             @endif
         </div>
     </main>

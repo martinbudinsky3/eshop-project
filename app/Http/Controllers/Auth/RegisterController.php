@@ -81,6 +81,8 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
+
+        // if user is registering from cart before sending order
         if ($request->session()->has('cart')) {
             session()->forget('cart');
 
@@ -99,9 +101,10 @@ class RegisterController extends Controller
                 ]); 
             }
 
+            // delete cart items from session
             session()->forget('cartItems');
 
-            return redirect('/cart/data');
+            return redirect('/order/create');
         }
 
         return redirect('/');

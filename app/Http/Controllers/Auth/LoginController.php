@@ -45,6 +45,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
 
+        // if user is logging in from cart before sending order
         if ( $request->session()->has('cart') ) {
             session()->forget('cart');
             
@@ -73,7 +74,7 @@ class LoginController extends Controller
             // delete cart items from session
             session()->forget('cartItems');
 
-            return redirect('/cart/data');
+            return redirect('/order/create');
         }
 
         return redirect('/');

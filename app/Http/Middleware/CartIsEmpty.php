@@ -19,7 +19,7 @@ class CartIsEmpty
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && !Auth::user()->cart || !session()->get('cartItems')) {
+        if(Auth::check() && !Auth::user()->cart || !Auth::check() && !session()->get('cartItems')) {
             return redirect('cart');
         }
 
