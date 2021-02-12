@@ -36,7 +36,7 @@ class CartItemController extends Controller
             
         if(!$productDesign) {
             return response()->json([
-                'error' => 'Product design does not exist',
+                'error' => 'Zadaný variant produktu neexistuje',
             ], 422);
         }
 
@@ -81,10 +81,9 @@ class CartItemController extends Controller
         }
 
         return response()->json([
-            'message' => 'Product added to cart successfully!',
+            'success' => 'Produkt bol pridaný do košíka',
         ], 200);
 
-        //return back()->with('success', 'Product added to cart successfully!');
     }
 
 
@@ -136,7 +135,6 @@ class CartItemController extends Controller
             $cart = Cart::where('user_id', Auth::user()->id)->first();
             $cartItems = $cart->cartItems;
 
-            Log::debug($cartItems);
             // if there are no cart items left delete cart
             if($cartItems->isEmpty()) {
                 $cart->delete();
@@ -164,7 +162,7 @@ class CartItemController extends Controller
             } 
         }
 
-        return back()->with('success', 'Product deleted successfully!');
+        return redirect('/cart');
     }
 
 }

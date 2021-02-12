@@ -18,13 +18,15 @@ $(function(){
         });
 
         req.done(function(data) {
-            console.log( data );
-            $('#add-to-cart-modal').modal('show');
+            var modalSuccess = $('#add-to-cart-modal');
+            modalSuccess.find('.modal-body > p').text(data.success);
+            modalSuccess.modal('show');
         });
 
         req.fail(function(error) {
-            console.log(error);
-            $('#add-to-cart-modal-fail').modal('show');
+            var modalFail = $('#add-to-cart-modal-fail');
+            modalFail.find('.modal-body > p').text(error.error);
+            modalFail.modal('show');
         })
 
         event.preventDefault();

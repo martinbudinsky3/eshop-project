@@ -4,8 +4,8 @@ namespace App\Traits;
 
 trait ProductsTrait
 {
+    // get all unique colors of products
     private function getUniqueColors($products) {
-        // get all unique colors that occur in this category
         $products->load(['colors' => function ($q) use (&$colors) {
             $colors = $q->get()->unique();
         }]);
@@ -13,8 +13,8 @@ trait ProductsTrait
         return $colors;
     }
 
+    // get all unique brands of products
     private function getUniqueBrands($products) {
-        // get all unique brands that occur in this category
         $products->load(['brand' => function ($q) use (&$brands) {
             $brands = $q->get()->unique();
         }]);
@@ -22,8 +22,8 @@ trait ProductsTrait
         return $brands;
     }
 
+    // get all unique size of products
     private function getUniqueSizes($products) {
-        // get all unique sizes that occur in this category
         $products->load(['productDesigns' => function ($q) use (&$sizesRecords) {
             $sizesRecords = $q->get()->unique('size');
         }]);
@@ -36,8 +36,8 @@ trait ProductsTrait
         return $sizes;
     }
 
+    // filtering
     private function filterProducts($products) {
-        // filtering
         $filterColors = request()->get('color');
         $filterSizes = request()->get('size');
         $filterBrand = request()->get('brand');
@@ -61,8 +61,8 @@ trait ProductsTrait
         return $products;
     }
 
+    // sorting
     private function sortProducts($products) {
-        // sorting
         $sortOrder = request()->get('sort');
 
         switch ($sortOrder) {

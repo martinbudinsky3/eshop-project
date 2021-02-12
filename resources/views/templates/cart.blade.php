@@ -20,7 +20,7 @@
                             <a href="/cart/delivery">Doprava a platba</a>
                         </li>
                         <li class="breadcrumb-item">
-                            <a href="/cart/data">Dodacie údaje</a>
+                            <a href="/order/create">Dodacie údaje</a>
                         </li>
                     </ol>
                 </nav>

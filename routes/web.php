@@ -61,4 +61,8 @@ Route::post('image/', 'ImageController@store'); //*
 
 Route::get('image/{product}/', 'ImageController@show'); //*
 
+Route::get('profile/', function() {
+    return view('templates.profile');
+});
+
 Auth::routes();

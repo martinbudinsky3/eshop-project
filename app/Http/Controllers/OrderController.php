@@ -77,7 +77,7 @@ class OrderController extends Controller
         $items_price = 0;
 
         foreach($cartItems as $item){
-            $items_price = $items_price + $item->amount*$item->productDesign->product->price;
+            $items_price = $items_price + $item->amount * $item->productDesign->product->price;
         }
         
         $final_price = $items_price + $payment_price + $transport_price;
@@ -94,7 +94,6 @@ class OrderController extends Controller
 
     public function store(Request $request){
 
-        Log::debug($request);
         // validation
         $request->validate([
             'name' => 'required|string|max:255',
@@ -106,7 +105,6 @@ class OrderController extends Controller
             'phone' => 'required|string|max:255',
             'zip' => 'required|string|max:15',
         ]);
-
 
         // get cart items from logged user
         $cartItems = [];
@@ -125,7 +123,7 @@ class OrderController extends Controller
         DB::transaction(function() use ($request, $cartItems) {
             // create delivery record
             $delivery = Delivery::create([
-                'user_id' => (!Auth::check()) ? null : Auth::user()->id,
+                //'user_id' => (!Auth::check()) ? null : Auth::user()->id,
                 'name' => $request->post('name'),
                 'email' =>$request->post('email'),
                 'street' =>$request->post('street'),

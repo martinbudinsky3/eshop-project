@@ -48,7 +48,7 @@
                                 <!--Logged in user-->
                                 <!--h4>{{ Auth::user()->name }}</h4-->
                                 <li>
-                                    <a href="">Profil</a>
+                                    <a href="/profile">Profil</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('logout') }}" onclick="logout(event)">Odhlásenie</a>
