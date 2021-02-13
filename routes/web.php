@@ -61,8 +61,13 @@ Route::post('image/', 'ImageController@store'); //*
 
 Route::get('image/{product}/', 'ImageController@show'); //*
 
-Route::get('profile/', function() {
-    return view('templates.profile');
+Route::group(['middleware' => 'auth', 'prefix' => 'profile'], function() {
+    Route::get('/', function() {
+        return view('templates.profile');
+    });
+    Route::get('/info', 'ProfileController@info');
+    Route::get('/orders', 'ProfileController@orders');
 });
+
 
 Auth::routes();

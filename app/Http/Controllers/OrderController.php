@@ -158,6 +158,6 @@ class OrderController extends Controller
         session()->forget('payment');
         session()->forget('transport');
         
-        return redirect('/');
+        return redirect('/profile/orders');
     }
 }

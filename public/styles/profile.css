@@ -1,5 +1,5 @@
 .profile-icon {
-    max-width: 96px;
+    max-width: 70px;
 }
 
 .profile-link {
@@ -8,4 +8,10 @@
 
 .small-text {
     font-size: 0.9rem;
+}
+
+@media (min-width: 576px) {
+    .profile-icon {
+        max-width: 96px;
+    }
 }

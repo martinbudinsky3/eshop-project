@@ -24,7 +24,7 @@
 
     <main class="container mt-2">
         <nav class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-2">
                 <div class="d-flex">
                     <a href="/profile/orders">
                         <img src="../assets/icons/order-icon.png" alt="" class="img-responsive profile-icon">
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
                 <div class="d-flex">
                     <a href="/profile/info">
                         <img src="../assets/icons/profile-icon.png" alt="" class="img-responsive profile-icon">            
@@ -49,12 +49,4 @@
             </div>
         </nav>
     </main>
-@endsection
-
-@section('external-scripts')
-    @include('layout.partials.external-scripts')
-@endsection
-
-@section('custom-scripts')
-    
 @endsection
