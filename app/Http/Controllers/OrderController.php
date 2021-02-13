@@ -17,6 +17,26 @@ use App\Models\Delivery;
 
 class OrderController extends Controller
 {
+    public function show(Order $order)
+    {
+        $orderItems = $order->orderItems;
+
+        $productsPrice = $orderItems->reduce(function ($sum, $item) {
+            return $sum + $item->price;
+        });
+
+        $transportPaymentPrice = $order->price - $productsPrice;
+
+        $transport = $order->transport;
+        $payment = $order->payment;
+
+        return view('templates.order')
+                ->with('order', $order)
+                ->with('orderItems', $orderItems)
+                ->with('transportPaymentPrice', $transportPaymentPrice)
+                ->with('transport', $transport)
+                ->with('payment', $payment);
+    }
     
     public function create(Request $request){
 
@@ -109,9 +129,8 @@ class OrderController extends Controller
         // get cart items from logged user
         $cartItems = [];
         if(Auth::check()){
-            $logged = Auth::user();
-            $cart = $logged->cart->first();
-            $cartItems = $cart->cartItems;   
+            $cart = Auth::user()->cart;
+            $cartItems = $cart->cartItems;
             $cart->delete();
         } 
 
@@ -123,7 +142,6 @@ class OrderController extends Controller
         DB::transaction(function() use ($request, $cartItems) {
             // create delivery record
             $delivery = Delivery::create([
-                //'user_id' => (!Auth::check()) ? null : Auth::user()->id,
                 'name' => $request->post('name'),
                 'email' =>$request->post('email'),
                 'street' =>$request->post('street'),
@@ -138,9 +156,9 @@ class OrderController extends Controller
             $order = Order::create([
                 'user_id' =>(!Auth::check()) ? null : Auth::user()->id,
                 'delivery_id' => $delivery->id,
-                'transport_id' => $request->session()->get('transport', 1),
-                'payment_id' => $request->session()->get('payment', 1),
-                'price' => $request->session()->get('final_price'),
+                'transport_id' => session()->get('transport', 1),
+                'payment_id' => session()->get('payment', 1),
+                'price' => session()->get('final_price'),
             ]);
 
             // create all cart items
@@ -149,6 +167,7 @@ class OrderController extends Controller
                     'product_design_id' => $item->productDesign->id,
                     'amount' => $item->amount,
                     'order_id' => $order->id,
+                    'price' => $item->productDesign->product->price
                 ]);
             }
         });
@@ -157,7 +176,10 @@ class OrderController extends Controller
         session()->forget('cartItems');
         session()->forget('payment');
         session()->forget('transport');
+        session()->forget('final_price');
         
+        session()->flash('message', 'Objednávka bola zaznamenaná.');
+
         return redirect('/profile/orders');
     }
 }

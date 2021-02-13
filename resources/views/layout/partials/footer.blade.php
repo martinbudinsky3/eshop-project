@@ -1,5 +1,5 @@
 <!--Footer-->
-<footer class="container center-col mt-2">
+<footer class="container center-col mt-4">
     <hr class="hr">
     <nav class="row row-m-b">
         <div class="col-12 col-md-3 footer-link">

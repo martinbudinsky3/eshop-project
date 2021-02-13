@@ -1,0 +1,12 @@
+.price-value {
+    color: red;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.overview {
+    max-width: 70px;
+}

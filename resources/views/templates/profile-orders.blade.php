@@ -24,9 +24,12 @@
     </div>
 
     <main class="container mt-2">
+        @if (Session::has('message'))
+            <div class="alert alert-info">{{ Session::get('message') }}</div>
+        @endif
         <section>
-        <h2>Zoznam objednávok</h2>
-            <div class="table-responsive mt-5">
+            <h2>Zoznam objednávok</h2>
+            <div class="table-responsive mt-4">
                 <table class="table">
                     <thead class="thead-light">
                         <tr>
@@ -48,12 +51,4 @@
             </div>
         </section>
     </main>
-@endsection
-
-@section('external-scripts')
-    @include('layout.partials.external-scripts')
-@endsection
-
-@section('custom-scripts')
-    
 @endsection

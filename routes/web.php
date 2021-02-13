@@ -17,10 +17,6 @@ use App\Http\Requests;
 
 Route::get('/', 'IndexController@index');
 
-Route::get('products/', 'ProductController@index');
-
-Route::get('products/{product}/', 'ProductController@show');
-
 Route::get('categories/{category}', 'CategoryController@show');
 
 Route::get('category/', 'CategoryController@index'); //*
@@ -40,6 +36,10 @@ Route::put('cart-item/{id}/', 'CartItemController@update');
 Route::delete('cart-item/{id}/', 'CartItemController@destroy');
 
 Route::get('cart/login/', 'CartController@login');
+
+Route::get('products/', 'ProductController@index');
+
+Route::get('products/{product}/', 'ProductController@show');
 
 Route::get('products/list/{page}/', 'ProductController@list');
 
@@ -68,6 +68,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'profile'], function() {
     Route::get('/info', 'ProfileController@info');
     Route::get('/orders', 'ProfileController@orders');
 });
+
+Route::get('orders/{order}', 'OrderController@show');
 
 
 Auth::routes();
