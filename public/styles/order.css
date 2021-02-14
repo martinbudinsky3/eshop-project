@@ -10,3 +10,15 @@
 .overview {
     max-width: 70px;
 }
+
+.order-data > span {
+    display: block;
+    margin-top: 1px;
+}
+
+.info-table th{
+    color: #a4a4a4;
+    padding-right: 15px;
+    font-weight: normal;
+    vertical-align: top;
+}

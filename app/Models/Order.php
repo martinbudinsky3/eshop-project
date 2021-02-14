@@ -17,4 +17,16 @@ class Order extends Model
     public function orderItems() {
         return $this->hasMany('App\Models\OrderItem');
     }
+
+    public function delivery() {
+        return $this->belongsTo('App\Models\Delivery');
+    }
+
+    public function payment() {
+        return $this->belongsTo('App\Models\Payment');
+    }
+
+    public function transport() {
+        return $this->belongsTo('App\Models\Transport');
+    }
 }

@@ -51,7 +51,6 @@
                         @error('name')
                             <strong class="text-danger">{{ $message }}</strong>
                         @enderror
-
                     </div>
                     <div class="form-group">
                         <label for="email">Email *</label>
@@ -62,7 +61,6 @@
                             @error('email')
                                 <strong class="text-danger">{{ $message }}</strong>
                             @enderror
-
                     </div>
 
                     <div class="form-group">
@@ -73,7 +71,6 @@
                             @error('phone')
                                 <strong class="text-danger">{{ $message }}</strong>
                             @enderror
-
                     </div>
 
                     <div class="form-row">

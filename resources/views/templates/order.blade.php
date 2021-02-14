@@ -71,5 +71,47 @@
                 <p class="text-sm-right price">Cena spolu: <span class="price-value">{{ $order->price }} €</span></p>
             </div>
         </section>
+
+        <hr class="hr">
+
+        <section class="mb-4">
+            <h2>Podrobnosti</h2>
+            <div class="mt-4">
+                <table class="info-table">
+                    <tbody>
+                        <tr>
+                            <th>Doprava</th>
+                            <td>{{ $order->transport->name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Platba</th>
+                            <td>{{ $order->payment->name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Dátum vytvorenia</th>
+                            <td>{{ $order->created_at->toFormattedDateString() }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <hr class="hr">
+
+        <section>
+            <h2>Dodacie údaje</h2>
+            <div class="mt-4 order-data">
+                @php
+                    $delivery = $order->delivery;
+                @endphp
+
+                <b>{{ $delivery->name }}</b>
+                <span>{{ $delivery->email }}</span>
+                <span>{{ $delivery->phone_number }}</span>
+                <span>{{ $delivery->street }}, {{ $delivery->house_number }}</span>
+                <span>{{ $delivery->town }}, {{ $delivery->zip }}</span>
+                <span>{{ $delivery->country }}</span>
+            </div>
+        </section>
     </main>
 @endsection
