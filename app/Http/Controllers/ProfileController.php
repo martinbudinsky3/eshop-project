@@ -19,6 +19,16 @@ class ProfileController extends Controller
         return view('templates.profile-orders')->with('orders', $orders);
     }
 
+    public function info() 
+    {
+        $user = Auth::user();
+        $delivery = $user->delivery;
+
+        return view('templates.profile-info')
+            ->with('user', $user)
+            ->with('delivery', $delivery);
+    }
+
     /**
      * Display a listing of the resource.
      *

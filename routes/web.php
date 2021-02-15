@@ -71,4 +71,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'profile'], function() {
 
 Route::get('orders/{order}', 'OrderController@show')->middleware('auth', 'can:show,order');
 
+Route::group(['middleware' => 'auth', 'prefix' => 'deliveries'], function() {
+    Route::put('/', 'DeliveryController@update');
+    Route::delete('/', 'DeliveryController@destroy');
+});
+
 Auth::routes();

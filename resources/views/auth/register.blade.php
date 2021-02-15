@@ -36,11 +36,6 @@
                 <p class="form-restriction mb-4">* - všetky údaje sú povinné.</p>
 
                 <div class="form-group">
-                    <label for="name">Meno a priezvisko *</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
-                </div>
-
-                <div class="form-group">
                     <label for="email">Email *</label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror"
                         id="email" name="email" value="{{ old('email') }}" required

@@ -47,7 +47,6 @@ class OrderController extends Controller
             $logged = Auth::user();
             $cart = $logged->cart->first();
             $data = array(
-                "name" => $logged->name,
                 'email' => $logged->email,
                 'phone' => $logged->phone,
             );
