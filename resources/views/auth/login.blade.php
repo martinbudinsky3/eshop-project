@@ -19,7 +19,7 @@
                 </ol>
             </nav>
         </div>
-        <hr>
+        <hr class="hr">
     </div>
     <main class="container mt-2">
         <section>

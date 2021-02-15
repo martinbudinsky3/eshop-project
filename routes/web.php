@@ -69,7 +69,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'profile'], function() {
     Route::get('/orders', 'ProfileController@orders');
 });
 
-Route::get('orders/{order}', 'OrderController@show');
-
+Route::get('orders/{order}', 'OrderController@show')->middleware('auth', 'can:show,order');
 
 Auth::routes();
