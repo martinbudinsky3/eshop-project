@@ -45,44 +45,21 @@
                                     Zvoľte dopravu
                                 </legend>
                                 <div>
-                                    <input type="radio" class="radio-input" id="delivery1" value = 1 name="delivery"
-                                        {{ $transport->id == 1 ? 'checked' : '' }} 
-                                        onchange="transportSelectHandler('{{ $transports[0]->name }}', {{ $transports[0]->price }}, {{ $transport->price }}, {{ $final_price }})">
-                                    
-                                    <label class="radio-label" for="delivery1">{{ $transports[0]->name }}</label>
-                                    <div class="row">
-                                        <div class="col price">
-                                            <p class="price-delivery">{{ $transports[0]->price == 0 ? 'Zadarmo' : $transports[0]->price }} €</p>
+                                    @foreach($transports as $transport)
+                                        <input type="radio" class="radio-input" id="delivery{{ $transport->id }}" value={{ $transport->id }} name="delivery"
+                                            {{ $selectedTransport->id == $transport->id ? 'checked' : '' }} 
+                                            onchange="transportSelectHandler('{{ $transport->name }}', {{ $transport->price }}, {{ $selectedTransport->price }}, {{ $final_price }})">
+                                        
+                                        <label class="radio-label" for="delivery1">{{ $transport->name }}</label>
+                                        <div class="row">
+                                            <div class="col price">
+                                                <p class="price-delivery">{{ $transport->price == 0 ? 'Zadarmo' : $transport->price }} €</p>
+                                            </div>
+                                            <!--div class="col">
+                                                <p class="time-delivery"> dnes od 15:00</p>
+                                            </div-->
                                         </div>
-                                        <div class="col">
-                                            <p class="time-delivery"> dnes od 15:00</p>
-                                        </div>
-                                    </div>
-
-                                    <input type="radio" class="radio-input" id="delivery2"  value=2 name="delivery"
-                                        {{ $transport->id == 2 ? 'checked' : '' }} 
-                                        onchange="transportSelectHandler('{{ $transports[1]->name }}', {{ $transports[1]->price }}, {{ $transport->price }}, {{ $final_price }})">
-                                    <label class="radio-label" for="delivery2">{{ $transports[1]->name }}</label>
-                                    <div class="row">
-                                        <div class="col price">
-                                            <p class="price-delivery">{{ $transports[1]->price == 0 ? 'Zadarmo' : $transports[1]->price }} €</p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="time-delivery">5.10</p>
-                                        </div>
-                                    </div>
-                                    <input type="radio" class="radio-input" id="delivery3" value =3  name="delivery"
-                                        {{ $transport->id == 3 ? 'checked' : '' }} 
-                                        onchange="transportSelectHandler('{{ $transports[2]->name }}', {{ $transports[2]->price }}, {{ $transport->price }}, {{ $final_price }})">
-                                    <label class="radio-label" for="delivery3">{{ $transports[2]->name }}</label>
-                                    <div class="row">
-                                        <div class="col price">
-                                            <p class="price-delivery">{{ $transports[2]->price == 0 ? 'Zadarmo' : $transports[2]->price }} €</p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="time-delivery">zajtra</p>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </fieldset>
                         </div>
@@ -91,56 +68,16 @@
                                 <legend class="select-title">
                                     Zvoľte platbu
                                 </legend>
-                                <div class="radio-buttons">
-                                    <div>
-                                        <input type="radio" class="radio-input" id="pay4" name="pay" value=1 
-                                            {{ $payment->id == 1 ? 'checked' : '' }} 
-                                            onchange="paymentSelectHandler('{{ $payments[0]->name }}', {{ $payments[0]->price }}, {{ $payment->price }}, {{ $final_price }})">
-                                        <label class="radio-label" for="pay4">{{ $payments[0]->name }}</label>
+                                <div>
+                                    @foreach($payments as $payment)
+                                        <input type="radio" class="radio-input" id="pay{{ $payment->id }}" name="pay" value={{ $payment->id }}
+                                            {{ $payment->id == $selectedPayment->id ? 'checked' : '' }} 
+                                            onchange="paymentSelectHandler('{{ $payment->name }}', {{ $payment->price }}, {{ $selectedPayment->price }}, {{ $final_price }})">
+                                        <label class="radio-label" for="pay4">{{ $payment->name }}</label>
                                         <div class="price">
-                                            <p class="pay-description">{{ $payments[0]->price == 0 ? 'Zadarmo' : $payments[0]->price }} €</p>
+                                            <p class="pay-description">{{ $payment->price == 0 ? 'Zadarmo' : $payment->price }} €</p>
                                         </div>
-                                    </div>
-
-                                    <div>
-                                        <input type="radio" class="radio-input" id="pay1" name="pay"  value=2 
-                                            {{ $payment->id == 2 ? 'checked' : '' }} 
-                                            onchange="paymentSelectHandler('{{ $payments[1]->name }}', {{ $payments[1]->price }}, {{ $payment->price }}, {{ $final_price }})">
-                                        <label class="radio-label" for="pay1">{{ $payments[1]->name }}</label>
-                                        <div class="price">
-                                            <p class="pay-description">{{ $payments[1]->price == 0 ? 'Zadarmo' : $payments[1]->price }} €</p>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <input type="radio" class="radio-input" id="pay2" name="pay" value=3 
-                                            {{ $payment->id == 3 ? 'checked' : '' }} 
-                                            onchange="paymentSelectHandler('{{ $payments[2]->name }}', {{ $payments[2]->price }}, {{ $payment->price }}, {{ $final_price }})">
-                                        <label class="radio-label" for="pay2">{{ $payments[2]->name }}</label>
-                                        <div class="price">
-                                            <p class="pay-description">{{ $payments[2]->price == 0 ? 'Zadarmo' : $payments[2]->price }} €</p>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <input type="radio" class="radio-input" id="pay3" name="pay" value=4 
-                                            {{ $payment->id == 4 ? 'checked' : '' }} 
-                                            onchange="paymentSelectHandler('{{ $payments[3]->name }}', {{ $payments[3]->price }}, {{ $payment->price }}, {{ $final_price }})">
-                                        <label class="radio-label" for="pay3">{{ $payments[3]->name }}</label>
-                                        <div class="price">
-                                            <p class="pay-description">{{ $payments[3]->price == 0 ? 'Zadarmo' : $payments[3]->price }} €</p>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <input type="radio" class="radio-input" id="pay5" name="pay" value="5" 
-                                            {{ $payment->id == 5 ? 'checked' : '' }} 
-                                            onchange="paymentSelectHandler('{{ $payments[4]->name }}', {{ $payments[4]->price }}, {{ $payment->price }}, {{ $final_price }})">
-                                        <label class="radio-label" for="pay3">{{ $payments[4]->name }}</label>
-                                        <div class="price">
-                                            <p class="pay-description">{{ $payments[4]->price == 0 ? 'Zadarmo' : $payments[4]->price }} €</p>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </fieldset>
                         </div>

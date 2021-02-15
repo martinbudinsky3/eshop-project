@@ -131,8 +131,8 @@ class CartController extends Controller
         $payments = Payment::all();
 
         return view('templates.cart2')
-            ->with('transport', $transport)
-            ->with('payment', $payment)
+            ->with('selectedTransport', $transport)
+            ->with('selectedPayment', $payment)
             ->with('final_price', $final_price)
             ->with('transports', $transports)
             ->with('payments', $payments);
