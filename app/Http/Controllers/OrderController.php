@@ -40,18 +40,13 @@ class OrderController extends Controller
     
     public function create(Request $request){
 
-        $data = [];
-
-        // get cart items and some personal info from logged user
+        $delivery = null;
+        // get cart items from logged user
         if(Auth::check()){
             $logged = Auth::user();
             $cart = $logged->cart->first();
-            $data = array(
-                'email' => $logged->email,
-                'phone' => $logged->phone,
-            );
-
-            $cartItems = $cart->cartItems;   
+            $cartItems = $cart->cartItems;
+            $delivery = $logged->delivery;
         } 
 
         // get cart items from guest
@@ -108,7 +103,7 @@ class OrderController extends Controller
             ->with('transport_price', $transport_price)
             ->with('items_price', $items_price)
             ->with('final_price', $final_price)
-            ->with('data', $data);
+            ->with('delivery', $delivery);
     }
 
     public function store(Request $request){
