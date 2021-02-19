@@ -35,12 +35,23 @@
 
                 <div class="form-group">
                     <label for="current_password" class="col-form-label">Staré heslo:</label>
-                    <input type="password" id="current_password" class="form-control" 
+                    <input type="password" id="current_password" class="form-control @error('current_password') is-invalid @enderror" 
                         name="current_password">
+                    @error('current_password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="new_password" class="col-form-label">Nové heslo:</label>
-                    <input type="password" id="new_password" class="form-control" name="new_password">
+                    <input type="password" id="new_password" class="form-control @error('new_password') is-invalid @enderror"
+                        name="new_password">
+                    @error('new_password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="new_password_confirmation" class="col-form-label">Potvrdenie nového hesla:</label>
