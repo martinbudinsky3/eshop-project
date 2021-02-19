@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('custom-css')
-    <link rel="stylesheet" href="{{ asset('styles/profile.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/profile-info.css') }}">
 @endsection
 
 @section('title')
@@ -23,42 +23,90 @@
         <hr class="hr">
     </div>
     <main class="container mt-2">
-        <!--section class="mb-4">
+        <!--Phone number change modal-->
+        <div class="modal fade" id="modal-phone" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Zmena telefónneho čísla</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="phone" class="col-form-label">Telefónne číslo:</label>
+                                <input type="text" class="form-control" id="phone" name="phone">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary">Zmeniť</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Password change modal-->
+        <div class="modal fade" id="modal-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Zmena telefónneho čísla</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="phone" class="col-form-label">Staré heslo:</label>
+                                <input type="text" class="form-control" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="col-form-label">Nové heslo:</label>
+                                <input type="text" class="form-control" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="col-form-label">Nové heslo:</label>
+                                <input type="text" class="form-control" id="phone" name="phone">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary">Zmeniť</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="mb-5">
             <h3>Registračné údaje</h3>
                     
-            <form action="" method="POST">
-                @csrf
-                <p class="form-restriction mb-4">* - všetky údaje sú povinné.</p>
-
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror"
-                        id="email" name="email" value="{{ old('email') }}" required
-                        autocomplete="email" placeholder="napr. priklad@mail.sk">
-                    @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="phone">Telefónne číslo *</label>
-                    <input type="text" class="form-control @error('phone') is-invalid @enderror" 
-                        id="phone" name="phone" value="{{ old('phone') }}" required
-                        placeholder="napr. +421012345678">
-                    @error('phone')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <button class="btn btn-primary mb-3" type="submit">Upraviť</button>
-            </form>
+            <table class="mt-4 mb-4 registration-info table-responsive">
+                <tbody>
+                    <tr>
+                        <th>Email:</th>
+                        <td>
+                            {{ Auth::user()->email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Telefónne číslo:</th>
+                        <td>
+                            {{ Auth::user()->phone }}
+                            <button class="button-icon" data-toggle="modal" data-target="#modal-phone">
+                                <img class="img-responsive" src="../assets/icons/edit_icon.png" alt="">
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-password">Zmeniť heslo</button>
         </section>
 
-        <hr class="hr"-->
+        <hr class="hr">
 
         <section>
             <h3>Dodacie údaje</h3>
@@ -158,4 +206,8 @@
             @endif
         </section>
     </main>
+@endsection
+
+@section('external-scripts')
+    @include('layout.partials.external-scripts')
 @endsection

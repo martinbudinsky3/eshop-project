@@ -1,0 +1,39 @@
+.button-icon {
+    background-color: white;
+    max-width: 16px;
+    max-height: 16px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.button-icon:focus {
+   outline: none;
+}
+
+.registration-info th {
+    font-weight: normal;
+    padding-right: 20px;
+    vertical-align: top;
+}
+
+.registration-info td {
+    vertical-align: bottom;
+    padding-bottom: 10px;
+}
+
+
+@media (min-width: 576px) {
+
+    .registration-info th {
+        padding-right: 30px;
+    }
+}
+
+@media (min-width: 767px) {
+
+    .registration-info th {
+        padding-right: 40px;
+    }
+}
