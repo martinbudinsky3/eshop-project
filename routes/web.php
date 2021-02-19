@@ -63,10 +63,13 @@ Route::get('image/{product}/', 'ImageController@show'); //*
 
 Route::group(['middleware' => 'auth', 'prefix' => 'profile'], function() {
     Route::get('/', function() {
-        return view('templates.profile');
+        return view('templates.profile.profile');
     });
-    Route::get('/info', 'ProfileController@info');
-    Route::get('/orders', 'ProfileController@orders');
+    Route::get('settings/', function() {
+        return view('templates.profile.settings');
+    });
+    Route::get('info/', 'ProfileController@info');
+    Route::get('orders/', 'ProfileController@orders');
 });
 
 Route::get('orders/{order}', 'OrderController@show')->middleware('auth', 'can:show,order');
@@ -74,6 +77,11 @@ Route::get('orders/{order}', 'OrderController@show')->middleware('auth', 'can:sh
 Route::group(['middleware' => 'auth', 'prefix' => 'deliveries'], function() {
     Route::put('/', 'DeliveryController@update');
     Route::delete('/', 'DeliveryController@destroy');
+});
+
+Route::group(['middleware' => 'auth', 'prefix' => 'user'], function() {
+    Route::put('password/', 'UserController@changePassword')->name('change.password');
+    Route::put('phone/', 'UserController@changePhone')->name('change.phone');
 });
 
 Auth::routes();

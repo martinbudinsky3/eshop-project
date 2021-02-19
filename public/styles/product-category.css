@@ -73,6 +73,10 @@ select {
     padding-right: 5%;
 }
 
+select, select option {
+    background-color: white;
+}
+
 select:focus {
     outline: none;
 }

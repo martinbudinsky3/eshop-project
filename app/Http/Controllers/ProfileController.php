@@ -16,7 +16,7 @@ class ProfileController extends Controller
     {
         $orders = Auth::user()->orders;
 
-        return view('templates.profile-orders')->with('orders', $orders);
+        return view('templates.profile.orders')->with('orders', $orders);
     }
 
     public function info() 
@@ -24,7 +24,7 @@ class ProfileController extends Controller
         $user = Auth::user();
         $delivery = $user->delivery;
 
-        return view('templates.profile-info')
+        return view('templates.profile.info')
             ->with('user', $user)
             ->with('delivery', $delivery);
     }

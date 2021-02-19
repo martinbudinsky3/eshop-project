@@ -34,7 +34,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="/user/phone" method="POST">
+                            @csrf
+                            <input type="hidden" name="_method" value="PUT">
+                            
                             <div class="form-group">
                                 <label for="phone" class="col-form-label">Telefónne číslo:</label>
                                 <input type="text" class="form-control" id="phone" name="phone">
@@ -59,7 +62,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="/user/password" method="POST">
+                            @csrf
+                            <input type="hidden" name="_method" value="PUT">
+
                             <div class="form-group">
                                 <label for="phone" class="col-form-label">Staré heslo:</label>
                                 <input type="text" class="form-control" id="phone" name="phone">
@@ -96,14 +102,14 @@
                         <th>Telefónne číslo:</th>
                         <td>
                             {{ Auth::user()->phone }}
-                            <button class="button-icon" data-toggle="modal" data-target="#modal-phone">
-                                <img class="img-responsive" src="../assets/icons/edit_icon.png" alt="">
-                            </button>
+                            <a href="/profile/settings/#change-phone" class="button-icon">
+                                <img class="edit-icon img-responsive" src="../assets/icons/edit_icon.png" alt="">
+                            </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-password">Zmeniť heslo</button>
+            <a href="/profile/settings/#change-password" class="btn btn-primary">Zmeniť heslo</a>
         </section>
 
         <hr class="hr">
@@ -119,7 +125,7 @@
 
                 <div class="form-group">
                     <label for="name">Meno a priezvisko *</label>
-                    <input type="text" class="text-input form-control" id="name" name="name" required
+                    <input type="text" class="form-control" id="name" name="name" required
                         value="{{ $delivery ? $delivery->name : old('name') }}">
                     @error('name')
                         <strong class="text-danger">{{ $message }}</strong>
@@ -127,7 +133,7 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email *</label>
-                    <input type="email" class="text-input form-control  @error('email') is-invalid @enderror"  required
+                    <input type="email" class="form-control  @error('email') is-invalid @enderror"  required
                             autocomplete="email" id="email" name="email" placeholder="napr. priklad@mail.com"
                             value = "{{ $delivery ? $delivery->email : old('email') }}">
 
@@ -138,7 +144,7 @@
 
                 <div class="form-group">
                     <label for="phone">Telefónne číslo *</label>
-                    <input type="tel" class="text-input form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder=" napr. +421999888777"
+                    <input type="tel" class="form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder=" napr. +421999888777"
                         value = "{{ $delivery ? $delivery->phone_number : old('phone') }}">
                         
                         @error('phone')
@@ -149,7 +155,7 @@
                 <div class="form-row">
                     <div class="col-sm-8 col-md-8 form-group">
                         <label for="street">Ulica *</label>
-                        <input type="text" class="text-input form-control" id="street" name="street" required
+                        <input type="text" class="form-control" id="street" name="street" required
                             value="{{ $delivery ? $delivery->street : old('street') }}">
 
                         @error('street')
@@ -158,7 +164,7 @@
                     </div>
                     <div class="col-sm-4 col-md-4 form-group">
                         <label for="numb">Číslo domu *</label>
-                        <input type="text" class="text-input form-control" id="numb" name="numb" required
+                        <input type="text" class="form-control" id="numb" name="numb" required
                             value="{{ $delivery ? $delivery->house_number : old('numb') }}">
                         @error('numb')
                             <strong class="text-danger">{{ $message }}</strong>
@@ -169,7 +175,7 @@
                 <div class="form-row">
                     <div class="col-sm-8 col-md-8 form-group ">
                         <label for="town">Mesto *</label>
-                        <input type="text" class="text-input form-control" id="town" name="town" required
+                        <input type="text" class="form-control" id="town" name="town" required
                             value="{{ $delivery ? $delivery->town : old('town') }}">
                         @error('town')
                             <strong class="text-danger">{{ $message }}</strong>
@@ -177,7 +183,7 @@
                     </div>
                     <div class="col-sm-4 col-md-4 form-group">
                         <label for="zip">PSČ *</label>
-                        <input type="text" class="text-input form-control" id="zip" name="zip" required placeholder="napr. 96801"
+                        <input type="text" class="form-control" id="zip" name="zip" required placeholder="napr. 96801"
                             value="{{ $delivery ? $delivery->zip : old('zip') }}">
                         @error('zip')
                             <strong class="text-danger">{{ $message }}</strong>
@@ -187,7 +193,7 @@
 
                 <div class="form-group ">
                     <label for="country">Krajina *</label>
-                    <input type="text" class="text-input form-control" id="country" name="country" required
+                    <input type="text" class="form-control" id="country" name="country" required
                         value="{{ $delivery ? $delivery->country : old('country') }}">
                     @error('country')
                         <strong class="text-danger">{{ $message }}</strong>

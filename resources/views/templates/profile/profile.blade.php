@@ -43,7 +43,19 @@
                     </a>
                     <div class="p-2">
                         <a href="/profile/info" class="profile-link">Osobné údaje</a>
-                        <p class="small-text">Upravte svoje osobné údaje</p>
+                        <p class="small-text">Zobrazte a upravte svoje osobné údaje</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
+                <div class="d-flex">
+                    <a href="/profile/settings">
+                        <img src="../assets/icons/settings.png" alt="" class="img-responsive profile-icon">            
+                    </a>
+                    <div class="p-2">
+                        <a href="/profile/settings" class="profile-link">Nastavenia</a>
+                        <p class="small-text">Zmeňte heslo alebo iné nastavenia svojho účtu</p>
                     </div>
                 </div>
             </div>

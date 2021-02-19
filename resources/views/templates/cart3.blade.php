@@ -45,7 +45,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="name">Meno a priezvisko *</label>
-                    <input type="text" class="text-input form-control" id="name" name="name" required
+                    <input type="text" class="form-control" id="name" name="name" required
                         value="{{ old('name') ? old('name') : ($delivery ? $delivery->name : '') }}">
                     @error('name')
                         <strong class="text-danger">{{ $message }}</strong>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Email *</label>
-                    <input type="email" class="text-input form-control  @error('email') is-invalid @enderror"  required
+                    <input type="email" class="form-control  @error('email') is-invalid @enderror"  required
                             autocomplete="email" id="email" name="email" placeholder="napr. priklad@mail.com"
                             value = "{{ old('email') ? old('email') : ($delivery ? $delivery->email : '') }}">
 
@@ -64,7 +64,7 @@
 
                 <div class="form-group">
                     <label for="phone">Telefónne číslo *</label>
-                    <input type="tel" class="text-input form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder=" napr. +421999888777"
+                    <input type="tel" class="form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder=" napr. +421999888777"
                         value = "{{ old('phone') ? old('phone') : ($delivery ? $delivery->phone_number : '') }}">
                         
                         @error('phone')
@@ -75,7 +75,7 @@
                 <div class="form-row">
                     <div class="col-sm-8 col-md-8 form-group">
                         <label for="street">Ulica *</label>
-                        <input type="text" class="text-input form-control" id="street" name="street" required
+                        <input type="text" class="form-control" id="street" name="street" required
                             value="{{ old('street') ? old('street') : ($delivery ? $delivery->street : '') }}">
 
                         @error('street')
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-sm-4 col-md-4 form-group">
                         <label for="numb">Číslo domu *</label>
-                        <input type="text" class="text-input form-control" id="numb" name="numb" required
+                        <input type="text" class="form-control" id="numb" name="numb" required
                             value="{{ old('numb') ? old('numb') : ($delivery ? $delivery->house_number : '') }}">
                         @error('numb')
                             <strong class="text-danger">{{ $message }}</strong>
@@ -95,7 +95,7 @@
                 <div class="form-row">
                     <div class="col-sm-8 col-md-8 form-group ">
                         <label for="town">Mesto *</label>
-                        <input type="text" class="text-input form-control" id="town" name="town" required
+                        <input type="text" class="form-control" id="town" name="town" required
                             value="{{ old('town') ? old('town') : ($delivery ? $delivery->town : '') }}">
                         @error('town')
                             <strong class="text-danger">{{ $message }}</strong>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-sm-4 col-md-4 form-group">
                         <label for="zip">PSČ *</label>
-                        <input type="text" class="text-input form-control" id="zip" name="zip" required placeholder="napr. 96801"
+                        <input type="text" class="form-control" id="zip" name="zip" required placeholder="napr. 96801"
                         value="{{ old('zip') ? old('zip') : ($delivery ? $delivery->zip : '') }}">
                         @error('zip')
                             <strong class="text-danger">{{ $message }}</strong>
@@ -113,7 +113,7 @@
 
                 <div class="form-group ">
                     <label for="country">Krajina *</label>
-                    <input type="text" class="text-input form-control" id="country" name="country" required
+                    <input type="text" class="form-control" id="country" name="country" required
                         value="{{ old('country') ? old('country') : ($delivery ? $delivery->country : '') }}">
                     @error('country')
                         <strong class="text-danger">{{ $message }}</strong>

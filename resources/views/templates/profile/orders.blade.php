@@ -24,8 +24,8 @@
     </div>
 
     <main class="container mt-2">
-        @if (Session::has('message'))
-            <div class="alert alert-info">{{ Session::get('message') }}</div>
+        @if (Session::has('success'))
+            <div class="alert alert-success">{{ Session::get('success') }}</div>
         @endif
         <section>
             <h2>Zoznam objednávok</h2>

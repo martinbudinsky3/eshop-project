@@ -73,7 +73,7 @@
 
                 <div class="form-group">
                     <label for="phone">Telefónne číslo *</label>
-                    <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required
+                    <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="{{ old('phone') }}" required
                         placeholder="napr. +421012345678">
                     @error('phone')
                         <span class="invalid-feedback" role="alert">

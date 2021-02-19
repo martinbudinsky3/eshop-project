@@ -30,7 +30,7 @@ class OrderController extends Controller
         $transport = $order->transport;
         $payment = $order->payment;
 
-        return view('templates.order')
+        return view('templates.profile.order')
                 ->with('order', $order)
                 ->with('orderItems', $orderItems)
                 ->with('transportPaymentPrice', $transportPaymentPrice)
@@ -106,6 +106,7 @@ class OrderController extends Controller
             ->with('delivery', $delivery);
     }
 
+
     public function store(Request $request){
 
         // validation
@@ -172,7 +173,7 @@ class OrderController extends Controller
         session()->forget('transport');
         session()->forget('final_price');
         
-        session()->flash('message', 'Objednávka bola zaznamenaná.');
+        session()->flash('success', 'Objednávka bola zaznamenaná.');
 
         return redirect('/profile/orders');
     }
