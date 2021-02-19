@@ -13,19 +13,17 @@ class UserController extends Controller
 {
     public function changePhone(Request $request)
     {
-        /*$request->validate([
-            'current_password' => ['required', new MatchOldPassword],
-            'new_password' => ['required'],
-            'new_confirm_password' => ['same:new_password'],
+        $request->validate([
+            'phone' => ['required', 'string', 'between:10,16'],
         ]);
    
         $user = Auth::user();
-        $user->password = Hash::make($request->new_password);
+        $user->phone = $request->phone;
         $user->save();
         
-        session()->flash('Heslo bolo úspešne zmenené');*/
+        session()->flash('success', 'Telefónne číslo bolo úspešne zmenené');
 
-        return redirect('/profile/info');
+        return redirect('/profile/settings');
     }
 
     public function changePassword(Request $request)
