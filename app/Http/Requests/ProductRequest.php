@@ -32,7 +32,8 @@ class ProductRequest extends FormRequest
             'product_designs' => 'required|array',
             'product_designs.*.color' => 'required|array',
             'product_designs.*.size' => 'required',
-            'product_designs.*.quantity' => 'required'
+            'product_designs.*.quantity' => 'required',
+            'image' => 'required|array'
         ];
     }
 }

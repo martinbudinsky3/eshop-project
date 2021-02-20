@@ -12,12 +12,18 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
-
+use App\Services\ImageService;
 
 class ProductController extends Controller
 {
     use ProductsTrait;
-    //
+    
+    protected $imageService;
+
+    public function __construct(ImageService $imageService)
+    {
+        $this->imageService = $imageService;
+    }
 
     /**
      * Display a listing of the resource.
@@ -149,7 +155,8 @@ class ProductController extends Controller
                 'product_id' => $product->id,
                 'category_id' => $request->category_id
             ]);
-
+            
+            $this->imageService->store($request->file('image'), $product->id);
         });
 
         return response()->json(['id' => $product->id]);

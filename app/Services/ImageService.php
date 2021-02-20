@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -8,36 +7,28 @@ use Illuminate\Http\UploadedFile;
 use Intervention\Image\ImageManagerStatic as ImgService;
 use App\Models\Image;
 
-
-class ImageController extends Controller
+class MyService
 {
-
     /**
-     * Show images of given product
+     * Get images of given product
      */
-    public function show($id) {
+    public function getProductImages($productId) {
 
-        $images = Image::where('product_id', $id)->get();
+        $images = Image::where('product_id', $productId)->get();
 
         foreach($images as $image) {
             $image->path = $image->path.'_520x728.jpg';
         }
 
-        return response()->json($images);
+        return $images;
     }
-    
+
     /**
      * Upload images
      */
-    public function store(Request $request)
+    public function store($images, $productId)
     {
-
-        $request->validate([
-            'productId' => 'required',
-            'image' => 'required|array'
-        ]);
-
-        foreach($request->file('image') as $uploadedImage){
+        foreach($images as $uploadedImage){
             // get image name and extension
             $file = $uploadedImage->getClientOriginalName();
             $filename = pathinfo($file, PATHINFO_FILENAME);
@@ -64,7 +55,6 @@ class ImageController extends Controller
             $image_lg->save(public_path($path_sm));
 
             // save image to DB
-            $productId = $request->productId;
             $pathDB = dirname($path_lg) . '/' . $filename;
             Image::create([
                 'product_id' => $productId,
