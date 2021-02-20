@@ -19,8 +19,6 @@ Route::get('/', 'IndexController@index');
 
 Route::get('categories/{category}', 'CategoryController@show');
 
-Route::get('category/', 'CategoryController@index'); //*
-
 Route::get('cart/', 'CartController@show');
 
 Route::get('cart/delivery/', 'CartController@delivery')->middleware('cart');
@@ -40,26 +38,6 @@ Route::get('cart/login/', 'CartController@login');
 Route::get('products/', 'ProductController@index');
 
 Route::get('products/{product}/', 'ProductController@show');
-
-Route::get('products/list/{page}/', 'ProductController@list');
-
-Route::delete('products/{product}/', 'ProductController@destroy');
-
-Route::post('products/', 'ProductController@store');
-
-Route::get('products/{product}/edit/', 'ProductController@edit');
-
-Route::put('products/{product}/', 'ProductController@update');
-
-Route::get('brand/', 'BrandController@index'); //*
-
-Route::get('color/', 'ColorController@index'); //*
-
-Route::get('size/', 'SizeController@index'); //*
-
-Route::post('image/', 'ImageController@store'); //*
-
-Route::get('image/{product}/', 'ImageController@show'); //*
 
 Route::group(['middleware' => 'auth', 'prefix' => 'profile'], function() {
     Route::get('/', function() {

@@ -120,20 +120,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         // validation      
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'brand_id' => 'required',
-            'material' => 'required',
-            'product_designs' => 'required|array',
-            'product_designs.*.color' => 'required|array',
-            'product_designs.*.size' => 'required',
-            'product_designs.*.quantity' => 'required'
-        ]);
+        $validated = $request->validate();
 
         $productDesigns = $request->product_designs;
 
@@ -236,20 +226,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         // validation
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'brand_id' => 'required',
-            'material' => 'required',
-            'product_designs' => 'required|array',
-            'product_designs.*.color' => 'required|array',
-            'product_designs.*.size' => 'required',
-            'product_designs.*.quantity' => 'required'
-        ]);
+        $validated = $request->validate();
         
         DB::transaction(function() use($request, $id) {
 
