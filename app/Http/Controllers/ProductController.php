@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 use App\Services\ImageService;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -129,7 +130,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         // validation      
-        $validated = $request->validate();
+        $validated = $request->validated();
 
         $productDesigns = $request->product_designs;
 
@@ -236,7 +237,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $id)
     {
         // validation
-        $validated = $request->validate();
+        $validated = $request->validated();
         
         DB::transaction(function() use($request, $id) {
 

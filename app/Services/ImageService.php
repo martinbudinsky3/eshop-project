@@ -7,7 +7,7 @@ use Illuminate\Http\UploadedFile;
 use Intervention\Image\ImageManagerStatic as ImgService;
 use App\Models\Image;
 
-class MyService
+class ImageService
 {
     /**
      * Get images of given product
