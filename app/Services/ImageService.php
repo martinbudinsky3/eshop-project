@@ -27,7 +27,7 @@ class ImageService
      * Upload images
      */
     public function store($images, $productId)
-    {
+    {        
         foreach($images as $uploadedImage){
             // get image name and extension
             $file = $uploadedImage->getClientOriginalName();

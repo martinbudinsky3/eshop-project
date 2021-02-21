@@ -145,7 +145,7 @@ class ProductController extends Controller
 
             foreach($productDesigns as $productDesign) {
                 ProductDesign::create([
-                    'color_id' => $productDesign['color']['id'],
+                    'color_id' => $productDesign['color'],
                     'size' => $productDesign['size'],
                     'quantity' => $productDesign['quantity'],
                     'product_id' => $product->id
@@ -157,11 +157,10 @@ class ProductController extends Controller
                 'category_id' => $request->category_id
             ]);
             
-            $this->imageService->store($request->file('image'), $product->id);
+            $this->imageService->store($request->file('images'), $product->id);
         });
 
         return response()->json(['id' => $product->id]);
-
     }
 
     /**
