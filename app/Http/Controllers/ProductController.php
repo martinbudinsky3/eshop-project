@@ -223,7 +223,12 @@ class ProductController extends Controller
 
         $product = Product::with('categories.parentCategories', 'productDesigns.color', 'brand')->find($id);
         
-        return response()->json($product);
+        $images = $this->imageService->getProductImages($product->id);
+
+        return response()->json(array(
+            'product' => $product,
+            'images' => $images,
+        ));
     }
 
     /**
