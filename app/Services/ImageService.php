@@ -62,4 +62,17 @@ class ImageService
             ]);
         }
     }
+
+
+    public function deleteImages($deletedImages) {
+        foreach($deletedImages as $deletedImage) {
+
+            // delete physically
+            $directory = dirname($deletedImage['path']);
+            Storage::deleteDirectory($directory);
+
+            // delete from db
+            Image::where('id', $deletedImage['id'])->delete();
+        }
+    }
 }

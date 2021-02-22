@@ -13,7 +13,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 use App\Services\ImageService;
-use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductPostRequest;
+use App\Http\Requests\ProductPutRequest;
+
 
 class ProductController extends Controller
 {
@@ -127,11 +129,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(ProductPostRequest $request)
     {
-        // validation      
-        $validated = $request->validated();
-
         $productDesigns = $request->product_designs;
 
         DB::transaction(function() use ($productDesigns, $request, &$product) {
@@ -160,7 +159,7 @@ class ProductController extends Controller
             $this->imageService->store($request->file('images'), $product->id);
         });
 
-        return response()->json(['id' => $product->id]);
+        return response()->json(['id' => $product->id, 'success' => 'Produkt bol úspešne vytvorený']);
     }
 
     /**
@@ -238,7 +237,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, $id)
+    public function update(ProductPutRequest $request, $id)
     {
         // validation
         $validated = $request->validated();
@@ -257,11 +256,13 @@ class ProductController extends Controller
             $product->save();
 
             // destroy deleted product designs
-            $deletedProductDesigns = $request->deleted_designs;
-            foreach($deletedProductDesigns as $deletedProductDesign) {
+            if($request->has('deleted_designs')) {
+                $deletedProductDesigns = $request->deleted_designs;
+                foreach($deletedProductDesigns as $deletedProductDesign) {
 
-                $designToDelete = ProductDesign::find($deletedProductDesign['id']);
-                $designToDelete->delete();
+                    $designToDelete = ProductDesign::find($deletedProductDesign['id']);
+                    $designToDelete->delete();
+                }
             }
 
             // update or create product designs
@@ -270,14 +271,14 @@ class ProductController extends Controller
                 if(!isset($productDesign['id'])) { // create product design
 
                     ProductDesign::create([
-                        'color_id' => $productDesign['color']['id'],
+                        'color_id' => $productDesign['color'],
                         'size' => $productDesign['size'],
                         'quantity' => $productDesign['quantity'],
                         'product_id' => $product->id
                     ]);
                 } else { // update existing product design
                     $oldProductDesign = ProductDesign::find($productDesign['id']);
-                    $oldProductDesign->color_id = $productDesign['color']['id'];
+                    $oldProductDesign->color_id = $productDesign['color'];
                     $oldProductDesign->size = $productDesign['size'];
                     $oldProductDesign->quantity = $productDesign['quantity'];
 
@@ -292,11 +293,14 @@ class ProductController extends Controller
             $oldProductCategory->save();
 
             // delete images
-            $deletedImages = $request->deleted_images;
-            $this->deleteImages($deletedImages);
+            if($request->has('deleted_images')) {
+                $deletedImages = $request->deleted_images;
+                $this->imageService->deleteImages($deletedImages);
+            }
+            
         });
 
-        return response()->json(['status' => 'success', 'msg' => 'Product updated successfully']); 
+        return response()->json(['success' => 'Produkt bol úspešne editovaný']); 
     }
 
     /**
@@ -316,7 +320,7 @@ class ProductController extends Controller
             $product->delete();
 
             // delete images
-            $this->deleteImages($deletedImages);
+            $this->imageService->deleteImages($deletedImages);
         });
 
         return response()->json(['status' => 'success', 'msg' => 'Product deleted successfully']);
@@ -330,18 +334,4 @@ class ProductController extends Controller
 
         return $str;
     }
-
-    public function deleteImages($deletedImages) {
-        foreach($deletedImages as $deletedImage) {
-
-            // delete physically
-            $directory = dirname($deletedImage['path']);
-
-            Storage::deleteDirectory($directory);
-
-            // delete from db
-            Image::where('id', $deletedImage['id'])->delete();
-        }
-    }
-
 }
