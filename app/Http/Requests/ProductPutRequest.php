@@ -41,4 +41,14 @@ class ProductPutRequest extends FormRequest
             'deleted_images.*.id' => 'required|integer'
         ];
     }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = array();
+        foreach ($validator->errors()->toArray() as $key => $value) {
+            array_set($errors, $key, $value);
+        }
+
+        throw new HttpResponseException(response()->json(['errors' => $errors], 422));
+    }
 }

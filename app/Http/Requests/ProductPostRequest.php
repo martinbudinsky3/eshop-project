@@ -5,9 +5,13 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Log;
 
 class ProductPostRequest extends FormRequest
 {
+    public function wantsJson() {
+        return false;
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -36,12 +40,17 @@ class ProductPostRequest extends FormRequest
             'product_designs.*.size' => 'required|string',
             'product_designs.*.quantity' => 'required|integer',
             'images' => 'required|array',
-            'images.*' => 'mimes:jpg'
+            'images' => 'mimes:jpg'
         ];
     }
 
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()], 422));
+        $errors = array();
+        foreach ($validator->errors()->toArray() as $key => $value) {
+            array_set($errors, $key, $value);
+        }
+
+        throw new HttpResponseException(response()->json(['errors' => $errors], 422));
     }
 }
