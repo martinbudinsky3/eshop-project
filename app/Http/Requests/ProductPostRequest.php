@@ -12,6 +12,7 @@ class ProductPostRequest extends FormRequest
     public function wantsJson() {
         return false;
     }
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -40,7 +41,7 @@ class ProductPostRequest extends FormRequest
             'product_designs.*.size' => 'required|string',
             'product_designs.*.quantity' => 'required|integer',
             'images' => 'required|array',
-            'images' => 'mimes:jpg'
+            'images.*' => 'mimes:jpg'
         ];
     }
 
@@ -52,5 +53,15 @@ class ProductPostRequest extends FormRequest
         }
 
         throw new HttpResponseException(response()->json(['errors' => $errors], 422));
+    }
+
+    public function messages()
+    {
+        return [
+            'product_designs.*.color.required' => 'The color field is required.',
+            'product_designs.*.size.required' => 'The size field is required.',
+            'product_designs.*.quantity.required' => 'The quantity field is required.',
+            'images.*.mimes' => 'The images must be a file of type .jpg.'
+        ];
     }
 }

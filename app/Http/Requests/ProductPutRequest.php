@@ -51,4 +51,14 @@ class ProductPutRequest extends FormRequest
 
         throw new HttpResponseException(response()->json(['errors' => $errors], 422));
     }
+
+    public function messages()
+    {
+        return [
+            'product_designs.*.color.required' => 'The color field is required.',
+            'product_designs.*.size.required' => 'The size field is required.',
+            'product_designs.*.quantity.required' => 'The quantity field is required.',
+            'images.*.mimes' => 'The images must be a file of type .jpg.'
+        ];
+    }
 }
