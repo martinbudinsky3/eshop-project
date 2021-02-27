@@ -3,6 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ImagesNotEmpty;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Log;
 
 class ProductPutRequest extends FormRequest
 {
@@ -23,22 +27,26 @@ class ProductPutRequest extends FormRequest
      */
     public function rules()
     {
+        Log::debug($this);
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'brand_id' => 'required|integer',
+            'brand' => 'required|integer',
+            'category' => 'required|integer',
             'material' => 'required|string|max:255',
             'product_designs' => 'required|array',
             'product_designs.*.color' => 'required|integer',
             'product_designs.*.size' => 'required|string',
             'product_designs.*.quantity' => 'required|integer',
-            'images' => 'array',
+            'images' => 'nullable|array',
             'images.*' => 'mimes:jpg',
-            'deleted_designs' => 'array',
+            'deleted_designs' => 'nullable|array',
             'deleted_designs.*.id' => 'required|integer',
-            'deleted_images' => 'array',
-            'deleted_images.*.id' => 'required|integer'
+            'deleted_images' => ['nullable', 'array', new ImagesNotEmpty($this->images, 
+                $this->route('product'))],
+            'deleted_images.*.id' => 'required|integer',
+            'deleted_images.*.path' => 'required|string'
         ];
     }
 

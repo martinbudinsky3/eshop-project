@@ -38,6 +38,6 @@ class MatchOldPassword implements Rule
      */
     public function message()
     {
-        return 'Zadané staré heslo je nesprávne!';
+        return 'Given old password is incorrect.';
     }
 }

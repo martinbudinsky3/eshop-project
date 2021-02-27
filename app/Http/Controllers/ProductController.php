@@ -138,7 +138,7 @@ class ProductController extends Controller
                         'name' => $request->name,
                         'description' => $request->description,
                         'price' => $request->price,
-                        'brand_id' =>  $request->brand_id,
+                        'brand_id' =>  $request->brand,
                         'material' => $request->material
                     ]);
 
@@ -153,7 +153,7 @@ class ProductController extends Controller
 
             ProductCategory::create([
                 'product_id' => $product->id,
-                'category_id' => $request->category_id
+                'category_id' => $request->category
             ]);
             
             $this->imageService->store($request->file('images'), $product->id);
@@ -240,7 +240,7 @@ class ProductController extends Controller
     public function update(ProductPutRequest $request, $id)
     {
         // validation
-        $validated = $request->validated();
+        //$validated = $request->validated();
         
         DB::transaction(function() use($request, $id) {
 
@@ -250,7 +250,7 @@ class ProductController extends Controller
             $product->name = $request->name;
             $product->description = $request->description;
             $product->price = $request->price;
-            $product->brand_id = $request->brand_id;
+            $product->brand_id = $request->brand;
             $product->material = $request->material;
             
             $product->save();
@@ -288,7 +288,7 @@ class ProductController extends Controller
             
             // update product category
             $oldProductCategory = ProductCategory::where('product_id', $id)->first();
-            $oldProductCategory->category_id = $request->category_id;
+            $oldProductCategory->category_id = $request->category;
 
             $oldProductCategory->save();
 
