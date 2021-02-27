@@ -27,7 +27,6 @@ class ProductPutRequest extends FormRequest
      */
     public function rules()
     {
-        Log::debug($this);
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -41,7 +40,7 @@ class ProductPutRequest extends FormRequest
             'product_designs.*.quantity' => 'required|integer',
             'images' => 'nullable|array',
             'images.*' => 'mimes:jpg',
-            'deleted_designs' => 'nullable|array',
+            'deleted_designs' => ['nullable', 'array'],
             'deleted_designs.*.id' => 'required|integer',
             'deleted_images' => ['nullable', 'array', new ImagesNotEmpty($this->images, 
                 $this->route('product'))],
@@ -63,6 +62,7 @@ class ProductPutRequest extends FormRequest
     public function messages()
     {
         return [
+            'product_designs.required' => 'Product must have at least 1 design.',
             'product_designs.*.color.required' => 'The color field is required.',
             'product_designs.*.size.required' => 'The size field is required.',
             'product_designs.*.quantity.required' => 'The quantity field is required.',

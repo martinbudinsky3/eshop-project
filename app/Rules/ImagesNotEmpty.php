@@ -31,9 +31,8 @@ class ImagesNotEmpty implements Rule
      */
     public function passes($attribute, $deletedImages)
     {
-        Log::debug('test');
         $images = Image::where('product_id', $this->productId)->get();
-        if(is_null($this->newImages) && !is_null($deletedImages) && sizeof($deletedImages) >= sizeof($images)) {
+        if(is_null($this->newImages) && sizeof($deletedImages) >= sizeof($images)) {
             return false;
         }
 
@@ -47,6 +46,6 @@ class ImagesNotEmpty implements Rule
      */
     public function message()
     {
-        return 'Product must have at least 1 image';
+        return 'Product must have at least 1 image.';
     }
 }

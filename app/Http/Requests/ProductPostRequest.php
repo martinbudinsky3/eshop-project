@@ -59,10 +59,12 @@ class ProductPostRequest extends FormRequest
     public function messages()
     {
         return [
+            'product_designs.required' => 'Product must have at least 1 design.',
             'product_designs.*.color.required' => 'The color field is required.',
             'product_designs.*.size.required' => 'The size field is required.',
             'product_designs.*.quantity.required' => 'The quantity field is required.',
-            'images.*.mimes' => 'The images must be a file of type .jpg.'
+            'images.*.mimes' => 'The images must be a file of type .jpg.',
+            'images.required' => 'Product must have at least 1 image.'
         ];
     }
 }

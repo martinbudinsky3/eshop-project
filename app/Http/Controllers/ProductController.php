@@ -292,10 +292,14 @@ class ProductController extends Controller
 
             $oldProductCategory->save();
 
+            // store new images
+            if($request->has('images')) {
+                $this->imageService->store($request->images, $id);
+            }
+
             // delete images
-            if($request->has('deleted_images')) {
-                $deletedImages = $request->deleted_images;
-                $this->imageService->deleteImages($deletedImages);
+            if(!is_null($request->deleted_images)) {
+                $this->imageService->deleteImages($request->deleted_images);
             }
             
         });
