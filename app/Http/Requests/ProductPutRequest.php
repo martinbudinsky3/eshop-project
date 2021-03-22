@@ -35,16 +35,17 @@ class ProductPutRequest extends FormRequest
             'category' => 'required|integer',
             'material' => 'required|string|max:255',
             'product_designs' => 'required|array',
+            'product_designs.id' => 'nullable|exists:product_designs',
             'product_designs.*.color' => 'required|integer',
             'product_designs.*.size' => 'required|string',
             'product_designs.*.quantity' => 'required|integer',
             'images' => 'nullable|array',
             'images.*' => 'mimes:jpg',
             'deleted_designs' => ['nullable', 'array'],
-            'deleted_designs.*.id' => 'required|integer',
+            'deleted_designs.*.id' => 'required|exists:product_designs',
             'deleted_images' => ['nullable', 'array', new ImagesNotEmpty($this->images, 
                 $this->route('product'))],
-            'deleted_images.*.id' => 'required|integer',
+            'deleted_images.*.id' => 'required|exists:images',
             'deleted_images.*.path' => 'required|string'
         ];
     }
