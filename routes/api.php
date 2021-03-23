@@ -31,14 +31,13 @@ Route::prefix('questions')->group(function () {
     Route::post('/', 'QuestionController@store');
     Route::get('{question}/', 'QuestionController@show');
     Route::put('{question}/', 'QuestionController@update');
-    Route::delete('{question}/', 'QuestionController@destroy');
-    Route::get('{question}/edit', 'QuestionController@edit');
+    Route::delete('{question}/', 'QuestionController@destroy'); // TODO
+    Route::post('{question}/answers/', 'AnswerController@store'); // TODO
+    Route::get('{question}/answers/', 'QuestionController@indexAnswers'); // TODO
+    Route::get('{question}/results/', 'QuestionController@results'); // TODO
 });
 
-Route::prefix('answers')->group(function () {
-    Route::post('/', 'QuestionController@store');
-    Route::delete('{answer}/', 'QuestionController@destroy');
-});
+Route::delete('answers/{answer}/', 'AnswerController@destroy'); // TODO
 
 Route::get('category/', 'CategoryController@index'); 
 

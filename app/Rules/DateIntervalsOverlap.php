@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use App\Models\Question;
 
 class DateIntervalsOverlap implements Rule
 {
@@ -29,7 +30,7 @@ class DateIntervalsOverlap implements Rule
             ->where('date_to', '>=', $value)
             ->get();
 
-        return sizeof($questions) == 0 ? false : true;
+        return sizeof($questions) == 0 ? true : false;
     }
 
     /**
@@ -39,6 +40,6 @@ class DateIntervalsOverlap implements Rule
      */
     public function message()
     {
-        return 'There is already question overlapping given date interval';
+        return 'There is already question in given date interval';
     }
 }

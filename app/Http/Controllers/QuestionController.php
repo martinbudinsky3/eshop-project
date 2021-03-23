@@ -24,7 +24,8 @@ class QuestionController extends Controller
         return response()->json(['count' => $count, 'questions' => $questions], 200);
     }
 
-    public function edit(Question $question) {
+    
+    public function show(Question $question) {
         return response()->json([$question], 200);
     }
 
@@ -36,5 +37,15 @@ class QuestionController extends Controller
         ]);
 
         return response()->json(['id' => $question->id], 201);
+    }
+
+    public function update(QuestionPostRequest $request, Question $question) {
+        $question->text = $request->text;
+        $question->date_from = $request->date_from;
+        $question->date_to = $request->date_to;
+
+        $question->save();
+
+        return response()->json(null, 204);
     }
 }

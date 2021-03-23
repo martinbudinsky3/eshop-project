@@ -27,7 +27,7 @@ class QuestionPostRequest extends FormRequest
     {
         return [
             'text' => 'required|string',
-            'date_from' => ['required','date', 'before:date_to', 'bail', new DateIntervalsOverlap],
+            'date_from' => ['required','date', 'before_or_equal:date_to', new DateIntervalsOverlap],
             'date_to' => ['required', 'date', new DateIntervalsOverlap]
         ];
     }
