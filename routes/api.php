@@ -31,7 +31,7 @@ Route::prefix('questions')->group(function () {
     Route::post('/', 'QuestionController@store');
     Route::get('{question}/', 'QuestionController@show');
     Route::put('{question}/', 'QuestionController@update');
-    Route::delete('{question}/', 'QuestionController@destroy'); // TODO
+    Route::delete('{question}/', 'QuestionController@destroy');
     Route::post('{question}/answers/', 'AnswerController@store'); // TODO
     Route::get('{question}/answers/', 'QuestionController@indexAnswers'); // TODO
     Route::get('{question}/results/', 'QuestionController@results'); // TODO

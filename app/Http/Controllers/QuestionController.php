@@ -48,4 +48,10 @@ class QuestionController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function destroy(Question $question) {
+        $question->delete();
+
+        return response()->json(null, 204);
+    }
 }
