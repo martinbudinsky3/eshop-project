@@ -26,6 +26,20 @@ Route::prefix('products')->group(function () {
     Route::put('{product}/', 'ProductController@update');
 });
 
+Route::prefix('questions')->group(function () {
+    Route::get('/', 'QuestionController@index');
+    Route::post('/', 'QuestionController@store');
+    Route::get('{question}/', 'QuestionController@show');
+    Route::put('{question}/', 'QuestionController@update');
+    Route::delete('{question}/', 'QuestionController@destroy');
+    Route::get('{question}/edit', 'QuestionController@edit');
+});
+
+Route::prefix('answers')->group(function () {
+    Route::post('/', 'QuestionController@store');
+    Route::delete('{answer}/', 'QuestionController@destroy');
+});
+
 Route::get('category/', 'CategoryController@index'); 
 
 Route::get('brand/', 'BrandController@index');
