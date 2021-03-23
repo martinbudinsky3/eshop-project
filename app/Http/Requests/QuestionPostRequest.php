@@ -26,7 +26,7 @@ class QuestionPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required|string',
+            'text' => 'unique:questions,text|required|string',
             'date_from' => ['required','date', 'before_or_equal:date_to', new DateIntervalsOverlap],
             'date_to' => ['required', 'date', new DateIntervalsOverlap]
         ];

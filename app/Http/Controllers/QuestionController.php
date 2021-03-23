@@ -24,6 +24,19 @@ class QuestionController extends Controller
         return response()->json(['count' => $count, 'questions' => $questions], 200);
     }
 
+    public function indexAnswers(Question $question) {
+        $question->load('answers');
+
+        return response()->json(['questions' => $questions], 200);
+    }
+
+    public function results(Question $question) {
+        $answers = Answer::withCount('votings')
+            ->where('question_id', $question->id)
+            ->get();
+
+        return response()->json(['answers' => $answers], 200);
+    }
     
     public function show(Question $question) {
         return response()->json([$question], 200);
