@@ -13,6 +13,10 @@ class Answer extends Model
 
     protected $fillable = ['question_id', 'text'];
 
+    protected $hidden = [
+        'question_id',
+    ];
+
     public function votings() {
         return $this->hasMany(Voting::class);
     }

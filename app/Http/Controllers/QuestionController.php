@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Models\Answer;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\QuestionPostRequest;
 
@@ -27,7 +28,7 @@ class QuestionController extends Controller
     public function indexAnswers(Question $question) {
         $question->load('answers');
 
-        return response()->json(['questions' => $questions], 200);
+        return response()->json(['answers' => $question->answers], 200);
     }
 
     public function results(Question $question) {
