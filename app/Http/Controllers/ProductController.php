@@ -20,7 +20,7 @@ use App\Http\Requests\ProductPutRequest;
 class ProductController extends Controller
 {
     use ProductsTrait;
-    
+
     protected $imageService;
 
     public function __construct(ImageService $imageService)
@@ -89,7 +89,7 @@ class ProductController extends Controller
         $descending = $descendingBool === 'true' ? 'desc' : 'asc';
 
         $filter = request('filter', '');
-        
+
         // filtering based on search term
         $filteredProducts = Product::orderBy($sortBy, $descending)->get()->filter(function ($product) use ($filter) {
             if (Str::is('*' . $this->transformString($filter) . '*', $this->transformString($product->name))) {
@@ -103,11 +103,10 @@ class ProductController extends Controller
 
             $products = $filteredProducts->slice($offset, $rowsPerPage)->values();
 
-            $rowsNumber = count($products);
         } else {
             $products = $filteredProducts;
         }
-        
+
         $rowsNumber = count($filteredProducts);
 
         return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
@@ -155,7 +154,7 @@ class ProductController extends Controller
                 'product_id' => $product->id,
                 'category_id' => $request->category
             ]);
-            
+
             $this->imageService->store($request->file('images'), $product->id);
         });
 
@@ -221,7 +220,7 @@ class ProductController extends Controller
     {
 
         $product = Product::with('categories.parentCategories', 'productDesigns.color', 'brand')->find($id);
-        
+
         $images = $this->imageService->getProductImages($product->id);
 
         return response()->json(array(
@@ -240,7 +239,7 @@ class ProductController extends Controller
     public function update(ProductPutRequest $request, $id)
     {
         Log::debug($request);
-        
+
         DB::transaction(function() use($request, $id) {
 
             // update product
@@ -251,7 +250,7 @@ class ProductController extends Controller
             $product->price = $request->price;
             $product->brand_id = $request->brand;
             $product->material = $request->material;
-            
+
             $product->save();
 
             // destroy deleted product designs
@@ -284,7 +283,7 @@ class ProductController extends Controller
                     $oldProductDesign->save();
                 }
             }
-            
+
             // update product category
             $oldProductCategory = ProductCategory::where('product_id', $id)->first();
             $oldProductCategory->category_id = $request->category;
@@ -300,10 +299,10 @@ class ProductController extends Controller
             if(!is_null($request->deleted_images)) {
                 $this->imageService->deleteImages($request->deleted_images);
             }
-            
+
         });
 
-        return response()->json(['success' => 'Produkt bol úspešne editovaný']); 
+        return response()->json(['success' => 'Produkt bol úspešne editovaný']);
     }
 
     /**

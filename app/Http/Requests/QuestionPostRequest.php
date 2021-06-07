@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\DateIntervalsOverlap;
+use Illuminate\Validation\Rule;
 
 
 class QuestionPostRequest extends FormRequest

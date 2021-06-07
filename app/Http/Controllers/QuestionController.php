@@ -13,10 +13,14 @@ class QuestionController extends Controller
     public function index() {
         $recordsPerPage = request('recordsPerPage', 5);
         $page = request('page', 1);
+        $sortBy = request('sortBy', 'date_from');
+        $descendingFlag = request('descending', 'false');
+
+        $orderType = $descendingFlag == 'true' ? 'desc' : 'asc';
         $offset = ($page - 1) * $recordsPerPage;
 
         $questions = Question::skip($offset)
-            ->orderBy('date_from', 'desc')
+            ->orderBy($sortBy, $orderType)
             ->take($recordsPerPage)
             ->get();
 
@@ -38,7 +42,7 @@ class QuestionController extends Controller
 
         return response()->json(['answers' => $answers], 200);
     }
-    
+
     public function show(Question $question) {
         return response()->json([$question], 200);
     }
