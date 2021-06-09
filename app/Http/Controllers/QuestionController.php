@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionPutRequest;
 use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Answer;
@@ -44,7 +45,11 @@ class QuestionController extends Controller
     }
 
     public function show(Question $question) {
-        return response()->json([$question], 200);
+        return response()->json($question, 200);
+    }
+
+    public function edit(Question $question) {
+        return response()->json($question, 200);
     }
 
     public function store(QuestionPostRequest $request) {
@@ -57,7 +62,7 @@ class QuestionController extends Controller
         return response()->json(['id' => $question->id], 201);
     }
 
-    public function update(QuestionPostRequest $request, Question $question) {
+    public function update(QuestionPutRequest $request, Question $question) {
         $question->text = $request->text;
         $question->date_from = $request->date_from;
         $question->date_to = $request->date_to;

@@ -7,14 +7,16 @@ use App\Models\Question;
 
 class DateIntervalsOverlap implements Rule
 {
+    private $questionId;
+
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($questionId)
     {
-        //
+        $this->questionId = $questionId;
     }
 
     /**
@@ -28,9 +30,10 @@ class DateIntervalsOverlap implements Rule
     {
         $questions = Question::where('date_from', '<=', $value)
             ->where('date_to', '>=', $value)
+            ->where('id', '!=', $this->questionId)
             ->get();
 
-        return sizeof($questions) == 0 ? true : false;
+        return sizeof($questions) == 0;
     }
 
     /**

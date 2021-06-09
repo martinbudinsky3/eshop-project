@@ -30,6 +30,7 @@ Route::prefix('questions')->group(function () {
     Route::get('/', 'QuestionController@index');
     Route::post('/', 'QuestionController@store');
     Route::get('{question}/', 'QuestionController@show');
+    Route::get('{question}/edit', 'QuestionController@edit');
     Route::put('{question}/', 'QuestionController@update');
     Route::delete('{question}/', 'QuestionController@destroy');
     Route::post('{question}/answers/', 'AnswerController@store');
@@ -39,7 +40,7 @@ Route::prefix('questions')->group(function () {
 
 Route::delete('answers/{answer}/', 'AnswerController@destroy');
 
-Route::get('category/', 'CategoryController@index'); 
+Route::get('category/', 'CategoryController@index');
 
 Route::get('brand/', 'BrandController@index');
 
