@@ -38,7 +38,10 @@ Route::prefix('questions')->group(function () {
     Route::get('{question}/results/', 'QuestionController@results');
 });
 
-Route::delete('answers/{answer}/', 'AnswerController@destroy');
+Route::prefix('answers')->group(function () {
+    Route::delete('{answer}/', 'AnswerController@destroy');
+    Route::put('{answer}/', 'AnswerController@update');
+});
 
 Route::get('category/', 'CategoryController@index');
 

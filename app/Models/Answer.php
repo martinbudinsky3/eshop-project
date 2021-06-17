@@ -17,6 +17,10 @@ class Answer extends Model
         'question_id',
     ];
 
+    public function question() {
+        return $this->belongsTo(Question::class);
+    }
+
     public function votings() {
         return $this->hasMany(Voting::class);
     }
