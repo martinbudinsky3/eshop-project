@@ -94,33 +94,34 @@
             </div>
         </main>
         <aside class="container">
-            <div class="row row-m-b justify-content-center">
-                <section class="col-4 card">
-                    <div class="card-body">
-                        <h2 class="card-title center-text">Anketa</h2>
-                        <form action="/votes" method="POST">
-                            <fieldset>
-                                <legend>Otazka</legend>
+            @auth
+                @if($survey)
+                    <div class="row row-m-b justify-content-center">
+                        <section class="col-4 card">
+                            <div class="card-body">
+                                <h2 class="card-title center-text">Anketa</h2>
+                                <form action="/votes" method="POST">
+                                    <fieldset>
+                                        <legend>{{$survey->text}}</legend>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Default radio
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Default checked radio
-                                    </label>
-                                </div>
-                            </fieldset>
+                                        @foreach($survey->answers as $answer)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="{{$answer->id}}"
+                                                       id="{{$answer->id}}" {{$loop->first ? "checked" : ""}}>
+                                                <label class="form-check-label" for="{{$answer->id}}">
+                                                    {{$answer->text}}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </fieldset>
 
-                            <input class="btn btn-primary mt-3" type="submit" value="Hlasovať">
-                        </form>
+                                    <input class="btn btn-primary mt-3" type="submit" value="Hlasovať">
+                                </form>
+                            </div>
+                        </section>
                     </div>
-                </section>
-            </div>
+                @endif
+            @endauth
         </aside>
     </div>
 @endsection
