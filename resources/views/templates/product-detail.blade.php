@@ -62,7 +62,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Hlavná stránka</a></li>
                     <li class="breadcrumb-item"><a href="">{{ $product->categories[0]->parentCategories[0]->name }}</a></li>
-                    <li class="breadcrumb-item"><a href="/category/{{ $product->categories[0]->id }}">{{ $product->categories[0]->name }}</a></li>
+                    <li class="breadcrumb-item"><a href="/categories/{{ $product->categories[0]->id }}">{{ $product->categories[0]->name }}</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{$product->name}}</li>
                 </ol>
             </nav>
@@ -72,7 +72,7 @@
     <main class="container mt-2">
         <div class="row">
             <div class="col-lg-6 col-md-7 col-12 row-m-b">
-                
+
                 <!--Carousel-->
                 <div id="carousel-product-images" class="carousel slide " data-ride="carousel">
                     <!-- Indicators -->
@@ -82,16 +82,16 @@
                         @endforeach
                     </ol>
                     <div class="carousel-inner">
-                    
+
                         @foreach ($liste_images as $key => $act_image)
                             <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
                                 <img class="d-block w-100 img-responsive"
                                     srcset="{{ asset($act_image.'_520x728.jpg')}} 520w,
-                                            {{ asset($act_image.'_640x896.jpg')}} 640w" 
+                                            {{ asset($act_image.'_640x896.jpg')}} 640w"
                                     sizes="(max-width: 576px) 520px, 640px"
                                     src="{{ asset($act_image.'_640x896.jpg')}}"
                                     alt="{{$act_image}}">
-                            </div> 
+                            </div>
                         @endforeach
                     </div>
 
@@ -368,10 +368,10 @@
         </section> --}}
 
         <!--Similar products-->
-        @component('layout.partials.carousel', 
+        @component('layout.partials.carousel',
             ['heading' => 'Podobné produkty', 'carouselId' => 'carousel-similars', 'data' => $similar_products])
         @endcomponent
-        
+
     </main>
 @endsection
 
