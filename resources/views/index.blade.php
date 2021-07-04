@@ -12,6 +12,9 @@
 @section('content')
     <div class="wrapper">
         <main class="container">
+            @if (Session::has('message'))
+                <div class="alert alert-info">{{ Session::get('message') }}</div>
+            @endif
             <div class="row row-m-b">
                 <article class="col-sm-12">
                     <div class="image-content center-box">
@@ -100,14 +103,16 @@
                         <section class="col-4 card">
                             <div class="card-body">
                                 <h2 class="card-title center-text">Anketa</h2>
-                                <form action="/votes" method="POST">
+                                <form action="/questions/{{$survey->id}}/votings" method="POST">
+                                    @csrf
                                     <fieldset>
                                         <legend>{{$survey->text}}</legend>
 
                                         @foreach($survey->answers as $answer)
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="{{$answer->id}}"
-                                                       id="{{$answer->id}}" {{$loop->first ? "checked" : ""}}>
+                                                <input class="form-check-input" type="radio" name="answer_id"
+                                                       value="{{$answer->id}}" id="{{$answer->id}}"
+                                                    {{$loop->first ? "checked" : ""}}>
                                                 <label class="form-check-label" for="{{$answer->id}}">
                                                     {{$answer->text}}
                                                 </label>

@@ -39,27 +39,31 @@ Route::get('products/', 'ProductController@index');
 
 Route::get('products/{product}/', 'ProductController@show');
 
-Route::group(['middleware' => 'auth', 'prefix' => 'profile'], function() {
-    Route::get('/', function() {
-        return view('templates.profile.profile');
+Route::group(['middleware' => 'auth'], function() {
+    Route::group(['prefix' => 'profile'], function() {
+        Route::get('/', function() {
+            return view('templates.profile.profile');
+        });
+        Route::get('settings/', function() {
+            return view('templates.profile.settings');
+        });
+        Route::get('info/', 'ProfileController@info');
+        Route::get('orders/', 'ProfileController@orders');
     });
-    Route::get('settings/', function() {
-        return view('templates.profile.settings');
+
+    Route::group(['prefix' => 'deliveries'], function() {
+        Route::put('/', 'DeliveryController@update');
+        Route::delete('/', 'DeliveryController@destroy');
     });
-    Route::get('info/', 'ProfileController@info');
-    Route::get('orders/', 'ProfileController@orders');
-});
 
-Route::get('orders/{order}', 'OrderController@show')->middleware('auth', 'can:show,order');
+    Route::group(['prefix' => 'user'], function() {
+        Route::put('password/', 'UserController@changePassword')->name('change.password');
+        Route::put('phone/', 'UserController@changePhone')->name('change.phone');
+    });
 
-Route::group(['middleware' => 'auth', 'prefix' => 'deliveries'], function() {
-    Route::put('/', 'DeliveryController@update');
-    Route::delete('/', 'DeliveryController@destroy');
-});
-
-Route::group(['middleware' => 'auth', 'prefix' => 'user'], function() {
-    Route::put('password/', 'UserController@changePassword')->name('change.password');
-    Route::put('phone/', 'UserController@changePhone')->name('change.phone');
+    Route::get('orders/{order}', 'OrderController@show')->middleware('can:show,order');
+    Route::post('questions/{question}/votings/', 'VotingController@store')
+        /*->middleware('can:create,question')*/;
 });
 
 Auth::routes();

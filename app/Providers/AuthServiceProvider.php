@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Voting;
+use App\Policies\VotingPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\CartItem;
@@ -17,8 +19,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Models\CartItem' => 'App\Policies\CartItemPolicy',
-        'App\Models\Order' => 'App\Policies\OrderPolicy',
+        CartItem::class => CartItemPolicy::class,
+        Order::class => OrderPolicy::class,
+        Voting::class => VotingPolicy::class,
     ];
 
     /**

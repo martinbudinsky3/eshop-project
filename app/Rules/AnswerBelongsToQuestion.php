@@ -2,10 +2,10 @@
 
 namespace App\Rules;
 
+use App\Models\Answer;
 use Illuminate\Contracts\Validation\Rule;
-use App\Models\Question;
 
-class DateIntervalsOverlap implements Rule
+class AnswerBelongsToQuestion implements Rule
 {
     private $questionId;
 
@@ -28,13 +28,9 @@ class DateIntervalsOverlap implements Rule
      */
     public function passes($attribute, $value)
     {
-        // TODO refactoring - ,,exists" construction
-        $questions = Question::where('date_from', '<=', $value)
-            ->where('date_to', '>=', $value)
-            ->where('id', '!=', $this->questionId)
-            ->get();
-
-        return sizeof($questions) == 0;
+        return Answer::where('id', $value)
+            ->where('question_id', $this->questionId)
+            ->exists();
     }
 
     /**
@@ -44,6 +40,6 @@ class DateIntervalsOverlap implements Rule
      */
     public function message()
     {
-        return 'There is already question in given date interval';
+        return 'The validation error message.';
     }
 }
