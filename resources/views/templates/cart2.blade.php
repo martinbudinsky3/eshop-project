@@ -27,18 +27,19 @@
                     </ol>
                 </nav>
             </div>
-            <hr class="hr"> 
+            <hr class="hr">
         </div>
     </div>
 
     <main class="container items mt-2">
         <section>
             <h3>Výber dopravy a platby</h3>
-            
+
             <div class="mt-4">
                 <form action="/order/create/" id="cart-form" method="get">
                     @csrf
                     <div class="row">
+{{--                        TODO align left --}}
                         <div class="col-10 col-sm-5 py-3 cart-card">
                             <fieldset>
                                 <legend class="select-title">
@@ -47,9 +48,9 @@
                                 <div>
                                     @foreach($transports as $transport)
                                         <input type="radio" class="radio-input" id="delivery{{ $transport->id }}" value={{ $transport->id }} name="delivery"
-                                            {{ $selectedTransport->id == $transport->id ? 'checked' : '' }} 
+                                            {{ $selectedTransport->id == $transport->id ? 'checked' : '' }}
                                             onchange="transportSelectHandler('{{ $transport->name }}', {{ $transport->price }}, {{ $selectedTransport->price }}, {{ $final_price }})">
-                                        
+
                                         <label class="radio-label" for="delivery1">{{ $transport->name }}</label>
                                         <div class="row">
                                             <div class="col price">
@@ -71,7 +72,7 @@
                                 <div>
                                     @foreach($payments as $payment)
                                         <input type="radio" class="radio-input" id="pay{{ $payment->id }}" name="pay" value={{ $payment->id }}
-                                            {{ $payment->id == $selectedPayment->id ? 'checked' : '' }} 
+                                            {{ $payment->id == $selectedPayment->id ? 'checked' : '' }}
                                             onchange="paymentSelectHandler('{{ $payment->name }}', {{ $payment->price }}, {{ $selectedPayment->price }}, {{ $final_price }})">
                                         <label class="radio-label" for="pay4">{{ $payment->name }}</label>
                                         <div class="price">

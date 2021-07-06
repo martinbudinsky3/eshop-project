@@ -62,8 +62,9 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     Route::get('orders/{order}', 'OrderController@show')->middleware('can:show,order');
+    
     Route::post('questions/{question}/votings/', 'VotingController@store')
-        /*->middleware('can:create,question')*/;
+        ->middleware('can:create, App\Models\Voting');
 });
 
 Auth::routes();

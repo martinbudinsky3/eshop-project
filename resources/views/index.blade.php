@@ -8,7 +8,6 @@
     <title>E-shop</title>
 @endsection
 
-
 @section('content')
     <div class="wrapper">
         <main class="container">
@@ -99,8 +98,8 @@
         <aside class="container">
             @auth
                 @if($survey)
-                    <div class="row row-m-b justify-content-center">
-                        <section class="col-4 card">
+                    <div class="row row-m-b justify-content-center mx-0">
+                        <section class="col-lg-4 col-md-6 col-12 card">
                             <div class="card-body">
                                 <h2 class="card-title center-text">Anketa</h2>
                                 <form action="/questions/{{$survey->id}}/votings" method="POST">
