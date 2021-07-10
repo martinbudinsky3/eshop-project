@@ -28,13 +28,10 @@ class DateIntervalsOverlap implements Rule
      */
     public function passes($attribute, $value)
     {
-        // TODO refactoring - ,,exists" construction
-        $questions = Question::where('date_from', '<=', $value)
+        return Question::where('date_from', '<=', $value)
             ->where('date_to', '>=', $value)
             ->where('id', '!=', $this->questionId)
-            ->get();
-
-        return sizeof($questions) == 0;
+            ->exists();
     }
 
     /**
