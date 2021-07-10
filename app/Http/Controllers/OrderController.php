@@ -22,10 +22,8 @@ class OrderController extends Controller
         $orderItems = $order->orderItems;
 
         $productsPrice = $orderItems->reduce(function ($sum, $item) {
-            return $sum + $item->price;
+            return $sum + $item->price * $item->amount;
         });
-
-        $transportPaymentPrice = $order->price - $productsPrice;
 
         $transport = $order->transport;
         $payment = $order->payment;
@@ -33,7 +31,7 @@ class OrderController extends Controller
         return view('templates.profile.order')
                 ->with('order', $order)
                 ->with('orderItems', $orderItems)
-                ->with('transportPaymentPrice', $transportPaymentPrice)
+                ->with('finalPrice', $productsPrice + $order->transportPrice + $order->paymentPrice)
                 ->with('transport', $transport)
                 ->with('payment', $payment);
     }
@@ -106,12 +104,14 @@ class OrderController extends Controller
     }
 
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
+        // TODO test transaction
 
         // validation
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
             'street' => 'required|string|max:255',
             'town' => 'required|string|max:255',
             'country' => 'required|string|max:255',
@@ -120,20 +120,19 @@ class OrderController extends Controller
             'zip' => 'required|string|max:15',
         ]);
 
-        // get cart items from logged user
-        $cartItems = [];
-        if(Auth::check()){
-            $cart = Auth::user()->cart;
-            $cartItems = $cart->cartItems;
-            $cart->delete();
-        }
+        DB::transaction(function() use ($request) {
+            // get cart items from logged user
+            if(Auth::check()){
+                $cart = Auth::user()->cart;
+                $cartItems = $cart->cartItems;
+                $cart->delete();
+            }
 
-        // get cart items from guest
-        else {
-            $cartItems = $request->session()->get('cartItems');
-        }
+            // get cart items from guest
+            else {
+                $cartItems = $request->session()->get('cartItems');
+            }
 
-        DB::transaction(function() use ($request, $cartItems) {
             // create delivery record
             $delivery = Delivery::create([
                 'name' => $request->post('name'),
@@ -146,18 +145,22 @@ class OrderController extends Controller
                 'zip' => $request->post('zip')
             ]);
 
+            $transport = Transport::find(session()->get('transport', 1));
+            $payment = Payment::find(session()->get('payment', 1));
+
             // create order
             $order = Order::create([
-                'user_id' =>(!Auth::check()) ? null : Auth::user()->id,
+                'user_id' =>(Auth::check()) ? Auth::id() : null,
                 'delivery_id' => $delivery->id,
-                'transport_id' => session()->get('transport', 1),
-                'payment_id' => session()->get('payment', 1),
-                'price' => session()->get('final_price'),
+                'transport_id' => $transport->id,
+                'payment_id' => $payment->id,
+                'transport_price' => $transport->price,
+                'payment_price' => $payment->price,
             ]);
 
-            // create all cart items
+            // create order items
             foreach($cartItems as $item) {
-                $orderitem =  OrderItem::create([
+                OrderItem::create([
                     'product_design_id' => $item->productDesign->id,
                     'amount' => $item->amount,
                     'order_id' => $order->id,
@@ -166,11 +169,10 @@ class OrderController extends Controller
             }
         });
 
-        // delete cart items, payment and delivery info from session
+        // delete cart items, payment and transport info from session
         session()->forget('cartItems');
         session()->forget('payment');
         session()->forget('transport');
-        session()->forget('final_price');
 
         session()->flash('success', 'Objednávka bola zaznamenaná.');
 

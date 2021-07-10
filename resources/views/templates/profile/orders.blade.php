@@ -43,7 +43,7 @@
                             <tr>
                                 <th scope="row"><a href="/orders/{{ $order->id }}">{{ $order->id }}</a></th>
                                 <td>{{ $order->created_at->toFormattedDateString() }}</td>
-                                <td>{{ $order->price }}</td>
+                                <td>{{ $order->order_items_price + $order->transport_price + $order->payment_price }}</td>
                             </tr>
                         @endforeach
                     </tbody>

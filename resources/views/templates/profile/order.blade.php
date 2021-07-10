@@ -50,25 +50,39 @@
                                 </td>
                                 <td><a href="/products/{{ $product->id }}">{{ $product->name }}</a></td>
                                 <td>{{ $orderItem->amount }}ks</td>
-                                <td>{{ $orderItem->price }}</td>
+                                <td>{{ $orderItem->price * $orderItem->amount }}</td>
                             </tr>
                         @endforeach
-                        <tr>
-                            <td>
-                                <img class="overview"
-                                    src="../assets/icons/delivery.png"
-                                    alt="{{ $product->name }}">
-                            </td>
-                            <td>Doprava a platba</td>
-                            <td>1ks</td>
-                            <td>{{ $transportPaymentPrice }}</td>
-                        </tr>
+                        @if($order->transport_price > 0)
+                            <tr>
+                                <td>
+                                    <img class="overview"
+                                        src="../assets/icons/delivery.png"
+                                        alt="Delivery icon">
+                                </td>
+                                <td>Doprava</td>
+                                <td>1ks</td>
+                                <td>{{ $order->transport_price }}</td>
+                            </tr>
+                        @endif
+                        @if($order->payment_price > 0)
+                            <tr>
+                                <td>
+                                    <img class="overview"
+                                         src="../assets/icons/payment.png"
+                                         alt="Payment icon">
+                                </td>
+                                <td>Platba</td>
+                                <td>1ks</td>
+                                <td>{{ $order->payment_price }}</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>
 
             <div class="mt-2">
-                <p class="text-sm-right price">Cena spolu: <span class="price-value">{{ $order->price }} €</span></p>
+                <p class="text-sm-right price">Cena spolu: <span class="price-value">{{ $finalPrice }} €</span></p>
             </div>
         </section>
 
