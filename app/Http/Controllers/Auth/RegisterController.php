@@ -55,7 +55,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            // 'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone' => ['required', 'string', 'between:10,16'],
@@ -72,7 +72,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            // 'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'],
@@ -81,7 +81,6 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
-
         // if user is registering from cart before sending order
         if ($request->session()->has('cart')) {
             session()->forget('cart');
@@ -98,7 +97,7 @@ class RegisterController extends Controller
                     'product_design_id' => $cartItem->product_design_id,
                     'amount' => $cartItem->amount,
                     'cart_id' => $cart->id,
-                ]); 
+                ]);
             }
 
             // delete cart items from session

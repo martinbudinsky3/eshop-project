@@ -102,8 +102,6 @@ ul {
     border: 1px solid #8F8F8F;
     border-radius: 15px;
     margin-bottom: 1.2rem;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .input-btn {
@@ -375,7 +373,7 @@ select, select:focus, input, input:focus {
 
 /** product description **/
 
-.product-attributes th { 
+.product-attributes th {
     padding-right: 20px;
 }
 

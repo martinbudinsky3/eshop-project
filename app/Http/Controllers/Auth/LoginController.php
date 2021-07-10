@@ -44,11 +44,10 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-
         // if user is logging in from cart before sending order
         if ( $request->session()->has('cart') ) {
             session()->forget('cart');
-            
+
             // get cart if already exists
             $cart = Cart::where('user_id', $user->id);
 
@@ -68,7 +67,7 @@ class LoginController extends Controller
                     'product_design_id' => $cartItem->product_design_id,
                     'amount' => $cartItem->amount,
                     'cart_id' => $cart->id,
-                ]); 
+                ]);
             }
 
             // delete cart items from session

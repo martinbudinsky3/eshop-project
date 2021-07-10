@@ -38,8 +38,7 @@
             <div class="mt-4">
                 <form action="/order/create/" id="cart-form" method="get">
                     @csrf
-                    <div class="row">
-{{--                        TODO align left --}}
+                    <div class="row justify-content-around">
                         <div class="col-10 col-sm-5 py-3 cart-card">
                             <fieldset>
                                 <legend class="select-title">
@@ -87,8 +86,8 @@
             </div>
 
             <div class="summary">
-                <p id='summary-delivery'>Doprava: <span>{{$transport->name}}</span></p>
-                <p id='summary-pay'>Platba: <span>{{$payment->name}}</span></p>
+                <p id='summary-delivery'>Doprava: <span>{{$selectedTransport->name}}</span></p>
+                <p id='summary-pay'>Platba: <span>{{$selectedPayment->name}}</span></p>
                 <p id='summary-price'>CENA SPOLU: <span>{{$final_price}} €</span></p>
             </div>
 

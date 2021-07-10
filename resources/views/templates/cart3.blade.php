@@ -28,8 +28,8 @@
         @guest
             <div class="mb-1">
                 <div class="row">
-                    <div class="col-10  col-sm-6 col-md-5 col-lg-5 cart-card register-box">
-                        <p><strong>Máte už v nás konto? Ušetrite čas a prihláste sa.</strong></p>
+                    <div class="col-12 cart-card register-box">
+                        <p><strong>Máte už u nás konto? Ušetrite čas a prihláste sa.</strong></p>
                         <button class="login-button btn btn-info" onClick="window.location='/cart/login';"
                             type="button">Prihlásenie</button>
                     </div>
@@ -55,7 +55,7 @@
                     <label for="email">Email *</label>
                     <input type="email" class="form-control  @error('email') is-invalid @enderror"  required
                             autocomplete="email" id="email" name="email" placeholder="napr. priklad@mail.com"
-                            value = "{{ old('email') ? old('email') : ($delivery ? $delivery->email : '') }}">
+                            value = "{{ old('email') ? old('email') : ($delivery ? $delivery->email : Auth::user()->email) }}">
 
                         @error('email')
                             <strong class="text-danger">{{ $message }}</strong>
@@ -65,8 +65,8 @@
                 <div class="form-group">
                     <label for="phone">Telefónne číslo *</label>
                     <input type="tel" class="form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder=" napr. +421999888777"
-                        value = "{{ old('phone') ? old('phone') : ($delivery ? $delivery->phone_number : '') }}">
-                        
+                        value = "{{ old('phone') ? old('phone') : ($delivery ? $delivery->phone_number : Auth::user()->phone) }}">
+
                         @error('phone')
                             <strong class="text-danger">{{ $message }}</strong>
                         @enderror
@@ -120,12 +120,12 @@
                     @enderror
                 </div>
 
-
                 <!--div class="form-check">
                     <input class="form-check-input" type="checkbox" id="newsletter-check">
                     <label class="form-check-label" for="newsletter-check">
                         Odoslať na inú adresu</label>
                 </div-->
+
                 <div class="form-check mb-4">
                     <input class="form-check-input" type="checkbox" required id="conditions-check">
                     <label class="form-check-label" for="conditions-check">

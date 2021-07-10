@@ -37,44 +37,45 @@ class OrderController extends Controller
                 ->with('transport', $transport)
                 ->with('payment', $payment);
     }
-    
-    public function create(Request $request){
 
+    public function create(Request $request)
+    {
         $delivery = null;
+
         // get cart items from logged user
         if(Auth::check()){
             $logged = Auth::user();
             $cart = $logged->cart->first();
             $cartItems = $cart->cartItems;
             $delivery = $logged->delivery;
-        } 
+        }
 
         // get cart items from guest
         else {
             $cartItems = $request->session()->get('cartItems');
         }
-        
+
         // get payment from request if parameter exists
         if($request->has('pay')) {
             $pay_id = $request->get('pay');
-            session(['payment' => $pay_id]); 
-        } 
-        
-        // if payment hasn't been selected yet set it to default value 
+            session(['payment' => $pay_id]);
+        }
+
+        // if payment hasn't been selected yet set it to default value
         else if(!$request->session()->has('payment')) {
             session(['payment' => 1]);
         }
-        
+
         // get transport from request if parameter exists
         if($request->has('delivery')) {
             $transport_id = $request->get('delivery');
             session(['transport' => $transport_id]);
-        }  
-        
-        // if transport hasn't been selected yet set it to default value 
+        }
+
+        // if transport hasn't been selected yet set it to default value
         else if(!$request->session()->has('transport')) {
             session(['transport' => 1]);
-        }    
+        }
 
         // get final transport and payment
         $pay_id = session()->get('payment');
@@ -93,10 +94,8 @@ class OrderController extends Controller
         foreach($cartItems as $item){
             $items_price = $items_price + $item->amount * $item->productDesign->product->price;
         }
-        
-        $final_price = $items_price + $payment_price + $transport_price;
 
-        session(['final_price' => $final_price]);
+        $final_price = $items_price + $payment_price + $transport_price;
 
         return view('templates.cart3')
             ->with('payment_price', $payment_price)
@@ -127,7 +126,7 @@ class OrderController extends Controller
             $cart = Auth::user()->cart;
             $cartItems = $cart->cartItems;
             $cart->delete();
-        } 
+        }
 
         // get cart items from guest
         else {
@@ -146,7 +145,7 @@ class OrderController extends Controller
                 'phone_number' => $request->post('phone'),
                 'zip' => $request->post('zip')
             ]);
-            
+
             // create order
             $order = Order::create([
                 'user_id' =>(!Auth::check()) ? null : Auth::user()->id,
@@ -172,7 +171,7 @@ class OrderController extends Controller
         session()->forget('payment');
         session()->forget('transport');
         session()->forget('final_price');
-        
+
         session()->flash('success', 'Objednávka bola zaznamenaná.');
 
         return redirect('/profile/orders');

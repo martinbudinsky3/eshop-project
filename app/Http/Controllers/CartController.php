@@ -16,9 +16,9 @@ use App\Models\User;
 
 class CartController extends Controller
 {
-    
+
     //
-     
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +27,7 @@ class CartController extends Controller
     public function index()
     {
         //
-        
+
     }
 
     /**
@@ -48,21 +48,16 @@ class CartController extends Controller
      */
     public function show(Request $request)
     {
-        
         // get cart items of logged in user from DB
         if(Auth::check()){
 
-            $cart = User::with('cart')->find(Auth::user()->id)->cart;
-            /*$cart = Cart::firstOrCreate([
-                'user_id' => Auth::user()->id,
-            ]);*/
-
+            $cart = Auth::user()->cart;
             if(!$cart) {
                 $cartItems = [];
             } else {
                 $cartItems = $cart->cartItems;
             }
-        } 
+        }
 
         // get cart items of guest from session
         else {
@@ -72,13 +67,13 @@ class CartController extends Controller
             }
         }
 
-        // count price of cart items 
+        // count price of cart items
         $final_price = 0;
 
         foreach($cartItems as $item){
             $final_price = $final_price + $item->amount * $item->productDesign->product->price;
         }
-            
+
         return view('templates.cart')
             ->with('cartItems', $cartItems)
             ->with('final_price', $final_price);
@@ -109,8 +104,8 @@ class CartController extends Controller
         // get cart items of logged in user from DB
         if(Auth::check()){
             $cart = Auth::user()->cart->first();
-            $cartItems = $cart->cartItems;   
-        } 
+            $cartItems = $cart->cartItems;
+        }
 
         // get cart items of guest from session
         else {
@@ -138,7 +133,7 @@ class CartController extends Controller
     }
 
     public function update(Request $request, $id) {
-        
+
     }
 
     // login from cart
