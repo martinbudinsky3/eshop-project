@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <main class="container items mt-2">
+    <main class="container mt-2">
         <section>
             <h3>Výber dopravy a platby</h3>
 
@@ -39,47 +39,52 @@
                 <form action="/order/create/" id="cart-form" method="get">
                     @csrf
                     <div class="row justify-content-around">
-                        <div class="col-10 col-sm-5 py-3 cart-card">
-                            <fieldset>
-                                <legend class="select-title">
-                                    Zvoľte dopravu
-                                </legend>
-                                <div>
-                                    @foreach($transports as $transport)
-                                        <input type="radio" class="radio-input" id="delivery{{ $transport->id }}" value={{ $transport->id }} name="delivery"
-                                            {{ $selectedTransport->id == $transport->id ? 'checked' : '' }}
-                                            onchange="transportSelectHandler('{{ $transport->name }}', {{ $transport->price }}, {{ $selectedTransport->price }}, {{ $final_price }})">
+                        <div class="col-10 col-sm-5 card">
+                            <div class="card-body">
+                                <fieldset>
+                                    <legend class="select-title">
+                                        Zvoľte dopravu
+                                    </legend>
+                                    <div>
+                                        @foreach($transports as $transport)
+                                            <input type="radio" class="radio-input" id="delivery{{ $transport->id }}" value={{ $transport->id }} name="delivery"
+                                                {{ $selectedTransport->id == $transport->id ? 'checked' : '' }}
+                                                onchange="transportSelectHandler('{{ $transport->name }}', {{ $transport->price }}, {{ $selectedTransport->price }}, {{ $final_price }})">
 
-                                        <label class="radio-label" for="delivery1">{{ $transport->name }}</label>
-                                        <div class="row">
-                                            <div class="col price">
-                                                <p class="price-delivery">{{ $transport->price == 0 ? 'Zadarmo' : $transport->price }} €</p>
+                                            <label class="radio-label" for="delivery1">{{ $transport->name }}</label>
+                                            <div class="row">
+                                                <div class="col price">
+                                                    <p class="price-delivery">{{ $transport->price == 0 ? 'Zadarmo' : $transport->price }} €</p>
+                                                </div>
+                                                <!--div class="col">
+                                                    <p class="time-delivery"> dnes od 15:00</p>
+                                                </div-->
                                             </div>
-                                            <!--div class="col">
-                                                <p class="time-delivery"> dnes od 15:00</p>
-                                            </div-->
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </fieldset>
+                                        @endforeach
+                                    </div>
+                                </fieldset>
+                            </div>
                         </div>
-                        <div class="col-10 col-sm-5 py-3 cart-card">
-                            <fieldset>
-                                <legend class="select-title">
-                                    Zvoľte platbu
-                                </legend>
-                                <div>
-                                    @foreach($payments as $payment)
-                                        <input type="radio" class="radio-input" id="pay{{ $payment->id }}" name="pay" value={{ $payment->id }}
-                                            {{ $payment->id == $selectedPayment->id ? 'checked' : '' }}
-                                            onchange="paymentSelectHandler('{{ $payment->name }}', {{ $payment->price }}, {{ $selectedPayment->price }}, {{ $final_price }})">
-                                        <label class="radio-label" for="pay4">{{ $payment->name }}</label>
-                                        <div class="price">
-                                            <p class="pay-description">{{ $payment->price == 0 ? 'Zadarmo' : $payment->price }} €</p>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </fieldset>
+
+                        <div class="col-10 col-sm-5 card">
+                            <div class="card-body">
+                                <fieldset>
+                                    <legend class="select-title">
+                                        Zvoľte platbu
+                                    </legend>
+                                    <div>
+                                        @foreach($payments as $payment)
+                                            <input type="radio" class="radio-input" id="pay{{ $payment->id }}" name="pay" value={{ $payment->id }}
+                                                {{ $payment->id == $selectedPayment->id ? 'checked' : '' }}
+                                                onchange="paymentSelectHandler('{{ $payment->name }}', {{ $payment->price }}, {{ $selectedPayment->price }}, {{ $final_price }})">
+                                            <label class="radio-label" for="pay4">{{ $payment->name }}</label>
+                                            <div class="price">
+                                                <p class="pay-description">{{ $payment->price == 0 ? 'Zadarmo' : $payment->price }} €</p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </fieldset>
+                            </div>
                         </div>
                     </div>
                 </form>

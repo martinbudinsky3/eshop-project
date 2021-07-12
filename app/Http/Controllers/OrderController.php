@@ -31,7 +31,7 @@ class OrderController extends Controller
         return view('templates.profile.order')
                 ->with('order', $order)
                 ->with('orderItems', $orderItems)
-                ->with('finalPrice', $productsPrice + $order->transportPrice + $order->paymentPrice)
+                ->with('finalPrice', $productsPrice + $order->transport_price + $order->payment_price)
                 ->with('transport', $transport)
                 ->with('payment', $payment);
     }

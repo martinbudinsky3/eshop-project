@@ -15,7 +15,7 @@
                 <div class="alert alert-info">{{ Session::get('message') }}</div>
             @endif
             <div class="row row-m-b">
-                <article class="col-sm-12">
+                <article class="col-12">
                     <div class="image-content center-box">
                         <a href="">
                             <picture>

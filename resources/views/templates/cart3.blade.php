@@ -28,7 +28,7 @@
         @guest
             <div class="mb-1">
                 <div class="row">
-                    <div class="col-12 cart-card register-box">
+                    <div class="col-12 text-center p-2">
                         <p><strong>Máte už u nás konto? Ušetrite čas a prihláste sa.</strong></p>
                         <button class="login-button btn btn-info" onClick="window.location='/cart/login';"
                             type="button">Prihlásenie</button>
@@ -55,7 +55,11 @@
                     <label for="email">Email *</label>
                     <input type="email" class="form-control  @error('email') is-invalid @enderror"  required
                             autocomplete="email" id="email" name="email" placeholder="napr. priklad@mail.com"
-                            value = "{{ old('email') ? old('email') : ($delivery ? $delivery->email : Auth::user()->email) }}">
+                            value = "{{ old('email') ? old('email') :
+                                ($delivery ? $delivery->email :
+                                (Auth::check() ? Auth::user()->email :
+                                ''))
+                        }}">
 
                         @error('email')
                             <strong class="text-danger">{{ $message }}</strong>
@@ -65,7 +69,11 @@
                 <div class="form-group">
                     <label for="phone">Telefónne číslo *</label>
                     <input type="tel" class="form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder=" napr. +421999888777"
-                        value = "{{ old('phone') ? old('phone') : ($delivery ? $delivery->phone_number : Auth::user()->phone) }}">
+                        value = "{{ old('phone') ? old('phone') :
+                            ($delivery ? $delivery->phone_number :
+                            (Auth::check() ? Auth::user()->phone :
+                            ''))
+                        }}">
 
                         @error('phone')
                             <strong class="text-danger">{{ $message }}</strong>

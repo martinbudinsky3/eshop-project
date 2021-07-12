@@ -25,7 +25,7 @@
                     </ol>
                 </nav>
             </div>
-            <hr class="hr"> 
+            <hr class="hr">
         @endif
     </div>
 
@@ -40,8 +40,9 @@
 
 
         @foreach($cartItems as $item)
-            <article class="cart-card py-4">
-                <div class="row">
+            <article class="card">
+{{--            <article class="cart-card py-4">--}}
+                <div class="row card-body">
                     <div class="col-12 col-md-5 col-lg-4 mb-4 d-flex justify-content-center">
                         <a href="/products/{{ $item->productDesign->product->id }}">
                             <img class='img-cart img-responsive'
@@ -56,7 +57,7 @@
 
                         <div id="quantity-input-box" class="mb-4">
                             <form action="/cart-item/{{ (!$item->id) ? $loop->index : $item->id }}" name="quantity" method="POST">
-                                @csrf 
+                                @csrf
                                 <input type="hidden" name="_method" value="PUT">
 
                                 <label for="quantity-input" class="d-block d-sm-inline-block">Množstvo:</label>
@@ -66,7 +67,7 @@
                                 <input id="quantity-submit" class="d-block mt-2" type="submit" value="Zmeniť">
                             </form>
                         </div>
-                        
+
                         <p class="final-price" id="final-price">Cena: {{$item->productDesign->product->price}} €</p>
                         <!--Delete icon-->
                         <form action="/cart-item/{{ (!$item->id) ? $loop->index : $item->id }}" method="POST">
@@ -79,7 +80,7 @@
                 </div>
             </article>
         @endforeach
-        
+
         @if(sizeof($cartItems) == 0)
         <div class="my-5">
             <p>V košíku sa nenachádzajú žiadne produkty.</p>
