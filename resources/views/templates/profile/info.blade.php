@@ -37,7 +37,7 @@
                         <form action="/user/phone" method="POST">
                             @csrf
                             <input type="hidden" name="_method" value="PUT">
-                            
+
                             <div class="form-group">
                                 <label for="phone" class="col-form-label">Telefónne číslo:</label>
                                 <input type="text" class="form-control" id="phone" name="phone">
@@ -89,7 +89,7 @@
 
         <section class="mb-5">
             <h3>Registračné údaje</h3>
-                    
+
             <table class="mt-4 mb-4 registration-info table-responsive">
                 <tbody>
                     <tr>
@@ -146,7 +146,7 @@
                     <label for="phone">Telefónne číslo *</label>
                     <input type="tel" class="form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder=" napr. +421999888777"
                         value = "{{ $delivery ? $delivery->phone_number : old('phone') }}">
-                        
+
                         @error('phone')
                             <strong class="text-danger">{{ $message }}</strong>
                         @enderror
@@ -200,7 +200,7 @@
                     @enderror
                 </div>
 
-                <button class="btn btn-primary mb-3" type="submit">Upraviť</button>
+                <button class="btn btn-primary mb-3" type="submit">Uložiť</button>
             </form>
 
             @if($delivery)

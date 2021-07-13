@@ -39,7 +39,7 @@
                 <form action="/order/create/" id="cart-form" method="get">
                     @csrf
                     <div class="row justify-content-around">
-                        <div class="col-10 col-sm-5 card">
+                        <div class="col-10 col-sm-5 card mb-2">
                             <div class="card-body">
                                 <fieldset>
                                     <legend class="select-title">
@@ -47,14 +47,14 @@
                                     </legend>
                                     <div>
                                         @foreach($transports as $transport)
-                                            <input type="radio" class="radio-input" id="delivery{{ $transport->id }}" value={{ $transport->id }} name="delivery"
+                                            <input type="radio" class="radio-input" id="transport{{ $transport->id }}" value={{ $transport->id }} name="transport"
                                                 {{ $selectedTransport->id == $transport->id ? 'checked' : '' }}
-                                                onchange="transportSelectHandler('{{ $transport->name }}', {{ $transport->price }}, {{ $selectedTransport->price }}, {{ $final_price }})">
+                                                onchange="transportSelectHandler({{ $transport->name }}, {{ $transport->price }}, {{ $selectedTransport->price }}, {{ $final_price }})">
 
-                                            <label class="radio-label" for="delivery1">{{ $transport->name }}</label>
+                                            <label class="radio-label" for="transport{{ $transport->id }}">{{ $transport->name }}</label>
                                             <div class="row">
                                                 <div class="col price">
-                                                    <p class="price-delivery">{{ $transport->price == 0 ? 'Zadarmo' : $transport->price }} €</p>
+                                                    <p>{{ $transport->price == 0 ? 'Zadarmo' : $transport->price }} €</p>
                                                 </div>
                                                 <!--div class="col">
                                                     <p class="time-delivery"> dnes od 15:00</p>
@@ -66,7 +66,7 @@
                             </div>
                         </div>
 
-                        <div class="col-10 col-sm-5 card">
+                        <div class="col-10 col-sm-5 card mb-2">
                             <div class="card-body">
                                 <fieldset>
                                     <legend class="select-title">
@@ -74,12 +74,12 @@
                                     </legend>
                                     <div>
                                         @foreach($payments as $payment)
-                                            <input type="radio" class="radio-input" id="pay{{ $payment->id }}" name="pay" value={{ $payment->id }}
+                                            <input type="radio" class="radio-input" id="payment{{ $payment->id }}" value={{ $payment->id }} name="payment"
                                                 {{ $payment->id == $selectedPayment->id ? 'checked' : '' }}
-                                                onchange="paymentSelectHandler('{{ $payment->name }}', {{ $payment->price }}, {{ $selectedPayment->price }}, {{ $final_price }})">
-                                            <label class="radio-label" for="pay4">{{ $payment->name }}</label>
+                                                onchange="paymentSelectHandler({{ $payment->name }}, {{ $payment->price }}, {{ $selectedPayment->price }}, {{ $final_price }})">
+                                            <label class="radio-label" for="payment"{{ $payment->id }}>{{ $payment->name }}</label>
                                             <div class="price">
-                                                <p class="pay-description">{{ $payment->price == 0 ? 'Zadarmo' : $payment->price }} €</p>
+                                                <p>{{ $payment->price == 0 ? 'Zadarmo' : $payment->price }} €</p>
                                             </div>
                                         @endforeach
                                     </div>

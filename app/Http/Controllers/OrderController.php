@@ -31,9 +31,9 @@ class OrderController extends Controller
         return view('templates.profile.order')
                 ->with('order', $order)
                 ->with('orderItems', $orderItems)
-                ->with('finalPrice', $productsPrice + $order->transport_price + $order->payment_price)
                 ->with('transport', $transport)
-                ->with('payment', $payment);
+                ->with('payment', $payment)
+                ->with('finalPrice', $productsPrice + $order->transport_price + $order->payment_price);
     }
 
     public function create(Request $request)
@@ -43,33 +43,29 @@ class OrderController extends Controller
         // get cart items from logged user
         if(Auth::check()){
             $logged = Auth::user();
-            $cart = $logged->cart->first();
-            $cartItems = $cart->cartItems;
+            $cartItems = $logged->cart->cartItems;
             $delivery = $logged->delivery;
         }
-
         // get cart items from guest
         else {
-            $cartItems = $request->session()->get('cartItems');
+            $cartItems = collect($request->session()->get('cartItems'));
         }
 
         // get payment from request if parameter exists
-        if($request->has('pay')) {
-            $pay_id = $request->get('pay');
+        if($request->has('payment')) {
+            $pay_id = $request->get('payment');
             session(['payment' => $pay_id]);
         }
-
         // if payment hasn't been selected yet set it to default value
         else if(!$request->session()->has('payment')) {
             session(['payment' => 1]);
         }
 
         // get transport from request if parameter exists
-        if($request->has('delivery')) {
-            $transport_id = $request->get('delivery');
+        if($request->has('transport')) {
+            $transport_id = $request->get('transport');
             session(['transport' => $transport_id]);
         }
-
         // if transport hasn't been selected yet set it to default value
         else if(!$request->session()->has('transport')) {
             session(['transport' => 1]);
@@ -77,21 +73,16 @@ class OrderController extends Controller
 
         // get final transport and payment
         $pay_id = session()->get('payment');
-        $transport_id = session()->get('transport');
-
-        // get info about selected payment and transport
         $payment = Payment::find($pay_id);
+        $transport_id = session()->get('transport');
         $transport = Transport::find($transport_id);
 
+        // count price of order
+        $items_price = $cartItems->reduce(function ($sum, $item) {
+            return $sum + $item->productDesign->product->price * $item->amount;
+        });
         $payment_price = $payment->price;
         $transport_price = $transport->price;
-
-        // count price of order
-        $items_price = 0;
-
-        foreach($cartItems as $item){
-            $items_price = $items_price + $item->amount * $item->productDesign->product->price;
-        }
 
         $final_price = $items_price + $payment_price + $transport_price;
 
@@ -106,8 +97,6 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        // TODO test transaction
-
         // validation
         $request->validate([
             'name' => 'required|string|max:255',
