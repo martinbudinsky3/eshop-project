@@ -89,7 +89,7 @@
 
         @if(sizeof($cartItems) > 0)
             <div class="summary">
-                <p class="text-sm-right">CENA SPOLU: <span>{{$final_price}} €</span></p>
+                <p class="text-sm-right">CENA SPOLU: <span>{{$finalPrice}} €</span></p>
             </div>
         @endif
 

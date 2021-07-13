@@ -49,7 +49,7 @@
                                         @foreach($transports as $transport)
                                             <input type="radio" class="radio-input" id="transport{{ $transport->id }}" value={{ $transport->id }} name="transport"
                                                 {{ $selectedTransport->id == $transport->id ? 'checked' : '' }}
-                                                onchange="transportSelectHandler({{ $transport->name }}, {{ $transport->price }}, {{ $selectedTransport->price }}, {{ $final_price }})">
+                                                onchange="transportSelectHandler('{{ $transport->name }}', {{ $transport->price }}, {{ $selectedTransport->price }}, {{ $finalPrice }})">
 
                                             <label class="radio-label" for="transport{{ $transport->id }}">{{ $transport->name }}</label>
                                             <div class="row">
@@ -76,7 +76,7 @@
                                         @foreach($payments as $payment)
                                             <input type="radio" class="radio-input" id="payment{{ $payment->id }}" value={{ $payment->id }} name="payment"
                                                 {{ $payment->id == $selectedPayment->id ? 'checked' : '' }}
-                                                onchange="paymentSelectHandler({{ $payment->name }}, {{ $payment->price }}, {{ $selectedPayment->price }}, {{ $final_price }})">
+                                                onchange="paymentSelectHandler('{{ $payment->name }}', {{ $payment->price }}, {{ $selectedPayment->price }}, {{ $finalPrice }})">
                                             <label class="radio-label" for="payment"{{ $payment->id }}>{{ $payment->name }}</label>
                                             <div class="price">
                                                 <p>{{ $payment->price == 0 ? 'Zadarmo' : $payment->price }} €</p>
@@ -93,7 +93,7 @@
             <div class="summary">
                 <p id='summary-delivery'>Doprava: <span>{{$selectedTransport->name}}</span></p>
                 <p id='summary-pay'>Platba: <span>{{$selectedPayment->name}}</span></p>
-                <p id='summary-price'>CENA SPOLU: <span>{{$final_price}} €</span></p>
+                <p id='summary-price'>CENA SPOLU: <span>{{$finalPrice}} €</span></p>
             </div>
 
             <div class="d-flex mt-2">

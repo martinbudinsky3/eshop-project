@@ -59,10 +59,8 @@ class ProductController extends Controller
 
         // query filtered products
         $products = Product::whereIn('id', $filteredProductsIds);
-
         $products = $this->filterProducts($products);
         $products = $this->sortProducts($products);
-
         $products = $products->paginate(12)->appends(request()->query());
 
         return view('templates.product-category')
@@ -98,9 +96,7 @@ class ProductController extends Controller
         });
 
         if ($rowsPerPage > 0) {
-
             $offset = ($page - 1) * $rowsPerPage;
-
             $products = $filteredProducts->slice($offset, $rowsPerPage)->values();
 
         } else {
@@ -110,16 +106,6 @@ class ProductController extends Controller
         $rowsNumber = count($filteredProducts);
 
         return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -173,41 +159,41 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         // random products from same category
-        $similar_products = Product::whereHas('categories', function ($cat) use ($product) {
-            $cat->where('categories.id', '=', $product->categories->first()->id);
+        $similarProducts = Product::whereHas('categories', function ($query) use ($product) {
+            $query->where('categories.id', '=', $product->categories->first()->id);
         })->where('id', '!=', $id)->take(12)->get();
 
-        if(sizeof($similar_products) < 12) {
-            $similar_products = Product::where('id', '!=', $id)->inRandomOrder()->take(12)->get();
+        if(sizeof($similarProducts) < 12) {
+            $similarProducts = Product::where('id', '!=', $id)->inRandomOrder()->take(12)->get();
         }
 
         // get all unique colors for given product
-        $liste_color = $this->getUniqueColors($product);
+        $colors = $this->getUniqueColors($product);
 
         // get selected color
         $selectedColor = request()->get('color');
         if (!$selectedColor) {
-            $selectedColor = $liste_color[0]->id;
+            $selectedColor = $colors[0]->id;
         }
 
         // get only product designs of selected color
-        $productOfColor = ProductDesign::where('product_id', '=', $id)->where('color_id', '=', $selectedColor);
+        $productDesignsOfColor = ProductDesign::where('product_id', '=', $id)->where('color_id', '=', $selectedColor);
 
         // get all unique sizes of selected color product design
-        $liste_size = $productOfColor->distinct()->get(['size']);
+        $sizes = $productDesignsOfColor->distinct()->get(['size']);
 
         // get product images
-        $liste_images = [];
+        $images = [];
         foreach ($product->images as $image) {
-            array_push($liste_images, $image->path);
+            array_push($images, $image->path);
         }
 
         return view('templates.product-detail')
             ->with('product', $product)
-            ->with('similar_products', $similar_products)
-            ->with('liste_images', $liste_images)
-            ->with('liste_color', $liste_color)
-            ->with('liste_size', $liste_size);
+            ->with('similarProducts', $similarProducts)
+            ->with('images', $images)
+            ->with('colors', $colors)
+            ->with('sizes', $sizes);
     }
 
     /**
@@ -238,8 +224,6 @@ class ProductController extends Controller
      */
     public function update(ProductPutRequest $request, $id)
     {
-        Log::debug($request);
-
         DB::transaction(function() use($request, $id) {
 
             // update product

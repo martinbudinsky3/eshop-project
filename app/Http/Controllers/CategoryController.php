@@ -30,27 +30,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -69,7 +48,7 @@ class CategoryController extends Controller
                 ->with('products', $products->get())
                 ->with('search', FALSE);
         }
-        
+
         if(sizeof($products->get()) >= 12) {
             $recommendedProducts = Product::whereHas('categories', function ($cat) use ($id) {
                 $cat->where('categories.id', $id);
@@ -77,7 +56,7 @@ class CategoryController extends Controller
         } else {
             $recommendedProducts = Product::inRandomOrder()->take(12)->get();
         }
-        
+
 
         // get unique products attributes
         $colors = $this->getUniqueColors($products->get());
@@ -86,7 +65,7 @@ class CategoryController extends Controller
 
         // filtering
         $products = $this->filterProducts($products);
-        
+
         // sorting
         $products = $this->sortProducts($products);
 
@@ -101,84 +80,5 @@ class CategoryController extends Controller
             ->with('brands', $brands)
             ->with('sizes', $sizes)
             ->with('search', FALSE);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    private function filterProducts($products) {
-        // filtering
-        $filterColors = request()->get('color');
-        $filterSizes = request()->get('size');
-        $filterBrand = request()->get('brand');
-        
-        if($filterColors) {
-            $products = $products->whereHas('colors', function ($col) use ($filterColors) {
-                $col->whereIn('colors.id', $filterColors);
-            });
-        }
-
-        if($filterSizes) {
-            $products = $products->whereHas('productDesigns', function ($size) use ($filterSizes) {
-                $size->whereIn('product_designs.size', $filterSizes);
-            });
-        }
-
-        if($filterBrand) {
-            $products = $products->whereIn('brand_id', $filterBrand);
-        }
-
-        return $products;
-    }
-
-    private function sortProducts($products) {
-        // sorting
-        $sortOrder = request()->get('sort');
-
-        switch ($sortOrder) {
-            case 1:
-                $products = $products->orderBy('price', 'asc');
-                break;
-
-            case 2:
-                $products = $products->orderBy('price', 'desc');
-                break;
-
-            default:
-                $products = $products->orderBy('price', 'asc');
-        }
-
-        return $products;
     }
 }

@@ -16,34 +16,9 @@ use App\Models\User;
 
 class CartController extends Controller
 {
-
-    //
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
@@ -68,58 +43,51 @@ class CartController extends Controller
         }
 
         // count price of cart items
-        $final_price = 0;
-
-        foreach($cartItems as $item){
-            $final_price = $final_price + $item->amount * $item->productDesign->product->price;
-        }
+        $finalPrice = $cartItems->reduce(function ($sum, $item) {
+            return $sum + $item->productDesign->product->price * $item->amount;
+        });
 
         return view('templates.cart')
             ->with('cartItems', $cartItems)
-            ->with('final_price', $final_price);
+            ->with('finalPrice', $finalPrice);
     }
-
 
     public function delivery(Request $request)
     {
         // get selected payment and transport option
-        $pay_id = $request->session()->get('payment');
-        $transport_id = $request->session()->get('transport');
+        $paymentId = session()->get('payment');
+        $transportId = session()->get('transport');
 
         // if user hasn't selected yet, select default
-        if(!$transport_id) {
-            session(['transport' => '1']);
-            $transport_id = $request->session()->get('transport');
+        if(!$transportId) {
+            session(['transport' => 1]);
+            $transportId = session()->get('transport');
         }
 
-        if(!$pay_id) {
-            session(['payment' => '1']);
-            $pay_id = $request->session()->get('payment');
+        if(!$paymentId) {
+            session(['payment' => 1]);
+            $paymentId = session()->get('payment');
         }
 
         // get records of selected transport and payment from DB
-        $transport = Transport::find($transport_id);
-        $payment = Payment::find($pay_id);
+        $transport = Transport::find($transportId);
+        $payment = Payment::find($paymentId);
 
         // get cart items of logged in user from DB
         if(Auth::check()){
-            $cart = Auth::user()->cart->first();
-            $cartItems = $cart->cartItems;
+            $cartItems = Auth::user()->cart->cartItems;
         }
-
         // get cart items of guest from session
         else {
-            $cartItems = $request->session()->get('cartItems');
+            $cartItems = session()->get('cartItems');
         }
 
         // count price of order
-        $final_price = 0;
+        $finalPrice = $cartItems->reduce(function ($sum, $item) {
+            return $sum + $item->productDesign->product->price * $item->amount;
+        });
 
-        foreach($cartItems as $item){
-            $final_price = $final_price + $item->amount*$item->productDesign->product->price;
-        }
-
-        $final_price += $transport->price + $payment->price;
+        $finalPrice += $transport->price + $payment->price;
 
         $transports = Transport::all();
         $payments = Payment::all();
@@ -127,13 +95,9 @@ class CartController extends Controller
         return view('templates.cart2')
             ->with('selectedTransport', $transport)
             ->with('selectedPayment', $payment)
-            ->with('final_price', $final_price)
+            ->with('finalPrice', $finalPrice)
             ->with('transports', $transports)
             ->with('payments', $payments);
-    }
-
-    public function update(Request $request, $id) {
-
     }
 
     // login from cart

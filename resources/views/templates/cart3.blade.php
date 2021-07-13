@@ -143,10 +143,10 @@
 
             <hr class="hr">
             <div class="summary">
-                <p>Hodnota tovaru: <span>{{ $items_price }} €</span></p>
-                <p>Platba: <span>{{ $payment_price }} €</span></p>
-                <p>Doprava: <span>{{ $transport_price }} €</span></p>
-                <p>CENA SPOLU: <span>{{ $final_price }} €</span></p>
+                <p>Hodnota tovaru: <span>{{ $productsPrice }} €</span></p>
+                <p>Platba: <span>{{ $paymentPrice }} €</span></p>
+                <p>Doprava: <span>{{ $transportPrice }} €</span></p>
+                <p>CENA SPOLU: <span>{{ $finalPrice }} €</span></p>
             </div>
 
             <div class="d-flex mt-2">

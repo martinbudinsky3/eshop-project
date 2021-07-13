@@ -118,7 +118,7 @@ input {
 
 /** product description **/
 
-.product-attributes th { 
+.product-attributes th {
     padding-right: 20px;
 }
 
@@ -217,8 +217,8 @@ input {
     }
 }
 
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
     .stars-col {
         width: 15%;
     }
-} 
+}

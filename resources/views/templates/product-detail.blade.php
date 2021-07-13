@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-
     <!-- Modal window that pops up after user adds product to cart -->
     <div class="modal fade" id="add-to-cart-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
@@ -77,13 +76,13 @@
                 <div id="carousel-product-images" class="carousel slide " data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        @foreach ($liste_images as $key => $act_image)
+                        @foreach ($images as $key => $act_image)
                             <li data-target="#carousel-product-images" data-slide-to="{{$key}}", class = "{{$key == 0 ? 'active' : '' }}"></li>
                         @endforeach
                     </ol>
                     <div class="carousel-inner">
 
-                        @foreach ($liste_images as $key => $act_image)
+                        @foreach ($images as $key => $act_image)
                             <div class="carousel-item {{$key == 0 ? 'active' : '' }}">
                                 <img class="d-block w-100 img-responsive"
                                     srcset="{{ asset($act_image.'_520x728.jpg')}} 520w,
@@ -133,7 +132,7 @@
                         <div id="color-input-box">
                             <label for="color_selector">Farba:</label>
                                 <select name="color" id="color_selector" class="@error('color') is-invalid @enderror" onChange="showProductInColor(this)">
-                                    @foreach ($liste_color as $color)
+                                    @foreach ($colors as $color)
                                         <option value="{{$color->id}}" {{ (request()->get('color') == $color->id) ? 'selected' : ''}}> {{ $color->name }}</option>
                                     @endforeach
                                 </select>
@@ -147,7 +146,7 @@
                         <div id="size-input-box">
                             <label for="size_selector">Veľkosť:</label>
                             <select name="size" id="size_selector" class="@error('size') is-invalid @enderror">
-                                @foreach ($liste_size as $size)
+                                @foreach ($sizes as $size)
                                     <option value="{{$size->size}}"> {{ $size->size }}</option>
                                 @endforeach
                             </select>
@@ -172,7 +171,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" id="add-to-cart" >Pridať do košíka</button>
+                        <button type="submit" id="add-to-cart">Pridať do košíka</button>
                         <input type="hidden" id="product" name="product" value="{{ $product->id }}">
                     </form>
                 </div>
@@ -369,7 +368,7 @@
 
         <!--Similar products-->
         @component('layout.partials.carousel',
-            ['heading' => 'Podobné produkty', 'carouselId' => 'carousel-similars', 'data' => $similar_products])
+            ['heading' => 'Podobné produkty', 'carouselId' => 'carousel-similars', 'data' => $similarProducts])
         @endcomponent
 
     </main>

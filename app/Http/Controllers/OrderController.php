@@ -48,49 +48,49 @@ class OrderController extends Controller
         }
         // get cart items from guest
         else {
-            $cartItems = collect($request->session()->get('cartItems'));
+            $cartItems = collect(session()->get('cartItems'));
         }
 
         // get payment from request if parameter exists
         if($request->has('payment')) {
-            $pay_id = $request->get('payment');
-            session(['payment' => $pay_id]);
+            $payId = $request->get('payment');
+            session(['payment' => $payId]);
         }
         // if payment hasn't been selected yet set it to default value
-        else if(!$request->session()->has('payment')) {
+        else if(!session()->has('payment')) {
             session(['payment' => 1]);
         }
 
         // get transport from request if parameter exists
         if($request->has('transport')) {
-            $transport_id = $request->get('transport');
-            session(['transport' => $transport_id]);
+            $transportId = $request->get('transport');
+            session(['transport' => $transportId]);
         }
         // if transport hasn't been selected yet set it to default value
-        else if(!$request->session()->has('transport')) {
+        else if(!session()->has('transport')) {
             session(['transport' => 1]);
         }
 
         // get final transport and payment
-        $pay_id = session()->get('payment');
-        $payment = Payment::find($pay_id);
-        $transport_id = session()->get('transport');
-        $transport = Transport::find($transport_id);
+        $payId = session()->get('payment');
+        $payment = Payment::find($payId);
+        $transportId = session()->get('transport');
+        $transport = Transport::find($transportId);
 
         // count price of order
-        $items_price = $cartItems->reduce(function ($sum, $item) {
+        $productsPrice = $cartItems->reduce(function ($sum, $item) {
             return $sum + $item->productDesign->product->price * $item->amount;
         });
-        $payment_price = $payment->price;
-        $transport_price = $transport->price;
+        $paymentPrice = $payment->price;
+        $transportPrice = $transport->price;
 
-        $final_price = $items_price + $payment_price + $transport_price;
+        $finalPrice = $productsPrice + $paymentPrice + $transportPrice;
 
         return view('templates.cart3')
-            ->with('payment_price', $payment_price)
-            ->with('transport_price', $transport_price)
-            ->with('items_price', $items_price)
-            ->with('final_price', $final_price)
+            ->with('paymentPrice', $paymentPrice)
+            ->with('transportPrice', $transportPrice)
+            ->with('productsPrice', $productsPrice)
+            ->with('finalPrice', $finalPrice)
             ->with('delivery', $delivery);
     }
 
@@ -119,7 +119,7 @@ class OrderController extends Controller
 
             // get cart items from guest
             else {
-                $cartItems = $request->session()->get('cartItems');
+                $cartItems = session()->get('cartItems');
             }
 
             // create delivery record
