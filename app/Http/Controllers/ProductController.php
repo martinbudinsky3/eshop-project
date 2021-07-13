@@ -73,7 +73,11 @@ class ProductController extends Controller
             ->with('search', true);
     }
 
-    function list($page) {
+    public function indexDesigns(Product $product) {
+        return response()->json(null, 200);
+    }
+
+    public function list($page) {
 
         // get rowsPerPage from query parameters (after ?), if not set => 5
         $rowsPerPage = request('rowsPerPage', 5);
@@ -116,18 +120,16 @@ class ProductController extends Controller
      */
     public function store(ProductPostRequest $request)
     {
-        $productDesigns = $request->product_designs;
-
-        DB::transaction(function() use ($productDesigns, $request, &$product) {
+        DB::transaction(function() use ($request, &$product) {
             $product = Product::create([
-                        'name' => $request->name,
-                        'description' => $request->description,
-                        'price' => $request->price,
-                        'brand_id' =>  $request->brand,
-                        'material' => $request->material
-                    ]);
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'brand_id' =>  $request->brand,
+                'material' => $request->material
+            ]);
 
-            foreach($productDesigns as $productDesign) {
+            foreach($request->product_designs as $productDesign) {
                 ProductDesign::create([
                     'color_id' => $productDesign['color'],
                     'size' => $productDesign['size'],
@@ -224,6 +226,7 @@ class ProductController extends Controller
      */
     public function update(ProductPutRequest $request, $id)
     {
+        // TODO duck type product
         DB::transaction(function() use($request, $id) {
 
             // update product

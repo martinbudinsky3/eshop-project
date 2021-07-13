@@ -20,6 +20,13 @@ Route::prefix('products')->group(function () {
     Route::delete('{product}/', 'ProductController@destroy');
     Route::get('{product}/edit/', 'ProductController@edit');
     Route::put('{product}/', 'ProductController@update');
+    Route::post('{product}/product-designs/', 'ProductDesignController@store');
+    Route::get('{product}/product-designs/', 'ProductController@indexDesigns');
+});
+
+Route::prefix('product-designs')->group(function () {
+    Route::put('{product-design}/', 'ProductDesignController@update');
+    Route::delete('{product-design}/', 'ProductDesignController@destroy');
 });
 
 Route::prefix('questions')->group(function () {
@@ -39,6 +46,7 @@ Route::prefix('answers')->group(function () {
     Route::put('{answer}/', 'AnswerController@update');
 });
 
+// TODO plural
 Route::get('category/', 'CategoryController@index');
 
 Route::get('brand/', 'BrandController@index');
