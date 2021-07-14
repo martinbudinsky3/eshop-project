@@ -29,7 +29,7 @@ class QuestionPostRequest extends FormRequest
         return [
             'text' => 'unique:questions,text|required|string',
             'date_from' => ['required','date', 'before_or_equal:date_to', new DateIntervalsOverlap()],
-            'date_to' => ['required', 'date', new DateIntervalsOverlap()]
+            'date_to' => ['required', 'date', new DateIntervalsOverlap(null, $this->date_from)]
         ];
     }
 }

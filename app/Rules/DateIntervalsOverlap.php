@@ -8,15 +8,17 @@ use App\Models\Question;
 class DateIntervalsOverlap implements Rule
 {
     private $questionId;
+    private $intervalStart;
 
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($questionId=null)
+    public function __construct($questionId=null, $intervalStart=null)
     {
         $this->questionId = $questionId;
+        $this->intervalStart = $intervalStart;
     }
 
     /**
@@ -28,10 +30,18 @@ class DateIntervalsOverlap implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Question::where('date_from', '<=', $value)
+        $startOrEndOfNewIntervalInsideExisting = Question::where('date_from', '<=', $value)
             ->where('date_to', '>=', $value)
             ->where('id', '!=', $this->questionId)
             ->exists();
+
+        $wholeExistingIntervalInsideNew = $this->intervalStart != null &&
+            Question::where('date_from', '>', $this->intervalStart)
+                ->where('date_from', '<', $value)
+                ->where('id', '!=', $this->questionId)
+                ->exists();
+
+        return !$startOrEndOfNewIntervalInsideExisting && !$wholeExistingIntervalInsideNew;
     }
 
     /**
