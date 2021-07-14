@@ -25,10 +25,12 @@ class ProductDesignPostRequest extends FormRequest
     public function rules()
     {
         return [
-            'quantity' => 'required|integer',
+            'quantity' => 'required|integer|min:0',
             'size' => 'required|string|max:255',
             'color' => [
-                'required|integer|exists:colors,id',
+                'required',
+                'integer',
+                'exists:colors,id',
                 new UniqueProductDesign($this->size, $this->product->id)
             ]
         ];

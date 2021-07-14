@@ -32,7 +32,7 @@ class UniqueProductDesign implements Rule
      */
     public function passes($attribute, $value)
     {
-        return ProductDesign::where('id', '!=', $this->productDesignId)
+        return !ProductDesign::where('id', '!=', $this->productDesignId)
             ->where('product_id', $this->productId)
             ->where('color_id', $value)
             ->where('size', $this->size)
@@ -46,6 +46,6 @@ class UniqueProductDesign implements Rule
      */
     public function message()
     {
-        return 'Variant produktu musí mať unikátnu kombináciu farby a veľkosti';
+        return 'Design of product must have unique combination of color and size';
     }
 }
