@@ -28,11 +28,6 @@ class ProductController extends Controller
         $this->imageService = $imageService;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         // random products
@@ -112,12 +107,6 @@ class ProductController extends Controller
         return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ProductPostRequest $request)
     {
         DB::transaction(function() use ($request, &$product) {
@@ -148,13 +137,6 @@ class ProductController extends Controller
 
         return response()->json(['id' => $product->id, 'success' => 'Produkt bol úspešne vytvorený']);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function show($id)
     {
@@ -198,12 +180,6 @@ class ProductController extends Controller
             ->with('sizes', $sizes);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
 
@@ -217,13 +193,6 @@ class ProductController extends Controller
         ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ProductPutRequest $request, $id)
     {
         // TODO duck type product
@@ -292,27 +261,20 @@ class ProductController extends Controller
         return response()->json(['success' => 'Produkt bol úspešne editovaný']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        // get images to delete
-        $deletedImages = Image::where('product_id', $id)->get();
-
+        $imagesToDelete = Image::where('product_id', $id)->get();
         $product = Product::find($id);
 
-        DB::transaction(function() use($product, $deletedImages) {
+        DB::transaction(function() use($product, $imagesToDelete) {
             $product->delete();
-
-            // delete images
-            $this->imageService->deleteImages($deletedImages);
+            $this->imageService->deleteImages($imagesToDelete);
         });
 
-        return response()->json(['status' => 'success', 'msg' => 'Product deleted successfully']);
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Product deleted successfully'
+        ]);
     }
 
     private function transformString($str)

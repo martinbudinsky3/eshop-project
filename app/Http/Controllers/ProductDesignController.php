@@ -38,6 +38,8 @@ class ProductDesignController extends Controller
 
     public function destroy(ProductDesign $productDesign)
     {
+        $productDesign->delete();
+        
         return response()->json(null, 204);
     }
 }
