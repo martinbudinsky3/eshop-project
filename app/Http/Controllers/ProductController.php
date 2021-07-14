@@ -69,7 +69,9 @@ class ProductController extends Controller
     }
 
     public function indexDesigns(Product $product) {
-        return response()->json(null, 200);
+        $product->load('productDesigns');
+
+        return response()->json(['productDesigns' => $product->productDesigns], 200);
     }
 
     public function list($page) {
