@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\UniqueProductDesign;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductDesignPutRequest extends FormRequest
@@ -13,7 +14,7 @@ class ProductDesignPutRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,14 @@ class ProductDesignPutRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'quantity' => 'required|integer|min:0',
+            'size' => 'required|string|max:255',
+            'color' => [
+                'required',
+                'integer',
+                'exists:colors,id',
+                new UniqueProductDesign($this->size, $this->productDesign->product_id, $this->productDesign->id)
+            ]
         ];
     }
 }

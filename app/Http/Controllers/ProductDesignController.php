@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductDesignPostRequest;
+use App\Http\Requests\ProductDesignPutRequest;
 use App\Models\Product;
 use App\Models\ProductDesign;
 use Illuminate\Http\Request;
@@ -24,8 +25,14 @@ class ProductDesignController extends Controller
         ], 201);
     }
 
-    public function update(Request $request, ProductDesign $productDesign)
+    public function update(ProductDesignPutRequest $request, ProductDesign $productDesign)
     {
+        $productDesign->quantity = $request->quantity;
+        $productDesign->size = $request->size;
+        $productDesign->color_id = $request->color;
+
+        $productDesign->save();
+
         return response()->json(null, 204);
     }
 

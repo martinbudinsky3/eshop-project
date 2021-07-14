@@ -25,8 +25,8 @@ Route::prefix('products')->group(function () {
 });
 
 Route::prefix('product-designs')->group(function () {
-    Route::put('{product-design}/', 'ProductDesignController@update');
-    Route::delete('{product-design}/', 'ProductDesignController@destroy');
+    Route::put('{productDesign}/', 'ProductDesignController@update');
+    Route::delete('{productDesign}/', 'ProductDesignController@destroy');
 });
 
 Route::prefix('questions')->group(function () {
