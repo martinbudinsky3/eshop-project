@@ -32,7 +32,8 @@ class UniqueProductDesign implements Rule
      */
     public function passes($attribute, $value)
     {
-        return !ProductDesign::where('id', '!=', $this->productDesignId)
+        return $this->size == null ||
+            !ProductDesign::where('id', '!=', $this->productDesignId)
             ->where('product_id', $this->productId)
             ->where('color_id', $value)
             ->where('size', $this->size)

@@ -69,7 +69,7 @@ class ProductController extends Controller
     }
 
     public function indexDesigns(Product $product) {
-        $product->load('productDesigns');
+        $product->load('productDesigns.color');
 
         return response()->json(['productDesigns' => $product->productDesigns], 200);
     }
@@ -119,15 +119,6 @@ class ProductController extends Controller
                 'brand_id' =>  $request->brand,
                 'material' => $request->material
             ]);
-
-            foreach($request->product_designs as $productDesign) {
-                ProductDesign::create([
-                    'color_id' => $productDesign['color'],
-                    'size' => $productDesign['size'],
-                    'quantity' => $productDesign['quantity'],
-                    'product_id' => $product->id
-                ]);
-            }
 
             ProductCategory::create([
                 'product_id' => $product->id,
@@ -210,37 +201,6 @@ class ProductController extends Controller
             $product->material = $request->material;
 
             $product->save();
-
-            // destroy deleted product designs
-            if($request->has('deleted_designs')) {
-                $deletedProductDesigns = $request->deleted_designs;
-                foreach($deletedProductDesigns as $deletedProductDesign) {
-
-                    $designToDelete = ProductDesign::find($deletedProductDesign['id']);
-                    $designToDelete->delete();
-                }
-            }
-
-            // update or create product designs
-            $productDesigns = $request->product_designs;
-            foreach($productDesigns as $productDesign) {
-                if(!isset($productDesign['id'])) { // create product design
-
-                    ProductDesign::create([
-                        'color_id' => $productDesign['color'],
-                        'size' => $productDesign['size'],
-                        'quantity' => $productDesign['quantity'],
-                        'product_id' => $product->id
-                    ]);
-                } else { // update existing product design
-                    $oldProductDesign = ProductDesign::find($productDesign['id']);
-                    $oldProductDesign->color_id = $productDesign['color'];
-                    $oldProductDesign->size = $productDesign['size'];
-                    $oldProductDesign->quantity = $productDesign['quantity'];
-
-                    $oldProductDesign->save();
-                }
-            }
 
             // update product category
             $oldProductCategory = ProductCategory::where('product_id', $id)->first();

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Rules\UniqueProductDesign;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class ProductDesignPostRequest extends FormRequest
 {
@@ -24,6 +25,7 @@ class ProductDesignPostRequest extends FormRequest
      */
     public function rules()
     {
+        Log::debug($this);
         return [
             'quantity' => 'required|integer|min:0',
             'size' => 'required|string|max:255',
