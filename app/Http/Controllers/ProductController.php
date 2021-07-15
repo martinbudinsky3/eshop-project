@@ -30,17 +30,23 @@ class ProductController extends Controller
 
     public function index()
     {
-        // random products
-        $recommendedProducts = Product::inRandomOrder()->take(12)->get();
-
         $searchTerm = request()->get('search');
 
         // filtering based on search term
-        $filteredProducts = Product::all()->filter(function ($product) use ($searchTerm) {
-            if (Str::is('*' . $this->transformString($searchTerm) . '*', $this->transformString($product->name))) {
-                return $product;
-            };
-        });
+        $filteredProducts = Product::has('productDesigns')
+            ->get()
+            ->filter(function ($product) use ($searchTerm) {
+                if (Str::is('*' . $this->transformString($searchTerm) . '*', $this->transformString($product->name))) {
+                    return $product;
+                };
+            });
+
+        if($filteredProducts->count() < 1) {
+            return view('templates.product-category')
+                ->with('title', 'Vyhľadávanie')
+                ->with('products', $filteredProducts)
+                ->with('search', true);
+        }
 
         // get unique attributes for filtered products
         $colors = $this->getUniqueColors($filteredProducts);
@@ -57,6 +63,9 @@ class ProductController extends Controller
         $products = $this->filterProducts($products);
         $products = $this->sortProducts($products);
         $products = $products->paginate(12)->appends(request()->query());
+
+        // random products
+        $recommendedProducts = Product::inRandomOrder()->take(12)->get();
 
         return view('templates.product-category')
             ->with('title', 'Vyhľadávanie')
@@ -135,6 +144,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
+        if($product->productDesigns->count() < 1) {
+            abort(404);
+        }
+
         // random products from same category
         $similarProducts = Product::whereHas('categories', function ($query) use ($product) {
             $query->where('categories.id', '=', $product->categories->first()->id);
@@ -190,7 +203,6 @@ class ProductController extends Controller
     {
         // TODO duck type product
         DB::transaction(function() use($request, $id) {
-
             // update product
             $product = Product::find($id);
 
