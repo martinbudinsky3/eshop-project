@@ -65,7 +65,10 @@ class ProductController extends Controller
         $products = $products->paginate(12)->appends(request()->query());
 
         // random products
-        $recommendedProducts = Product::inRandomOrder()->take(12)->get();
+        $recommendedProducts = Product::has('productDesigns')
+            ->inRandomOrder()
+            ->take(12)
+            ->get();
 
         return view('templates.product-category')
             ->with('title', 'Vyhľadávanie')

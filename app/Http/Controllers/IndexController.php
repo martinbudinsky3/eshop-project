@@ -12,15 +12,11 @@ class IndexController extends Controller
 {
     private $MIN_SURVEY_ANSWER_COUNT = 2;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $news = Product::orderBy('created_at', 'desc')->take(12)->get();
-        $bests = Product::inRandomOrder()->take(12)->get();
+        $news = Product::has('productDesigns')->orderBy('created_at', 'desc')->take(12)->get();
+        $bests = Product::has('productDesigns')->inRandomOrder()->take(12)->get();
 
         $question = Question::where('date_from', '<=', now())
             ->where('date_to', '>=', now())
