@@ -5,19 +5,22 @@ namespace App\Rules;
 use App\Models\ProductDesign;
 use Illuminate\Contracts\Validation\Rule;
 
-class ProductDesignExists implements Rule
+class ProductHasSufficientQuantity implements Rule
 {
     private $size;
     private $colorId;
+    private $productId;
+
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($size, $colorId)
+    public function __construct($size, $colorId, $productId)
     {
         $this->size = $size;
         $this->colorId = $colorId;
+        $this->productId = $productId;
     }
 
     /**
@@ -29,11 +32,13 @@ class ProductDesignExists implements Rule
      */
     public function passes($attribute, $value)
     {
-        $productId = $value;
-        return ProductDesign::where('size', $this->size)
+        $amount = $value;
+        $productDesign = ProductDesign::where('size', $this->size)
             ->where('color_id', $this->colorId)
-            ->where('product_id', $productId)
-            ->exists();
+            ->where('product_id', $this->productId)
+            ->first();
+
+        return $productDesign->quantity - $amount >= 0;
     }
 
     /**
@@ -43,6 +48,6 @@ class ProductDesignExists implements Rule
      */
     public function message()
     {
-        return 'Requested product design does not exist';
+        return 'Requested amount of product is not currently available in stock';
     }
 }

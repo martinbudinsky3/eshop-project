@@ -3,11 +3,13 @@
 namespace App\Http\Requests;
 
 use App\Rules\ProductDesignExists;
+use App\Rules\ProductHasSufficientQuantity;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Log;
 
 class CartItemPostRequest extends FormRequest
 {
+    protected $stopOnFirstFailure = true;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,13 +27,16 @@ class CartItemPostRequest extends FormRequest
      */
     public function rules()
     {
-        Log::debug($this);
-
         return [
             'size' => 'required',
             'color' => 'required',
-            'amount' => 'required|integer|min:1',
-            'product' => new ProductDesignExists($this->size, $this->color)
+            'product' => new ProductDesignExists($this->size, $this->color),
+            'amount' => [
+                'required',
+                'integer',
+                'min:1',
+                new ProductHasSufficientQuantity($this->size, $this->color, $this->product)
+            ]
         ];
     }
 }

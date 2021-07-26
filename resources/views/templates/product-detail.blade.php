@@ -131,9 +131,11 @@
                         @csrf
                         <div id="color-input-box">
                             <label for="color_selector">Farba:</label>
-                                <select name="color" id="color_selector" class="@error('color') is-invalid @enderror" onChange="showProductInColor(this)">
+                                <select name="color" id="color_selector" class="@error('color') is-invalid @enderror" onChange="showProductInColor()">
                                     @foreach ($colors as $color)
-                                        <option value="{{$color->id}}" {{ (request()->get('color') == $color->id) ? 'selected' : ''}}> {{ $color->name }}</option>
+                                        <option value="{{$color->id}}" {{ (request()->get('color') == $color->id) ? 'selected' : ''}}>
+                                            {{ $color->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             @error('color')
@@ -145,9 +147,11 @@
 
                         <div id="size-input-box">
                             <label for="size_selector">Veľkosť:</label>
-                            <select name="size" id="size_selector" class="@error('size') is-invalid @enderror">
+                            <select name="size" id="size_selector" class="@error('size') is-invalid @enderror" onChange="showProductDesign()">
                                 @foreach ($sizes as $size)
-                                    <option value="{{$size->size}}"> {{ $size->size }}</option>
+                                    <option value="{{$size->size}}" {{ (request()->get('size') == $size->size) ? 'selected' : ''}}>
+                                        {{ $size->size }}
+                                    </option>
                                 @endforeach
                             </select>
                             <a href="">Veľkostná tabuľka</a>
@@ -157,12 +161,12 @@
                                 </span>
                             @enderror
                         </div>
-
                         <div id="quantity-input-box">
                             <label for="quantity-input">Množstvo:</label>
                             <div>
                                 <button type="button" class="btn input-btn d-inline-block d-md-none" onclick="decrementNumberValue(this)">-</button>
-                                <input type="number" name="amount" id="quantity-input" class="@error('amount') is-invalid @enderror" value="1" min="1">
+                                <input type="number" name="amount" id="quantity-input" class="@error('amount') is-invalid @enderror"
+                                       value="1" min="1" max="{{ $quantity }}">
                                 <button type="button" class="btn input-btn d-inline-block d-md-none" onclick="incrementNumberValue(this)">+</button>
                             </div>
                             @error('amount')
@@ -171,7 +175,15 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" id="add-to-cart">Pridať do košíka</button>
+                        @if($quantity == 0)
+                            <p class="text-danger">Variant produktu momentálne nie je dostupný</p>
+                        @endif
+                        @if($quantity <= 15 && $quantity > 0)
+                            <p>Na sklade je už iba posledných {{ $quantity }} ks</p>
+                        @endif
+                        <button type="submit" id="add-to-cart" {{ $quantity == 0 ? 'disabled' : '' }}>
+                            Pridať do košíka
+                        </button>
                         <input type="hidden" id="product" name="product" value="{{ $product->id }}">
                     </form>
                 </div>

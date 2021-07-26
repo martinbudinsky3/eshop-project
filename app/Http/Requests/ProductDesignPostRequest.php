@@ -25,7 +25,6 @@ class ProductDesignPostRequest extends FormRequest
      */
     public function rules()
     {
-        Log::debug($this);
         return [
             'quantity' => 'required|integer|min:0',
             'size' => 'required|string|max:255',

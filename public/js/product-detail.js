@@ -1,7 +1,18 @@
-function showProductInColor(colorSelector) {
+const colorSelector = document.querySelector('#color_selector')
+const sizeSelector = document.querySelector('#size_selector')
+
+
+function showProductInColor() {
     let colorValue = colorSelector.value
     let url = new URL(window.location.href);
     url.searchParams.set('color', colorValue);
+    window.location.href = url;
+}
+
+function showProductDesign() {
+    let sizeValue = sizeSelector.value
+    let url = new URL(window.location.href);
+    url.searchParams.set('size', sizeValue);
     window.location.href = url;
 }
 
@@ -23,9 +34,9 @@ $(function(){
             modalSuccess.modal('show');
         });
 
-        req.fail(function(error) {
+        req.fail(function(xhr, status, error) {
             var modalFail = $('#add-to-cart-modal-fail');
-            modalFail.find('.modal-body > p').text(error.error);
+            modalFail.find('.modal-body > p').text(xhr.error);
             modalFail.modal('show');
         })
 

@@ -156,6 +156,7 @@ class ProductController extends Controller
             $query->where('categories.id', '=', $product->categories->first()->id);
         })->where('id', '!=', $id)->take(12)->get();
 
+        // random products
         if(sizeof($similarProducts) < 12) {
             $similarProducts = Product::where('id', '!=', $id)->inRandomOrder()->take(12)->get();
         }
@@ -164,16 +165,24 @@ class ProductController extends Controller
         $colors = $this->getUniqueColors($product);
 
         // get selected color
-        $selectedColor = request()->get('color');
-        if (!$selectedColor) {
-            $selectedColor = $colors[0]->id;
-        }
+        $selectedColor = request()->get('color', $colors[0]->id);
 
         // get only product designs of selected color
-        $productDesignsOfColor = ProductDesign::where('product_id', '=', $id)->where('color_id', '=', $selectedColor);
+        $productDesignsOfColor = ProductDesign::where('product_id', $id)->where('color_id', $selectedColor);
 
         // get all unique sizes of selected color product design
         $sizes = $productDesignsOfColor->distinct()->get(['size']);
+
+        // get selected size
+        $selectedSize = request()->get('size', $sizes[0]->size);
+
+        Log::debug($selectedSize);
+        // get available quantity of selected product design
+        $productDesign = ProductDesign::where('product_id', $id)
+            ->where('color_id', $selectedColor)
+            ->where('size', $selectedSize)
+            ->first();
+        $availableQuantity = $productDesign->quantity;
 
         // get product images
         $images = [];
@@ -186,7 +195,8 @@ class ProductController extends Controller
             ->with('similarProducts', $similarProducts)
             ->with('images', $images)
             ->with('colors', $colors)
-            ->with('sizes', $sizes);
+            ->with('sizes', $sizes)
+            ->with('quantity', $availableQuantity);
     }
 
     public function edit($id)
