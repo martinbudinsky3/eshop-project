@@ -17,30 +17,21 @@ class CategoryController extends Controller
 {
     use ProductsTrait;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $parentCategories = Category::with('childCategories')->doesnthave('parentCategories')->get();
+        $parentCategories = Category::with('childCategories')->doesntHave('parentCategories')->get();
 
         return response()->json($parentCategories);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $category = Category::find($id);
         $products = Product::whereHas('categories', function ($cat) use ($id) {
-            $cat->where('categories.id', $id);
-        });
+                $cat->where('categories.id', $id);
+            })
+            ->has('productDesigns');
 
         if($products->get()->isEmpty()) {
             return view('templates.product-category')
@@ -49,14 +40,15 @@ class CategoryController extends Controller
                 ->with('search', FALSE);
         }
 
+        $recommendedProductsBuilder = Product::has('productDesigns')->inRandomOrder()->take(12);
+
         if(sizeof($products->get()) >= 12) {
-            $recommendedProducts = Product::whereHas('categories', function ($cat) use ($id) {
+            $recommendedProductsBuilder = Product::whereHas('categories', function ($cat) use ($id) {
                 $cat->where('categories.id', $id);
-            })->inRandomOrder()->take(12)->get();
-        } else {
-            $recommendedProducts = Product::inRandomOrder()->take(12)->get();
+            });
         }
 
+        $recommendedProducts = $recommendedProductsBuilder->get();
 
         // get unique products attributes
         $colors = $this->getUniqueColors($products->get());

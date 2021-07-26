@@ -28,24 +28,25 @@ class ProductController extends Controller
         $this->imageService = $imageService;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        // random products
-        $recommendedProducts = Product::inRandomOrder()->take(12)->get();
-
         $searchTerm = request()->get('search');
 
         // filtering based on search term
-        $filteredProducts = Product::all()->filter(function ($product) use ($searchTerm) {
-            if (Str::is('*' . $this->transformString($searchTerm) . '*', $this->transformString($product->name))) {
-                return $product;
-            };
-        });
+        $filteredProducts = Product::has('productDesigns')
+            ->get()
+            ->filter(function ($product) use ($searchTerm) {
+                if (Str::is('*' . $this->transformString($searchTerm) . '*', $this->transformString($product->name))) {
+                    return $product;
+                };
+            });
+
+        if($filteredProducts->count() < 1) {
+            return view('templates.product-category')
+                ->with('title', 'Vyhľadávanie')
+                ->with('products', $filteredProducts)
+                ->with('search', true);
+        }
 
         // get unique attributes for filtered products
         $colors = $this->getUniqueColors($filteredProducts);
@@ -63,6 +64,12 @@ class ProductController extends Controller
         $products = $this->sortProducts($products);
         $products = $products->paginate(12)->appends(request()->query());
 
+        // random products
+        $recommendedProducts = Product::has('productDesigns')
+            ->inRandomOrder()
+            ->take(12)
+            ->get();
+
         return view('templates.product-category')
             ->with('title', 'Vyhľadávanie')
             ->with('products', $products)
@@ -73,7 +80,13 @@ class ProductController extends Controller
             ->with('search', true);
     }
 
-    function list($page) {
+    public function indexDesigns(Product $product) {
+        $product->load('productDesigns.color');
+
+        return response()->json(['productDesigns' => $product->productDesigns], 200);
+    }
+
+    public function list($page) {
 
         // get rowsPerPage from query parameters (after ?), if not set => 5
         $rowsPerPage = request('rowsPerPage', 5);
@@ -108,33 +121,16 @@ class ProductController extends Controller
         return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ProductPostRequest $request)
     {
-        $productDesigns = $request->product_designs;
-
-        DB::transaction(function() use ($productDesigns, $request, &$product) {
+        DB::transaction(function() use ($request, &$product) {
             $product = Product::create([
-                        'name' => $request->name,
-                        'description' => $request->description,
-                        'price' => $request->price,
-                        'brand_id' =>  $request->brand,
-                        'material' => $request->material
-                    ]);
-
-            foreach($productDesigns as $productDesign) {
-                ProductDesign::create([
-                    'color_id' => $productDesign['color'],
-                    'size' => $productDesign['size'],
-                    'quantity' => $productDesign['quantity'],
-                    'product_id' => $product->id
-                ]);
-            }
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'brand_id' =>  $request->brand,
+                'material' => $request->material
+            ]);
 
             ProductCategory::create([
                 'product_id' => $product->id,
@@ -147,16 +143,13 @@ class ProductController extends Controller
         return response()->json(['id' => $product->id, 'success' => 'Produkt bol úspešne vytvorený']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
     public function show($id)
     {
         $product = Product::find($id);
+
+        if($product->productDesigns->count() < 1) {
+            abort(404);
+        }
 
         // random products from same category
         $similarProducts = Product::whereHas('categories', function ($query) use ($product) {
@@ -196,12 +189,6 @@ class ProductController extends Controller
             ->with('sizes', $sizes);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
 
@@ -215,17 +202,10 @@ class ProductController extends Controller
         ));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ProductPutRequest $request, $id)
     {
+        // TODO duck type product
         DB::transaction(function() use($request, $id) {
-
             // update product
             $product = Product::find($id);
 
@@ -236,37 +216,6 @@ class ProductController extends Controller
             $product->material = $request->material;
 
             $product->save();
-
-            // destroy deleted product designs
-            if($request->has('deleted_designs')) {
-                $deletedProductDesigns = $request->deleted_designs;
-                foreach($deletedProductDesigns as $deletedProductDesign) {
-
-                    $designToDelete = ProductDesign::find($deletedProductDesign['id']);
-                    $designToDelete->delete();
-                }
-            }
-
-            // update or create product designs
-            $productDesigns = $request->product_designs;
-            foreach($productDesigns as $productDesign) {
-                if(!isset($productDesign['id'])) { // create product design
-
-                    ProductDesign::create([
-                        'color_id' => $productDesign['color'],
-                        'size' => $productDesign['size'],
-                        'quantity' => $productDesign['quantity'],
-                        'product_id' => $product->id
-                    ]);
-                } else { // update existing product design
-                    $oldProductDesign = ProductDesign::find($productDesign['id']);
-                    $oldProductDesign->color_id = $productDesign['color'];
-                    $oldProductDesign->size = $productDesign['size'];
-                    $oldProductDesign->quantity = $productDesign['quantity'];
-
-                    $oldProductDesign->save();
-                }
-            }
 
             // update product category
             $oldProductCategory = ProductCategory::where('product_id', $id)->first();
@@ -289,27 +238,20 @@ class ProductController extends Controller
         return response()->json(['success' => 'Produkt bol úspešne editovaný']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        // get images to delete
-        $deletedImages = Image::where('product_id', $id)->get();
-
+        $imagesToDelete = Image::where('product_id', $id)->get();
         $product = Product::find($id);
 
-        DB::transaction(function() use($product, $deletedImages) {
+        DB::transaction(function() use($product, $imagesToDelete) {
             $product->delete();
-
-            // delete images
-            $this->imageService->deleteImages($deletedImages);
+            $this->imageService->deleteImages($imagesToDelete);
         });
 
-        return response()->json(['status' => 'success', 'msg' => 'Product deleted successfully']);
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Product deleted successfully'
+        ]);
     }
 
     private function transformString($str)
