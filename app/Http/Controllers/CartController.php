@@ -28,7 +28,7 @@ class CartController extends Controller
 
             $cart = Auth::user()->cart;
             if(!$cart) {
-                $cartItems = [];
+                $cartItems = collect();
             } else {
                 $cartItems = $cart->cartItems;
             }
@@ -36,9 +36,9 @@ class CartController extends Controller
 
         // get cart items of guest from session
         else {
-            $cartItems = session()->get('cartItems');
+            $cartItems = collect(session()->get('cartItems'));
             if(!$cartItems) {
-                $cartItems = [];
+                $cartItems = collect();
             }
         }
 
@@ -79,7 +79,7 @@ class CartController extends Controller
         }
         // get cart items of guest from session
         else {
-            $cartItems = session()->get('cartItems');
+            $cartItems = collect(session()->get('cartItems'));
         }
 
         // count price of order

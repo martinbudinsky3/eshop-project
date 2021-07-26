@@ -148,13 +148,18 @@ class OrderController extends Controller
             ]);
 
             // create order items
-            foreach($cartItems as $item) {
+            foreach($cartItems as $cartItem) {
                 OrderItem::create([
-                    'product_design_id' => $item->productDesign->id,
-                    'amount' => $item->amount,
+                    'product_design_id' => $cartItem->product_design_id,
+                    'amount' => $cartItem->amount,
                     'order_id' => $order->id,
-                    'price' => $item->productDesign->product->price
+                    'price' => $cartItem->productDesign->product->price
                 ]);
+
+                // update product design quantity
+                $productDesign = ProductDesign::find($cartItem->product_design_id);
+                $productDesign->quantity -= $cartItem->amount;
+                $productDesign->save();
             }
         });
 

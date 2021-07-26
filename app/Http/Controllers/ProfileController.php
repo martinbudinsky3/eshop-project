@@ -26,6 +26,7 @@ class ProfileController extends Controller
                 DB::raw('sum(order_items.amount * order_items.price) AS order_items_price')
             )
             ->groupBy('orders.id')
+            ->orderBy('created_at', 'desc')
             ->where('user_id', Auth::id())->get();
 
         foreach ($orders as $order)
