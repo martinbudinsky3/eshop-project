@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CartItemPostRequest;
 use Illuminate\Http\Request;
 use App\Models\CartItem;
 use App\Models\Color;
@@ -14,34 +15,17 @@ use Illuminate\Support\Facades\DB;
 
 class CartItemController extends Controller
 {
-    
-    public function store(Request $request)
+    public function store(CartItemPostRequest $request)
     {
-        
-        // validate cart item object
-        $request->validate([
-            'size' => 'required',
-            'color' => 'required',
-            'amount' => 'required'
-        ]);
-
         // get attributes of selected product design
         $size = $request->post('size');
         $color_id = $request->post('color');
         $product_id = $request->post('product');
-        
-        // find product design by size, color and product_id
-        $productDesign = ProductDesign::where('size', '=', $size)->where('color_id', '=', $color_id)
-            ->where('product_id', '=', $product_id)->first();
-            
-        if(!$productDesign) {
-            return response()->json([
-                'error' => 'Zadaný variant produktu neexistuje',
-            ], 422);
-        }
-
-        // get selected amount
         $amount = $request->post('amount');
+
+        $productDesign = ProductDesign::where('size', $size)
+            ->where('color_id', $color_id)
+            ->where('product_id', $product_id)->first();
 
         // save cart item in DB for logged in user
         if(Auth::check()){
@@ -52,7 +36,7 @@ class CartItemController extends Controller
             ]);
 
             // create cart item and save it
-            $cartItem = CartItem::create([
+            CartItem::create([
                 'product_design_id' => $productDesign->id,
                 'amount' => $amount,
                 'cart_id' => $cart->id,
@@ -61,7 +45,6 @@ class CartItemController extends Controller
 
         // save cart item in session for guest
         else {
-            
             // get cart items from session
             $cartItems = session()->get('cartItems');
 
@@ -69,13 +52,13 @@ class CartItemController extends Controller
             if(!$cartItems) {
                 session()->put('cartItems', []);
             }
-        
+
             // create cart item
             $cartItem = new CartItem([
                 'product_design_id' => $productDesign->id,
                 'amount' => $amount,
             ]);
-            
+
             // add cart item to cartItems array in session
             session()->push('cartItems', ($cartItem));
         }
@@ -88,7 +71,7 @@ class CartItemController extends Controller
 
 
     public function update(Request $request, $id) {
-        
+
         // get new quantity of cart item
         $new_quantity = $request->post('quantity-input');
 
@@ -99,13 +82,13 @@ class CartItemController extends Controller
             $this->authorize('update', $cartItem);
 
             $cartItem->update(['amount'=>$new_quantity]);
-        } 
+        }
 
         // find requested cart item of guest in session and update it
         else {
             $cartItems = session()->get('cartItems');
             session()->forget('cartItems');
-                        
+
             foreach ($cartItems as $key => &$item) {
 
                 if ($key == $id) {
@@ -114,7 +97,7 @@ class CartItemController extends Controller
                 }
             }
 
-            session()->put('cartItems',$cartItems);      
+            session()->put('cartItems',$cartItems);
         }
 
         return redirect('/cart');
@@ -124,8 +107,8 @@ class CartItemController extends Controller
     public function destroy(Request $request, $id)
     {
         // delete cart item of logged in user from DB
-        if(Auth::check()){   
-  
+        if(Auth::check()){
+
             $cartItem = CartItem::find($id);
 
             $this->authorize('delete', $cartItem);
@@ -153,13 +136,13 @@ class CartItemController extends Controller
             // save cartItems to session only when not empty
             if($cartItems) {
                 session()->put('cartItems',$cartItems);
-            } 
-            
+            }
+
             // delete payment and transport info from session
             else {
                 session()->forget('payment');
                 session()->forget('transport');
-            } 
+            }
         }
 
         return redirect('/cart');
