@@ -15,7 +15,10 @@ class AuthController extends Controller
             ], 401);
         }
 
-        return response()->json(null, 204);
+        return response()->json([
+            'id' => auth()->user()->id,
+            'api_token' => auth()->user()->createToken('API Token')->plainTextToken
+        ], 200);
     }
 
     public function logout(Request $request)

@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-class Product_categoryTableSeeder extends Seeder
+class ProductCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -64,4 +64,3 @@ class Product_categoryTableSeeder extends Seeder
 }
 
 
-    

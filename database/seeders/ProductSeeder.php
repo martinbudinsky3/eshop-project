@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-class ProductsTableSeeder extends Seeder
+class ProductSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -31,7 +31,7 @@ class ProductsTableSeeder extends Seeder
         $descriptionShirts2 = "Elegantná košeľa vyrobená z bavlny. Košeľa je vhodná aj na formálne príležitosti, perfektne sa hodí s čiernym nohavicami a sakom.";
         $descriptionTshirtsKids1 = "Tričko, ktoré vaše dieťa nebude chcieť prestať nosiť. Materiál je príjemný na nosenie a hravý vzor poteší vaše dieťa.";
         $descriptionTshirtsKids2 = "Originálne tričko, ktoré sa bude vášmu dieťaťu páčiť. Príjemný materiál zabezpečí, že vaše dieťa sa bude v tričku cítíť pohodlne";
-        
+
         $materials = ['bavlna 100%', 'bavlna 95%, polyester 5%', 'bavlna 80%, polyester 15%, elastan 5%'];
 
         $id = 1;
@@ -48,7 +48,7 @@ class ProductsTableSeeder extends Seeder
                     'description' => $blousesDescriptions[mt_rand(0, 1)],
                     'material' => $materials[mt_rand(0, 2)],
                     'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s'),               
+                    'updated_at'=>date('Y-m-d H:i:s'),
                 ]);
             }
         }
@@ -66,7 +66,7 @@ class ProductsTableSeeder extends Seeder
                     'description' => $shirtsDescriptions[mt_rand(0, 1)],
                     'material' => $materials[mt_rand(0, 2)],
                     'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s'),               
+                    'updated_at'=>date('Y-m-d H:i:s'),
                 ]);
             }
         }
@@ -84,7 +84,7 @@ class ProductsTableSeeder extends Seeder
                     'description' => $kidsTshirtsDescriptions[mt_rand(0, 1)],
                     'material' => $materials[mt_rand(0, 2)],
                     'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s'),               
+                    'updated_at'=>date('Y-m-d H:i:s'),
                 ]);
             }
         }

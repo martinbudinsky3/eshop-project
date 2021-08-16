@@ -8,7 +8,7 @@ return [
     'allowedMethods' => ['GET', 'POST', 'PUT',  'DELETE'],
     'exposedHeaders' => ['DAV', 'content-length', 'Allow'],
     'maxAge' => 86400,
-    'paths' => ['*'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
     'hosts' => [],
 ];

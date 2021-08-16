@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-class CategoryTableSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,7 +20,7 @@ class CategoryTableSeeder extends Seeder
                 'id' => 1,
                 'name' =>'Muži',
             ],
-            [  
+            [
                 'id' => 2,
                 'name' =>'Ženy',
             ],
@@ -50,7 +50,7 @@ class CategoryTableSeeder extends Seeder
                 'id' => 8,
                 'name' =>'Svetre',
             ],
-            
+
 
             // men categories
             [
@@ -58,7 +58,7 @@ class CategoryTableSeeder extends Seeder
                 'name' =>'Tričká',
             ],
             [
-                'id' => 10,  
+                'id' => 10,
                 'name' =>'Košele',
             ],
             [
