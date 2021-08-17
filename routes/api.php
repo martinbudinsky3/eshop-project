@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', 'AuthController@login');
+Route::post('admin/login/', 'AdminAuthController@login');
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'can:administrate']], function () {
 
-    Route::post('/logout', 'AuthController@logout');
+    Route::post('admin/logout/', 'AdminAuthController@logout');
 
     Route::prefix('products')->group(function () {
         Route::post('/', 'ProductController@store');
@@ -51,15 +51,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::delete('{answer}/', 'AnswerController@destroy');
         Route::put('{answer}/', 'AnswerController@update');
     });
+
+    // TODO plural
+    Route::get('category/', 'CategoryController@index');
+
+    Route::get('brand/', 'BrandController@index');
+
+    Route::get('color/', 'ColorController@index');
+
+    Route::get('size/', 'SizeController@index');
 });
 
 
 
-// TODO plural
-Route::get('category/', 'CategoryController@index');
 
-Route::get('brand/', 'BrandController@index');
-
-Route::get('color/', 'ColorController@index');
-
-Route::get('size/', 'SizeController@index');

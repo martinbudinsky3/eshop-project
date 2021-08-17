@@ -9,6 +9,8 @@ class Role extends Model
 {
     use HasFactory;
 
+    const ADMIN_ROLE_NAME = 'ADMIN';
+
     public $timestamps = false;
 
     public function users() {

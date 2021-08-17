@@ -58,6 +58,7 @@ class ProductController extends Controller
             return $product->id;
         });
 
+        // TODO fix bug - after filtering search query disappears from query parameters -> no full text filter
         // query filtered products
         $products = Product::whereIn('id', $filteredProductsIds);
         $products = $this->filterProducts($products);
@@ -176,7 +177,6 @@ class ProductController extends Controller
         // get selected size
         $selectedSize = request()->get('size', $sizes[0]->size);
 
-        Log::debug($selectedSize);
         // get available quantity of selected product design
         $productDesign = ProductDesign::where('product_id', $id)
             ->where('color_id', $selectedColor)

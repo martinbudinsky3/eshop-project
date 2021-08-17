@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class AdminAuthController extends Controller
 {
     public function login(Request $request)
     {
@@ -15,15 +15,20 @@ class AuthController extends Controller
             ], 401);
         }
 
+        if (!auth()->user()->isAdmin()) {
+            return response()->json([
+                'message' => 'You must have an admin rights to log in'
+            ], 403);
+        }
+
         return response()->json([
-            'id' => auth()->user()->id,
             'api_token' => auth()->user()->createToken('API Token')->plainTextToken
         ], 200);
     }
 
     public function logout(Request $request)
     {
-        session()->flush();
+        auth()->user()->currentAccessToken()->delete();
 
         return response()->json(null, 204);
     }
