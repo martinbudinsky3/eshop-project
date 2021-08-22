@@ -15,20 +15,17 @@ class AdminAuthController extends Controller
             ], 401);
         }
 
-        if (!auth()->user()->isAdmin()) {
-            return response()->json([
-                'message' => 'You must have an admin rights to log in'
-            ], 403);
-        }
+        $request->session()->regenerate();
 
-        return response()->json([
-            'api_token' => auth()->user()->createToken('API Token')->plainTextToken
-        ], 200);
+        return response()->json(null, 204);
     }
 
     public function logout(Request $request)
     {
-        auth()->user()->currentAccessToken()->delete();
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return response()->json(null, 204);
     }
