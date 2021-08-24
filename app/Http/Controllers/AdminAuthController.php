@@ -15,6 +15,12 @@ class AdminAuthController extends Controller
             ], 401);
         }
 
+        if (!Auth::user()->isAdmin()) {
+            return response()->json([
+                'message' => 'Only users with administrator rights can log in to application'
+            ], 401);
+        }
+
         $request->session()->regenerate();
 
         return response()->json(null, 204);
