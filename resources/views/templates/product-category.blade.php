@@ -50,8 +50,9 @@
             <div class="row row-m-b">
                 <!--Left filter-->
                 <div class="col-lg-2 col-md-3 filter d-md-block d-none" id="left-filter">
-                    <form method="get" action="{{ url()->current().'?'.http_build_query(request()->except('page')) }}">
+                    <form method="get" action="{{ url()->current() }}">
                         @csrf
+                        <input type="hidden" name="search" value="{{ request()->get('search') }}" />
                         <fieldset class="filter-category">
                             <legend>
                                 <h4>Farba</h4>
@@ -112,8 +113,9 @@
                                     </span>
                                 </button>
                                 <div id="top-filter-menu" class="filter d-none d-md-none">
-                                    <form method="GET" action="{{ url()->current().'?'.http_build_query(request()->except('page')) }}">
+                                    <form method="GET" action="{{ url()->current() }}">
                                         @csrf
+                                        <input type="hidden" name="search" value="{{ request()->get('search') }}" />
                                         <fieldset class="filter-category">
                                             <legend>
                                                 <h4>Farba</h4>
@@ -214,11 +216,11 @@
 
             <div class="container center-col">
                 <!--Recommended products-->
-                @component('layout.partials.carousel', 
+                @component('layout.partials.carousel',
                     ['heading' => $search ? 'Najpredávanejšie' : 'Najpredávanejšie v tejto kategórií', 'carouselId' => 'carousel-rec', 'data' => $recommendedProducts])
-                @endcomponent 
+                @endcomponent
             </div>
-           
+
 
         @else
             <div class="row row-m-b">

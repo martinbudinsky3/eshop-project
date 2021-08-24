@@ -30,7 +30,7 @@
                             <i class="fa fa-times-circle icon" aria-hidden="true"></i>
                         </button>
 
-                        
+
                         <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST">
                             @csrf
                         </form>
@@ -69,7 +69,7 @@
                     <form method="GET" action="/products">
                         @csrf
                         <input type="search" name="search" class="search-full-text"
-                            placeholder="Zadajte hľadaný výraz">
+                               value="{{ request()->get('search') }}" placeholder="Zadajte hľadaný výraz">
                         <button type="submit" class="icon-btn">
                             <i class="fa fa-search icon"></i>
                         </button>
@@ -85,8 +85,8 @@
             </button>
             <form method="GET" action="/products" id="search-form-xs">
                 @csrf
-                <input type="text" name="search" class="search-full-text"
-                    placeholder="Zadajte hľadaný výraz" id="search-input-xs">
+                <input id="search-input-xs" type="text" name="search" class="search-full-text"
+                       value="{{ request()->get('search') }}" placeholder="Zadajte hľadaný výraz" >
                 <button type="submit" id="search-submit-xs" class="icon-btn">
                     <i class="fa fa-search icon"></i>
                 </button>
