@@ -6,11 +6,8 @@ use App\Models\Product;
 use App\Models\ProductDesign;
 use App\Models\ProductCategory;
 use App\Traits\ProductsTrait;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 use App\Services\ImageService;
 use App\Http\Requests\ProductPostRequest;
@@ -33,13 +30,12 @@ class ProductController extends Controller
         $searchTerm = request()->get('search');
 
         // filtering based on search term
-        $filteredProducts = Product::has('productDesigns')
-            ->get()
-            ->filter(function ($product) use ($searchTerm) {
-                if (Str::is('*' . $this->transformString($searchTerm) . '*', $this->transformString($product->name))) {
-                    return $product;
-                };
-            });
+        $filteredProducts = Product::search($searchTerm)->get();
+
+        // filter out products without product designs
+        $filteredProducts = $filteredProducts->filter(function ($product, $key) {
+            return $product->productDesigns->count() > 0;
+        });
 
         if($filteredProducts->count() < 1) {
             return view('templates.product-category')
@@ -58,7 +54,6 @@ class ProductController extends Controller
             return $product->id;
         });
 
-        // TODO fix bug - after filtering search query disappears from query parameters -> no full text filter
         // query filtered products
         $products = Product::whereIn('id', $filteredProductsIds);
         $products = $this->filterProducts($products);

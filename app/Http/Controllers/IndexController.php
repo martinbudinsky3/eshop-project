@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Question;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 
 class IndexController extends Controller

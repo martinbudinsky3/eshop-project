@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
-
+use MeiliSearch\Client;
 /*
 |--------------------------------------------------------------------------
 | Console Routes
@@ -17,3 +17,15 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('meilisearch:update', function () {
+    $client = new Client(
+        env('MEILISEARCH_HOST','http://127.0.0.1:7700'),
+        env('MEILISEARCH_KEY', 'masterKey')
+    );
+
+    $client->index('products')->updateSearchableAttributes([
+        'name',
+        'material'
+    ]);
+});

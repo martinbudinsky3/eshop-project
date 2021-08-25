@@ -4,15 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
-    
-    use HasFactory;
+    use HasFactory, Searchable;
 
     protected $fillable = ['name', 'price', 'material', 'brand_id','description'];
-    
-    public function cartItems(){
+
+    public function cartItems() {
         return $this->hasMany('App\Models\CartItem');
     }
 
