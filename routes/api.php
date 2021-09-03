@@ -54,8 +54,6 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('categories/', 'CategoryController@index');
         Route::get('brands/', 'BrandController@index');
-
-        // TODO plural
         Route::get('colors/', 'ColorController@index');
         Route::get('sizes/', 'SizeController@index');
     });

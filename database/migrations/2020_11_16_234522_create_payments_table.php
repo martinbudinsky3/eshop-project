@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// TODO maybe remove this migration
 class CreatePaymentsTable extends Migration
 {
     /**
@@ -19,6 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->timestamps();
         });
 
+        // TODO move to seeders
         DB::table('payments')->insert(array('id' => 1, 'name' => 'Kartou online',));
         DB::table('payments')->insert(array('id' => 2, 'name' => 'VúB e-platby',));
         DB::table('payments')->insert(array('id' => 3, 'name' => 'Platba kuriérovi',));

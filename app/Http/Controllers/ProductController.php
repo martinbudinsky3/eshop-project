@@ -7,11 +7,13 @@ use App\Models\ProductDesign;
 use App\Models\ProductCategory;
 use App\Traits\ProductsTrait;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Models\Image;
 use App\Services\ImageService;
 use App\Http\Requests\ProductPostRequest;
 use App\Http\Requests\ProductPutRequest;
+use MeiliSearch\Endpoints\Indexes;
 
 
 class ProductController extends Controller
@@ -30,7 +32,7 @@ class ProductController extends Controller
         $searchTerm = request()->get('search');
 
         // filtering based on search term
-        $filteredProducts = Product::search($searchTerm)->get();
+        $filteredProducts = $this->searchProducts($searchTerm);
 
         // filter out products without product designs
         $filteredProducts = $filteredProducts->filter(function ($product, $key) {
@@ -82,27 +84,22 @@ class ProductController extends Controller
         return response()->json(['productDesigns' => $product->productDesigns], 200);
     }
 
-    public function list($page) {
-
-        // get rowsPerPage from query parameters (after ?), if not set => 5
+    public function list($page)
+    {
         $rowsPerPage = request('rowsPerPage', 5);
-
-        // get sortBy from query parameters (after ?), if not set => name
         $sortBy = request('sortBy', 'name');
-
-        // get descending from query parameters (after ?), if not set => false
         $descendingBool = request('descending', 'false');
-        // convert descending true|false -> desc|asc
-        $descending = $descendingBool === 'true' ? 'desc' : 'asc';
-
         $filter = request('filter', '');
 
         // filtering based on search term
-        $filteredProducts = Product::orderBy($sortBy, $descending)->get()->filter(function ($product) use ($filter) {
-            if (Str::is('*' . $this->transformString($filter) . '*', $this->transformString($product->name))) {
-                return $product;
-            };
-        });
+        // TODO what to do if Meilisearch is not accessible at the moment
+        $filteredProducts = $this->searchProducts($filter);
+
+        if ($descendingBool == 'true') {
+            $filteredProducts = $filteredProducts->sortByDesc($sortBy);
+        } else {
+            $filteredProducts = $filteredProducts->sortBy($sortBy);
+        }
 
         if ($rowsPerPage > 0) {
             $offset = ($page - 1) * $rowsPerPage;
@@ -128,6 +125,7 @@ class ProductController extends Controller
                 'material' => $request->material
             ]);
 
+            // TODO use attach method
             ProductCategory::create([
                 'product_id' => $product->id,
                 'category_id' => $request->category
@@ -259,12 +257,14 @@ class ProductController extends Controller
         ]);
     }
 
-    private function transformString($str)
-    {
-        $str = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
-        $str = preg_replace('/[^a-zA-Z0-9]/', '', $str);
-        $str = strtolower($str);
+    private function searchProducts($searchQuery) {
+        return Product::search(
+            $searchQuery,
+            function (Indexes $meiliSearch, string $query, array $options) {
+                $options['limit'] = Product::count();
 
-        return $str;
+                return $meiliSearch->search($query, $options);
+            }
+        )->get();
     }
 }

@@ -15,7 +15,7 @@ class ChangeColorInProductDesignsTable extends Migration
     {
         Schema::table('product_designs', function (Blueprint $table) {
             $table->dropColumn('color');
-            $table->foreignId('color_id');
+            $table->foreignId('color_id'); // TODO add FK ->constrained
             $table->string('size')->change();
         });
     }

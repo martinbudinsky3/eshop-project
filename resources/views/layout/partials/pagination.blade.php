@@ -8,8 +8,8 @@
     <nav>
         <ul class="pagination">
         @if($lastPage < 6)
-            @for($page=1; $page <=$lastPage; $page++)
-                @if($page==$currentPage)
+            @for($page = 1; $page <= $lastPage; $page++)
+                @if($page == $currentPage)
                     <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
                 @else
                     <li class="page-item">
@@ -20,8 +20,8 @@
 
         @else
             @if($currentPage - 1 < 2)
-                @for($page=1; $page <=4; $page++)
-                    @if($page==$currentPage)
+                @for($page = 1; $page <= 4; $page++)
+                    @if($page == $currentPage)
                         <li class="page-item active">
                             <span class="page-link">{{ $page }}</span>
                         </li>
@@ -38,7 +38,7 @@
                     <a class="page-link" href="{{ $pagination->url($lastPage) }}">{{ $lastPage }}</a>
                 </li>
 
-            @elseif($lastPage - $currentPage < 2) 
+            @elseif($lastPage - $currentPage < 2)
                 <li class="page-item">
                     <a class="page-link" href="{{ $pagination->url(1) }}">1</a>
                 </li>
@@ -46,8 +46,8 @@
                     <span class="page-link pagination-three-dots disabled">...</span>
                 </li>
 
-                @for($page = $lastPage - 3; $page <= $lastPage; $page++) 
-                    @if($page==$currentPage) 
+                @for($page = $lastPage - 3; $page <= $lastPage; $page++)
+                    @if($page == $currentPage)
                         <li class="page-item active">
                             <span class="page-link">{{ $page }}</span>
                         </li>

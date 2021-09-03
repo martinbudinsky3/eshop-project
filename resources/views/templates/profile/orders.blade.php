@@ -24,6 +24,7 @@
     </div>
 
     <main class="container mt-2">
+{{--        TODO move this alert to layout header under right under navigation component--}}
         @if (Session::has('success'))
             <div class="alert alert-success">{{ Session::get('success') }}</div>
         @endif

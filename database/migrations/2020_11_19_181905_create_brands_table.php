@@ -19,6 +19,7 @@ class CreateBrandsTable extends Migration
             $table->timestamps();
         });
 
+        // TODO move to seeder
         DB::table('brands')->insert(array('id' => 1, 'name' => 'Esmara',));
         DB::table('brands')->insert(array('id' => 2, 'name' => 'ONLY',));
         DB::table('brands')->insert(array('id' => 3, 'name' => 'H&M',));

@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// TODO maybe delete this migration
 class AddTransportToOrderTable extends Migration
 {
     /**
@@ -14,7 +15,7 @@ class AddTransportToOrderTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->integer('transport');
+            $table->integer('transport'); // WTF ?? :D
         });
     }
 

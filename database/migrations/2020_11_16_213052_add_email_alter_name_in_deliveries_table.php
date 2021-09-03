@@ -17,7 +17,6 @@ class AddEmailAlterNameInDeliveriesTable extends Migration
             $table->string('phone_number');
             $table->dropColumn('surname');
             $table->dropColumn('vorname');
-            //$table->dropColumn('user_id');
             $table->string('name');
             $table->foreignId('user_id')->nullable()->change();
         });
