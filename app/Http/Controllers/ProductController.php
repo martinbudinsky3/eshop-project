@@ -97,12 +97,18 @@ class ProductController extends Controller
 
         $sortOrder = $descendingBool === 'true' ? 'desc' : 'asc';
 
-        // filtering based on search term
-        // TODO what to do if Meilisearch is not accessible at the moment
-        $filteredProductsIds = $this->searchProductsIds($filter);
+        if($filter === '') {
+            $productsQuery = Product::query();
+            $rowsNumber = Product::count();
+        } else {
+            // filtering based on search term
+            // TODO what to do if Meilisearch is not accessible at the moment
+            $filteredProductsIds = $this->searchProductsIds($filter);
+            $productsQuery = Product::whereIn('id', $filteredProductsIds);
+            $rowsNumber = count($filteredProductsIds);
+        }
 
-        $productsQuery = Product::whereIn('id', $filteredProductsIds)
-            ->orderBy($sortBy, $sortOrder);
+        $productsQuery = $productsQuery->orderBy($sortBy, $sortOrder);
 
         if ($rowsPerPage > 0) {
             $offset = ($page - 1) * $rowsPerPage;
@@ -110,7 +116,6 @@ class ProductController extends Controller
         }
 
         $products = $productsQuery->get();
-        $rowsNumber = count($filteredProductsIds);
 
         return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
     }
