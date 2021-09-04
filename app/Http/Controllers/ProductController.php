@@ -99,7 +99,6 @@ class ProductController extends Controller
             $rowsNumber = Product::count();
         } else {
             // filtering based on search term
-            // TODO what to do if Meilisearch is not accessible at the moment
             $filteredProductsIds = $this->searchProductsIds($filter);
             $productsQuery = Product::whereIn('id', $filteredProductsIds);
             $rowsNumber = count($filteredProductsIds);
@@ -269,6 +268,7 @@ class ProductController extends Controller
             $searchedProductsIdsFlattenArr = Arr::flatten($searchedProductsIdsArr);
             $searchedProductsIds = collect($searchedProductsIdsFlattenArr);
         } catch (CommunicationException $exception) {
+            // if Meilisearch is not accessible get search products by sql query
             $searchedProducts = Product::select('id')
                 ->where('name', 'ILIKE', '%'.$searchQuery.'%')
                 ->orWhere('material', 'ILIKE', '%'.$searchQuery.'%')

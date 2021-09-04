@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-
 
 class ProductSeeder extends Seeder
 {
@@ -22,7 +21,7 @@ class ProductSeeder extends Seeder
         $shirtsNames = ['Košeľa s dlhým rukávom s potlačou', 'Košeľa s dlhým rukávom', 'Košeľa', 'Košeľa s rukávmi na vyhnutie',
                         'Flanelová košeľa', 'Kordová košeľa', 'Košeľa s minimálnym vzorom', 'Košeľa s dlhým rukávom', 'Strečová košeľa', 'Košeľa Slim Fit',
                         'Košeľa s kravatovým vzorom', 'Košeľa s grafickou potlačou', 'Elegantná košeľa', 'Košeľa', 'Flanelová košeľa', 'Košeľa s dlhým rukávom'];
-        $tshirtsKidsNames = ['Tričko s dlhým rukávom', 'Vrstvené tričko bio bavlna', 'Pásikované tričko s dlhým rukávom s potlačou', 'Vrstvené tričko', 'Športové tričko pre chlapcov',
+        $tShirtsKidsNames = ['Tričko s dlhým rukávom', 'Vrstvené tričko bio bavlna', 'Pásikované tričko s dlhým rukávom s potlačou', 'Vrstvené tričko', 'Športové tričko pre chlapcov',
                             'Športové tričko s kapucňou', 'Tričko s kapucňou', 'Emoji tričko s dlhým rukávom'];
 
         $descriptionBlouses1 = "Skvelá priľnavá blúzka s čipkovaným lemovaním, mäkká bavlna je veľmi príjemná pri nosení a dobre drží tvar. Pohodlná blúzka sa skvelo hodí k elegantným čiernym nohaviciam či sukni.";
@@ -34,57 +33,45 @@ class ProductSeeder extends Seeder
 
         $materials = ['bavlna 100%', 'bavlna 95%, polyester 5%', 'bavlna 80%, polyester 15%, elastan 5%'];
 
-        $id = 1;
         // Generate women blouses products
         $blousesDescriptions = [$descriptionBlouses1, $descriptionBlouses2];
-
-        for ($i=0; $i < 4; $i++) {
-            for ($j=0; $j < sizeof($blousesNames); $j++) {
-                DB::table('products')->insert([
-                    'id' => $id++,
-                    'name' => $blousesNames[$j],
+        for ($i = 0; $i < 4; $i++) {
+            foreach ($blousesNames as $blouseName) {
+                Product::create([
+                    'name' => $blouseName,
                     'price' => mt_rand(5, 30) - 0.01,
                     'brand_id' => mt_rand(1, 6),
                     'description' => $blousesDescriptions[mt_rand(0, 1)],
-                    'material' => $materials[mt_rand(0, 2)],
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s'),
+                    'material' => $materials[mt_rand(0, 2)]
                 ]);
+
             }
         }
 
         // Generate men shirts products
         $shirtsDescriptions = [$descriptionShirts1, $descriptionShirts2];
-
-        for ($i=0; $i < 4; $i++) {
-            for ($j=0; $j < sizeof($shirtsNames); $j++) {
-                DB::table('products')->insert([
-                    'id' => $id++,
-                    'name' => $shirtsNames[$j],
-                    'price' => mt_rand(5, 50) - 0.01,
+        for ($i = 0; $i < 4; $i++) {
+            foreach ($shirtsNames as $shirtsName) {
+                Product::create([
+                    'name' => $shirtsName,
+                    'price' => mt_rand(5, 30) - 0.01,
                     'brand_id' => mt_rand(1, 6),
                     'description' => $shirtsDescriptions[mt_rand(0, 1)],
-                    'material' => $materials[mt_rand(0, 2)],
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s'),
+                    'material' => $materials[mt_rand(0, 2)]
                 ]);
             }
         }
 
         // Generate men shirts products
         $kidsTshirtsDescriptions = [$descriptionTshirtsKids1, $descriptionTshirtsKids2];
-
-        for ($i=0; $i < 2; $i++) {
-            for ($j=0; $j < sizeof($tshirtsKidsNames); $j++) {
-                DB::table('products')->insert([
-                    'id' => $id++,
-                    'name' => $tshirtsKidsNames[$j],
+        for ($i = 0; $i < 2; $i++) {
+            foreach ($tShirtsKidsNames as $tShirtsKidsName) {
+                Product::create([
+                    'name' => $tShirtsKidsName,
                     'price' => mt_rand(5, 30) - 0.01,
-                    'brand_id' => mt_rand(1, 9),
+                    'brand_id' => mt_rand(7, 9),
                     'description' => $kidsTshirtsDescriptions[mt_rand(0, 1)],
-                    'material' => $materials[mt_rand(0, 2)],
-                    'created_at'=>date('Y-m-d H:i:s'),
-                    'updated_at'=>date('Y-m-d H:i:s'),
+                    'material' => $materials[mt_rand(0, 2)]
                 ]);
             }
         }

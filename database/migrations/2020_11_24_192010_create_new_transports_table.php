@@ -19,10 +19,6 @@ class CreateNewTransportsTable extends Migration
             $table->float('price');
             $table->timestamps();
         });
-
-        DB::table('transports')->insert(array('id' => 1, 'name' => 'Osobný odber','price' => '0',));
-        DB::table('transports')->insert(array('id' => 2, 'name' => 'Doručenie kuriérom','price' => '4.60',));
-        DB::table('transports')->insert(array('id' => 3, 'name' => 'Pošta','price' => '1.70',));
     }
 
     /**

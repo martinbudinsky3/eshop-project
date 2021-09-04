@@ -21,7 +21,8 @@ class Category extends Model
         return $this->belongsToMany('App\Models\Category', 'category_hierarchies', 'child_category_id', 'parent_category_id');
     }
 
-    function categoryHierarchies() {
-        return $this->hasMany('App\Models\CategoryHierarchy');
-    }
+
+//    function categoryHierarchies() {
+//        return $this->hasMany('App\Models\CategoryHierarchy');
+//    }
 }

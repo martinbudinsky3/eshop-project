@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 
 class CategorySeeder extends Seeder
@@ -15,78 +15,17 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
-            [
-                'id' => 1,
-                'name' =>'Muži',
-            ],
-            [
-                'id' => 2,
-                'name' =>'Ženy',
-            ],
-            [
-                'id' => 3,
-                'name' =>'Deti',
-            ],
+        $names = [
+            'Muži', 'Ženy', 'Deti', // main categories
+            'Tričká', 'Blúzky', 'Šaty', 'Nohavice', 'Svetre', // women categories
+            'Tričká','Košele', 'Nohavice', 'Obleky', // men categories
+            'Tričká', 'Kombinézy', 'Svetre', 'Mikiny' // kids categories
+        ];
 
-            // women categories
-            [
-                'id' => 4,
-                'name' =>'Tričká',
-            ],
-            [
-                'id' => 5,
-                'name' =>'Blúzky',
-            ],
-            [
-                'id' => 6,
-                'name' =>'Šaty',
-            ],
-            [
-                'id' => 7,
-                'name' =>'Nohavice',
-            ],
-            [
-                'id' => 8,
-                'name' =>'Svetre',
-            ],
-
-
-            // men categories
-            [
-                'id' => 9,
-                'name' =>'Tričká',
-            ],
-            [
-                'id' => 10,
-                'name' =>'Košele',
-            ],
-            [
-                'id' => 11,
-                'name' =>'Nohavice',
-            ],
-            [
-                'id' => 12,
-                'name' =>'Obleky',
-            ],
-
-            // kids categories
-            [
-                'id' => 13,
-                'name' =>'Tričká',
-            ],
-            [
-                'id' => 14,
-                'name' =>'Kombinézy',
-            ],
-            [
-                'id' => 15,
-                'name' =>'Svetre',
-            ],
-            [
-                'id' => 16,
-                'name' =>'Mikiny',
-            ],
-        ]);
+        foreach ($names as $name) {
+            Category::create([
+                'name' => $name
+            ]);
+        }
     }
 }

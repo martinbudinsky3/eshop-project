@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -22,13 +23,8 @@ class ProductCategorySeeder extends Seeder
         $blouseCategoryId = 5;
 
         for($productId = 1; $productId <= $blouseProductsSize; $productId++) {
-            DB::table('product_categories')->insert([
-                [
-                    'id' => $id++,
-                    'category_id' => $blouseCategoryId,
-                    'product_id' => $productId,
-                ],
-            ]);
+            $product = Product::find($productId);
+            $product->categories()->attach($blouseCategoryId);
         }
 
         // Shirt category products
@@ -37,13 +33,8 @@ class ProductCategorySeeder extends Seeder
         $shirtCategoryId = 10;
 
         for($productId = $shirtProductsStart; $productId <= $shirtProductsEnd; $productId++) {
-            DB::table('product_categories')->insert([
-                [
-                    'id' => $id++,
-                    'category_id' => $shirtCategoryId,
-                    'product_id' => $productId,
-                ],
-            ]);
+            $product = Product::find($productId);
+            $product->categories()->attach($shirtCategoryId);
         }
 
         // Kids t-shirts category products
@@ -52,13 +43,8 @@ class ProductCategorySeeder extends Seeder
         $tshirtKidsCategoryId = 13;
 
         for($productId = $tshirtKidsProductsStart; $productId <= $tshirtKidsProductsEnd; $productId++) {
-            DB::table('product_categories')->insert([
-                [
-                    'id' => $id++,
-                    'category_id' => $tshirtKidsCategoryId,
-                    'product_id' => $productId,
-                ],
-            ]);
+            $product = Product::find($productId);
+            $product->categories()->attach($tshirtKidsCategoryId);
         }
     }
 }
