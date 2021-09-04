@@ -19,10 +19,7 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Artisan::command('meilisearch:update', function () {
-    $client = new Client(
-        env('MEILISEARCH_HOST','http://127.0.0.1:7700'),
-        env('MEILISEARCH_KEY', 'masterKey')
-    );
+    $client = app(\MeiliSearch\Client::class);
 
     $client->index('products')->updateSearchableAttributes([
         'name',
