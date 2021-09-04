@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductDesign;
 use App\Models\ProductCategory;
 use App\Traits\ProductsTrait;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -14,17 +15,20 @@ use App\Services\ImageService;
 use App\Http\Requests\ProductPostRequest;
 use App\Http\Requests\ProductPutRequest;
 use MeiliSearch\Endpoints\Indexes;
+use MeiliSearch\MeiliSearch;
 
 
 class ProductController extends Controller
 {
     use ProductsTrait;
 
-    protected $imageService;
+    private $imageService;
+    private $client;
 
     public function __construct(ImageService $imageService)
     {
         $this->imageService = $imageService;
+        $this->client = app(\MeiliSearch\Client::class);
     }
 
     public function index()
@@ -88,28 +92,25 @@ class ProductController extends Controller
     {
         $rowsPerPage = request('rowsPerPage', 5);
         $sortBy = request('sortBy', 'name');
-        $descendingBool = request('descending', 'false');
         $filter = request('filter', '');
+        $descendingBool = request('descending', 'false');
+
+        $sortOrder = $descendingBool === 'true' ? 'desc' : 'asc';
 
         // filtering based on search term
         // TODO what to do if Meilisearch is not accessible at the moment
-        $filteredProducts = $this->searchProducts($filter);
+        $filteredProductsIds = $this->searchProductsIds($filter);
 
-        if ($descendingBool == 'true') {
-            $filteredProducts = $filteredProducts->sortByDesc($sortBy);
-        } else {
-            $filteredProducts = $filteredProducts->sortBy($sortBy);
-        }
+        $productsQuery = Product::whereIn('id', $filteredProductsIds)
+            ->orderBy($sortBy, $sortOrder);
 
         if ($rowsPerPage > 0) {
             $offset = ($page - 1) * $rowsPerPage;
-            $products = $filteredProducts->slice($offset, $rowsPerPage)->values();
-
-        } else {
-            $products = $filteredProducts;
+            $productsQuery = $productsQuery->offset($offset)->limit($rowsPerPage);
         }
 
-        $rowsNumber = count($filteredProducts);
+        $products = $productsQuery->get();
+        $rowsNumber = count($filteredProductsIds);
 
         return response()->json(['rows' => $products, 'rowsNumber' => $rowsNumber]);
     }
@@ -257,14 +258,32 @@ class ProductController extends Controller
         ]);
     }
 
-    private function searchProducts($searchQuery) {
-        return Product::search(
-            $searchQuery,
-            function (Indexes $meiliSearch, string $query, array $options) {
-                $options['limit'] = Product::count();
+    private function searchProductsIds($searchQuery) {
+        $searchedProductsIdsArr = $this->client
+            ->index('products')
+            ->search(
+                $searchQuery,
+                [
+                    'attributesToRetrieve' => ['id'],
+                    'limit' => Product::count()
+                ]
+            )
+            ->getHits();
 
-                return $meiliSearch->search($query, $options);
-            }
-        )->get();
+        $searchedProductsIdsFlattenArr = Arr::flatten($searchedProductsIdsArr);
+
+        return collect($searchedProductsIdsFlattenArr);
     }
+
+
+    //    private function searchProducts($searchQuery) {
+//        return Product::search(
+//            $searchQuery,
+//            function (Indexes $meiliSearch, string $query, array $options) {
+//                $options['limit'] = Product::count();
+//
+//                return $meiliSearch->search($query, $options);
+//            }
+//        )->get();
+//    }
 }
