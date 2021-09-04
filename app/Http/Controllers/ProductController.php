@@ -36,35 +36,30 @@ class ProductController extends Controller
         $searchTerm = request()->get('search');
 
         // filtering based on search term
-        $filteredProducts = $this->searchProducts($searchTerm);
+        $filteredProductsIds = $this->searchProductsIds($searchTerm);
 
         // filter out products without product designs
-        $filteredProducts = $filteredProducts->filter(function ($product, $key) {
-            return $product->productDesigns->count() > 0;
-        });
+        $productsQuery = Product::whereIn('id', $filteredProductsIds)
+            ->has('productDesigns');
 
-        if($filteredProducts->count() < 1) {
+        if($productsQuery->count() < 1) {
             return view('templates.product-category')
                 ->with('title', 'Vyhľadávanie')
-                ->with('products', $filteredProducts)
+                ->with('products',  $productsQuery->get())
                 ->with('search', true);
         }
+
+        $filteredProducts = $productsQuery->get();
 
         // get unique attributes for filtered products
         $colors = $this->getUniqueColors($filteredProducts);
         $brands = $this->getUniqueBrands($filteredProducts);
         $sizes = $this->getUniqueSizes($filteredProducts);
 
-        // get filtered products ids
-        $filteredProductsIds = $filteredProducts->map(function ($product) {
-            return $product->id;
-        });
-
         // query filtered products
-        $products = Product::whereIn('id', $filteredProductsIds);
-        $products = $this->filterProducts($products);
-        $products = $this->sortProducts($products);
-        $products = $products->paginate(12)->appends(request()->query());
+        $productsQuery = $this->filterProducts($productsQuery);
+        $productsQuery = $this->sortProducts($productsQuery);
+        $products = $productsQuery->paginate(12)->appends(request()->query());
 
         // random products
         $recommendedProducts = Product::has('productDesigns')
