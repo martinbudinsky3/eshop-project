@@ -15,7 +15,9 @@ use App\Services\ImageService;
 use App\Http\Requests\ProductPostRequest;
 use App\Http\Requests\ProductPutRequest;
 use MeiliSearch\Endpoints\Indexes;
+use MeiliSearch\Exceptions\CommunicationException;
 use MeiliSearch\MeiliSearch;
+use function GuzzleHttp\Promise\exception_for;
 
 
 class ProductController extends Controller
@@ -156,19 +158,13 @@ class ProductController extends Controller
             $similarProducts = Product::where('id', '!=', $id)->inRandomOrder()->take(12)->get();
         }
 
-        // get all unique colors for given product
         $colors = $this->getUniqueColors($product);
-
-        // get selected color
         $selectedColor = request()->get('color', $colors[0]->id);
-
-        // get only product designs of selected color
         $productDesignsOfColor = ProductDesign::where('product_id', $id)->where('color_id', $selectedColor);
 
         // get all unique sizes of selected color product design
         $sizes = $productDesignsOfColor->distinct()->get(['size']);
 
-        // get selected size
         $selectedSize = request()->get('size', $sizes[0]->size);
 
         // get available quantity of selected product design
@@ -259,31 +255,29 @@ class ProductController extends Controller
     }
 
     private function searchProductsIds($searchQuery) {
-        $searchedProductsIdsArr = $this->client
-            ->index('products')
-            ->search(
-                $searchQuery,
-                [
-                    'attributesToRetrieve' => ['id'],
-                    'limit' => Product::count()
-                ]
-            )
-            ->getHits();
+        try {
+            $searchedProductsIdsArr = $this->client
+                ->index('products')
+                ->search(
+                    $searchQuery,
+                    [
+                        'attributesToRetrieve' => ['id'],
+                        'limit' => Product::count()
+                    ]
+                )
+                ->getHits();
+            $searchedProductsIdsFlattenArr = Arr::flatten($searchedProductsIdsArr);
+            $searchedProductsIds = collect($searchedProductsIdsFlattenArr);
+        } catch (CommunicationException $exception) {
+            $searchedProducts = Product::select('id')
+                ->where('name', 'ILIKE', '%'.$searchQuery.'%')
+                ->orWhere('material', 'ILIKE', '%'.$searchQuery.'%')
+                ->get();
+            $searchedProductsIds = $searchedProducts->map(function ($product) {
+                return $product->id;
+            });
+        }
 
-        $searchedProductsIdsFlattenArr = Arr::flatten($searchedProductsIdsArr);
-
-        return collect($searchedProductsIdsFlattenArr);
+        return $searchedProductsIds;
     }
-
-
-    //    private function searchProducts($searchQuery) {
-//        return Product::search(
-//            $searchQuery,
-//            function (Indexes $meiliSearch, string $query, array $options) {
-//                $options['limit'] = Product::count();
-//
-//                return $meiliSearch->search($query, $options);
-//            }
-//        )->get();
-//    }
 }
