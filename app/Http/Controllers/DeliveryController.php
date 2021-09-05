@@ -18,15 +18,15 @@ class DeliveryController extends Controller
      */
     public function store(Request $request)
     {
-        $delivery = Delivery::create([
+        Delivery::create([
             'user_id' => Auth::user()->id,
             'name' => $request->name,
             'email' =>$request->email,
             'street' =>$request->street,
             'town' => $request->town,
             'country' => $request->country,
-            'house_number' => $request->numb,
-            'phone_number' => $request->phone,
+            'house_number' => $request->house_number,
+            'phone' => $request->phone,
             'zip' => $request->zip
         ]);
     }
@@ -41,26 +41,28 @@ class DeliveryController extends Controller
     public function update(Request $request)
     {
         // validation
+        // TODO update validation rules, change 'numb' field name
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
             'street' => 'required|string|max:255',
             'town' => 'required|string|max:255',
             'country' => 'required|string|max:255',
-            'numb' => 'required|string|max:15',
-            'phone' => 'required|string|max:255',
+            'house_number' => 'required|string|max:31',
+            'phone' => 'required|string|max:31',
             'zip' => 'required|string|max:15',
         ]);
 
         $delivery = Auth::user()->delivery;
+        // TODO use updateOrInsert
         if(!$delivery) {
             $this->store($request);
         } else {
             $delivery->name = $request->name;
             $delivery->email = $request->email;
-            $delivery->phone_number = $request->phone;
+            $delivery->phone = $request->phone;
             $delivery->street = $request->street;
-            $delivery->house_number = $request->numb;
+            $delivery->house_number = $request->house_number;
             $delivery->town = $request->town;
             $delivery->zip = $request->zip;
             $delivery->country = $request->country;

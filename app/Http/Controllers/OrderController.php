@@ -100,12 +100,12 @@ class OrderController extends Controller
         // validation
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|email|max:255',
             'street' => 'required|string|max:255',
             'town' => 'required|string|max:255',
             'country' => 'required|string|max:255',
-            'numb' => 'required|string|max:15',
-            'phone' => 'required|string|max:255',
+            'house_number' => 'required|string|max:31',
+            'phone' => 'required|string|max:31',
             'zip' => 'required|string|max:15',
         ]);
 
@@ -129,8 +129,8 @@ class OrderController extends Controller
                 'street' =>$request->post('street'),
                 'town' => $request->post('town'),
                 'country' => $request->post('country'),
-                'house_number' => $request->post('numb'),
-                'phone_number' => $request->post('phone'),
+                'house_number' => $request->post('house_number'),
+                'phone' => $request->post('phone'),
                 'zip' => $request->post('zip')
             ]);
 

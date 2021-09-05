@@ -9,8 +9,8 @@ class Voting extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    public $timestamps = [ "created_at" ];
 
-    protected $fillable = ['user_id', 'answer_id', 'date'];
+    protected $fillable = ['user_id', 'answer_id'];
 
 }

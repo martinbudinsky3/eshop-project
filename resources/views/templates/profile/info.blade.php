@@ -136,7 +136,6 @@
                     <input type="email" class="form-control  @error('email') is-invalid @enderror"  required
                             autocomplete="email" id="email" name="email" placeholder="napr. priklad@mail.com"
                             value = "{{ $delivery ? $delivery->email : old('email') }}">
-
                         @error('email')
                             <strong class="text-danger">{{ $message }}</strong>
                         @enderror
@@ -144,12 +143,12 @@
 
                 <div class="form-group">
                     <label for="phone">Telefónne číslo *</label>
-                    <input type="tel" class="form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder=" napr. +421999888777"
-                        value = "{{ $delivery ? $delivery->phone_number : old('phone') }}">
-
-                        @error('phone')
-                            <strong class="text-danger">{{ $message }}</strong>
-                        @enderror
+                    <input type="tel" class="form-control @error('phone') is-invalid @enderror " required
+                           id="phone" name="phone" placeholder=" napr. +421999888777"
+                           value = "{{ $delivery ? $delivery->phone : old('phone') }}">
+                    @error('phone')
+                        <strong class="text-danger">{{ $message }}</strong>
+                    @enderror
                 </div>
 
                 <div class="form-row">
@@ -157,16 +156,15 @@
                         <label for="street">Ulica *</label>
                         <input type="text" class="form-control" id="street" name="street" required
                             value="{{ $delivery ? $delivery->street : old('street') }}">
-
                         @error('street')
                             <strong class="text-danger">{{ $message }}</strong>
                         @enderror
                     </div>
                     <div class="col-sm-4 col-md-4 form-group">
-                        <label for="numb">Číslo domu *</label>
-                        <input type="text" class="form-control" id="numb" name="numb" required
-                            value="{{ $delivery ? $delivery->house_number : old('numb') }}">
-                        @error('numb')
+                        <label for="house_number">Číslo domu *</label>
+                        <input type="text" class="form-control" id="house_number" name="house_number" required
+                            value="{{ $delivery ? $delivery->house_number : old('house_number') }}">
+                        @error('house_number')
                             <strong class="text-danger">{{ $message }}</strong>
                         @enderror
                     </div>

@@ -33,9 +33,9 @@ class ProductPostRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'price' => 'required|numeric',
-            'brand' => 'required|integer',
-            'category' => 'required|integer',
+            'price' => 'required|numeric|min:0',
+            'brand' => 'required|exists:brands,id',
+            'category' => 'required|exists:categories,id',
             'material' => 'required|string|max:255',
             'images' => 'required|array',
             'images.*' => 'mimes:jpg'

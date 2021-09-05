@@ -70,7 +70,7 @@
                     <label for="phone">Telefónne číslo *</label>
                     <input type="tel" class="form-control @error('phone') is-invalid @enderror " required id="phone" name="phone" placeholder=" napr. +421999888777"
                         value = "{{ old('phone') ? old('phone') :
-                            ($delivery ? $delivery->phone_number :
+                            ($delivery ? $delivery->phone :
                             (Auth::check() ? Auth::user()->phone :
                             ''))
                         }}">
@@ -91,10 +91,10 @@
                         @enderror
                     </div>
                     <div class="col-sm-4 col-md-4 form-group">
-                        <label for="numb">Číslo domu *</label>
-                        <input type="text" class="form-control" id="numb" name="numb" required
-                            value="{{ old('numb') ? old('numb') : ($delivery ? $delivery->house_number : '') }}">
-                        @error('numb')
+                        <label for="house_number">Číslo domu *</label>
+                        <input type="text" class="form-control" id="house_number" name="house_number" required
+                            value="{{ old('house_number') ? old('house_number') : ($delivery ? $delivery->house_number : '') }}">
+                        @error('house_number')
                             <strong class="text-danger">{{ $message }}</strong>
                         @enderror
                     </div>

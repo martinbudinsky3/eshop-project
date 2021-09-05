@@ -12,8 +12,7 @@ class VotingController extends Controller
     public function store(VotingPostRequest $request, Question $question) {
         $voting = Voting::create([
             'user_id' => Auth::id(),
-            'answer_id' => $request->answer_id,
-            'date' => now(),
+            'answer_id' => $request->answer_id
         ]);
 
         $request->session()->flash('message', 'Odpoveď bola úspešne zaznamenaná.');

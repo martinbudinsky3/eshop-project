@@ -27,10 +27,9 @@ class ProductDesignPostRequest extends FormRequest
     {
         return [
             'quantity' => 'required|integer|min:0',
-            'size' => 'required|string|max:255',
+            'size' => 'required|string|max:31',
             'color' => [
                 'required',
-                'integer',
                 'exists:colors,id',
                 new UniqueProductDesign($this->size, $this->product->id)
             ]

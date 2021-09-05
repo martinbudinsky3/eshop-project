@@ -31,15 +31,15 @@ class ProductPutRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'brand' => 'required|integer',
-            'category' => 'required|integer',
+            'brand' => 'required|exists:brands,id',
+            'category' => 'required|exists:categories,id',
             'material' => 'required|string|max:255',
             'images' => 'nullable|array',
             'images.*' => 'mimes:jpg',
             'deleted_images' => ['nullable', 'array', new ImagesNotEmpty($this->images,
                 $this->route('product'))],
-            'deleted_images.*.id' => 'required|exists:images',
-            'deleted_images.*.path' => 'required|string'
+            'deleted_images.*.id' => 'required|exists:images,id',
+            'deleted_images.*.path' => 'required|string' // TODO dont send in request
         ];
     }
 
