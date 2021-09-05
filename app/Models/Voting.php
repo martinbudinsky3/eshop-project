@@ -9,8 +9,7 @@ class Voting extends Model
 {
     use HasFactory;
 
-    public $timestamps = [ "created_at" ];
+    public const UPDATED_AT = null;
 
     protected $fillable = ['user_id', 'answer_id'];
-
 }

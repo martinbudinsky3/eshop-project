@@ -11,8 +11,6 @@ class Role extends Model
 
     const ADMIN_ROLE_NAME = 'ADMIN';
 
-    public $timestamps = false;
-
     public function users() {
         return $this->belongsToMany('App\Models\User');
     }

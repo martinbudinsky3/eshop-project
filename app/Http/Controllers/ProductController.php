@@ -127,11 +127,7 @@ class ProductController extends Controller
                 'material' => $request->material
             ]);
 
-            // TODO use attach method
-            ProductCategory::create([
-                'product_id' => $product->id,
-                'category_id' => $request->category
-            ]);
+            $product->categories()->attach($request->category);
 
             $this->imageService->store($request->file('images'), $product->id);
         });
@@ -139,10 +135,8 @@ class ProductController extends Controller
         return response()->json(['id' => $product->id, 'success' => 'Produkt bol úspešne vytvorený']);
     }
 
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::find($id);
-
         if($product->productDesigns->count() < 1) {
             abort(404);
         }
@@ -150,16 +144,16 @@ class ProductController extends Controller
         // random products from same category
         $similarProducts = Product::whereHas('categories', function ($query) use ($product) {
             $query->where('categories.id', '=', $product->categories->first()->id);
-        })->where('id', '!=', $id)->take(12)->get();
+        })->where('id', '!=', $product->id)->take(12)->get();
 
         // random products
         if(sizeof($similarProducts) < 12) {
-            $similarProducts = Product::where('id', '!=', $id)->inRandomOrder()->take(12)->get();
+            $similarProducts = Product::where('id', '!=', $product->id)->inRandomOrder()->take(12)->get();
         }
 
         $colors = $this->getUniqueColors($product);
         $selectedColor = request()->get('color', $colors[0]->id);
-        $productDesignsOfColor = ProductDesign::where('product_id', $id)->where('color_id', $selectedColor);
+        $productDesignsOfColor = ProductDesign::where('product_id', $product->id)->where('color_id', $selectedColor);
 
         // get all unique sizes of selected color product design
         $sizes = $productDesignsOfColor->distinct()->get(['size']);
@@ -167,7 +161,7 @@ class ProductController extends Controller
         $selectedSize = request()->get('size', $sizes[0]->size);
 
         // get available quantity of selected product design
-        $productDesign = ProductDesign::where('product_id', $id)
+        $productDesign = ProductDesign::where('product_id', $product->id)
             ->where('color_id', $selectedColor)
             ->where('size', $selectedSize)
             ->first();
@@ -190,7 +184,6 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-
         $product = Product::with('categories.parentCategories', 'productDesigns.color', 'brand')->find($id);
 
         $images = $this->imageService->getProductImages($product->id);
@@ -201,13 +194,10 @@ class ProductController extends Controller
         ));
     }
 
-    public function update(ProductPutRequest $request, $id)
+    public function update(ProductPutRequest $request, Product $product)
     {
-        // TODO duck type product
-        DB::transaction(function() use($request, $id) {
+        DB::transaction(function() use($request, $product) {
             // update product
-            $product = Product::find($id);
-
             $product->name = $request->name;
             $product->description = $request->description;
             $product->price = $request->price;
@@ -217,30 +207,26 @@ class ProductController extends Controller
             $product->save();
 
             // update product category
-            $oldProductCategory = ProductCategory::where('product_id', $id)->first();
-            $oldProductCategory->category_id = $request->category;
-
-            $oldProductCategory->save();
+            $product->categories()->detach();
+            $product->categories()->attach($request->category);
 
             // store new images
             if($request->has('images')) {
-                $this->imageService->store($request->images, $id);
+                $this->imageService->store($request->images, $product->id);
             }
 
             // delete images
             if(!is_null($request->deleted_images)) {
                 $this->imageService->deleteImages($request->deleted_images);
             }
-
         });
 
         return response()->json(['success' => 'Produkt bol úspešne editovaný']);
     }
 
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        $imagesToDelete = Image::where('product_id', $id)->get();
-        $product = Product::find($id);
+        $imagesToDelete = Image::where('product_id', $product->id)->get();
 
         DB::transaction(function() use($product, $imagesToDelete) {
             $product->delete();
@@ -254,6 +240,7 @@ class ProductController extends Controller
     }
 
     private function searchProductsIds($searchQuery) {
+        // TODO split to two functions
         try {
             $searchedProductsIdsArr = $this->client
                 ->index('products')

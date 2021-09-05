@@ -9,7 +9,6 @@ class Color extends Model
 {
     use HasFactory;
 
-    // TODO remove relations
     function productDesigns() {
         return $this->hasMany('App\Models\ProductDesign');
     }
