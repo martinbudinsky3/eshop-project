@@ -108,5 +108,5 @@
 @endsection
 
 @section('custom-scripts')
-    <script src="../js/cart2.js"></script>
+    <script src={{ asset("js/cart2.js") }}></script>
 @endsection

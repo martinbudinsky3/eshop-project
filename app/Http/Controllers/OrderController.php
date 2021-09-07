@@ -53,8 +53,8 @@ class OrderController extends Controller
 
         // get payment from request if parameter exists
         if($request->has('payment')) {
-            $payId = $request->get('payment');
-            session(['payment' => $payId]);
+            $paymentId = $request->get('payment');
+            session(['payment' => $paymentId]);
         }
         // if payment hasn't been selected yet set it to default value
         else if(!session()->has('payment')) {
@@ -72,8 +72,8 @@ class OrderController extends Controller
         }
 
         // get final transport and payment
-        $payId = session()->get('payment');
-        $payment = Payment::find($payId);
+        $paymentId = session()->get('payment');
+        $payment = Payment::find($paymentId);
         $transportId = session()->get('transport');
         $transport = Transport::find($transportId);
 
@@ -170,6 +170,10 @@ class OrderController extends Controller
 
         session()->flash('success', 'Objednávka bola zaznamenaná.');
 
-        return redirect('/profile/orders');
+        if(Auth::check()) {
+            return redirect('/profile/orders');
+        } else {
+            return redirect('/');
+        }
     }
 }

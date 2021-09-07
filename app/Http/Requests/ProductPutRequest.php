@@ -37,7 +37,7 @@ class ProductPutRequest extends FormRequest
             'images' => 'nullable|array',
             'images.*' => 'mimes:jpg',
             'deleted_images' => ['nullable', 'array', new ImagesNotEmpty($this->images,
-                $this->route('product'))],
+                $this->product->id)],
             'deleted_images.*.id' => 'required|exists:images,id',
             'deleted_images.*.path' => 'required|string' // TODO dont send in request
         ];

@@ -9,6 +9,6 @@ class Delivery extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id','name','email','street','town',
-        'country','house_number','phone_number', 'zip'];
+        'country','house_number','phone', 'zip'];
 
 }
